@@ -16,7 +16,7 @@ document.getElementById('btnlogin').addEventListener('click', function() {
     console.log('Botão clicado, redirecionando...');
     
     // E então, redirecionar o usuário
-    window.location.href = '/index.html'; 
+    window.location.href = 'index.html'; 
 });
 
 //atividade-individual 
@@ -25,7 +25,7 @@ document.getElementById('btnca').addEventListener('click', function() {
     console.log('Botão clicado, redirecionando...');
     
     // E então, redirecionar o usuário
-    window.location.href = '/index.html'; 
+    window.location.href = 'index.html'; 
 });
 
 function perfil () { 

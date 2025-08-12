@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>telaJogo</title>
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body>
+
+    <div id="telaJogo"> 
+        <div class="header">
+            <div class="group">
+                <p class="text_menor"> Dudy Academy </p>
+                <p class="text_maior"> Let's Play </p>
+            </div>
+            <hr id="linha">
+        </div>
+
+        <div>
+            <a class="imagens" id="imgs">
+                <img src="/assets/casinha.png" id="img" alt="img">
+            </a>
+        </div>
+        <div class="buttons">
+            <button id="btnUm" onclick="verificarResposta(this)"> House </button>
+            <button id="btnDois" onclick="verificarResposta(this)"> Cat </button>
+            <button id="btnTres" onclick="verificarResposta(this)"> Airplane </button>
+        </div>
+    </div>
+
+    
+</body>
+<script src="/scripts/telaJogo.js"></script>
+</html>

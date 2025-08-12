@@ -24,13 +24,13 @@ document.addEventListener('DOMContentLoaded', function() {
         const fundo = this.src;
         const senhaInput = document.getElementById('senhaLogin');
         if (fundo.includes('senhaFechado.svg')) {
-            this.src = 'assets/senhaAberto.svg';
+            this.src = '/assets/senhaAberto.svg';
 
     
             // Altera o tipo do input
             senhaInput.type = 'text'; // Isso mudará de 'password' para 'text', revelando a senha
         } else {
-            this.src = 'assets/senhaFechado.svg';
+            this.src = '/assets/senhaFechado.svg';
             senhaInput.type = 'password'; // Isso mudará de 'password' para 'text', revelando a senha
         }
     });
