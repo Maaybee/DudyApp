@@ -7,7 +7,7 @@ let btnTres;
 const proxBtnUm = ['House', 'Car', 'Bird']; 
 const proxBtnDois = ['Cat', 'House', 'Horse'];
 const proxBtnTres = ['AirPlane', 'AirPlane', 'Bunny'];
-const imagensSrc = ['assets/casinha.png', 'assets/carro.png', 'assets/coelho.png']; 
+const imagensSrc = ['/assets/casinha.png', '/assets/carro.png', '/assets/coelho.png']; 
 let contador = 0;
 const respostasCorretas = ['House', 'Car', 'Bunny','fim']; 
 let respostaCertaAtual = ''; 

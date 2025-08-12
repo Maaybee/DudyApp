@@ -1,0 +1,21 @@
+#imgTelaCadastro{ 
+    width: 219px;
+    height: 227px;
+}
+
+input {
+    color: #b4b4b4;
+    font-family: 'Baloo Chettan Regular';
+    font-size: 16px;
+}
+
+#subtitlecad { 
+    padding-top: -1000px;
+}
+
+#juntar { 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
