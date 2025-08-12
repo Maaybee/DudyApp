@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela Perfil</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="telaPerfil.css">
+
+</head>
+<body>
+
+    <div id="telaPerfil" class="col-itens2 center">
+        <img src="assets/estatuaLiberdade.png" id="estatuaLiberdade">
+        <h2 id="nomePerfil">Lucas</h2>
+
+        <div id="progresso-box" class="col-itens3">
+            <h3> Meu progresso </h3>
+            <div class="row-itens2"> 
+                <h1 id="progresso"> 0% </h1>
+                <div class="col-itens4">
+                    <h4> Do curso</h4>
+                    <h4 id="nivel"> Iniciante </h4>
+                </div>                    
+            </div>
+            <div id="barraProgresso"> 
+                <div id="progresso-preenchimento"></div>
+            </div>
+        </div>
+
+        <div id="row"> 
+            <div id="collum"> 
+                <div id="quadradoRoxo" class="quadrados"> 
+                    <img src="assets/balaoChat.png" alt="Balao Chat" class="imgSquare">
+                </div>
+                <div id="quadradoRosa" class="quadrados"> 
+                    <img src="assets/medalha.png" class="imgSquare"> 
+                </div>
+            </div>
+            <div id="collum"> 
+                <div id="collum2"> 
+                    <h3>0/220</h3>
+                    <h5>Palavras faladas</h5>
+                </div>
+                <div id="collum2"> 
+                    <h3>0/14</h3>
+                    <h5>Medalhas da semana</h5>
+                </div>
+            </div>
+        </div>
+
+        <button id="convidar"> Convide um amigo! </button>  
+    
+        <div id="texto">
+            <h6>Conhece algum amigo que gostaria de</h6>
+            <h6>aprender um novo idioma? <span style="font-weight: 900;">Convide-o</span> </h6>
+            <h6><span style="font-weight:900;">pro DudyApp</span> para conseguir novas </h6>
+            <h6>oportunidades </h6>
+            <h6><span style="font-weight:900;">Spread knowledge!</span> </h6>
+        </div>
+
+        <div class="menu"> 
+            <div class="btnsMenu"> 
+                <div class="btnMenuRow"> 
+                    <button class="btnMenu" id="btnHomeHome"> 
+                        <img src="assets/home.png" alt="MenuHome"> 
+                    </button>
+                    <h4> Prática </h4>
+                </div>
+                <div class="btnMenuRow"> 
+                    <button class="btnMenu" id="btnPerfilHome" onclick="perfil()"> 
+                        <img src="assets/perfil.png" alt="MenuPrática"> 
+                    </button>
+                    <h4> Perfil </h4>
+                </div>
+                <div class="btnMenuRow"> 
+                    <button class="btnMenu" id="btnToyHome"> 
+                        <img src="assets/toy.png" alt="MenuToy">
+                    </button>
+                    <h4> Toy Toy </h4>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+</body>
+<script src="scripts/telaPerfil.js"> </script>
+</html>
