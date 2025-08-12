@@ -31,5 +31,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // Exemplo 1: Define um progresso inicial ao carregar a página (ex: 30%)
     atualizarProgresso(80);
 
+    document.getElementById('btnHomeHome').addEventListener('click', function() {
+        // Aqui você poderia fazer outras coisas, como salvar dados...
+        console.log('Botão clicado, redirecionando...');
+
+        // E então, redirecionar o usuário
+        window.location.href = 'telaHome.html'; 
+    });
+
    
 });
+
+
+
