@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!historiaId) {
         alert("História não encontrada!");
-        window.location.href = 'indexCentrohistorias.html';
+        window.location.href = '/telas/indexCentrohistorias.html';
         return;
     }
 
@@ -52,11 +52,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // Inicia o quiz com os dados corretos
     quizAtual = historiaAtual.quiz;
     carregarPergunta();
+
+    document.getElementById("sair").addEventListener('click', function() {
+        // Aqui você poderia fazer outras coisas, como salvar dados...
+        console.log('Botão clicado, redirecionando...');
+        
+        // E então, redirecionar o usuário
+        window.location.href = '/telas/indexCentrohistorias.html'; 
+    });
 });
 
 // --- LÓGICA DO QUIZ ---
 
-function carregarPergunta() {
+function carregarPergunta() {ç
     const botoesContainer = document.getElementById('botoes-container');
     const txtPergunta = document.getElementById('pergunta');
 
@@ -156,6 +164,74 @@ function finalizarEsalvarQuiz() {
 
 function tocarAudio(nome) {
     const audio = document.getElementById('player');
-    audio.src = 'audios/' + nome + '.mp3';
+    audio.src = '/audios/' + nome + '.mp3';
     audio.play().catch(e => console.error("Error playing audio:", e));
+}
+
+const popupOverlay = document.getElementById('popupOverlay');
+const popUpContent = document.getElementById('pop-up'); // O conteúdo do pop-up em si
+const btnSair = document.getElementById('btnSair');
+const btnVoltar = document.getElementById('btnVoltar');
+
+// Referência ao elemento que acionará o pop-up (a imagem com id="sair")
+const sairImg = document.getElementById('sair');
+
+// --- Funções para controlar o Pop-up ---
+
+// Função para mostrar o pop-up
+function mostrarPopupSair() {
+    if (popupOverlay) { // Garante que o overlay existe no HTML
+        popupOverlay.classList.add('active'); // Adiciona a classe 'active' para exibir o overlay
+        // Opcional: Adicionar classe para animar o conteúdo do pop-up, se desejar
+        // if (popUpContent) {
+        //     popUpContent.classList.add('active');
+        // }
+    }
+}
+
+// Função para esconder o pop-up
+function esconderPopupSair() {
+    if (popupOverlay) { // Garante que o overlay existe no HTML
+        popupOverlay.classList.remove('active'); // Remove a classe 'active' para ocultar o overlay
+        // Opcional: Remover classe de animação do conteúdo do pop-up
+        // if (popUpContent) {
+        //     popUpContent.classList.remove('active');
+        // }
+    }
+}
+
+// --- Adiciona os Event Listeners ---
+
+// 1. Abre o pop-up quando a imagem 'sair' é clicada
+if (sairImg) {
+    sairImg.addEventListener('click', mostrarPopupSair);
+} else {
+    console.warn("Elemento com ID 'sair' não encontrado. O botão de saída do pop-up pode não funcionar.");
+}
+
+// 2. Ação do botão "SAIR" dentro do pop-up
+if (btnSair) {
+    btnSair.addEventListener('click', () => {
+
+        window.location.href = '/telas/indexCentrohistorias.html';
+    });
+} else {
+    console.warn("Elemento com ID 'btnSair' não encontrado.");
+}
+
+// 3. Ação do botão "VOLTAR" dentro do pop-up
+if (btnVoltar) {
+    btnVoltar.addEventListener('click', esconderPopupSair); // Apenas esconde o pop-up
+} else {
+    console.warn("Elemento com ID 'btnVoltar' não encontrado.");
+}
+
+// 4. Opcional: Fechar o pop-up clicando fora dele (no overlay)
+if (popupOverlay) {
+    popupOverlay.addEventListener('click', (event) => {
+        // Verifica se o clique foi diretamente no overlay (não no conteúdo do pop-up)
+        if (event.target === popupOverlay) {
+            esconderPopupSair();
+        }
+    });
 }
