@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Chettan+2&family=Gelasio&display=swap');
+
+:root{
+    --branco:#ffff;
+    --gelo:#f1f1f1;
+    --azul:#0262FF;
+    --preto:#2a2a2a;
+    --rosa: #FF6CE7;
+    --vermelho: #F2383D;
+    --bege:#fff7f7;
+    --cinza:#4a4b5c;
+    --begeEscuro:#ebdfdf;
+}
+
+body{
+    background-color: var(--bege);
+    margin: 0;
+    padding: 0;
+
+}
+
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: center; /* Centraliza o conteúdo no topo */
+    padding-top: 25px;  
+}
+
+.header > div {
+    display: flex;
+    flex-direction: column; /* Alinha os elementos em coluna */
+    align-items: center;    /* Centraliza horizontalmente */
+    gap: 1px;              /* Espaçamento entre os elementos */
+}
+
+.books, .audios {
+    width: 150px;
+    height: 150px;
+}
+
+h4 {
+    margin: 0;
+    font-size: 24px;
+    font-family: 'Baloo Chettan 2';
+}
+.historia {
+  width: 80%;        /* ou 100%, ou qualquer largura desejada */
+  margin: 0 auto;      /* centraliza na tela */
+  padding: 20px;       /* espaço interno */
+}
+.texto{
+    font-family: 'Baloo Chettan 2';
+    /* cada link vira um “item” vertical com espaçamento uniforme */
+    display:flex;
+    flex-direction:column;   /* empilha os filhos */
+    gap:12px;                /* distância entre cada linha */
+  }
+  
+  /* estilo para cada link */
+.texto a, p{
+    display:block;           /* força cada <a> ocupar 100 % da linha */
+    color:var(--cinza);
+    font-weight:bold;
+    font-size:large;
+    text-decoration:none; 
+}
+/*b, a{
+    color: var(--cinza);
+    font-family: 'Baloo Chettan 2';
+    font-weight: bold;
+    font-size:large;
+    margin-bottom: auto;
+}*/
+/*.texto {
+    line-height: 2.5;
+    font-family: 'Baloo Chettan 2';
+}*/
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    margin-top: 18px;
+    align-items: center;
+}
+
+.buttons button {
+    width: 271px;
+    height: 52px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    background-color: var(--bege);
+    border: 3px solid var(--begeEscuro);
+    font-family: 'Baloo Chettan 2';
+    color: var(--cinza);
+    font-size: 21.7px;
+    cursor: pointer;
+}
+
+/* Corrigido: aplicar apenas aos botões desabilitados */
+.buttons button:disabled {
+    color: black;
+    cursor: not-allowed;
+}
