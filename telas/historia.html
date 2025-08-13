@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DudyApp - História</title> <link rel="stylesheet" href="css/index.css"> <style> /* Adicionei o CSS aqui para garantir que funcione */
+        body { font-family: sans-serif; padding: 20px; }
+        a { display: block; margin-bottom: 5px; cursor: pointer; color: #007bff; }
+        .buttons button { display: block; width: 100%; padding: 10px; margin-top: 5px; cursor: pointer; border-radius: 5px; font-size: 16px; }
+        .buttons button:disabled { cursor: not-allowed; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div>
+            <img src="" alt="livro Icon" class="books"> <h4></h4> </div>
+    </div>
+
+    <div class="historia">
+        <div class="personagens">
+            <h4><b>Characters: </b><span></span></h4> </div>
+        <div class="texto">
+            </div>
+    </div>
+
+    <div class="quiz-container">
+        <h4 id="pergunta"></h4>
+        <div class="buttons" id="botoes-container"></div>
+    </div>
+
+    <audio id="player"></audio>
+
+    <script src="js/historias.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
