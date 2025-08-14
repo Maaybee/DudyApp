@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('Botão clicado, redirecionando...');
 
         // E então, redirecionar o usuário
-        window.location.href = 'telaHome.html'; 
+        window.location.href = '../telas/telaHome.html'; 
     });
 
    

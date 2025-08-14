@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!historiaId) {
         alert("História não encontrada!");
-        window.location.href = '/telas/indexCentrohistorias.html';
+        window.location.href = '../telas/indexCentrohistorias.html';
         return;
     }
 
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('Botão clicado, redirecionando...');
         
         // E então, redirecionar o usuário
-        window.location.href = '/telas/indexCentrohistorias.html'; 
+        window.location.href = '../telas/indexCentrohistorias.html'; 
     });
 });
 
@@ -136,7 +136,7 @@ function finalizarEsalvarQuiz() {
 
     // Usa a API Fetch para enviar os dados para o seu arquivo de backend.
     // Certifique-se de que o caminho 'api/salvar-pontuacao.php' está correto.
-    fetch('api/pontuacao.php', {
+    fetch('../api/pontuacao.php', {
         method: 'POST', // Estamos enviando dados
         headers: {
             'Content-Type': 'application/json', // O formato dos dados é JSON
@@ -148,7 +148,7 @@ function finalizarEsalvarQuiz() {
         console.log('Resposta do servidor:', data); // Útil para depuração
         // Redireciona para o menu principal após um pequeno atraso
         setTimeout(() => {
-            window.location.href = 'indexCentrohistorias.html';
+            window.location.href = '../telas/indexCentrohistorias.html';
         }, 2000); // Espera 2 segundos para o usuário ver a pontuação final
     })
     .catch((error) => {
@@ -156,7 +156,7 @@ function finalizarEsalvarQuiz() {
         alert('Ocorreu um erro ao salvar seu progresso. Mas não se preocupe, vamos te levar de volta ao menu.');
         // Redireciona mesmo se der erro
         setTimeout(() => {
-            window.location.href = 'indexCentrohistorias.html';
+            window.location.href = '../telas/indexCentrohistorias.html';
         }, 2000);
     });
 }
@@ -213,7 +213,7 @@ if (sairImg) {
 if (btnSair) {
     btnSair.addEventListener('click', () => {
 
-        window.location.href = '/telas/indexCentrohistorias.html';
+        window.location.href = '../telas/indexCentrohistorias.html';
     });
 } else {
     console.warn("Elemento com ID 'btnSair' não encontrado.");
