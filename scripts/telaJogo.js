@@ -123,10 +123,8 @@ function verificarResposta(elementoBotaoClicado) {
 
 }
 
-function fimDeJogo (){ 
+function fimDeJogo() {
 
-    window.location.href = '../telas/telaResultado.html'; 
- 
-    console.log("fim de jogo,tela mudada");
-
+    window.location.href = '../telas/telaResultado.html?pontuacao=' + pontuacao;
+    console.log("fim de jogo, tela mudada");
 }
