@@ -1,27 +1,27 @@
 @font-face {
     font-family: 'Baloo Chettan Regular';
-    src: local("☺"), url("/baloo-chettan-webfont/BalooChettan-Regular.woff") format("woff");
+    src: local("☺"), url("../baloo-chettan-webfont/BalooChettan-Regular.woff") format("woff");
     font-weight: 900;
     font-style: normal
 }
 
 @font-face {
     font-family: 'Gelasio';
-    src: local("☺"), url("/gelasio-webfont/Gelasio-Regular.woff") format("woff");
+    src: local("☺"), url("../gelasio-webfont/Gelasio-Regular.woff") format("woff");
     font-weight: 900;
     font-style: normal
 }
 
 @font-face { 
     font-family: 'Arimo';
-    src: local(0), url("/Arimo/Arimo-Regular.ttf") format("woff");
+    src: local(0), url("../Arimo/Arimo-Regular.ttf") format("woff");
     font-weight: 100;
     font-style: normal;
 }
 
 @font-face { 
     font-family: 'Arimo';
-    src: local(0), url("/Arimo/Arimo-Bold.ttf") format("woff");
+    src: local(0), url("../Arimo/Arimo-Bold.ttf") format("woff");
     font-weight: 900;
     font-style: normal;
 }
