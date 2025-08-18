@@ -5,12 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>telaResultadoJogo</title>
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/telaResultado.css">
 
 </head>
 <body>
 
-    <div id="telaResultadoJogo"> 
-        <p> Sua pontuação é <span id="pontuacaoFinal"></span></p>    
+    <div id="telaResultadoJogo" class="center"> 
+        <img src="../assets/atv_concluida.png"> 
+        <div class="row" id="blocks">
+            <div class="col" id="acertos"> 
+                <h3> ACERTOS </h3> 
+                <div id="acertos_inside"> 
+                </div>
+
+            </div> 
+            <div class="col" id="pontuacao">
+                <h3> PONTUAÇÃO </h3> 
+                <div id="pontuacao_inside"> 
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row_buttons">
+            <button class="btns" id="voltar"> VOLTAR </button>
+            <button class="btns" id="proxAtv"> PRÓXIMA ATIVIDADE</button>
+
+        </div>
     </div>
     
 </body>
