@@ -1,0 +1,101 @@
+.center { 
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 80px;
+    font-family:'Baloo Chettan Regular';
+    align-items: center;
+    
+}
+
+#acertos{ 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 162px;
+    height: 162px;
+    background-color: #553399;
+    border-radius: 15px;
+    gap: 11px;
+
+}
+
+#pontuacao{ 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 162px;
+    height: 162px;
+    background-color: #FF7BAC;
+    border-radius: 15px;
+    gap: 11px;
+}
+
+.row { 
+    display: flex;
+    flex-direction: row;
+}
+
+#blocks { 
+    gap: 14px;
+    color: white;
+}
+
+#acertos_inside {
+    width: 135px;
+    height: 90px;
+    background-color: #ABACE3;
+    border-radius: 15px;
+}
+
+#pontuacao_inside {
+    width: 135px;
+    height: 90px;
+    background-color: #FFB8D2;
+    border-radius: 15px;
+}
+
+h3{ 
+    margin: 0;
+    font-size: 19px;
+    overflow-wrap: break-word;
+
+}
+
+#row_buttons { 
+    display: flex;
+    justify-content: center; 
+    align-items: center;     
+    gap: 15px;               
+    margin: 0;
+}
+
+.btns {
+    border:none;
+    background-color: #0262FF;
+    width: 148px;
+    height: 67px;
+    color: white;
+    font-family:'Baloo Chettan Regular';
+    text-align: center;
+    cursor: pointer;
+    min-height: 67px; 
+    font-size: 19px;
+    display: inline-block; 
+    vertical-align: middle;  
+}
+
+
+
+#voltar { 
+    border-bottom-left-radius: 15px;
+    border-top-left-radius: 15px;
+
+}
+
+#proxAtv {
+    border-bottom-right-radius: 15px;
+    border-top-right-radius: 15px;
+}
