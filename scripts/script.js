@@ -2,11 +2,11 @@ const btnLogin = document.getElementById('bntlogin')
 const btnCadastro = documen.getElementById('btncadastro')
 
 function login () {
-    window.location.href = 'telas/telaLogin.html'
+    window.location.href = '/telas/telaLogin.html'
 };
 
 function cadastro () { 
-    window.location.href = 'telas/telaCadastro.html'
+    window.location.href = '/telas/telaCadastro.html'
 }
 
 
@@ -34,8 +34,9 @@ function perfil () {
         console.log('Botão clicado, redirecionando...');
 
         // E então, redirecionar o usuário
-        window.location.href = 'telas/telaPerfil.html'; 
+        window.location.href = '/telas/telaPerfil.html'; 
     });
 };
+
 
 
