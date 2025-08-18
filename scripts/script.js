@@ -2,11 +2,11 @@ const btnLogin = document.getElementById('bntlogin')
 const btnCadastro = documen.getElementById('btncadastro')
 
 function login () {
-    window.location.href = '/telas/telaLogin.html'
+    window.location.href = './telas/telaLogin.html'
 };
 
 function cadastro () { 
-    window.location.href = '/telas/telaCadastro.html'
+    window.location.href = './telas/telaCadastro.html'
 }
 
 
@@ -16,7 +16,7 @@ document.getElementById('btnlogin').addEventListener('click', function() {
     console.log('Botão clicado, redirecionando...');
     
     // E então, redirecionar o usuário
-    window.location.href = 'index.html'; 
+    window.location.href = '/index.html'; 
 });
 
 //atividade-individual 
@@ -25,7 +25,7 @@ document.getElementById('btnca').addEventListener('click', function() {
     console.log('Botão clicado, redirecionando...');
     
     // E então, redirecionar o usuário
-    window.location.href = 'index.html'; 
+    window.location.href = '/index.html'; 
 });
 
 function perfil () { 
@@ -34,7 +34,7 @@ function perfil () {
         console.log('Botão clicado, redirecionando...');
 
         // E então, redirecionar o usuário
-        window.location.href = '/telas/telaPerfil.html'; 
+        window.location.href = './telas/telaPerfil.html'; 
     });
 };
 
