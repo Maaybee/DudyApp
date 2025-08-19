@@ -29,14 +29,17 @@ document.getElementById('btnca').addEventListener('click', function() {
 });
 
 function perfil () { 
-    document.addEventListener('click', function() {
-        // Aqui você poderia fazer outras coisas, como salvar dados...
-        console.log('Botão clicado, redirecionando...');
+    
+    console.log('Botão clicado, redirecionando...');
 
-        // E então, redirecionar o usuário
-        window.location.href = './telas/telaPerfil.html'; 
-    });
+    window.location.href = '../telas/telaPerfil.html'; 
 };
+
+function atividade () { 
+    console.log('Botão clicado, redirecionando...');
+
+    window.location.href = '../telas/telaAtividade.html'; 
+}
 
 
 
