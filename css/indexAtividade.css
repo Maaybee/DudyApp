@@ -1,0 +1,191 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Chettan+2&family=Gelasio&display=swap');
+
+body { 
+    background-color: #FFF7F7;
+    margin-top: 25px;
+    padding-bottom: 80px; 
+}
+.group {
+    margin-left: 20px;
+}
+.text_menor { 
+    font-size: 15.7px;
+    margin-bottom: -10px;
+    font-family:'Gelasio';
+}
+
+.text_maior {
+    font-size: 38.7px;
+    margin: 0;
+    font-family:'Baloo Chettan 2';
+    font-weight: 900;
+}
+
+#linha { 
+    height: 1px;
+    width: 330px;
+}
+
+.imagens { 
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+#Atividades {
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    margin-bottom: 30px; /* Valor corrigido (ex: 30px) */
+}
+
+/* Estilo para o botão transparente */
+button.circle {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    
+    /* Mantém o layout que você já tinha */
+    display: flex;
+    text-align: center;
+    align-items: center; /* Ajuda a alinhar o ícone e o texto verticalmente */
+}
+
+button.circle h2 {
+    padding: 8px;
+    font-family: 'Baloo Chettan 2', sans-serif;
+    margin-left: 4%;
+    font-size: 21.7px; /* Movido para cá para ser mais específico */
+}
+
+#icone {
+    width: 80px;
+    margin-top: 1%;
+    margin-left: 15%;
+}
+
+#iconefinal {
+    width: 80px;
+    margin-top: 20px; /* Removida a duplicação de margin-top */
+    margin-left: 15%;
+}
+
+/* Regra .buttons combinada e corrigida */
+.buttons { 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 271px;
+    height: 52px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    background-color: #FFF7F7;
+    border: 3px solid #EBDFDF;
+    font-family: 'Baloo Chettan 2', sans-serif;
+    font-size: 21.7px;
+}
+
+/* Seletor :disabled corrigido */
+.buttons:disabled { 
+    color: black;
+}
+
+#buttonsLogin button { 
+    background-color: #0262FF;
+    border-radius: 30px;
+    color: white;
+    border: 1px solid #0262FF;
+    height: 50px;
+    width: 340px;
+    margin-top: 30px;
+    font-family:'Baloo Chettan 2';
+    font-size: 18px;
+}
+
+#logoInicial { 
+    margin-top: 50px;
+    height: 303px;
+    width: 292px;
+}
+
+#home {
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+    justify-content: space-between; 
+    align-items: center; 
+    margin-top: -10px;
+}
+
+#logo { 
+    height: 62px;
+    width: 62px;
+    margin-right: 20px;
+}
+
+#textHome { 
+    font-family:'Baloo Chettan 2';
+    font-size: 21px;
+    margin-left: 25px;
+    margin-top: 10px;
+}
+
+
+.menu {
+    position: fixed;   /* fixa o menu na tela */
+    bottom: 20px;      /* distância do rodapé da tela (ajuste conforme preferir) */
+    left: 50%;         /* posiciona no centro horizontal */
+    transform: translateX(-50%); /* corrige o deslocamento para centralizar exatamente */
+    z-index: 9999;     /* garante que fique acima de outros elementos */
+    
+    background-color: white;
+    width: 337px;
+    height: 67px;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center; /* Centraliza o conteúdo horizontalmente no menu */
+    align-items: center; /* Centraliza o conteúdo verticalmente no menu */
+    margin: 5px auto 0; /* shorthand para margin-top: 5px; e centraliza horizontalmente */
+}
+
+.btnsMenu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around; /* Distribui os itens uniformemente com espaço entre eles */
+    align-items: center;
+    width: 100%; 
+    margin-top: 15px;/* Garante que btnsMenu ocupe toda a largura disponível no .menu para a distribuição */
+}
+
+.btnMenu {
+    width: 53px;
+    height: 50px;
+    display: flex;
+    justify-content: center; /* Centraliza a imagem horizontalmente dentro do botão */
+    align-items: center; /* Centraliza a imagem verticalmente dentro do botão */
+    background: none; /* Remove o fundo */
+    border: none; /* Remove a borda */
+    padding: 0; 
+    margin: 0;/* Remove padding padrão do botão */
+    /* Remova margin: auto; e as margens laterais fixas */
+}
+
+.btnMenu img {
+    max-width: 100%; /* Garante que a imagem não transborde o botão */
+    max-height: 100%; /* Garante que a imagem não transborde o botão */
+    object-fit: contain; /* Ajusta a imagem para caber sem cortar */
+}
+
+.btnMenuRow {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza os itens (botão e h4) horizontalmente dentro de btnMenuRow */
+}
+
+.btnMenuRow h4 {
+    font-size: 10px;
+    font-family:'Baloo Chettan 2';
+    margin-top: -10px; /* Adiciona um pequeno espaçamento entre o botão e o texto */
+    text-align: center; /* Centraliza o texto */
+}
