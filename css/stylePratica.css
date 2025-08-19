@@ -1,0 +1,307 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Chettan+2&family=Gelasio&display=swap');
+
+body { 
+    background-color: #FFF7F7;
+    margin-top: 25px;
+}
+
+.group {
+    margin-left: 20px;
+}
+
+.text_menor { 
+    font-size: 15.7px;
+    margin-bottom: -10px;
+    font-family:'Gelasio';
+}
+
+.text_maior {
+    font-size: 38.7px;
+    margin: 0;
+    font-family:'Baloo Chettan 2';
+    font-weight: bold;
+}
+
+#linha { 
+    height: 1px;
+    width: 330px;
+}
+
+.imagens { 
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.buttons { 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.buttons button { 
+    width: 271px;
+    height: 52px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    background-color: #FFF7F7;
+    border: 3px solid #EBDFDF;
+    font-family: 'Baloo Chettan 2';
+    font-size: 21.7px;
+}
+
+.buttons :disabled { 
+    color: black;
+}
+
+#telaLogin{ 
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+#buttonsLogin button { 
+    background-color: #0262FF;
+    border-radius: 30px;
+    color: white;
+    border: 1px solid #0262FF;
+    height: 50px;
+    width: 340px;
+    margin-top: 30px;
+    font-family: 'Baloo Chettan 2';
+    font-size: 18px;
+}
+
+#logoInicial { 
+    margin-top: 50px;
+    height: 303px;
+    width: 292px;
+}
+
+#home {
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+    justify-content: space-between; 
+    align-items: center; 
+    margin-top: -10px;
+}
+
+#logo { 
+    height: 62px;
+    width: 62px;
+    margin-right: 20px;
+}
+
+#textHome { 
+    font-family: 'Baloo Chettan 2';
+    font-size: 21px;
+    margin-left: 25px;
+    margin-top: 10px;
+}
+
+#blocoAzul { 
+    width: 130px;
+    height: 153px;
+    background-color: #0262FF;
+    border-radius: 7px;
+    margin: auto;
+    box-shadow: 8px 8px 0px #0553D2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 0;
+    border: 0px;
+
+    & h3{ 
+        color: white;
+        font-family: 'Baloo Chettan 2';
+        margin: auto;
+    }
+}
+
+#blocoRosa { 
+    width: 130px;
+    height: 153px;
+    background-color: #FF6CE7;
+    border-radius: 7px;
+    margin: auto;
+    box-shadow: 8px 8px 0px #E262CD;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 0;
+    border: 0px;
+
+    & h3{ 
+        color: white;
+        font-family: 'Baloo Chettan 2';
+        margin: auto;
+    }
+
+}
+
+#blocos { 
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+    flex-direction: row;
+    margin-top: 15px;
+}
+
+#juntarTXT {
+    display: flex;
+    justify-content: space-center;
+    align-items: baseline;
+    max-width: 80px;
+    gap: 4px;
+    margin-top: 5px;
+    margin-bottom: -20px;
+}
+
+#livro { 
+    width: 84px;
+    height: 79px;
+    margin-top: 18px;
+    margin-bottom: -8px;
+}
+
+#cerebro { 
+    width: 91px;
+    height: 73px;
+    margin-top: 18px;
+    margin-bottom: -8px;
+}
+
+#blocoRevise { 
+    width: 303px;
+    height: 40px;
+    background-color: #F2383D;
+    box-shadow: 5px 5px 0px 2px #A21F23;
+    border-radius: 8px;
+    margin: auto;
+    margin-top: 28px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: start;
+    flex-direction: row;
+    border: 0px;
+
+    & h3{ 
+        color: white;
+        font-family: 'Baloo Chettan 2';
+        margin: 0;
+    }
+
+}
+
+#coracao { 
+    margin-left: 10px;
+    width: 28px;
+    height: 27px;
+}
+
+#juntarTXTLinha { 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+#telaHomeInt{ 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    & h2{ 
+        font-family: 'Baloo Chettan 2';
+        font-size: 21px;
+        margin-left: 35px;
+        margin-top: 25px;
+    }
+}
+
+.btnHome { 
+    width: 309px;
+    height: 42px;
+    background-color: #FFF7F7;
+    border: 2px solid #EBDFDF;
+    border-radius: 10px;
+    margin-bottom: -25px;
+    font-family: 'Baloo Chettan 2';
+    font-size: 15px;
+    padding: 0;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    padding-left: 20px;
+}
+
+#btns { 
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+}
+
+.menu {
+    background-color: white;
+    width: 337px;
+    height: 67px;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center; /* Centraliza o conteúdo horizontalmente no menu */
+    align-items: center; /* Centraliza o conteúdo verticalmente no menu */
+    margin: 5px auto 0; /* shorthand para margin-top: 5px; e centraliza horizontalmente */
+}
+
+.btnsMenu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around; /* Distribui os itens uniformemente com espaço entre eles */
+    align-items: center;
+    width: 100%; 
+    margin-top: 15px;/* Garante que btnsMenu ocupe toda a largura disponível no .menu para a distribuição */
+}
+
+.btnMenu {
+    width: 53px;
+    height: 50px;
+    display: flex;
+    justify-content: center; /* Centraliza a imagem horizontalmente dentro do botão */
+    align-items: center; /* Centraliza a imagem verticalmente dentro do botão */
+    background: none; /* Remove o fundo */
+    border: none; /* Remove a borda */
+    padding: 0; 
+    margin: 0;/* Remove padding padrão do botão */
+    /* Remova margin: auto; e as margens laterais fixas */
+}
+
+.btnMenu img {
+    max-width: 100%; /* Garante que a imagem não transborde o botão */
+    max-height: 100%; /* Garante que a imagem não transborde o botão */
+    object-fit: contain; /* Ajusta a imagem para caber sem cortar */
+}
+
+.btnMenuRow {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza os itens (botão e h4) horizontalmente dentro de btnMenuRow */
+}
+
+.btnMenuRow h4 {
+    font-size: 10px;
+    font-family: 'Baloo Chettan 2';
+    margin-top: -10px; /* Adiciona um pequeno espaçamento entre o botão e o texto */
+    text-align: center; /* Centraliza o texto */
+}
