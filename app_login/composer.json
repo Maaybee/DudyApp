@@ -1,0 +1,18 @@
+{
+    "name": "projeto-educacional/dudyapp",
+    "description": "Um app de ensino de inglês para criancas",
+    "autoload": {
+        "psr-4": {
+            "ProjetoEducacional\\Dudyapp\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Team Dudy Idiomas"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.9",
+        "firebase/php-jwt": "^6.11"
+    }
+}
