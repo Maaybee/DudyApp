@@ -43,3 +43,4 @@ if (sairImg) {
 } else {
     console.warn("Elemento com ID 'sair' não encontrado. O botão de saída do pop-up pode não funcionar.");
 }
+
