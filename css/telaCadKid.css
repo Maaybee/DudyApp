@@ -1,0 +1,11 @@
+#imgTelaCadastro{ 
+    width: 219px;
+    height: 227px;
+}
+
+.icone { 
+    width: 133px;
+    height: 133px;
+    border-radius: 100%;
+    background-color: gray;
+}
