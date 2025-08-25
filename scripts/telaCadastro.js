@@ -1,98 +1,93 @@
-document.getElementById('btnLogin').addEventListener('click', function() {
+// URL e chave do Supabase
+// Use estas variáveis para inicializar o cliente.
+const SUPABASE_URL = "https://jqteyocpfokvjmsrdiea.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpxdGV5b2NwZm9rdmptc3JkaWVhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU2MTQwNDIsImV4cCI6MjA3MTE5MDA0Mn0.SNBHJgmoXVIAx6d5uDIBU2OYfzIzyZMbqcigAuoSBtA";
 
-    console.log('Botão clicado, redirecionando...');
-    
-    window.location.href = '../telas/telaLogin.html'; // se login feito com sucesso
-});
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+document.addEventListener("DOMContentLoaded", () => {
+    const nomeInput = document.getElementById("nome");
+    const emailInput = document.getElementById("emailLogin");
+    const senhaInput = document.getElementById("senhaCadastro");
+    const confirmarInput = document.getElementById("senha2");
+    const mostrarSenhaImg = document.getElementById("mostrarSenha");
+    const btnCadastro = document.getElementById("btnLogin");
+    const subtitle = document.getElementById("subtitle");
 
-//------- não mexer --------
-document.getElementById('subtitle').addEventListener('click', function() {
+    // Criar mensagem dinâmica
+    const message = document.createElement("p");
+    message.id = "messageCadastro";
+    message.style.marginTop = "10px";
+    document.getElementById("juntar").appendChild(message);
 
-    console.log('Botão clicado, redirecionando...');
-
-    window.location.href = '../telas/telaLogin.html'; 
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('mostrarSenha').addEventListener('click', function() {
-        const fundo = this.src;
-        const senhaInput = document.getElementById('senha2');
-        if (fundo.includes('../assets/senhaFechado.svg')) {
-            this.src = 'assets/senhaAberto.svg';
-            // Altera o tipo do input
-            senhaInput.type = 'text'; // Isso mudará de 'password' para 'text', revelando a senha
+    // Mostrar/esconder senha 👁️
+    mostrarSenhaImg.addEventListener("click", () => {
+        if (senhaInput.type === "password") {
+            senhaInput.type = "text";
+            confirmarInput.type = "text";
+            mostrarSenhaImg.src = "../assets/senhaAberto.svg";
         } else {
-            this.src = '../assets/senhaFechado.svg';
-            senhaInput.type = 'password'; // Isso mudará de 'password' para 'text', revelando a senha
+            senhaInput.type = "password";
+            confirmarInput.type = "password";
+            mostrarSenhaImg.src = "../assets/senhaFechado.svg";
         }
     });
 
-});
+    // Redireciona para login
+    subtitle.addEventListener("click", () => {
+        window.location.href = "../telas/telaLogin.html";
+    });
 
-document.addEventListener('DOMContentLoaded', () => {
-    // Pegando os elementos do formulário pelos seus IDs
-    const nomeInput = document.getElementById('nome');
-    const emailInput = document.getElementById('emailLogin');
-    const senhaInput = document.getElementById('senhaCadastro');
-    const senha2Input = document.getElementById('senha2');
-    const btnCadastro = document.getElementById('btnLogin'); // O botão "Cadastre-se"
+    // Lógica de Cadastro usando a autenticação do Supabase
+    btnCadastro.addEventListener("click", async (e) => {
+        e.preventDefault();
 
-    // Verifica se o botão foi encontrado antes de adicionar o evento
-    if (btnCadastro) {
-        btnCadastro.addEventListener('click', () => {
-            // 1. Validação dos dados do formulário
-            const nomeResponsavel = nomeInput.value.trim();
-            const email = emailInput.value.trim();
-            const senha = senhaInput.value;
-            const senha2 = senha2Input.value;
+        const nome = nomeInput.value.trim();
+        const email = emailInput.value.trim();
+        const senha = senhaInput.value.trim();
+        const confirmarSenha = confirmarInput.value.trim();
 
-            if (!nomeResponsavel || !email || !senha || !senha2) {
-                alert('Por favor, preencha todos os campos.');
-                return; // Para a execução se algo estiver faltando
-            }
+        if (!nome || !email || !senha || !confirmarSenha) {
+            message.style.color = "red";
+            message.textContent = "Preencha todos os campos!";
+            return;
+        }
 
-            if (senha !== senha2) {
-                alert('As senhas não coincidem!');
-                return; // Para a execução se as senhas forem diferentes
-            }
+        if (senha !== confirmarSenha) {
+            message.style.color = "red";
+            message.textContent = "As senhas não coincidem!";
+            return;
+        }
 
-            // 2. Criando o objeto com os dados para enviar ao PHP
-            const dadosCadastro = {
-                nomeResponsavel: nomeResponsavel,
-                emailResponsavel: email,
-                senhaResponsavel: senha
-            };
-
-            console.log("Enviando dados do responsável para o PHP:", dadosCadastro);
-
-            // 3. Enviando os dados para a API PHP via fetch
-            fetch('api/cadastrar.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
+        try {
+            // Usa o método signUp() para registrar o usuário
+            const { data, error } = await supabaseClient.auth.signUp({
+                email: email,
+                password: senha,
+                options: {
+                    data: { nome: nome }, // Passa o nome para o trigger
                 },
-                body: JSON.stringify(dadosCadastro)
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 'sucesso') {
-                    // Pega o ID que o PHP retornou
-                    const idResponsavel = data.idResponsavel;
-                    // Redireciona para a tela de cadastro da criança, passando o ID na URL
-                    alert('Responsável cadastrado com sucesso! Agora, cadastre a criança.');
-                    window.location.href = `telaCadKid.html?resp_id=${idResponsavel}`;
-                } else {
-                    // Mostra a mensagem de erro vinda do PHP (ex: "email já existe")
-                    alert('Erro no cadastro: ' + data.mensagem);
-                }
-            })
-            .catch(error => {
-                console.error('Erro na requisição:', error);
-                alert('Ocorreu um erro de comunicação. Verifique o console (F12) para mais detalhes.');
             });
-        });
-    } else {
-        console.error('Botão de cadastro (ID: btnLogin) não foi encontrado na página.');
-    }
+
+            if (error) {
+                message.style.color = "red";
+                message.textContent = "Erro: " + error.message;
+                console.error(error);
+            } else {
+                message.style.color = "green";
+                message.textContent = "Cadastro realizado! Verifique seu email.";
+
+                console.log("Usuário cadastrado:", data);
+
+                // redireciona para tela de login
+                setTimeout(() => {
+                    window.location.href = "../telas/telaLogin.html";
+                }, 2500);
+            }
+        } catch (err) {
+            console.error("Erro inesperado:", err);
+            message.style.color = "red";
+            message.textContent = "Ocorreu um erro, tente novamente.";
+        }
+    });
 });
