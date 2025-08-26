@@ -62,3 +62,11 @@ function cadastrar_redirecionamento () {
     window.location.href = "../telas/telaCadKid.html";
 }
 
+
+function abrirMenu() {
+    document.getElementById("menu").style.display = "block";
+}
+
+function fecharMenu() {
+    document.getElementById("menu").style.display = "none";
+}
