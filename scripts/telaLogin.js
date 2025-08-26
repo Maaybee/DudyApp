@@ -1,3 +1,5 @@
+// telaLogin.js
+
 // URL e chave do Supabase
 const SUPABASE_URL = "https://jqteyocpfokvjmsrdiea.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpxdGV5b2NwZm9rdmptc3JkaWVhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU2MTQwNDIsImV4cCI6MjA3MTE5MDA0Mn0.SNBHJgmoXVIAx6d5uDIBU2OYfzIzyZMbqcigAuoSBtA";
@@ -5,11 +7,10 @@ const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 // Criação do cliente Supabase
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-const subtitle = document.getElementById('subtitle'); 
+const subtitle = document.getElementById('subtitle');
 const mostrarSenhaImg = document.getElementById('mostrarSenha');
 
-// Redireciona para o cadastro
-subtitle.addEventListener('click', function() { 
+subtitle.addEventListener('click', () => {
   window.location.href = '../telas/telaCadastro.html';
 });
 
@@ -20,15 +21,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const message = document.getElementById("message");
 
   // Mostrar/esconder senha
-  mostrarSenhaImg.addEventListener('click', function() { 
-    const fundo = this.src; 
-    if (fundo.includes('senhaFechado.svg')) { 
-      this.src = '../app_login/assets/senhaAberto.svg'; 
-      senhaInput.type = 'text'; 
-    } else { 
-      this.src = '../app_login/assets/senhaFechado.svg'; 
-      senhaInput.type = 'password'; 
-    } 
+  mostrarSenhaImg.addEventListener('click', () => {
+    const fundo = mostrarSenhaImg.src;
+    if (fundo.includes('senhaFechado.svg')) {
+      mostrarSenhaImg.src = '../app_login/assets/senhaAberto.svg';
+      senhaInput.type = 'text';
+    } else {
+      mostrarSenhaImg.src = '../app_login/assets/senhaFechado.svg';
+      senhaInput.type = 'password';
+    }
   });
 
   // LOGIN
@@ -44,62 +45,53 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     try {
-      // 1) Autentica no Auth
-      const { data, error } = await supabaseClient.auth.signInWithPassword({
+      // 1) Autentica
+      const { data: authData, error: authError } = await supabaseClient.auth.signInWithPassword({
         email,
         password,
       });
 
-      if (error) {
-        message.textContent = "Erro: " + error.message;
-        console.error(error);
-        return;
-      }
+      if (authError) throw authError;
 
-      const user = data.user;
+      const user = authData.user;
       message.style.color = "green";
       message.textContent = "Login realizado com sucesso!";
       console.log("Usuário logado:", user);
 
-      // 2) Busca na tabela responsavel pelo auth_id
-      let { data: perfil, error: perfilError } = await supabaseClient
+      // 2) Busca perfil
+      const { data: perfil, error: perfilError } = await supabaseClient
         .from("responsavel")
-        .select("idresponsavel, nome, email, auth_id")
-        .eq("auth_id", user.id)
-        .single();
+        .select("id")
+        .eq("email", user.email);
 
-      // 3) Se não existir, cria agora (primeiro login)
-      if (perfilError && perfilError.code === "PGRST116") {
-        // PGRST116 = not found em .single()
-        const nomeDoMeta = (user.user_metadata && user.user_metadata.nome) || "";
-        const { data: criado, error: insertError } = await supabaseClient
-          .from("responsavel")
-          .insert([{
-            auth_id: user.id,
-            nome: nomeDoMeta,
-            email: user.email
-          }])
-          .select("idresponsavel, nome, email, auth_id")
-          .single();
-
-        if (insertError) {
-          console.error("Erro ao criar responsavel:", insertError);
-        } else {
-          perfil = criado;
-        }
-      } else if (perfilError) {
-        console.error("Erro ao buscar responsavel:", perfilError);
+      if (perfilError) throw perfilError;
+      if (!perfil || perfil.length === 0) {
+        message.textContent = "Perfil não encontrado. Complete seu cadastro.";
+        return;
       }
 
-      // 4) Guarda localmente (se quiser)
-      if (perfil) {
-        localStorage.setItem("perfil", JSON.stringify(perfil));
-      }
+      const idResponsavel = perfil[0].id;
+      localStorage.setItem("id", idResponsavel);
 
-      // 5) Redireciona
-      setTimeout(() => {
-        window.location.href = "../telas/telaHome.html";
-      }, 1500);
+      // 3) Conta crianças
+      const { count, error: countError } = await supabaseClient
+        .from("estudante")
+        .select("idestudante", { count: "exact" })
+        .eq("id", idResponsavel);
+
+      if (countError) throw countError;
+
+      console.log("Número de crianças:", count);
+
+      // Redirecionamento com delay
+      const redirecionar = () => {
+        if (count === 0) window.location.href = '../telas/telaCadKid.html';
+        else if (count === 1) window.location.href = '../telas/telaCadKid_1.html';
+        else if (count === 2) window.location.href = '../telas/telaCadKid_1.html';
+        else window.location.href = '../telas/telaCadKid_1.html';
+      };
+      
+      setTimeout(redirecionar, 1000); // 1 segundo de delay
 
     } catch (err) {
       console.error("Erro inesperado:", err);
@@ -107,3 +99,5 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+
