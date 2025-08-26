@@ -1,27 +1,9 @@
-body { 
-    height: 100%;
+
+#imgTelaCadastro{ 
+    width: 219px;
+    height: 227px;
 }
 
-header { 
-    display: flex;
-    justify-content: end;
-    margin: 15px;
-}
-
-#telaLoginKid { 
-    display: flex; 
-    flex-direction: column;
-    gap: 30px;
-    justify-content: center;
-    align-items: center;
-}
-
-.perfil_kid { 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
 .icone { 
     width: 133px;
     height: 133px;
@@ -29,14 +11,33 @@ header {
     background-color: rgb(218, 218, 218);
 }
 
-#btnLoginKid { 
-    font-family: 'Baloo Chettan Regular';
-    height: 39px;
-    width: 269px;
-    font-size: 20px;
+#escolha{ 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 300px; 
+    height: 130px;
+    background-color: #ffffff;
+    border-radius: 15px;
 }
 
-.nome_kid { 
-    font-family: 'Baloo Chettan Regular';
-    font-size: 17px;
+.container { 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
 }
+
+.row { 
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.icone-escolha { 
+    width: 50px; 
+    height: 50px;
+}
+
