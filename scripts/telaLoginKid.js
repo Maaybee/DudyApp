@@ -59,14 +59,37 @@ async function carregarCrianças() {
 document.addEventListener("DOMContentLoaded", carregarCrianças);
 
 function cadastrar_redirecionamento () { 
-    window.location.href = "../telas/telaCadKid.html";
+  window.location.href = "../telas/telaCadKid.html";
 }
 
 
 function abrirMenu() {
-    document.getElementById("menu").style.display = "block";
+  document.getElementById("menu").style.display = "block";
 }
 
 function fecharMenu() {
-    document.getElementById("menu").style.display = "none";
+  document.getElementById("menu").style.display = "none";
+}
+
+async function logout() {
+  try {
+    // Faz logout no Supabase
+    const { error } = await supabaseClient.auth.signOut();
+
+    if (error) {
+      console.error("Erro ao deslogar:", error);
+      alert("Não foi possível sair. Tente novamente.");
+      return;
+    }
+
+    // Limpa o localStorage (opcional, mas recomendado)
+    localStorage.removeItem("id");
+
+    // Redireciona para a tela de login
+    window.location.href = "../index.html";
+
+  } catch (err) {
+    console.error("Erro inesperado ao sair:", err);
+    alert("Ocorreu um erro. Tente novamente.");
+  }
 }
