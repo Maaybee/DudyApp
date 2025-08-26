@@ -1,0 +1,85 @@
+body { 
+    height: 100%;
+}
+
+header { 
+    display: flex;
+    justify-content: end;
+    margin: 15px;
+}
+
+#telaLoginKid { 
+    display: flex; 
+    flex-direction: column;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+}
+
+.perfil_kid { 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.icone { 
+    width: 133px;
+    height: 133px;
+    border-radius: 100%;
+    background-color: rgb(218, 218, 218);
+}
+
+#btnLoginKid { 
+    font-family: 'Baloo Chettan Regular';
+    height: 39px;
+    width: 269px;
+    font-size: 20px;
+}
+
+.nome_kid { 
+    font-family: 'Baloo Chettan Regular';
+    font-size: 17px;
+}
+
+#menu { 
+    width: 318px;
+    height: 531px;
+    background-color: white;
+    border-radius: 15px;
+
+    /* Novas propriedades para centralizar e sobrepor */
+    position: fixed;           /* Fica sobre a página */
+    top: 50%;                  /* Centraliza vertical */
+    left: 50%;                 /* Centraliza horizontal */
+    transform: translate(-50%, -50%); /* Ajuste central perfeito */
+    z-index: 1000;             /* Fica acima de outros elementos */
+    display: none;             /* Inicialmente escondido */
+}
+
+/* Fundo escuro atrás do menu */
+#menu::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;                  /* Fica atrás do menu */
+    border-radius: 0;             /* Sem borda no overlay */
+}
+#options {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 80px;
+    flex-direction: column;
+    font-family: 'Baloo Chettan Regular';
+    font-size: 20px;
+
+}
+
+#sair { 
+    display: flex;
+    justify-content: end;
+    margin: 10px;
+}
