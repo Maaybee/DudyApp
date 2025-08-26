@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/telaLoginKid.css">
+
+    
+</head>
+<body>
+    <header> 
+        <img src="../assets/config.svg" id="config" onclick="abrirMenu()"> 
+    </header>
+
+    <div id="telaLoginKid"> 
+        <div id="listaCrianças"> 
+            <div class="perfil_kid"> 
+                <div class="icone"> 
+                </div>
+                <div class="nome_kid"> 
+                    <h1> Nome </h1>
+                </div>
+            </div> 
+
+        </div>
+
+
+
+        <button id="btnLoginKid" class="btns-blue" onclick="cadastrar_redirecionamento()"> Adicione outra criança </button>
+        <div id="menu"> 
+
+        </div>
+    </div>
+
+</body>
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+<script src="../scripts/supabaseConfig.js"></script>
+<script src="../scripts/telaLoginKid.js"></script>
+</html>
