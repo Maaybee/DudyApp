@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>telaCadastro</title>
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="telaCadastro.css">
     <link rel="stylesheet" href="../css/telaCadKid.css">
 
 </head>
@@ -34,28 +33,44 @@
                 </div>
 
                 <div class="container">
-                    <div class="icone">
+                    <div class="icone" id='icone_area'>
  
 
                     </div> 
 
                     <div id="escolha"> 
+                        <div class='row'>
+                            <img src="../assets/icones/perfil_alce.svg" class="icone-escolha">
+                            <img src="../assets/icones/perfil_cachorro.svg" class="icone-escolha">
+                            <img src="../assets/icones/perfil_elefante.svg" class="icone-escolha">
+                            <img src="../assets/icones/perfil_gato.svg" class="icone-escolha">
+                            <img src="../assets/icones/perfil_giraffa.svg" class="icone-escolha">
+                        </div>
+
+                        <div class='row'> 
+                            <img src="../assets/icones/perfil_ovelha.svg" class="icone-escolha">
+                            <img src="../assets/icones/perfil_panda.svg" class="icone-escolha">
+                            <img src="../assets/icones/perfil_passaro.svg" class="icone-escolha">
+                            <img src="../assets/icones/perfil_sapo.svg" class="icone-escolha">
+                            <img src="../assets/icones/perfil_urso.svg" class="icone-escolha">
+                        </div>
+                    </div>
                         
 
                 </div>
 
 
                 <div id="juntar">
-                    <button id="btnLogin" class="btns-blue"> Cadastrar </button>
+                    <button id="btnLogin" class="btns-blue" onclick="enviar_dados()"> Cadastrar </button>
                 </div> 
 
             </div>  
         </div>
            
-
     </div>
 
-    
 </body>
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+<script src="../scripts/supabaseConfig.js"></script>
 <script src="../scripts/telaCadKid.js"></script>
 </html>
