@@ -91,3 +91,10 @@ async function logout() {
     alert("Ocorreu um erro. Tente novamente.");
   }
 }
+
+function home() { 
+    
+    console.log('Botão clicado, redirecionando...');
+
+    window.location.href = '../telas/telaHome.html'; 
+};
