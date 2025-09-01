@@ -40,12 +40,28 @@ async function carregarPerfil(idEstudante) {
 
     const nivelElem = document.getElementById("nivel");
     if (nivelElem) nivelElem.textContent = crianca.nivel ?? "Iniciante";
+    
+// --- NOVO: calcula a porcentagem com base na pontuação total ---
+    const pontuacaoTotal = crianca.pontuacao_total ?? 0;
+    const porcentagem = Math.min((pontuacaoTotal / 3000) * 100, 100); // garante max 100%
 
     const progressoElem = document.getElementById("progresso-preenchimento");
     const progressoText = document.getElementById("progresso");
-    const progresso = crianca.progresso ?? 0;
-    if (progressoElem) progressoElem.style.width = `${progresso}%`;
-    if (progressoText) progressoText.textContent = `${progresso}%`;
+
+    if (progressoElem) progressoElem.style.width = `${porcentagem}%`;
+    if (progressoText) progressoText.textContent = `${Math.round(porcentagem)}%`;
+
+    // --- Palavras faladas ---
+    const palavrasTotal = crianca.palavras_total ?? 0;
+    const maxPalavras = 220;
+    const palavrasText = document.getElementById("palavras-texto");
+    if (palavrasText) palavrasText.textContent = `${palavrasTotal}/${maxPalavras}`;
+
+    // --- Medalhas da semana ---
+    const medalhasTotal = crianca.medalhas_total ?? 0;
+    const maxMedalhas = 14;
+    const medalhasText = document.getElementById("medalhas-texto");
+    if (medalhasText) medalhasText.textContent = `${medalhasTotal}/${maxMedalhas}`;
 
   } catch (err) {
     console.error("Erro ao carregar criança:", err);
