@@ -1,46 +1,77 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const progressoPreenchimento = document.getElementById('progresso-preenchimento');
-    const textoProgresso = document.getElementById('progresso');
-    const nivelTexto = document.getElementById('nivel');
+// Pega o id da criança selecionada
+const idEstudante = localStorage.getItem("criancaSelecionada");
 
-    // Função para atualizar o progresso
-    function atualizarProgresso(porcentagem) {
-        // Garante que a porcentagem esteja entre 0 e 100
-        const progressoAtual = Math.min(100, Math.max(0, porcentagem));
+async function carregarPerfil(idEstudante) {
+  const idInt = parseInt(idEstudante, 10);
+  if (isNaN(idInt)) {
+    alert("ID da criança inválido.");
+    return;
+  }
 
-        // Atualiza a largura do preenchimento da barra de progresso
-        progressoPreenchimento.style.width = `${progressoAtual}%`;
+  try {
+    const { data: crianca, error } = await supabaseClient
+      .from("estudante")
+      .select("*")
+      .eq("idestudante", idInt)
+      .single();
 
-        // Atualiza o texto da porcentagem
-        textoProgresso.textContent = `${progressoAtual}%`;
-
-        // Opcional: Atualizar o nível com base no progresso
-        if (progressoAtual < 25) {
-            nivelTexto.textContent = 'Iniciante';
-        } else if (progressoAtual < 50) {
-            nivelTexto.textContent = 'Básico';
-        } else if (progressoAtual < 75) {
-            nivelTexto.textContent = 'Intermediário';
-        } else {
-            nivelTexto.textContent = 'Avançado';
-        }
+    if (error) {
+      console.error("Erro ao buscar criança:", error.message);
+      return;
     }
 
-    // --- Exemplos de como você pode usar a função ---
+    if (!crianca) {
+      console.error("Nenhuma criança encontrada com esse ID.");
+      return;
+    }
 
-    // Exemplo 1: Define um progresso inicial ao carregar a página (ex: 30%)
-    atualizarProgresso(80);
+    // Atualiza os elementos da página
+    const nomeElem = document.getElementById("nomePerfil");
+    if (nomeElem) nomeElem.textContent = crianca.nome ?? "Sem nome";
 
-    document.getElementById('btnHomeHome').addEventListener('click', function() {
-        // Aqui você poderia fazer outras coisas, como salvar dados...
-        console.log('Botão clicado, redirecionando...');
+    const experienciaElem = document.getElementById("experiencia");
+    if (experienciaElem) experienciaElem.textContent = crianca.experiencia ?? 0;
 
-        // E então, redirecionar o usuário
-        window.location.href = '../telas/telaHome.html'; 
-    });
+    const iconeElem = document.getElementById("icone");
+    if (iconeElem) {
+      iconeElem.src = crianca.icone || "../assets/default-kid.png";
+      iconeElem.alt = `Ícone de ${crianca.nome ?? "criança"}`;
+    }
 
-   
+    const nivelElem = document.getElementById("nivel");
+    if (nivelElem) nivelElem.textContent = crianca.nivel ?? "Iniciante";
+
+    const progressoElem = document.getElementById("progresso-preenchimento");
+    const progressoText = document.getElementById("progresso");
+    const progresso = crianca.progresso ?? 0;
+    if (progressoElem) progressoElem.style.width = `${progresso}%`;
+    if (progressoText) progressoText.textContent = `${progresso}%`;
+
+  } catch (err) {
+    console.error("Erro ao carregar criança:", err);
+  }
+}
+
+// Executa quando a página carregar
+document.addEventListener("DOMContentLoaded", () => {
+  if (!idEstudante) {
+    alert("Nenhuma criança selecionada. Volte à tela de seleção.");
+    return;
+  }
+
+  carregarPerfil(idEstudante);
 });
 
+// Logout
+async function logout() {
+  try {
+    const { error } = await supabaseClient.auth.signOut();
+    if (error) throw error;
 
-
+    localStorage.clear();
+    window.location.href = "../index.html";
+  } catch (err) {
+    console.error("Erro inesperado ao sair:", err);
+    alert("Ocorreu um erro. Tente novamente.");
+  }
+}
