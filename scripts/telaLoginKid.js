@@ -5,36 +5,34 @@ const idResponsavel = localStorage.getItem("id");
 const listaCriançasDiv = document.getElementById("listaCrianças");
 
 async function carregarCrianças() {
-  const idResponsavel = localStorage.getItem("id");
-  const listaCriançasDiv = document.getElementById("listaCrianças");
-
   if (!idResponsavel) {
     alert("Não foi possível identificar o responsável. Faça login novamente.");
     return;
   }
 
   try {
+    // Busca todas as crianças do responsável
     const { data: crianças, error } = await supabaseClient
       .from("estudante")
-      .select("nome, icone")
+      .select("idestudante, nome, icone")
       .eq("id", idResponsavel);
 
     if (error) throw error;
 
-    listaCriançasDiv.innerHTML = crianças.length === 0 
-      ? "<p>Nenhuma criança cadastrada.</p>" 
+    listaCriançasDiv.innerHTML = crianças.length === 0
+      ? "<p>Nenhuma criança cadastrada.</p>"
       : "";
 
     crianças.forEach(crianca => {
       const perfilDiv = document.createElement("div");
       perfilDiv.classList.add("perfil_kid");
+      perfilDiv.dataset.id = crianca.idestudante;
 
       const img = document.createElement("img");
-      img.src = crianca.icone; // caminho correto
+      img.src = crianca.icone || "../assets/default-kid.png";
       img.alt = `Ícone de ${crianca.nome}`;
-      
+
       const nomeH1 = document.createElement("h1");
-      // Pega apenas o primeiro nome
       nomeH1.textContent = crianca.nome.split(" ")[0];
 
       const iconeDiv = document.createElement("div");
@@ -48,6 +46,13 @@ async function carregarCrianças() {
       perfilDiv.appendChild(iconeDiv);
       perfilDiv.appendChild(nomeDiv);
 
+      // Salva id correto da criança no clique
+      perfilDiv.addEventListener("click", () => {
+        console.log("Criança selecionada:", crianca.idestudante);
+        localStorage.setItem("criancaSelecionada", crianca.idestudante);
+        window.location.href = "../telas/telaPerfil.html";
+      });
+
       listaCriançasDiv.appendChild(perfilDiv);
     });
 
@@ -58,10 +63,10 @@ async function carregarCrianças() {
 
 document.addEventListener("DOMContentLoaded", carregarCrianças);
 
-function cadastrar_redirecionamento () { 
+// Funções auxiliares
+function cadastrar_redirecionamento() { 
   window.location.href = "../telas/telaCadKid.html";
 }
-
 
 function abrirMenu() {
   document.getElementById("menu").style.display = "block";
@@ -73,21 +78,11 @@ function fecharMenu() {
 
 async function logout() {
   try {
-    // Faz logout no Supabase
     const { error } = await supabaseClient.auth.signOut();
+    if (error) throw error;
 
-    if (error) {
-      console.error("Erro ao deslogar:", error);
-      alert("Não foi possível sair. Tente novamente.");
-      return;
-    }
-
-    // Limpa o localStorage (opcional, mas recomendado)
-    localStorage.removeItem("id");
-
-    // Redireciona para a tela de login
+    localStorage.clear();
     window.location.href = "../index.html";
-
   } catch (err) {
     console.error("Erro inesperado ao sair:", err);
     alert("Ocorreu um erro. Tente novamente.");
