@@ -26,13 +26,16 @@ async function carregarPerfil(idEstudante) {
     }
 
     // Atualiza os elementos da página
+
+    
+
     const nomeElem = document.getElementById("nomePerfil");
     if (nomeElem) nomeElem.textContent = crianca.nome ?? "Sem nome";
 
     const experienciaElem = document.getElementById("experiencia");
     if (experienciaElem) experienciaElem.textContent = crianca.experiencia ?? 0;
 
-    const iconeElem = document.getElementById("icone");
+    const iconeElem = document.getElementById("fotoPerfil");
     if (iconeElem) {
       iconeElem.src = crianca.icone || "../assets/default-kid.png";
       iconeElem.alt = `Ícone de ${crianca.nome ?? "criança"}`;
