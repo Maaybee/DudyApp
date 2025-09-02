@@ -271,7 +271,6 @@ body {
     justify-content: space-around; /* Distribui os itens uniformemente com espaço entre eles */
     align-items: center;
     width: 100%; 
-    margin-top: 15px;/* Garante que btnsMenu ocupe toda a largura disponível no .menu para a distribuição */
 }
 
 .btnMenu {
