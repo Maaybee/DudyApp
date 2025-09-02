@@ -17,7 +17,7 @@
 
                 <div class="col-itens-input"> 
                     <div class="row-itens"> 
-                        <img src="../assets/pessoa.svg">
+                        <img src="../assets/pessoa.svg" id="pessoa">
                         <input  type="text" placeholder="Qual o seu nome?" id="nome">
                     </div>
 
@@ -35,7 +35,7 @@
 
                 <div class="col-itens-input"> 
                     <div class="row-itens"> 
-                        <img src="../assets/cadeado.svg">
+                        <img src="../assets/cadeado.svg" id="cadeado">
                         <input type="password" placeholder="Insira uma senha" id="senhaCadastro">
                     </div>
 
@@ -45,8 +45,8 @@
 
                 <div class="col-itens-input"> 
                     <div class="row-itens"> 
-                        <img src="../assets/cadeado.svg">
-                        <input type="password" placeholder="Confirme a senha" id="senha2">
+                        <img src="../assets/cadeado.svg" id="cadeado">
+                        <input type="password" placeholder="Repita a senha" id="senha2">
 
                         <img src="../assets/senhaFechado.svg" id="mostrarSenha"> 
                     </div>
@@ -60,6 +60,12 @@
                     <h2 id="subtitle" class="subtitle"> Já tem cadastro? Clique aqui </h2>
                 </div> 
 
+                <div id="popupOverlay" class="overlay"> 
+                    <div id="messagetest"> 
+                        <h5 id="textmessage">Usuário não encontrado, senha ou e-mail incorretos</h5>
+                    </div>
+                </div>
+                
             </div>  
         </div>
            
