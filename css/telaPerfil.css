@@ -160,3 +160,8 @@ h6{
     margin: 0;
     text-align: center;
 }
+
+#fotoPerfil {
+    width: 45px;
+    height: 45px;
+}
