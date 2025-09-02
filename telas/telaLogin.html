@@ -17,6 +17,7 @@
                     <div class="col-itens-input"> 
                         <div class="row-itens"> 
                             <img src="../assets/correio.svg">
+                        
                             <input type="email" placeholder="Insira seu E-mail" id="emailLogin" name="email">
                         </div>
                         <hr class="linhaInput">
@@ -24,7 +25,7 @@
 
                     <div class="col-itens-input"> 
                         <div class="row-itens"> 
-                            <img src="../assets/cadeado.svg">
+                            <img src="../assets/cadeado.svg" id="cadeado">
                             <input type="password" placeholder="Insira sua senha" id="senhaLogin" name="senha">
                             <img src="../assets/senhaFechado.svg" id="mostrarSenha"> 
                         </div>
@@ -33,9 +34,14 @@
 
                     <button type="submit" id="btnLogin" class="btns-blue"> Entrar </button>
                 </form>
-                <p id="message" style="color: red; margin-top: 15px;"></p>
-
                 <h2 id="subtitle" class="subtitle"> Não tem cadastro? Clique aqui </h2>
+
+                <div id="popupOverlay" class="overlay"> 
+                    <div id="messagetest"> 
+                        <h5 id="textmessage">Usuário não encontrado, senha ou e-mail incorretos</h5>
+                    </div>
+                </div>
+
             </div>  
         </div>
     </div>
