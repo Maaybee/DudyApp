@@ -27,8 +27,6 @@ async function carregarPerfil(idEstudante) {
 
     // Atualiza os elementos da página
 
-    
-
     const nomeElem = document.getElementById("nomePerfil");
     if (nomeElem) nomeElem.textContent = crianca.nome ?? "Sem nome";
 
@@ -101,3 +99,4 @@ function home() {
 
     window.location.href = '../telas/telaHome.html'; 
 };
+
