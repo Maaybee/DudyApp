@@ -14,11 +14,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnCadastro = document.getElementById("btnLogin");
     const subtitle = document.getElementById("subtitle");
 
+    
+
     // Criar mensagem dinâmica
-    const message = document.createElement("p");
-    message.id = "messageCadastro";
-    message.style.marginTop = "10px";
-    document.getElementById("juntar").appendChild(message);
+    const popupOverlay = document.getElementById("popupOverlay");
+    const textmessage = document.getElementById("textmessage");
+
+      // Fechar popup clicando fora
+    popupOverlay.addEventListener("click", (e) => {
+        if (e.target === popupOverlay) {
+            popupOverlay.classList.remove("active");
+        }
+    });
+
 
     // Mostrar/esconder senha 👁️
     mostrarSenhaImg.addEventListener("click", () => {
@@ -48,14 +56,18 @@ document.addEventListener("DOMContentLoaded", () => {
         const confirmarSenha = confirmarInput.value.trim();
 
         if (!nome || !email || !senha || !confirmarSenha) {
-            message.style.color = "red";
-            message.textContent = "Preencha todos os campos!";
+            textmessage.style.color = "gray";
+            textmessage.style.fontSize = "20px"
+            popupOverlay.classList.add("active");
+            textmessage.textContent = "Preencha todos os campos!";
             return;
         }
 
         if (senha !== confirmarSenha) {
-            message.style.color = "red";
-            message.textContent = "As senhas não coincidem!";
+            textmessage.style.color = "red";
+            popupOverlay.classList.add("active");
+            textmessage.style.fontSize = "20px"
+            textmessage.textContent = "As senhas não coincidem!";
             return;
         }
 
@@ -70,13 +82,17 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
             if (error) {
-                message.style.color = "red";
-                message.textContent = "Erro: " + error.message;
+
+                textmessage.style.color = "red";
+                popupOverlay.classList.add("active");
+                textmessage.style.fontSize = "20px"
+                textmessage.textContent = "Erro: " + error.message;
                 console.error(error);
             } else {
-                message.style.color = "green";
-                message.textContent = "Cadastro realizado! Verifique seu email.";
-
+                textmessage.style.color = "green";
+                popupOverlay.classList.add("active");
+                textmessage.textContent = "Cadastro realizado! Verifique seu email.";
+                textmessage.style.fontSize = "20px"
                 console.log("Usuário cadastrado:", data);
 
                 // redireciona para tela de login
@@ -86,8 +102,10 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         } catch (err) {
             console.error("Erro inesperado:", err);
-            message.style.color = "red";
-            message.textContent = "Ocorreu um erro, tente novamente.";
+            textmessage.style.color = "red";
+            popupOverlay.classList.add("active");
+            textmessage.style.fontSize = "20px"
+            textmessage.textContent = "Ocorreu um erro, tente novamente.";
         }
     });
 });
