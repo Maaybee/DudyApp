@@ -481,3 +481,7 @@ input[type="password"]::-webkit-textfield-decoration-container {
 #cadeado { 
     margin-right: 9px;
 }
+
+#pessoa {
+    margin-right: 4px;
+}
