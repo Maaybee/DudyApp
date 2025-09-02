@@ -79,13 +79,6 @@ body {
     color: black;
 }
 
-#telaLogin{ 
-    display: flex;
-    text-align: center;
-    flex-direction: column;
-    align-items: center;
-}
-
 #buttonsLogin button { 
     background-color: #0262FF;
     border-radius: 30px;
@@ -332,11 +325,6 @@ body {
 }
 
 
-#imgTelaLogin { 
-    width: 306px;
-    height: 306px;
-}
-
 input::placeholder { 
     color: #0262FF;
     font-family: 'Baloo Chettan Regular';
@@ -393,6 +381,61 @@ input {
     color: white;
 }
 
+.centerH { 
+    top: 50%;
+}
+
+#messagetest{ 
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 15px;
+    width: 314px;
+    height: 194px;
+    font-family: 'Baloo Chettan Regular';
+    align-items: center;
+    justify-content: center;
+    transform: scale(0.9); /* Opcional: Efeito de zoom */
+    transition: transform 0.3s ease;
+}
+
+#textmessage{ 
+    font-family: 'Baloo Chettan Regular';
+    width: 190px;
+    font-size: 15px;
+    text-align: center;
+}
+
+.overlay {
+    position: fixed; /* Fixado para cobrir toda a tela */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Fundo semi-transparente */
+    display: flex; /* Para centralizar o pop-up */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    
+    /* Ocultar por padrão e transição */
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.3s ease;
+    z-index: 1000; /* Garante que fique acima de tudo */
+}
+
+/* Quando o overlay está ativo, ele se torna visível */
+.overlay.active {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Adicione o efeito de zoom quando o overlay estiver ativo */
+.overlay.active #pop-up {
+    transform: scale(1);
+}
+
+
 #btnLogin { 
     width: 131px;
     height: 39px;
@@ -408,6 +451,33 @@ input {
 
 }
 
-.centerH { 
-    top: 50%;
+/* Remove o botão nativo de mostrar senha no Chrome, Edge, Opera */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear,
+input[type="password"]::-webkit-credentials-auto-fill-button,
+input[type="password"]::-webkit-password-toggle-button {
+    display: none !important;
+}
+
+/* Safari */
+input[type="password"]::-webkit-textfield-decoration-container {
+    display: none !important;
+}
+
+#loginForm{ 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+
+}
+
+#imgTelaLogin { 
+    width: 306px;
+    height: 306px;
+}
+
+#cadeado { 
+    margin-right: 9px;
 }
