@@ -469,3 +469,135 @@ input[type="password"]::-webkit-textfield-decoration-container {
 #pessoa {
     margin-right: 4px;
 }
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Chettan+2&family=Gelasio&display=swap');
+
+body { 
+    background-color: #FFF7F7;
+    margin-top: 25px;
+    padding-bottom: 80px; 
+}
+.group {
+    margin-left: 20px;
+}
+.text_menor { 
+    font-size: 15.7px;
+    margin-bottom: -10px;
+    font-family:'Gelasio';
+}
+
+.text_maior {
+    font-size: 38.7px;
+    margin: 0;
+    font-family:'Baloo Chettan 2';
+    font-weight: 900;
+}
+
+#linha { 
+    height: 1px;
+    width: 330px;
+}
+
+.imagens { 
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+#Atividades {
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    margin-bottom: 30px; /* Valor corrigido (ex: 30px) */
+}
+
+/* Estilo para o botão transparente */
+button.circle {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    
+    /* Mantém o layout que você já tinha */
+    display: flex;
+    text-align: center;
+    align-items: center; /* Ajuda a alinhar o ícone e o texto verticalmente */
+}
+
+button.circle h2 {
+    padding: 8px;
+    font-family: 'Baloo Chettan 2', sans-serif;
+    margin-left: 4%;
+    font-size: 21.7px; /* Movido para cá para ser mais específico */
+}
+
+#icone {
+    width: 100px;
+    margin-top: 1%;
+    margin-left: 15%;
+}
+
+#iconefinal {
+    width: 110px;
+    margin-top: 20px; /* Removida a duplicação de margin-top */
+    margin-left: 15%;
+}
+
+/* Regra .buttons combinada e corrigida */
+.buttons { 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 271px;
+    height: 52px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    background-color: #FFF7F7;
+    border: 3px solid #EBDFDF;
+    font-family: 'Baloo Chettan 2', sans-serif;
+    font-size: 21.7px;
+}
+
+/* Seletor :disabled corrigido */
+.buttons:disabled { 
+    color: black;
+}
+
+#buttonsLogin button { 
+    background-color: #0262FF;
+    border-radius: 30px;
+    color: white;
+    border: 1px solid #0262FF;
+    height: 50px;
+    width: 340px;
+    margin-top: 30px;
+    font-family:'Baloo Chettan 2';
+    font-size: 18px;
+}
+
+#logoInicial { 
+    margin-top: 50px;
+    height: 303px;
+    width: 292px;
+}
+
+#home {
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+    justify-content: space-between; 
+    align-items: center; 
+    margin-top: -10px;
+}
+
+#logo { 
+    height: 62px;
+    width: 62px;
+    margin-right: 20px;
+}
+
+#textHome { 
+    font-family:'Baloo Chettan 2';
+    font-size: 21px;
+    margin-left: 25px;
+    margin-top: 10px;
+}
+
