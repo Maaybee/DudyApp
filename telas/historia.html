@@ -5,12 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DudyApp - História</title> 
     <link rel="stylesheet" href="../css/index.css"> 
-    <style> /* Adicionei o CSS aqui para garantir que funcione */
-        body { font-family: sans-serif; padding: 20px; }
-        a { display: block; margin-bottom: 5px; cursor: pointer; color: #007bff; }
-        .buttons button { display: block; width: 100%; padding: 10px; margin-top: 5px; cursor: pointer; border-radius: 5px; font-size: 16px; }
-        .buttons button:disabled { cursor: not-allowed; }
-    </style>
 </head>
 <body>
 
@@ -28,25 +22,23 @@
         <div class="texto">
             </div>
     </div>
+<div class="quiz-container">
+    <h4 id="pergunta"></h4>
+    <div class="buttons" id="botoes-container"></div>
+</div>
 
-    <div class="quiz-container">
-        <h4 id="pergunta"></h4>
-        <div class="buttons" id="botoes-container"></div>
-    </div>
+<audio id="player"></audio>
 
-    <audio id="player"></audio>
-
-    <div id="popupOverlay" class="overlay">
-        <div id="pop-up">
-            <h2>Tem certeza que deseja sair?</h2>
-            <h3>*Seu progresso NÂO será salvo!</h3>
-            <div id="group">
-                <button id="btnSair">SAIR</button>
-                <button id="btnVoltar">VOLTAR</button>
-            </div>
+<div id="popupOverlay" class="overlay">
+    <div id="pop-up">
+        <h2>Tem certeza que deseja sair?</h2>
+        <h3>*Seu progresso NÂO será salvo!</h3>
+        <div id="group">
+            <button id="btnSair" class="styled-button">SAIR</button>
+            <button id="btnVoltar" class="styled-button">VOLTAR</button>
         </div>
     </div>
-
+</div>
 </body>
     <script src="../scripts/historias.js"></script>
     <script src="../scripts/script2.js"></script>
