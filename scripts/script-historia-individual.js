@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const sairBtnPrincipal = document.getElementById('sair');
     const popupOverlay = document.getElementById('popupOverlay');
     const btnSairPopup = document.getElementById('btnSair');
-    const btnVoltarPopup = document = document.getElementById('btnVoltar');
+    const btnVoltarPopup = document.getElementById('btnVoltar');
 
     // --- VARIÁVEIS DE ESTADO ---
     let linhaAtual = 0;
@@ -47,51 +47,61 @@ document.addEventListener('DOMContentLoaded', () => {
         mostrarLinha(linhaAtual);
     }
 
-    // --- LÓGICA DO DIÁLOGO (Corrigida) ---
-    function mostrarLinha(indice) {
-        if (indice >= historia.dialogo.length) {
-            iniciarQuiz(); // Se o diálogo acabou, começa o quiz
-            return;
+ // ... outras partes do código ...
+
+    // --- LÓGICA DO DIÁLOGO ---
+    
+    // --- LÓGICA DO DIÁLOGO ---
+function mostrarLinha(indice) {
+    if (indice >= historia.dialogo.length) {
+        iniciarQuiz();
+        return;
+    }
+    
+    linhaAtual = indice;
+    const item = historia.dialogo[indice];
+
+    textoContainer.innerHTML = '';
+
+    const p = document.createElement('p');
+    if (item.tipo === 'acao') {
+        p.textContent = `(${item.texto})`;
+        p.style.fontStyle = 'italic';
+        p.style.textAlign = 'center';
+    } else {
+        p.textContent = `${item.personagem}: ${item.fala}`;
+        if (item.audio) {
+            audioPlayer.src = `../assets/audio/${item.audio}.mp3`;
+            audioPlayer.play();
         }
-        
-        linhaAtual = indice;
-        const item = historia.dialogo[indice];
+    }
+    textoContainer.appendChild(p);
 
-        textoContainer.innerHTML = '';
+    const navContainer = document.createElement('div');
+    navContainer.className = 'buttons'; 
 
-        const p = document.createElement('p');
-        if (item.tipo === 'acao') {
-            p.textContent = `(${item.texto})`;
-            p.style.fontStyle = 'italic';
-            p.style.textAlign = 'center';
-        } else {
-            p.textContent = `${item.personagem}: ${item.fala}`;
-            if (item.audio) {
-                audioPlayer.src = `../assets/audio/${item.audio}.mp3`;
-                audioPlayer.play();
-            }
-        }
-        textoContainer.appendChild(p);
-
-        const navContainer = document.createElement('div');
-        navContainer.className = 'dialogo-nav';
-
-        if (linhaAtual > 0) {
-            const btnAnterior = document.createElement('button');
-            btnAnterior.textContent = 'Anterior';
-            btnAnterior.onclick = () => mostrarLinha(linhaAtual - 1);
-            navContainer.appendChild(btnAnterior);
-        }
-
-        const btnProximo = document.createElement('button');
-        btnProximo.textContent = 'Próximo';
-        btnProximo.onclick = () => mostrarLinha(linhaAtual + 1);
-        navContainer.appendChild(btnProximo);
-
-        textoContainer.appendChild(navContainer);
+    if (linhaAtual > 0) {
+        const btnAnterior = document.createElement('button');
+        btnAnterior.textContent = 'Anterior';
+        btnAnterior.onclick = (e) => {
+            e.target.style.backgroundColor = '#90EE90'; // Muda a cor para verde
+            mostrarLinha(linhaAtual - 1);
+        };
+        navContainer.appendChild(btnAnterior);
     }
 
-    // --- LÓGICA DO QUIZ (Corrigida para mostrar tudo de uma vez) ---
+    const btnProximo = document.createElement('button');
+    btnProximo.textContent = 'Avançar';
+    btnProximo.onclick = (e) => {
+        e.target.style.backgroundColor = '#90EE90'; // Muda a cor para verde
+        mostrarLinha(linhaAtual + 1);
+    };
+    navContainer.appendChild(btnProximo);
+
+    textoContainer.appendChild(navContainer);
+}
+
+    // --- LÓGICA DO QUIZ ---
     function iniciarQuiz() {
         textoContainer.style.display = 'none';
         quizContainer.style.display = 'block';
@@ -107,11 +117,12 @@ document.addEventListener('DOMContentLoaded', () => {
             perguntaDiv.appendChild(perguntaTitulo);
 
             const botoesPerguntaDiv = document.createElement('div');
-            botoesPerguntaDiv.className = 'quiz-alternativas buttons';
+            botoesPerguntaDiv.className = 'quiz-alternativas';
 
             historia.quiz.alternativas[indicePergunta].forEach(alternativa => {
                 const botao = document.createElement('button');
                 botao.textContent = alternativa;
+                botao.className = 'transparent-button';
                 botao.onclick = (e) => checarResposta(e.target, indicePergunta);
                 botoesPerguntaDiv.appendChild(botao);
             });
@@ -123,6 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const btnFinalizar = document.createElement('button');
         btnFinalizar.textContent = 'Finalizar Quiz';
         btnFinalizar.id = 'btnFinalizar';
+        btnFinalizar.className = 'transparent-button';
         btnFinalizar.style.marginTop = '20px';
         btnFinalizar.onclick = finalizarQuiz;
         botoesContainer.appendChild(btnFinalizar);
@@ -133,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const respostaDoUsuario = botaoSelecionado.textContent;
         const containerBotoes = botaoSelecionado.parentElement;
 
-        containerBotoes.querySelectorAll('button').forEach(b => {
+        containerBotoes.querySelectorAll('.transparent-button').forEach(b => {
             b.disabled = true;
             if (b.textContent === respostaCorreta) {
                 b.style.backgroundColor = '#90EE90';
@@ -149,7 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let pontuacaoFinal = 0;
         const perguntasRespondidas = botoesContainer.querySelectorAll('.quiz-pergunta');
         perguntasRespondidas.forEach((perguntaDiv, indice) => {
-            const botoes = perguntaDiv.querySelectorAll('button');
+            const botoes = perguntaDiv.querySelectorAll('.transparent-button');
             const respostaCorreta = historia.quiz.respostasCorretas[indice];
             botoes.forEach(botao => {
                 if (botao.textContent === respostaCorreta && botao.style.backgroundColor === 'rgb(144, 238, 144)') {
@@ -161,16 +173,17 @@ document.addEventListener('DOMContentLoaded', () => {
         quizContainer.innerHTML = `
             <h2>Quiz Finalizado!</h2>
             <h3>Sua pontuação: ${pontuacaoFinal} de ${historia.quiz.perguntas.length}</h3>
-            <button onclick="window.location.href='../telas/centrohistorias.html'">Voltar para Histórias</button>
+            <button class="transparent-button" onclick="window.location.href='../telas/indexCentrohistorias.html'">Voltar para Histórias</button>
         `;
     }
+// ... restante do código ...
 
     // --- LÓGICA DO POP-UP ---
     sairBtnPrincipal.addEventListener('click', () => {
         popupOverlay.style.display = 'flex';
     });
     btnSairPopup.addEventListener('click', () => {
-        window.location.href = '../telas/centrohistorias.html';
+        window.location.href = '../telas/indexCentrohistorias.html';
     });
     btnVoltarPopup.addEventListener('click', () => {
         popupOverlay.style.display = 'none';
