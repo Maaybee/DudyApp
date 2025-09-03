@@ -40,6 +40,13 @@ function atividade () {
 
     window.location.href = '../telas/telaAtividade.html'; 
 }
+function historia () { 
+    console.log('Botão clicado, redirecionando...');
+
+    window.location.href = '../telas/indexCentrohistorias.html'; 
+}
+
+
 
 
 
