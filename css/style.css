@@ -488,7 +488,7 @@ body {
 .text_maior {
     font-size: 38.7px;
     margin: 0;
-    font-family:'Baloo Chettan 2';
+    font-family:'Baloo Chettan Regular';
     font-weight: 900;
 }
 
@@ -524,7 +524,7 @@ button.circle {
 
 button.circle h2 {
     padding: 8px;
-    font-family: 'Baloo Chettan 2', sans-serif;
+    font-family: 'Baloo Chettan Regular', sans-serif;
     margin-left: 4%;
     font-size: 21.7px; /* Movido para cá para ser mais específico */
 }
@@ -552,7 +552,7 @@ button.circle h2 {
     margin-bottom: 30px;
     background-color: #FFF7F7;
     border: 3px solid #EBDFDF;
-    font-family: 'Baloo Chettan 2', sans-serif;
+    font-family: 'Baloo Chettan Regular', sans-serif;
     font-size: 21.7px;
 }
 
@@ -569,7 +569,7 @@ button.circle h2 {
     height: 50px;
     width: 340px;
     margin-top: 30px;
-    font-family:'Baloo Chettan 2';
+    font-family:'Baloo Chettan Regular';
     font-size: 18px;
 }
 
@@ -595,7 +595,7 @@ button.circle h2 {
 }
 
 #textHome { 
-    font-family:'Baloo Chettan 2';
+    font-family:'Baloo Chettan Regular';
     font-size: 21px;
     margin-left: 25px;
     margin-top: 10px;
