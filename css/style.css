@@ -28,7 +28,14 @@
 
 body { 
     background-color: #FFF7F7;
-    margin-top: 25px;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    margin-bottom: 50px;
 }
 
 .group {
@@ -280,6 +287,8 @@ body {
     flex-direction: row;
     justify-content: center; /* Centraliza o conteúdo horizontalmente no menu */
     align-items: center; /* Centraliza o conteúdo verticalmente no menu */
+    position: fixed;
+    bottom: 0;
 }
 
 .btnsMenu {
@@ -355,7 +364,9 @@ input {
 .center { 
     display: flex;
     align-items: center;
+    justify-content: center;
     flex-direction: column;
+    height: 100%;
 }
 
 .btns-blue{ 
@@ -471,11 +482,6 @@ input[type="password"]::-webkit-textfield-decoration-container {
 }
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Chettan+2&family=Gelasio&display=swap');
 
-body { 
-    background-color: #FFF7F7;
-    margin-top: 25px;
-    padding-bottom: 80px; 
-}
 .group {
     margin-left: 20px;
 }
@@ -601,3 +607,55 @@ button.circle h2 {
     margin-top: 10px;
 }
 
+/* Smartphones grandes e tablets pequenos */
+@media (min-width: 414px) {
+  html { 
+    margin-bottom: 10px;
+  }
+
+  #telaHomeInt{ 
+    gap: px;
+
+    & h2{ 
+        font-size: 24px;
+    }
+  }
+
+  #blocoRosa,#blocoAzul { 
+    width: 150px;
+    height: 173px;
+  }
+
+  #cerebro { 
+    width: 111px;
+    height: 93px;
+    margin-top: 18px;
+    margin-bottom: -8px;
+}
+#livro { 
+    width: 104px;
+    height: 99px;
+    margin-top: 18px;
+    margin-bottom: -8px;
+}
+
+    #textHome{ 
+        font-size: 26px;
+    }
+
+
+}
+
+/* Tablets e monitores menores */
+@media (min-width: 768px) {
+  .elemento {
+    /* estilo para telas a partir de 768px */
+  }
+}
+
+/* Desktops e monitores grandes */
+@media (min-width: 1024px) {
+  .elemento {
+    /* estilo para telas a partir de 1024px */
+  }
+}
