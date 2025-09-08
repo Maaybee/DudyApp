@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Chettan+2&family=Gelasio&display=swap');
 
+@font-face {
+    font-family: 'Baloo Chettan Regular';
+    src: local("☺"), url("../baloo-chettan-webfont/BalooChettan-Regular.woff") format("woff");
+    font-weight: 900;
+    font-style: normal
+}
+
 body { 
     background-color: #FFF7F7;
     margin-top: 25px;
@@ -18,7 +25,7 @@ body {
 .text_maior {
     font-size: 38.7px;
     margin: 0;
-    font-family:'Baloo Chettan 2';
+    font-family:'Baloo Chettan Regular';
     font-weight: bold;
 }
 
@@ -46,7 +53,7 @@ body {
     margin-bottom: 30px;
     background-color: #FFF7F7;
     border: 3px solid #EBDFDF;
-    font-family: 'Baloo Chettan 2';
+    font-family: 'Baloo Chettan Regular';
     font-size: 21.7px;
 }
 
@@ -69,7 +76,7 @@ body {
     height: 50px;
     width: 340px;
     margin-top: 30px;
-    font-family: 'Baloo Chettan 2';
+    font-family: 'Baloo Chettan Regular';
     font-size: 18px;
 }
 
@@ -95,7 +102,7 @@ body {
 }
 
 #textHome { 
-    font-family: 'Baloo Chettan 2';
+    font-family: 'Baloo Chettan Regular';
     font-size: 21px;
     margin-left: 25px;
     margin-top: 10px;
@@ -119,7 +126,7 @@ body {
 
     & h3{ 
         color: white;
-        font-family: 'Baloo Chettan 2';
+        font-family: 'Baloo Chettan Regular';
         margin: auto;
     }
 }
@@ -142,7 +149,7 @@ body {
 
     & h3{ 
         color: white;
-        font-family: 'Baloo Chettan 2';
+        font-family: 'Baloo Chettan Regular';
         margin: auto;
     }
 
@@ -197,7 +204,7 @@ body {
 
     & h3{ 
         color: white;
-        font-family: 'Baloo Chettan 2';
+        font-family: 'Baloo Chettan Regular';
         margin: 0;
     }
 
@@ -221,7 +228,7 @@ body {
     flex-direction: column;
     justify-content: center;
     & h2{ 
-        font-family: 'Baloo Chettan 2';
+        font-family: 'Baloo Chettan Regular';
         font-size: 21px;
         margin-left: 35px;
         margin-top: 25px;
@@ -235,7 +242,7 @@ body {
     border: 2px solid #EBDFDF;
     border-radius: 10px;
     margin-bottom: -25px;
-    font-family: 'Baloo Chettan 2';
+    font-family: 'Baloo Chettan Regular';
     font-size: 15px;
     padding: 0;
     display: flex;
@@ -300,7 +307,8 @@ body {
 
 .btnMenuRow h4 {
     font-size: 10px;
-    font-family: 'Baloo Chettan 2';
+    font-family: 'Baloo Chettan Regular';
     margin-top: -10px; /* Adiciona um pequeno espaçamento entre o botão e o texto */
     text-align: center; /* Centraliza o texto */
 }
+
