@@ -26,16 +26,17 @@
     font-style: normal;
 }
 
-body { 
-    background-color: #FFF7F7;
-}
-
 html,
 body {
     margin: 0;
     padding: 0;
     height: 100%;
+    margin-top: 10px;
     margin-bottom: 50px;
+    display: flex;
+    justify-content: center;
+    background-color: #FFF7F7;
+
 }
 
 .group {
@@ -52,6 +53,7 @@ body {
     font-size: 38.7px;
     margin: 0;
     font-family:'Baloo Chettan Regular';
+    font-weight: bold;
 }
 
 #linha { 
@@ -275,6 +277,7 @@ body {
     display: flex;
     flex-direction: column;
     margin-bottom: 30px;
+    margin: auto;
     
 }
 
@@ -289,6 +292,9 @@ body {
     align-items: center; /* Centraliza o conteúdo verticalmente no menu */
     position: fixed;
     bottom: 0;
+    margin-bottom: 20px;
+    margin: 5px auto 0; /* shorthand para margin-top: 5px; e centraliza horizontalmente */
+
 }
 
 .btnsMenu {
@@ -297,6 +303,7 @@ body {
     justify-content: space-around; /* Distribui os itens uniformemente com espaço entre eles */
     align-items: center;
     width: 100%; 
+    
 }
 
 .btnMenu {
@@ -309,6 +316,8 @@ body {
     background: none; /* Remove o fundo */
     border: none; /* Remove a borda */
     padding: 0; 
+    margin: 0;/* Remove padding padrão do botão */
+
 }
 
 .btnMenu img {
@@ -608,54 +617,78 @@ button.circle h2 {
 }
 
 /* Smartphones grandes e tablets pequenos */
-@media (min-width: 414px) {
+@media (min-width: 390px) {
   html { 
-    margin-bottom: 10px;
+    margin-top: 40px;
   }
 
   #telaHomeInt{ 
-    gap: px;
+    gap: 20px;
 
     & h2{ 
         font-size: 24px;
     }
   }
 
+  .btnHome{ 
+        width: 329px;
+        height: 62px;
+    }
+
   #blocoRosa,#blocoAzul { 
     width: 150px;
     height: 173px;
+
+    & h3 { 
+        font-size: 22px;
+    }
   }
 
-  #cerebro { 
-    width: 111px;
-    height: 93px;
-    margin-top: 18px;
-    margin-bottom: -8px;
-}
-#livro { 
-    width: 104px;
-    height: 99px;
-    margin-top: 18px;
-    margin-bottom: -8px;
-}
+  #blocoRevise { 
+    width: 323px;
+    height: 50px;
+
+    & h3 { 
+        font-size: 22px;
+    }
+  }
+
+    #cerebro { 
+        width: 111px;
+        height: 93px;
+        margin-top: 18px;
+        margin-bottom: -8px;
+    }
+    #livro { 
+        width: 104px;
+        height: 99px;
+        margin-top: 18px;
+        margin-bottom: -8px;
+    }
 
     #textHome{ 
         font-size: 26px;
     }
+
+    #btns { 
+        gap: 10px;
+    }
+
+    #coracao { 
+    width: 38px;
+    height: 37px;
 
 
 }
 
 /* Tablets e monitores menores */
 @media (min-width: 768px) {
-  .elemento {
-    /* estilo para telas a partir de 768px */
-  }
+
 }
 
 /* Desktops e monitores grandes */
 @media (min-width: 1024px) {
-  .elemento {
-    /* estilo para telas a partir de 1024px */
-  }
+
+}
+
 }
