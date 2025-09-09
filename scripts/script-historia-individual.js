@@ -49,9 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
  // ... outras partes do código ...
 
-    // --- LÓGICA DO DIÁLOGO ---
-    
-   // --- LÓGICA DO DIÁLOGO (COM O CAMINHO DO ÁUDIO CORRIGIDO) ---
+ // --- LÓGICA DO DIÁLOGO (COM O CAMINHO DO ÁUDIO CORRIGIDO PARA GITHUB PAGES) ---
 function mostrarLinha(indice) {
     if (indice >= historia.dialogo.length) {
         iniciarQuiz(); // Se o diálogo acabou, começa o quiz
@@ -71,9 +69,9 @@ function mostrarLinha(indice) {
     } else {
         p.textContent = `${item.personagem}: ${item.fala}`;
         if (item.audio) {
-            // A CORREÇÃO ESTÁ NESTA LINHA: 'audio' virou 'audios'
-            audioPlayer.src = `../assets/audios/${item.audio}.mp3`; 
-            audioPlayer.play().catch(e => console.error("Erro ao tocar o áudio:", e)); // Adicionado para ver erros
+            // A CORREÇÃO ESTÁ NESTA LINHA: Adicionamos o nome do repositório
+            audioPlayer.src = `/DUDYAPP-MAIN/assets/audios/${item.audio}.mp3`; 
+            audioPlayer.play().catch(e => console.error("Erro ao tocar o áudio:", e));
         }
     }
     textoContainer.appendChild(p);
@@ -192,3 +190,4 @@ function mostrarLinha(indice) {
     // Inicia a aplicação
     iniciarHistoria();
 });
+
