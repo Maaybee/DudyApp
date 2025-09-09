@@ -37,47 +37,55 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- LÓGICA DO DIÁLOGO ---
-    function mostrarLinha(indice) {
-        if (indice >= historia.dialogo.length) { iniciarQuiz(); return; }
-        
-        linhaAtual = indice;
-        const item = historia.dialogo[indice];
-        textoContainer.innerHTML = '';
+   function mostrarLinha(indice) {
+    if (indice >= historia.dialogo.length) {
+        iniciarQuiz(); // Se o diálogo acabou, começa o quiz
+        return;
+    }
+    
+    linhaAtual = indice;
+    const item = historia.dialogo[indice];
 
-        const p = document.createElement('p');
-        p.textContent = (item.tipo === 'acao') ? `(${item.texto})` : `${item.personagem}: ${item.fala}`;
-        textoContainer.appendChild(p);
-        
+    textoContainer.innerHTML = '';
+
+    const p = document.createElement('p');
+    if (item.tipo === 'acao') {
+        p.textContent = `(${item.texto})`;
+        p.style.fontStyle = 'italic';
+        p.style.textAlign = 'center';
+    } else {
+        p.textContent = `${item.personagem}: ${item.fala}`;
         if (item.audio) {
-            // AQUI ESTÁ A CORREÇÃO FINAL E DEFINITIVA
-            audioPlayer.src = `/DudyApp/assets/audios/${item.audio}.mp3`;
+            // A CORREÇÃO ESTÁ NESTA LINHA: O caminho agora aponta para a pasta correta
+            audioPlayer.src = `/DudyApp/audios/${item.audio}.mp3`; 
             audioPlayer.play().catch(e => console.error("Erro ao tocar o áudio:", e));
         }
+    }
+    textoContainer.appendChild(p);
 
-        const navContainer = document.createElement('div');
-        navContainer.className = 'buttons';
+    const navContainer = document.createElement('div');
+    navContainer.className = 'buttons'; 
 
-        if (linhaAtual > 0) {
-            const btnAnterior = document.createElement('button');
-            btnAnterior.textContent = 'Anterior';
-            btnAnterior.onclick = (e) => {
-                e.target.style.backgroundColor = '#90EE90';
-                mostrarLinha(linhaAtual - 1);
-            };
-            navContainer.appendChild(btnAnterior);
-        }
-
-        const btnProximo = document.createElement('button');
-        btnProximo.textContent = 'Avançar';
-        btnProximo.onclick = (e) => {
+    if (linhaAtual > 0) {
+        const btnAnterior = document.createElement('button');
+        btnAnterior.textContent = 'Anterior';
+        btnAnterior.onclick = (e) => {
             e.target.style.backgroundColor = '#90EE90';
-            mostrarLinha(linhaAtual + 1);
+            mostrarLinha(linhaAtual - 1);
         };
-        navContainer.appendChild(btnProximo);
-
-        textoContainer.appendChild(navContainer);
+        navContainer.appendChild(btnAnterior);
     }
 
+    const btnProximo = document.createElement('button');
+    btnProximo.textContent = 'Avançar';
+    btnProximo.onclick = (e) => {
+        e.target.style.backgroundColor = '#90EE90';
+        mostrarLinha(linhaAtual + 1);
+    };
+    navContainer.appendChild(btnProximo);
+
+    textoContainer.appendChild(navContainer);
+}
     // --- LÓGICA DO QUIZ (sem alterações) ---
     function iniciarQuiz() {
         document.querySelector('.header').style.display = 'none';
@@ -90,3 +98,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // (O resto do seu arquivo continua igual a partir daqui)
 });
+
