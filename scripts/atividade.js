@@ -1,23 +1,27 @@
+// Arquivo: scripts/atividade.js
+
 const DADOS_ATIVIDADES = [
     {
         id: 1,
-        tipo: 'associacao_imagem', // <-- Identifica o tipo de exercício
+        tipo: 'associacao_imagem',
         pergunta: "Qual destas imagens é 'açúcar'?",
         palavraAlvo: 'açúcar',
         respostaCorreta: 'sugar',
         opcoes: [
-            { id: 'water', imagem: '../assets/imagens/water.png', texto: 'water' },
-            { id: 'sugar', imagem: '../assets/imagens/sugar.png', texto: 'sugar' },
-            { id: 'milk',  imagem: '../assets/imagens/milk.png',  texto: 'milk' }
+            // Caminhos corrigidos para o GitHub Pages
+            { id: 'water', imagem: '/DudyApp/assets/img/water.png', texto: 'water' },
+            { id: 'sugar', imagem: '/DudyApp/assets/img/sugar.png', texto: 'sugar' },
+            { id: 'milk',  imagem: '/DudyApp/assets/img/milk.png',  texto: 'milk' }
         ]
     },
     {
         id: 2,
-        tipo: 'traducao', // <-- Identifica o tipo de exercício
+        tipo: 'traducao',
         pergunta: 'Escreva em português:',
         palavraOriginal: 'Sugar.',
         respostaCorreta: 'Açúcar',
-        audio: '../assets/audio/sugar.mp3'
+        // Caminho corrigido para o GitHub Pages
+        audio: '/DudyApp/audios/sugar.mp3'
     },
     {
         id: 3,
@@ -26,10 +30,10 @@ const DADOS_ATIVIDADES = [
         palavraAlvo: 'maçã',
         respostaCorreta: 'apple',
         opcoes: [
-            { id: 'apple',  imagem: '../assets/imagens/apple.png',  texto: 'apple' },
-            { id: 'bread',  imagem: '../assets/imagens/bread.png',  texto: 'bread' },
-            { id: 'cheese', imagem: '../assets/imagens/cheese.png', texto: 'cheese' }
+            // Caminhos corrigidos para o GitHub Pages
+            { id: 'apple',  imagem: '/DudyApp/assets/img/apple.png',  texto: 'apple' },
+            { id: 'bread',  imagem: '/DudyApp/assets/img/bread.png',  texto: 'bread' },
+            { id: 'cheese', imagem: '/DudyApp/assets/img/cheese.png', texto: 'cheese' }
         ]
     }
-    // Adicione quantas atividades quiser aqui...
 ];
