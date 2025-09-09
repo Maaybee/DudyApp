@@ -1,11 +1,11 @@
 
 @font-face {
     font-family: 'Baloo Chettan Regular';
+    /* Caminho corrigido para a fonte */
     src: local("☺"), url("../assets/fonts/baloo-chettan-webfont/BalooChettan-Regular.woff") format("woff");
     font-weight: 900;
-    font-style: normal
+    font-style: normal;
 }
-
 body { 
     background-color: #FFF7F7;
     margin-top: 25px;
@@ -45,23 +45,41 @@ body {
 }
 
 /* Estilo para o botão transparente */
+button.circle .icone { /* Altere de #icone para .icone aqui */
+    width: 60px; /* Reduza um pouco o tamanho, ajuste conforme desejar */
+    height: 60px; /* Mantenha a proporção */
+    object-fit: contain; /* Garante que a imagem se ajuste sem cortar */
+    margin-top: 0; /* Remova margem superior para alinhamento */
+    margin-left: 0; /* Remova margem esquerda */
+    margin-right: 15px; /* Espaço entre a imagem e o texto */
+}
+
 button.circle {
     background-color: transparent;
     border: none;
     padding: 0;
     cursor: pointer;
     
-    /* Mantém o layout que você já tinha */
-    display: flex;
-    text-align: center;
-    align-items: center; /* Ajuda a alinhar o ícone e o texto verticalmente */
+    display: flex; /* Para alinhar o ícone e o texto */
+    align-items: center; /* Alinha verticalmente */
+    width: 100%; /* Ocupa a largura total para alinhar melhor */
+    justify-content: flex-start; /* Alinha o conteúdo à esquerda */
+    margin-bottom: 15px; /* Espaçamento entre os botões */
 }
 
 button.circle h2 {
-    padding: 8px;
     font-family: 'Baloo Chettan Regular', sans-serif;
-    margin-left: 4%;
-    font-size: 21.7px; /* Movido para cá para ser mais específico */
+    font-size: 21.7px;
+    margin: 0; /* Remove margens padrão do h2 para controle total */
+    color: #333; /* Cor do texto */
+}
+
+/* Ajuste para o container #Atividades para centralizar os botões */
+#Atividades {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza os botões horizontalmente */
+    padding: 20px; /* Adicione um padding para não colar nas bordas */
 }
 
 #icone {
