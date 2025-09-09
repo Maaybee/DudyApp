@@ -1,7 +1,6 @@
-
 @font-face {
     font-family: 'Baloo Chettan Regular';
-    src: local("☺"), url("../baloo-chettan-webfont/BalooChettan-Regular.woff") format("woff");
+    src: local("☺"), url("../assets/fonts/baloo-chettan-webfont/BalooChettan-Regular.woff") format("woff");
     font-weight: 900;
     font-style: normal
 }
@@ -135,5 +134,4 @@ button.circle h2 {
     margin-left: 25px;
     margin-top: 10px;
 }
-
 
