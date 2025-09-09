@@ -26,9 +26,18 @@
     font-style: normal;
 }
 
-body { 
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    margin-top: 10px;
+    margin-bottom: 50px;
+    display: flex;
+    justify-content: center;
     background-color: #FFF7F7;
-    margin-top: 25px;
+    flex-direction: column;
+
 }
 
 .btns-blue{ 
@@ -131,3 +140,4 @@ body {
 #listaCrianças{ 
     margin-top: 30px;
 }
+
