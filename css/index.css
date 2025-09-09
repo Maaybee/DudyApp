@@ -1,7 +1,6 @@
-
 @font-face {
     font-family: 'Baloo Chettan Regular';
-    src: local("☺"), url("../baloo-chettan-webfont/BalooChettan-Regular.woff") format("woff");
+    src: local("☺"), url("../assets/fonts/baloo-chettan-webfont/BalooChettan-Regular.woff") format("woff");
     font-weight: 900;
     font-style: normal
 }
@@ -405,4 +404,3 @@ h3 {
     border-radius: 15px;
     cursor: pointer; /* Adicione o cursor de ponteiro */
 }
-
