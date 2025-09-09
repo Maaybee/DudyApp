@@ -8,6 +8,10 @@
 </head>
 <body>
 
+    <div id="tela-inicio-overlay">
+        <button id="btnComecarHistoria">Começar a História</button>
+    </div>
+
     <img src="../assets/sair.svg" id="sair">
 
     <div class="header">
@@ -18,36 +22,31 @@
 
     <div class="historia">
         <div class="personagens">
-            <h4><b>Characters: </b><span></span></h4> </div>
+            <h4><b>Characters: </b><span></span></h4> 
+        </div>
         <div class="texto">
             </div>
     </div>
-<div class="quiz-container">
-    <h4 id="pergunta"></h4>
-    <div class="buttons" id="botoes-container"></div>
-</div>
 
-<audio id="player"></audio>
+    <div class="quiz-container">
+        <h4 id="pergunta"></h4>
+        <div class="buttons" id="botoes-container"></div>
+    </div>
 
-<div id="popupOverlay" class="overlay">
-    <div id="pop-up">
-        <h2>Tem certeza que deseja sair?</h2>
-        <h3>*Seu progresso NÂO será salvo!</h3>
-        <div id="group">
-            <button id="btnSair" class="styled-button">SAIR</button>
-            <button id="btnVoltar" class="styled-button">VOLTAR</button>
+    <audio id="player"></audio>
+
+    <div id="popupOverlay" class="overlay">
+        <div id="pop-up">
+            <h2>Tem certeza que deseja sair?</h2>
+            <h3>*Seu progresso NÂO será salvo!</h3>
+            <div id="group">
+                <button id="btnSair">SAIR</button>
+                <button id="btnVoltar">VOLTAR</button>
+            </div>
         </div>
     </div>
-</div>
-<div id="tela-inicio-overlay">
-    <button id="btnComecarHistoria">Começar a História</button>
-</div>
 
-<img src="../assets/sair.svg" id="sair">
-<div class="header"> ... </div>
-</body>
     <script src="../scripts/historias.js"></script>
-    <script src="../scripts/script2.js"></script>
     <script src="../scripts/script-historia-individual.js"></script>
-
+    </body>
 </html>
