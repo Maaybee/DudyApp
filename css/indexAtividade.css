@@ -1,215 +1,147 @@
 
 @font-face {
     font-family: 'Baloo Chettan Regular';
-    /* Caminho corrigido para a fonte */
     src: local("☺"), url("../assets/fonts/baloo-chettan-webfont/BalooChettan-Regular.woff") format("woff");
     font-weight: 900;
     font-style: normal;
 }
-body { 
+
+body {
     background-color: #FFF7F7;
     margin-top: 25px;
-    padding-bottom: 80px; 
+    padding-bottom: 80px; /* Espaço para o menu fixo não cobrir o conteúdo */
 }
+
 .group {
     margin-left: 20px;
 }
-.text_menor { 
+
+.text_menor {
     font-size: 15.7px;
     margin-bottom: -10px;
-    font-family:'Gelasio';
+    font-family: 'Gelasio';
 }
 
 .text_maior {
     font-size: 38.7px;
     margin: 0;
-    font-family:'Baloo Chettan Regular';
+    font-family: 'Baloo Chettan Regular';
     font-weight: 900;
 }
 
-#linha { 
+#linha {
     height: 1px;
     width: 330px;
-}
-
-.imagens { 
-    margin-top: 10px;
-    display: flex;
-    justify-content: center;
-}
-#Atividades {
-    display: flex;
-    text-align: center;
-    flex-direction: column;
-    margin-bottom: 30px; /* Valor corrigido (ex: 30px) */
-}
-
-/* Estilo para o botão transparente */
-button.circle .icone { /* Altere de #icone para .icone aqui */
-    width: 60px; /* Reduza um pouco o tamanho, ajuste conforme desejar */
-    height: 60px; /* Mantenha a proporção */
-    object-fit: contain; /* Garante que a imagem se ajuste sem cortar */
-    margin-top: 0; /* Remova margem superior para alinhamento */
-    margin-left: 0; /* Remova margem esquerda */
-    margin-right: 15px; /* Espaço entre a imagem e o texto */
-}
-
-button.circle {
-    background-color: transparent;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    
-    display: flex; /* Para alinhar o ícone e o texto */
-    align-items: center; /* Alinha verticalmente */
-    width: 100%; /* Ocupa a largura total para alinhar melhor */
-    justify-content: flex-start; /* Alinha o conteúdo à esquerda */
-    margin-bottom: 15px; /* Espaçamento entre os botões */
-}
-
-button.circle h2 {
-    font-family: 'Baloo Chettan Regular', sans-serif;
-    font-size: 21.7px;
-    margin: 0; /* Remove margens padrão do h2 para controle total */
-    color: #333; /* Cor do texto */
-}
-
-/* Ajuste para o container #Atividades para centralizar os botões */
-#Atividades {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centraliza os botões horizontalmente */
-    padding: 20px; /* Adicione um padding para não colar nas bordas */
-}
-
-#icone {
-    width: 80px;
-    margin-top: 1%;
-    margin-left: 15%;
-}
-
-#iconefinal {
-    width: 80px;
-    margin-top: 20px; /* Removida a duplicação de margin-top */
-    margin-left: 15%;
-}
-
-/* Regra .buttons combinada e corrigida */
-.buttons { 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 271px;
-    height: 52px;
-    border-radius: 10px;
-    margin-bottom: 30px;
-    background-color: #FFF7F7;
-    border: 3px solid #EBDFDF;
-    font-family: 'Baloo Chettan Regular', sans-serif;
-    font-size: 21.7px;
-}
-
-/* Seletor :disabled corrigido */
-.buttons:disabled { 
-    color: black;
-}
-
-#buttonsLogin button { 
-    background-color: #0262FF;
-    border-radius: 30px;
-    color: white;
-    border: 1px solid #0262FF;
-    height: 50px;
-    width: 340px;
-    margin-top: 30px;
-    font-family:'Baloo Chettan Regular';
-    font-size: 18px;
-}
-
-#logoInicial { 
-    margin-top: 50px;
-    height: 303px;
-    width: 292px;
 }
 
 #home {
     display: flex;
     flex-direction: row;
     margin: auto;
-    justify-content: space-between; 
-    align-items: center; 
+    justify-content: space-between;
+    align-items: center;
     margin-top: -10px;
 }
 
-#logo { 
+#logo {
     height: 62px;
     width: 62px;
     margin-right: 20px;
 }
 
-#textHome { 
-    font-family:'Baloo Chettan Regular';
-    font-size: 21px;
-    margin-left: 25px;
-    margin-top: 10px;
+/* --- ESTILOS DO MENU DE ATIVIDADES --- */
+
+/* Container que agrupa os botões de atividade */
+#Atividades {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza os botões na página */
+    padding: 20px;
+    gap: 15px; /* Espaçamento entre cada botão */
+}
+
+/* Estilo do botão (o "círculo") */
+button.circle {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center; /* Alinha o ícone e o texto verticalmente */
+    /* A largura agora será automática, baseada no conteúdo */
+}
+
+/* Estilo para o ÍCONE dentro do botão */
+button.circle .icone { /* Usando .icone como classe */
+    width: 60px;
+    height: 60px;
+    object-fit: contain; /* Garante que a imagem não se distorça */
+    margin-right: 20px; /* Espaço entre o ícone e o texto */
+}
+
+/* Estilo para o TEXTO dentro do botão */
+button.circle h2 {
+    font-family: 'Baloo Chettan Regular', sans-serif;
+    font-size: 21.7px;
+    margin: 0;
+    color: #333;
 }
 
 
+/* --- MENU FIXO NO RODAPÉ --- */
 .menu {
-    position: fixed;   /* fixa o menu na tela */
-    bottom: 20px;      /* distância do rodapé da tela (ajuste conforme preferir) */
-    left: 50%;         /* posiciona no centro horizontal */
-    transform: translateX(-50%); /* corrige o deslocamento para centralizar exatamente */
-    z-index: 9999;     /* garante que fique acima de outros elementos */
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
     
     background-color: white;
     width: 337px;
     height: 67px;
     border-radius: 30px;
     display: flex;
-    flex-direction: row;
-    justify-content: center; /* Centraliza o conteúdo horizontalmente no menu */
-    align-items: center; /* Centraliza o conteúdo verticalmente no menu */
-    margin: 5px auto 0; /* shorthand para margin-top: 5px; e centraliza horizontalmente */
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.1); /* Sombra suave */
 }
 
 .btnsMenu {
     display: flex;
     flex-direction: row;
-    justify-content: space-around; /* Distribui os itens uniformemente com espaço entre eles */
+    justify-content: space-around;
     align-items: center;
-    width: 100%; 
-    margin-top: 15px;/* Garante que btnsMenu ocupe toda a largura disponível no .menu para a distribuição */
+    width: 100%;
 }
 
 .btnMenu {
     width: 53px;
     height: 50px;
     display: flex;
-    justify-content: center; /* Centraliza a imagem horizontalmente dentro do botão */
-    align-items: center; /* Centraliza a imagem verticalmente dentro do botão */
-    background: none; /* Remove o fundo */
-    border: none; /* Remove a borda */
-    padding: 0; 
-    margin: 0;/* Remove padding padrão do botão */
-    /* Remova margin: auto; e as margens laterais fixas */
+    justify-content: center;
+    align-items: center;
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
 }
 
 .btnMenu img {
-    max-width: 100%; /* Garante que a imagem não transborde o botão */
-    max-height: 100%; /* Garante que a imagem não transborde o botão */
-    object-fit: contain; /* Ajusta a imagem para caber sem cortar */
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
 }
 
 .btnMenuRow {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centraliza os itens (botão e h4) horizontalmente dentro de btnMenuRow */
+    align-items: center;
 }
 
 .btnMenuRow h4 {
     font-size: 10px;
-    font-family:'Baloo Chettan Regular';
-    margin-top: -10px; /* Adiciona um pequeno espaçamento entre o botão e o texto */
-    text-align: center; /* Centraliza o texto */
+    font-family: 'Baloo Chettan Regular';
+    margin-top: -5px; /* Ajuste fino */
+    text-align: center;
 }
