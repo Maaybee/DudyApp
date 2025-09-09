@@ -26,18 +26,9 @@
     font-style: normal;
 }
 
-html,
-body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    margin-top: 10px;
-    margin-bottom: 50px;
-    display: flex;
-    justify-content: center;
+body { 
     background-color: #FFF7F7;
-    flex-direction: column;
-
+    margin-top: 25px;
 }
 
 .btns-blue{ 
@@ -141,3 +132,11 @@ body {
     margin-top: 30px;
 }
 
+
+.perfil_kid img.selecionado {
+  border: 3px solid #0262FF;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0, 45, 128, 0.6);
+  transform: scale(1.05);
+  
+}
