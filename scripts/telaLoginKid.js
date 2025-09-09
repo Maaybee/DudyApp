@@ -50,7 +50,8 @@ async function carregarCrianças() {
       perfilDiv.addEventListener("click", () => {
         console.log("Criança selecionada:", crianca.idestudante);
         localStorage.setItem("criancaSelecionada", crianca.idestudante);
-        window.location.href = "../telas/telaPerfil.html";
+        
+        
       });
 
       listaCriançasDiv.appendChild(perfilDiv);
@@ -68,28 +69,4 @@ function cadastrar_redirecionamento() {
   window.location.href = "../telas/telaCadKid.html";
 }
 
-function abrirMenu() {
-  const menu = document.getElementById("menu");
-  if (menu.style.display === "none") { 
-    menu.style.display = "block";
-  } else { 
-    menu.style.display = "none";
-  }
-}
 
-function fecharMenu() {
-  document.getElementById("menu").style.display = "none";
-}
-
-async function logout() {
-  try {
-    const { error } = await supabaseClient.auth.signOut();
-    if (error) throw error;
-
-    localStorage.clear();
-    window.location.href = "../index.html";
-  } catch (err) {
-    console.error("Erro inesperado ao sair:", err);
-    alert("Ocorreu um erro. Tente novamente.");
-  }
-}
