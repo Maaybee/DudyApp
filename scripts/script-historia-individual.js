@@ -51,10 +51,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- LÓGICA DO DIÁLOGO ---
     
-    // --- LÓGICA DO DIÁLOGO ---
+   // --- LÓGICA DO DIÁLOGO (COM O CAMINHO DO ÁUDIO CORRIGIDO) ---
 function mostrarLinha(indice) {
     if (indice >= historia.dialogo.length) {
-        iniciarQuiz();
+        iniciarQuiz(); // Se o diálogo acabou, começa o quiz
         return;
     }
     
@@ -71,8 +71,9 @@ function mostrarLinha(indice) {
     } else {
         p.textContent = `${item.personagem}: ${item.fala}`;
         if (item.audio) {
-            audioPlayer.src = `../assets/audio/${item.audio}.mp3`;
-            audioPlayer.play();
+            // A CORREÇÃO ESTÁ NESTA LINHA: 'audio' virou 'audios'
+            audioPlayer.src = `../assets/audios/${item.audio}.mp3`; 
+            audioPlayer.play().catch(e => console.error("Erro ao tocar o áudio:", e)); // Adicionado para ver erros
         }
     }
     textoContainer.appendChild(p);
@@ -84,7 +85,7 @@ function mostrarLinha(indice) {
         const btnAnterior = document.createElement('button');
         btnAnterior.textContent = 'Anterior';
         btnAnterior.onclick = (e) => {
-            e.target.style.backgroundColor = '#90EE90'; // Muda a cor para verde
+            e.target.style.backgroundColor = '#90EE90';
             mostrarLinha(linhaAtual - 1);
         };
         navContainer.appendChild(btnAnterior);
@@ -93,14 +94,13 @@ function mostrarLinha(indice) {
     const btnProximo = document.createElement('button');
     btnProximo.textContent = 'Avançar';
     btnProximo.onclick = (e) => {
-        e.target.style.backgroundColor = '#90EE90'; // Muda a cor para verde
+        e.target.style.backgroundColor = '#90EE90';
         mostrarLinha(linhaAtual + 1);
     };
     navContainer.appendChild(btnProximo);
 
     textoContainer.appendChild(navContainer);
 }
-
     // --- LÓGICA DO QUIZ ---
     function iniciarQuiz() {
         textoContainer.style.display = 'none';
