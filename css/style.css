@@ -1,27 +1,27 @@
 @font-face {
     font-family: 'Baloo Chettan Regular';
-    src: local("☺"), url("../baloo-chettan-webfont/BalooChettan-Regular.woff") format("woff");
+    src: local("☺"), url("../assets/fonts/baloo-chettan-webfont/BalooChettan-Regular.woff") format("woff");
     font-weight: 900;
     font-style: normal
 }
 
 @font-face {
     font-family: 'Gelasio';
-    src: local("☺"), url("../gelasio-webfont/Gelasio-Regular.woff") format("woff");
+    src: local("☺"), url("../assets/fonts/gelasio-webfont/Gelasio-Regular.woff") format("woff");
     font-weight: 900;
     font-style: normal
 }
 
 @font-face { 
     font-family: 'Arimo';
-    src: local(0), url("../Arimo/Arimo-Regular.ttf") format("woff");
+    src: local(0), url("../assets/fonts/Arimo/Arimo-Regular.ttf") format("woff");
     font-weight: 100;
     font-style: normal;
 }
 
 @font-face { 
     font-family: 'Arimo';
-    src: local(0), url("../Arimo/Arimo-Bold.ttf") format("woff");
+    src: local(0), url("../assets/fonts/Arimo/Arimo-Bold.ttf") format("woff");
     font-weight: 900;
     font-style: normal;
 }
@@ -490,7 +490,6 @@ input[type="password"]::-webkit-textfield-decoration-container {
     margin-right: 4px;
 }
 
-
 .group {
     margin-left: 20px;
 }
@@ -680,6 +679,8 @@ button.circle h2 {
 
 
 }
+
+
 
 /* Tablets e monitores menores */
 @media (min-width: 768px) {
