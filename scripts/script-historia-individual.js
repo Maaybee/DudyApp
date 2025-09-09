@@ -8,7 +8,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const botoesContainer = document.getElementById('botoes-container');
     const audioPlayer = document.getElementById('player');
     
-    // --- POP-UP DE SAÍDA ---
+    // --- ELEMENTOS DE INÍCIO E POP-UP (ADICIONADOS DE VOLTA) ---
+    const telaInicioOverlay = document.getElementById('tela-inicio-overlay');
+    const btnComecarHistoria = document.getElementById('btnComecarHistoria');
     const sairBtnPrincipal = document.getElementById('sair');
     const popupOverlay = document.getElementById('popupOverlay');
     const btnSairPopup = document.getElementById('btnSair');
@@ -18,19 +20,29 @@ document.addEventListener('DOMContentLoaded', () => {
     let linhaAtual = 0;
     let historia;
 
-    // --- INICIALIZAÇÃO ---
+    // --- LÓGICA DE INÍCIO (ADICIONADA DE VOLTA) ---
+    btnComecarHistoria.addEventListener('click', () => {
+        // Esconde a tela de início
+        telaInicioOverlay.style.display = 'none';
+        
+        // Toca um áudio vazio para "acordar" o navegador e permitir som
+        audioPlayer.play().catch(() => {});
+        audioPlayer.pause();
+        audioPlayer.currentTime = 0;
+
+        // Carrega a história DEPOIS do clique
+        iniciarHistoria();
+    });
+
+    // --- INICIALIZAÇÃO DA HISTÓRIA ---
     function iniciarHistoria() {
         const urlParams = new URLSearchParams(window.location.search);
         const historiaId = urlParams.get('id');
         historia = DADOS_HISTORIAS.find(h => h.id === historiaId);
 
-        if (!historia) {
-            document.body.innerHTML = '<h1>Erro: História não encontrada.</h1>';
-            return;
-        }
+        if (!historia) { document.body.innerHTML = '<h1>Erro: História não encontrada.</h1>'; return; }
 
         document.title = `DudyApp - ${historia.titulo}`;
-        // Caminho da imagem também corrigido para GitHub Pages
         headerImg.src = `/DudyApp${historia.icone_header.substring(2)}`; 
         headerTitulo.textContent = historia.titulo;
         personagensSpan.textContent = historia.personagens;
@@ -41,10 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- LÓGICA DO DIÁLOGO ---
     function mostrarLinha(indice) {
-        if (indice >= historia.dialogo.length) {
-            iniciarQuiz();
-            return;
-        }
+        if (indice >= historia.dialogo.length) { iniciarQuiz(); return; }
         
         linhaAtual = indice;
         const item = historia.dialogo[indice];
@@ -55,7 +64,6 @@ document.addEventListener('DOMContentLoaded', () => {
         textoContainer.appendChild(p);
         
         if (item.audio) {
-            // Caminho do áudio corrigido para a nova pasta 'audios'
             audioPlayer.src = `/DudyApp/audios/${item.audio}.mp3`;
             audioPlayer.play().catch(e => console.error("Erro ao tocar o áudio:", e));
         }
@@ -84,8 +92,10 @@ document.addEventListener('DOMContentLoaded', () => {
         textoContainer.appendChild(navContainer);
     }
 
-    // --- LÓGICA DO QUIZ ---
+    // --- LÓGICA DO QUIZ (sem alterações) ---
     function iniciarQuiz() {
+        document.querySelector('.header').style.display = 'none';
+        document.querySelector('.personagens').style.display = 'none';
         textoContainer.style.display = 'none';
         quizContainer.style.display = 'block';
         botoesContainer.innerHTML = '';
@@ -136,7 +146,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function finalizarQuiz() {
-        // Esconde o cabeçalho e os personagens na tela final
         document.querySelector('.header').style.display = 'none';
         document.querySelector('.personagens').style.display = 'none';
         
@@ -171,6 +180,6 @@ document.addEventListener('DOMContentLoaded', () => {
         popupOverlay.classList.remove('active');
     });
 
-    // Inicia a aplicação
-    iniciarHistoria();
+    // A APLICAÇÃO NÃO INICIA MAIS AUTOMATICAMENTE
+    // iniciarHistoria(); <-- LINHA REMOVIDA
 });
