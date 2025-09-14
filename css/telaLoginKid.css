@@ -134,9 +134,96 @@ body {
 
 
 .perfil_kid img.selecionado {
-  border: 3px solid #0262FF;
+  border: 3px solid #9b9a9a;
   border-radius: 50%;
-  box-shadow: 0 0 10px rgba(0, 45, 128, 0.6);
+  box-shadow: 0 0 10px rgba(57, 58, 59, 0.6);
   transform: scale(1.05);
   
 }
+
+.overlay {
+    position: fixed; /* Fixado para cobrir toda a tela */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Fundo semi-transparente */
+    display: flex; /* Para centralizar o pop-up */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    
+    /* Ocultar por padrão e transição */
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.3s ease;
+    z-index: 1000; /* Garante que fique acima de tudo */
+}
+
+/* Quando o overlay está ativo, ele se torna visível */
+.overlay.active {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Adicione o efeito de zoom quando o overlay estiver ativo */
+.overlay.active #pop-up {
+    transform: scale(1);
+}
+
+#btnConfirmar {
+    width: 147px;
+    height: 30px;
+    background-color: #F2383D;
+    color: white;
+    text-align: center;
+    border: #F2383D; /* Mantenha border, mas se for apenas cor, pode ser border-color */
+    border-radius: 15px;
+    cursor: pointer; /* Adicione o cursor de ponteiro */
+}
+
+#btnCancelar {
+    width: 147px;
+    height: 30px;
+    background-color: #00BF63;
+    color: white;
+    text-align: center;
+    border: #00BF63; /* Mantenha border, mas se for apenas cor, pode ser border-color */
+    border-radius: 15px;
+    cursor: pointer; /* Adicione o cursor de ponteiro */
+}
+
+#pop-up {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 15px;
+    width: 314px;
+    height: 194px;
+    /* margin: auto; -- Remova esta linha, o overlay fará a centralização */
+    font-family: 'Baloo Chettan Regular';
+    align-items: center;
+    justify-content: center;
+    transform: scale(0.9); /* Opcional: Efeito de zoom */
+    transition: transform 0.3s ease; /* Transição para o efeito de zoom */
+    gap: 20px;
+}
+
+h4 {
+    font-size: 18px;
+    margin: 0;
+}
+
+h5 {
+    color: #767676;
+    font-size: 15px;
+    margin: 0;
+}
+
+#btnExcluirKid { 
+    font-family: 'Baloo Chettan Regular';
+    height: 39px;
+    width: 269px;
+    font-size: 20px;
+}
+
+ 
