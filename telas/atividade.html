@@ -7,23 +7,21 @@
     <link rel="stylesheet" href="../css/atividade-style.css">
 </head>
 <body>
-    <div> 
-        <img src="../assets/sair.svg" id="sair">
-    </div>
-       
-    <div class="progresso-header"> 
+
+    <div class="progresso-header">
+        <a href="telaAtividade.html" class="fechar-btn">X</a>
         <div class="barra-progresso">
             <div id="progresso-atual" class="progresso-atual"></div>
-    </div></div>
-    <br>
-    <BR>
-    <br>
+        </div>
+        <img src="/DudyApp/assets/img/coracao.png" alt="Vidas">
+        <span id="vidas">5</span>
+    </div>
 
     <main class="atividade-wrapper">
         <div id="exercicio-associacao" class="exercicio-container" style="display: none;">
             <h2 id="pergunta-associacao"></h2>
             <div id="opcoes-imagem" class="opcoes-imagem">
-                </div>
+            </div>
         </div>
 
         <div id="exercicio-traducao" class="exercicio-container" style="display: none;">
@@ -45,5 +43,7 @@
         <button id="btnVerificar" disabled>Verificar</button>
     </footer>
 
-    <script src="../scripts/atividade.js"></script> <script src="../scripts/scriptAtividade.js"></script> </body>
+    <script src="../scripts/dadosLicoes.js"></script> 
+    <script src="../scripts/scriptAtividade.js"></script> 
+</body>
 </html>
