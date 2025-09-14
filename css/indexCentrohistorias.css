@@ -10,6 +10,14 @@ body {
     margin-top: 25px;
     padding-bottom: 80px; 
 }
+#historias-centro {
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: -10px;
+}
 .group {
     margin-left: 20px;
 }
