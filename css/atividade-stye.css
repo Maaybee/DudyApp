@@ -10,7 +10,14 @@ body {
     min-height: 100vh;
     margin: 0;
 }
-
+#atividade {
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+    justify-content: space-between; 
+    align-items: center; 
+    margin-top: -10px;
+}
 .progresso-header {
     display: flex;
     align-items: center;
