@@ -43,7 +43,7 @@ const sairImg = document.getElementById('sair');
     if (sairImg) {
         sairImg.addEventListener('click', function() {
             // Esta função só será executada quando a imagem 'sair' for clicada
-            window.location.href = '../telas/telaHome.html';
+            window.location.href = '../telas/telaAtividade.html';
         });
     } else {
         console.warn("Elemento com ID 'sair' não encontrado. O botão de saída do pop-up pode não funcionar.");
