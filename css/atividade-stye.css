@@ -95,7 +95,7 @@ body {
 #feedback.correto { color: #58a700; }
 #feedback.incorreto { color: #ff4b4b; }
 
-.card-imagem{ 
+#imagem{ 
     width: 130px;
     height: 153px;
     background-color: #0262FF;
