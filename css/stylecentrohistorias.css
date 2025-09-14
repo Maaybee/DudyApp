@@ -1,0 +1,102 @@
+/* Arquivo: css/styleCentrohistorias.css */
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@700&display=swap');
+
+body {
+    background-color: #FFF7F7;
+    font-family: 'Baloo Chettan 2', sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+#pagina-historias {
+    max-width: 400px;
+    margin: auto;
+}
+
+/* --- Cabeçalho --- */
+.header-historias {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+.header-historias .titulo p {
+    margin: 0;
+    font-size: 14px;
+    color: #a0a0a0;
+}
+.header-historias .titulo h1 {
+    margin: 0;
+    font-size: 32px;
+}
+.header-historias .logo-dudy {
+    width: 50px;
+    height: 50px;
+}
+
+/* --- Mapa de Histórias --- */
+#mapa-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Padrão de alinhamento */
+    gap: 50px; /* Espaço vertical entre as histórias */
+}
+
+/* O Caminho (imagem de fundo) */
+#mapa-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px; /* Largura da sua imagem de caminho */
+    height: 100%;
+    background-image: url('/DudyApp/assets/img/caminho.png'); /* Caminho para sua imagem */
+    background-repeat: repeat-y;
+    background-position: top center;
+    z-index: -1;
+}
+
+/* O 'nó' que segura cada botão de história */
+.historia-node {
+    width: 100%;
+    display: flex;
+}
+
+/* --- Lógica para alternar os botões de lado --- */
+.historia-node:nth-child(odd) {
+    justify-content: flex-start; /* Ímpar na esquerda */
+}
+.historia-node:nth-child(even) {
+    justify-content: flex-end; /* Par na direita */
+}
+
+/* Estilo do botão da história */
+.historia-button {
+    background-color: #FFDDA9;
+    border: none;
+    border-radius: 25px;
+    width: 150px;
+    padding: 10px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
+
+.historia-button:hover {
+    transform: scale(1.05);
+}
+
+.historia-button img {
+    width: 100%;
+    max-width: 100px;
+    margin-bottom: 5px;
+}
+
+.historia-button span {
+    font-family: 'Baloo Chettan 2', sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+    color: #333;
+}
