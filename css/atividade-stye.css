@@ -94,3 +94,26 @@ body {
 #feedback { margin-bottom: 15px; font-size: 20px; font-weight: bold; }
 #feedback.correto { color: #58a700; }
 #feedback.incorreto { color: #ff4b4b; }
+
+.card-imagem{ 
+    width: 130px;
+    height: 153px;
+    background-color: #0262FF;
+    border-radius: 7px;
+    margin: auto;
+    box-shadow: 8px 8px 0px #0553D2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 0;
+    border: 0px;
+
+    & h3{ 
+        color: white;
+        font-family: 'Baloo Chettan Regular';
+        margin: auto;
+    }
+}
