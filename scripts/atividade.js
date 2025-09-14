@@ -9,9 +9,9 @@ const DADOS_ATIVIDADES = [
         respostaCorreta: 'Apple',
         opcoes: [
             // Caminhos corrigidos para o GitHub Pages
-            { id: 'water', imagem: '/DudyApp/assets/img/maça.png', texto: 'Apple' },
-            { id: 'sugar', imagem: '/DudyApp/assets/img/Orange.png', texto: 'Orange' },
-            { id: 'milk',  imagem: '/DudyApp/assets/img/morango.png',  texto: 'Strawberry' }
+            { id: 'apple', imagem: '/DudyApp/assets/img/maça.svg', texto: 'Apple' },
+            { id: 'orange', imagem: '/DudyApp/assets/img/Orange.svg', texto: 'Orange' },
+            { id: 'strawberry',  imagem: '/DudyApp/assets/img/morango.svg',  texto: 'Strawberry' }
         ]
     },
     {
