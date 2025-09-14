@@ -70,7 +70,7 @@ body {
 }
 
 /* --- AQUI ESTÁ A ALTERAÇÃO DO TAMANHO --- */
-.card-imagem img { 
+.opcoes-imagem img { 
     width: 120px;  /* Ajuste este valor como preferir */
     height: 120px; /* Ajuste este valor como preferir */
     object-fit: contain; 
