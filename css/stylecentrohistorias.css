@@ -52,7 +52,7 @@ body {
     transform: translateX(-50%);
     width: 100px; /* Largura da sua imagem de caminho */
     height: 100%;
-    background-image: url('/DudyApp/assets/img/caminho.png'); /* Caminho para sua imagem */
+    background-image: url('/DudyApp/assets/img/caminho.svg'); /* Caminho para sua imagem */
     background-repeat: repeat-y;
     background-position: top center;
     z-index: -1;
