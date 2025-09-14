@@ -10,14 +10,7 @@ body {
     min-height: 100vh;
     margin: 0;
 }
-#atividade {
-    display: flex;
-    flex-direction: row;
-    margin: auto;
-    justify-content: space-between; 
-    align-items: center; 
-    margin-top: -10px;
-}
+
 .progresso-header {
     display: flex;
     align-items: center;
@@ -25,6 +18,7 @@ body {
     padding: 15px;
     border-bottom: 2px solid #e5e5e5;
 }
+
 .fechar-btn { font-size: 24px; color: #afafaf; text-decoration: none; }
 .barra-progresso { flex-grow: 1; height: 16px; background-color: #e5e5e5; border-radius: 8px; }
 .progresso-atual { height: 100%; background-color: #58a700; border-radius: 8px; }
@@ -50,22 +44,51 @@ body {
     margin-bottom: 40px;
 }
 
-/* Estilos para Associação de Imagem */
-.opcoes-imagem { display: flex; justify-content: center; gap: 15px; }
-.card-imagem { border: 2px solid #e5e5e5; border-radius: 10px; padding: 10px; text-align: center; cursor: pointer; transition: all 0.2s; }
-.card-imagem:hover { background-color: #f7f7f7; }
-.card-imagem.selecionado { border-color: #84d8ff; background-color: #e1f5fe; }
-.card-imagem img { width: 100px; height: 100px; object-fit: contain; }
-.card-imagem p { margin: 10px 0 0 0; font-size: 18px; }
+/* --- ESTILOS PARA ASSOCIAÇÃO DE IMAGEM --- */
+.opcoes-imagem { 
+    display: flex; 
+    justify-content: center; 
+    gap: 15px; 
+}
 
-/* Estilos para Tradução */
+.card-imagem { 
+    border: 2px solid #e5e5e5; 
+    border-radius: 10px; 
+    padding: 10px; 
+    text-align: center; 
+    cursor: pointer; 
+    transition: all 0.2s; 
+}
+
+.card-imagem:hover { 
+    background-color: #f7f7f7; 
+}
+
+.card-imagem.selecionado { 
+    border-color: #84d8ff; 
+    background-color: #e1f5fe; 
+}
+
+/* --- AQUI ESTÁ A ALTERAÇÃO DO TAMANHO --- */
+.card-imagem img { 
+    width: 120px;  /* Ajuste este valor como preferir */
+    height: 120px; /* Ajuste este valor como preferir */
+    object-fit: contain; 
+}
+
+.card-imagem p { 
+    margin: 10px 0 0 0; 
+    font-size: 18px; 
+}
+
+/* --- ESTILOS PARA TRADUÇÃO --- */
 .prompt-audio { text-align: center; }
 .prompt-audio button { display: inline-flex; align-items: center; gap: 15px; font-size: 24px; border: none; background: none; cursor: pointer; }
 .prompt-audio img { width: 40px; }
 .area-resposta input { width: 100%; box-sizing: border-box; padding: 15px; font-size: 18px; border: none; border-bottom: 2px solid #e5e5e5; text-align: center; margin-top: 30px; }
 .area-resposta input:focus { border-color: #84d8ff; outline: none; }
 
-/* Rodapé */
+/* --- RODAPÉ --- */
 .acoes-rodape {
     padding: 20px;
     border-top: 2px solid #e5e5e5;
@@ -94,26 +117,3 @@ body {
 #feedback { margin-bottom: 15px; font-size: 20px; font-weight: bold; }
 #feedback.correto { color: #58a700; }
 #feedback.incorreto { color: #ff4b4b; }
-
-#imagem{ 
-    width: 130px;
-    height: 153px;
-    background-color: #0262FF;
-    border-radius: 7px;
-    margin: auto;
-    box-shadow: 8px 8px 0px #0553D2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    box-sizing: border-box;
-    padding: 0;
-    border: 0px;
-
-    & h3{ 
-        color: white;
-        font-family: 'Baloo Chettan Regular';
-        margin: auto;
-    }
-}
