@@ -3,8 +3,8 @@
 const DADOS_LICOES = [
     {
         id: 1,
-        titulo: "Lição 1: Minha Casa",
-        descricao: "Aprenda palavras e frases sobre a casa.",
+        titulo: "Lição 1: Minha família",
+        descricao: "Aprenda palavras e frases sobre a família.",
         // Sequência de IDs de atividades que compõem esta lição
         atividades: [
             { id: 1, tipo: 'associacao_imagem' }, // Exemplo: Atividade de ID 1 é associação
@@ -36,9 +36,9 @@ const DADOS_ATIVIDADES = [
         tipo: 'associacao_imagem',
         palavraAlvo: 'Maçã',
         opcoes: [
-            { id: '1a', imagem: '/DudyApp/assets/img/apple.png', texto: 'Maçã' },
-            { id: '1b', imagem: '/DudyApp/assets/img/banana.png', texto: 'Banana' },
-            { id: '1c', imagem: '/DudyApp/assets/img/orange.png', texto: 'Laranja' }
+            { id: '1a', imagem: '/DudyApp/assets/img/maça.svg', texto: 'Apple' },
+            { id: '1b', imagem: '/DudyApp/assets/img/orange.svg', texto: 'Orange' },
+            { id: '1c', imagem: '/DudyApp/assets/img/morango.svg', texto: 'Strawberry' }
         ],
         respostaCorreta: '1a'
     },
