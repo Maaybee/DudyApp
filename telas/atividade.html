@@ -3,32 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DudyApp-atividadesmenu</title>
-    <link rel="stylesheet" href="../css/indexAtividade.css">
+    <title>DudyApp - Atividade</title>
+    <link rel="stylesheet" href="../css/atividade-style.css">
 </head>
 <body>
-    <div class="progresso-header"> ... </div>
 
-    <div id="exercicio-associacao" style="display: none;">
-        <h2 id="pergunta-associacao"></h2>
-        <div id="opcoes-imagem" class="opcoes-imagem">
+    <div class="progresso-header">
+        <a href="telaAtividade.html" class="fechar-btn">X</a>
+        <div class="barra-progresso">
+            <div id="progresso-atual" class="progresso-atual"></div>
+        </div>
+        <img src="/DudyApp/assets/img/coracao.png" alt="Vidas">
+        <span id="vidas">5</span>
+    </div>
+
+    <main class="atividade-wrapper">
+        <div id="exercicio-associacao" class="exercicio-container" style="display: none;">
+            <h2 id="pergunta-associacao"></h2>
+            <div id="opcoes-imagem" class="opcoes-imagem">
+                </div>
+        </div>
+
+        <div id="exercicio-traducao" class="exercicio-container" style="display: none;">
+            <h2 id="pergunta-traducao"></h2>
+            <div class="prompt-audio">
+                <button id="btnAudio">
+                    <img src="/DudyApp/assets/img/som.png" alt="Ouvir">
+                    <span id="palavra-audio"></span>
+                </button>
             </div>
-    </div>
-
-    <div id="exercicio-traducao" style="display: none;">
-        <h2 id="pergunta-traducao"></h2>
-        <div class="prompt-audio">
-            <button id="btnAudio">...</button>
+            <div class="area-resposta">
+                <input type="text" id="inputResposta" placeholder="Escreva em português...">
+            </div>
         </div>
-        <div class="area-resposta">
-            <input type="text" id="inputResposta">
-        </div>
-    </div>
+    </main>
 
-    <div class="acoes-rodape">
-        <button id="btnVerificar">Verificar</button>
-    </div>
+    <footer class="acoes-rodape">
+        <div id="feedback"></div>
+        <button id="btnVerificar" disabled>Verificar</button>
+    </footer>
 
-    <script src="../js/atividade.js"></script>
-    <script src="../js/scriptAtividade.js"></script>
-</body>
+    <script src="../scripts/atividade.js"></script> <script src="../scripts/scriptAtividade.js"></script> </body>
+</html>

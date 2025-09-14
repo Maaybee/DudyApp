@@ -1,0 +1,89 @@
+/* Arquivo: css/atividade-style.css */
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Chettan+2&display=swap');
+
+body {
+    font-family: 'Baloo Chettan 2', sans-serif;
+    background-color: #fff;
+    color: #4c4c4c;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.progresso-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    border-bottom: 2px solid #e5e5e5;
+}
+.fechar-btn { font-size: 24px; color: #afafaf; text-decoration: none; }
+.barra-progresso { flex-grow: 1; height: 16px; background-color: #e5e5e5; border-radius: 8px; }
+.progresso-atual { height: 100%; background-color: #58a700; border-radius: 8px; }
+.progresso-header img { width: 28px; }
+.progresso-header span { font-size: 18px; font-weight: bold; color: #ff4b4b; }
+
+.atividade-wrapper {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.exercicio-container {
+    width: 100%;
+    max-width: 500px;
+}
+
+.exercicio-container h2 {
+    font-size: 28px;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+/* Estilos para Associação de Imagem */
+.opcoes-imagem { display: flex; justify-content: center; gap: 15px; }
+.card-imagem { border: 2px solid #e5e5e5; border-radius: 10px; padding: 10px; text-align: center; cursor: pointer; transition: all 0.2s; }
+.card-imagem:hover { background-color: #f7f7f7; }
+.card-imagem.selecionado { border-color: #84d8ff; background-color: #e1f5fe; }
+.card-imagem img { width: 100px; height: 100px; object-fit: contain; }
+.card-imagem p { margin: 10px 0 0 0; font-size: 18px; }
+
+/* Estilos para Tradução */
+.prompt-audio { text-align: center; }
+.prompt-audio button { display: inline-flex; align-items: center; gap: 15px; font-size: 24px; border: none; background: none; cursor: pointer; }
+.prompt-audio img { width: 40px; }
+.area-resposta input { width: 100%; box-sizing: border-box; padding: 15px; font-size: 18px; border: none; border-bottom: 2px solid #e5e5e5; text-align: center; margin-top: 30px; }
+.area-resposta input:focus { border-color: #84d8ff; outline: none; }
+
+/* Rodapé */
+.acoes-rodape {
+    padding: 20px;
+    border-top: 2px solid #e5e5e5;
+    text-align: center;
+}
+#btnVerificar {
+    width: 100%;
+    max-width: 300px;
+    padding: 15px;
+    background-color: #58a700;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-bottom: 4px solid #4a8d00;
+    border-radius: 15px;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+#btnVerificar:disabled {
+    background-color: #e5e5e5;
+    border-bottom-color: #c2c2c2;
+    cursor: not-allowed;
+}
+
+#feedback { margin-bottom: 15px; font-size: 20px; font-weight: bold; }
+#feedback.correto { color: #58a700; }
+#feedback.incorreto { color: #ff4b4b; }
