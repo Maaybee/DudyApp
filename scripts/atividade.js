@@ -5,7 +5,7 @@ const DADOS_ATIVIDADES = [
         id: 1,
         tipo: 'associacao_imagem',
         pergunta: "Qual destas imagens é 'Maçã'?",
-        palavraAlvo: 'Maçã',
+        palavraAlvo: 'Apple',
         respostaCorreta: 'Apple',
         opcoes: [
             // Caminhos corrigidos para o GitHub Pages
