@@ -145,28 +145,45 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
 
-    function carregarExercicioTraducao(dados) {
-        const perguntaEl = document.getElementById('pergunta-traducao');
-        const btnAudio = document.getElementById('btnAudio');
-        const spanPalavra = document.getElementById('palavra-audio');
-        const inputResposta = document.getElementById('inputResposta');
-        
-        perguntaEl.textContent = dados.pergunta;
-        spanPalavra.textContent = dados.palavraOriginal;
-        inputResposta.value = ''; // Limpa o input
-        
-        btnAudio.onclick = () => { new Audio(dados.audio).play(); };
+ function carregarExercicioTraducao(dados) {
+    const perguntaEl = document.getElementById('pergunta-traducao');
+    const btnAudio = document.getElementById('btnAudio');
+    const spanPalavra = document.getElementById('palavra-audio');
+    const inputResposta = document.getElementById('inputResposta');
+    const btnVerificar = document.getElementById('btnVerificar');
+    
+    // NOVO: Pega os elementos da imagem
+    const imgContainer = document.getElementById('imagem-principal-container');
+    const imgEl = document.getElementById('imagem-principal');
 
-        inputResposta.addEventListener('input', () => {
-            btnVerificar.disabled = inputResposta.value.trim() === '';
-        });
-
-        btnVerificar.onclick = () => {
-            const respostaUsuario = inputResposta.value.trim().toLowerCase();
-            const respostaCorreta = dados.respostaCorreta.trim().toLowerCase();
-            verificarResposta(respostaUsuario === respostaCorreta, dados);
-        };
+    perguntaEl.textContent = dados.pergunta;
+    spanPalavra.textContent = dados.palavraOriginal;
+    
+    // Mostra e preenche a imagem se ela existir nos dados
+    if (dados.imagemPrincipal) {
+        imgContainer.style.display = 'flex';
+        imgEl.src = dados.imagemPrincipal;
+    } else {
+        imgContainer.style.display = 'none'; // Esconde se não houver imagem
     }
+    
+    btnAudio.onclick = () => { new Audio(dados.audio).play(); };
+
+    inputResposta.addEventListener('input', () => {
+        btnVerificar.disabled = inputResposta.value.trim() === '';
+    });
+
+    btnVerificar.disabled = true;
+    btnVerificar.onclick = () => {
+        const respostaUsuario = inputResposta.value.trim().toLowerCase();
+        const respostaCorreta = dados.respostaCorreta.trim().toLowerCase();
+        if (respostaUsuario === respostaCorreta) {
+            alert('Correto!');
+        } else {
+            alert(`Incorreto! A resposta era: ${dados.respostaCorreta}`);
+        }
+    };
+}
 
     // Inicia a primeira atividade da lição
     carregarProximaAtividade();

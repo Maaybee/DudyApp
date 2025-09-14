@@ -42,12 +42,14 @@ const DADOS_ATIVIDADES = [
         ],
         respostaCorreta: '1a'
     },
-    {
+   {
         id: 2,
         tipo: 'traducao',
         pergunta: 'Traduza:',
         palavraOriginal: 'House',
-        audio: '/DudyApp/assets/audio/house.mp3', // Exemplo de arquivo de áudio
+        // ADICIONADO: A imagem que aparecerá na tela
+        imagemPrincipal: '/DudyApp/assets/img/house.png', 
+        audio: '/DudyApp/assets/audio/house.mp3',
         respostaCorreta: 'Casa'
     },
     {

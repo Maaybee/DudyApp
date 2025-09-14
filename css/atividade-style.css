@@ -136,3 +136,24 @@ body {
 #feedback { margin-bottom: 15px; font-size: 20px; font-weight: bold; }
 #feedback.correto { color: #58a700; }
 #feedback.incorreto { color: #ff4b4b; }
+/* Adicione este código ao final do seu atividade-style.css */
+
+/* NOVO: Estilo para o container da imagem principal na tela de tradução */
+#imagem-principal-container {
+    /* Estilo similar ao .card-imagem para consistência */
+    border: 2px solid #e5e5e5;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px auto; /* Espaçamento acima e abaixo */
+    width: 80%;
+    max-width: 250px; /* Tamanho máximo da caixa */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#imagem-principal {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
