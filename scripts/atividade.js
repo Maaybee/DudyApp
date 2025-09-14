@@ -10,7 +10,7 @@ const DADOS_ATIVIDADES = [
         opcoes: [
             // Caminhos corrigidos para o GitHub Pages
             { id: 'Apple', imagem: '/DudyApp/assets/img/maça.svg', texto: 'Apple' },
-            { id: 'Orange', imagem: '/DudyApp/assets/img/orange.svg', texto: 'Orange' },
+            { id: 'Orange', imagem: '/DudyApp/assets/img/orange.svg', texto: 'orange' },
             { id: 'Strawberry',  imagem: '/DudyApp/assets/img/morango.svg',  texto: 'Strawberry' }
         ]
     },
