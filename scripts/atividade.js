@@ -4,9 +4,9 @@ const DADOS_ATIVIDADES = [
     {
         id: 1,
         tipo: 'associacao_imagem',
-        pergunta: "Qual destas imagens é 'açúcar'?",
-        palavraAlvo: 'açúcar',
-        respostaCorreta: 'sugar',
+        pergunta: "Qual destas imagens é 'Maçã'?",
+        palavraAlvo: 'Maçã',
+        respostaCorreta: 'Apple',
         opcoes: [
             // Caminhos corrigidos para o GitHub Pages
             { id: 'water', imagem: '/DudyApp/assets/img/maça.png', texto: 'Apple' },
