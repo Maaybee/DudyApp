@@ -92,4 +92,9 @@ async function logout() {
     console.error("Erro inesperado ao sair:", err);
     alert("Ocorreu um erro. Tente novamente.");
   }
+
+}
+
+function direcRemoverKid (){
+  window.location.href = "../telas/removerKid.html";
 }
