@@ -22,9 +22,21 @@
 
         </div>
 
-        <button id="btnLoginKid" class="btns-blue" onclick="apagarKid(id)"> Remover perfil </button>
+        <button id="btnExcluirKid" class="btns-blue" onclick="apagarKid(id)"> Remover perfil </button>
         
     </div>
+
+    <div id="popupOverlay" class="overlay">
+        <div id="pop-up">
+            <h4>Certeza que deseja excluir o perfil?</h4>
+            <h5>Essa ação não poderá ser desfeita</h5>
+            <div id="group">
+                <button id="btnConfirmar">EXCLUIR</button>
+                <button id="btnCancelar">CANCELAR</button>
+            </div>
+        </div>
+    </div>
+
 
 </body>
 <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
