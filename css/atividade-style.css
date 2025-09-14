@@ -19,10 +19,7 @@ body {
     border-bottom: 2px solid #e5e5e5;
 }
 
-/* A tag de link para voltar (X) foi alterada no HTML, então este seletor pode precisar de ajuste dependendo do seu HTML atual */
-/* No HTML que te passei anteriormente, era <a href="telaAtividade.html" class="fechar-btn">X</a> */
-/* Se você está usando <img src="../assets/sair.svg" id="sair">, o estilo viria do indexAtividade.css */
-/* Vou manter o .fechar-btn para o X, como no HTML da atividade */
+
 .fechar-btn { 
     font-size: 24px; 
     color: #afafaf; 
