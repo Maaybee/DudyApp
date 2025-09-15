@@ -10,6 +10,10 @@
 </head>
 <body>
 
+    <div id="config"> 
+        <img src="../assets/config.svg"  onclick="abrirMenu()"> 
+    </div>
+
     <div id="telaPerfil" class="col-itens2 center">
         <img src="../assets/estatuaLiberdade.png" id="estatuaLiberdade">
         <h2 id="nomePerfil">Lucas</h2>
@@ -65,7 +69,6 @@
                     <button class="btnMenu" id="btnHomeHome" onclick="home()"> 
                         <img src="../assets/home.png" alt="MenuHome"> 
                     </button>
-                    <h4> Prática </h4>
                 </div>
                 <div class="btnMenuRow"> 
                     <button class="btnMenu" id="btnPerfilHome" onclick="perfil()"> 
@@ -76,11 +79,23 @@
                     <button class="btnMenu" id="btnToyHome"> 
                         <img src="../assets/toy.png" alt="MenuToy">
                     </button>
-                    <h4> Toy Toy </h4>
                 </div>
             </div>
         </div>
     </div>
+
+    <div id="menu"> 
+        <div id="sair"> 
+            <img src="../assets/ci_close-sm.svg" onclick="fecharMenu()"> 
+        </div>
+        <div id="options"> 
+            <h3 onclick="logout()"> Sair da conta </h3>
+            <h3 id="removerCriança" onclick="trocarPerfil ()"> Trocar Perfil </h3>
+            <h3> Suporte </h3>
+        </div>
+
+    </div>
+
         
 </body>
 <!-- Lib do Supabase -->
@@ -91,4 +106,5 @@
 
 <!-- Seu JS desta página -->
 <script src="../scripts/telaPerfil.js"></script>
+
 </html>
