@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     // --- ELEMENTOS DA PÁGINA ---
-    const header = document.querySelector('.header'); // Adicionado
-    const personagens = document.querySelector('.personagens'); // Adicionado
+    const header = document.querySelector('.header');
+    const personagens = document.querySelector('.personagens');
     const textoContainer = document.querySelector('.texto');
     const quizContainer = document.querySelector('.quiz-container');
     const botoesContainer = document.getElementById('botoes-container');
@@ -12,15 +12,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const sairBtnPrincipal = document.getElementById('sair');
     const popupOverlay = document.getElementById('popupOverlay');
     
-    // --- VARIÁVEIS DE ESTADO ---
-    let linhaAtual = 0;
-    let historia;
-
-    // --- LÓGICA DE INÍCIO (com botão de início) ---
-    // (Mantendo a lógica do botão de início que já tinhamos feito)
     const telaInicioOverlay = document.getElementById('tela-inicio-overlay');
     const btnComecarHistoria = document.getElementById('btnComecarHistoria');
 
+    // --- VARIÁVEIS DE ESTADO ---
+    let linhaAtual = 0;
+    let historia;
+    let pontuacao = 0; // ADICIONADO: Contador de pontuação em tempo real
+
+    // --- LÓGICA DE INÍCIO ---
     if (btnComecarHistoria) {
         btnComecarHistoria.addEventListener('click', () => {
             telaInicioOverlay.style.display = 'none';
@@ -29,7 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
             iniciarHistoria();
         });
     } else {
-        // Caso a tela de início não exista, carrega a história diretamente
         iniciarHistoria();
     }
     
@@ -126,8 +125,10 @@ document.addEventListener('DOMContentLoaded', () => {
         botoesContainer.appendChild(btnFinalizar);
     }
 
+    // --- FUNÇÃO DE VERIFICAR RESPOSTA (ATUALIZADA) ---
     function checarResposta(botaoSelecionado, indicePergunta) {
         const respostaCorreta = historia.quiz.respostasCorretas[indicePergunta];
+        const respostaDoUsuario = botaoSelecionado.textContent;
         const containerBotoes = botaoSelecionado.parentElement;
 
         containerBotoes.querySelectorAll('button').forEach(b => {
@@ -137,8 +138,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        if (botaoSelecionado.textContent !== respostaCorreta) {
+        if (respostaDoUsuario !== respostaCorreta) {
             botaoSelecionado.style.backgroundColor = '#FFB6C1';
+        } else {
+            // Se a resposta do usuário for a correta, incrementa a pontuação
+            pontuacao++;
         }
     }
 
@@ -148,22 +152,13 @@ document.addEventListener('DOMContentLoaded', () => {
         personagens.style.display = 'none';
         quizContainer.style.display = 'none';
         
-        let pontuacaoFinal = 0;
-        const perguntasRespondidas = botoesContainer.querySelectorAll('.quiz-pergunta');
-        perguntasRespondidas.forEach((perguntaDiv, indice) => {
-            const botoes = perguntaDiv.querySelectorAll('button');
-            const respostaCorreta = historia.quiz.respostasCorretas[indice];
-            botoes.forEach(botao => {
-                if (botao.disabled && botao.textContent === respostaCorreta && botao.style.backgroundColor === 'rgb(144, 238, 144)') {
-                    pontuacaoFinal++;
-                }
-            });
-        });
+        // A pontuação agora é lida diretamente da variável, sem recontagem
+        const pontuacaoFinal = pontuacao;
 
         // Mostra o modal de conclusão
         historiaConcluidaModal.style.display = 'flex';
         
-        // Preenche a pontuação no modal
+        // Preenche a pontuação correta no modal
         document.getElementById('pontuacao-final-texto').textContent = `${pontuacaoFinal} de ${historia.quiz.perguntas.length}`;
         
         // Configura o botão de voltar
