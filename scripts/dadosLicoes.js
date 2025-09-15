@@ -50,7 +50,7 @@ const DADOS_ATIVIDADES = [
             { id: '1b', imagem: '/DudyApp/assets/img/orange.svg', texto: 'Orange' },
             { id: '1c', imagem: '/DudyApp/assets/leite.svg', texto: 'Milk' }
         ],
-        respostaCorreta: '1a'
+        respostaCorreta: 'Apple'
     },
    {
         id: 2,
@@ -71,7 +71,7 @@ const DADOS_ATIVIDADES = [
             { id: '3b', imagem: '/DudyApp/assets/leite.svg', texto: 'Milk' },
             { id: 'Orange', imagem: '/DudyApp/assets/img/orange.svg', texto: 'Orange' }
         ],
-        respostaCorreta: '3c'
+        respostaCorreta: 'Orange'
     },
     {
         id: 4,
@@ -90,7 +90,7 @@ const DADOS_ATIVIDADES = [
             { id: 'Water', imagem: '/DudyApp/assets/agua.svg', texto: 'Water' },
             { id: '5c', imagem: '/DudyApp/assets/img/orange.svg', texto: 'Orange' }
         ],
-        respostaCorreta: '5b'
+        respostaCorreta: 'Water'
     }
     // Certifique-se de que DADOS_ATIVIDADES está completo com todas as suas atividades
     // e que os IDs usados nas lições existem aqui.
