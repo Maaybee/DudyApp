@@ -19,7 +19,7 @@ async function carregarCriancas() {
     const { data: crianças, error } = await supabaseClient
       .from("estudante")
       .select("idestudante, nome, icone")
-      .eq("id", idResponsavel);
+      .eq("idresponsavel", idResponsavel);
 
     if (error) throw error;
 
