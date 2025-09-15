@@ -116,7 +116,6 @@ document.addEventListener('DOMContentLoaded', () => {
     async function salvarProgressoDaLicao() {
         const idEstudanteLogado = 1; // VALOR FIXO PARA TESTE
         const pontuacaoFinal = atividadesCorretasUnicas.length;
-        // Usando um ID de jogo fictício para representar a lição
         const idDaLicaoComoJogo = licaoAtual.id + 100;
 
         const { data, error } = await supabaseClient
