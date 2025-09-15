@@ -132,24 +132,42 @@ body {
     border-bottom-color: #c2c2c2;
     cursor: not-allowed;
 }
-
-/* Adicione ao seu atividade-style.css */
-.feedback {
-    margin-top: 15px;
-    padding: 10px;
-    border-radius: 5px;
-    font-weight: bold;
+/* Adicione este código ao seu atividade-style.css, ou ajuste se já existir */
+#feedback { 
+    margin-bottom: 15px; 
+    font-size: 20px; 
+    font-weight: bold; 
     text-align: center;
+    
+    /* --- NOVAS PROPRIEDADES PARA FAZER DESAPARECER --- */
+    min-height: 0; /* Começa sem altura mínima */
+    padding: 0;    /* Remove padding inicial */
+    border: none;  /* Remove borda inicial */
+    background-color: transparent; /* Fundo transparente inicialmente */
+    visibility: hidden; /* Esconde o elemento por padrão */
+    opacity: 0;    /* Garante que não é visível */
+    transition: all 0.3s ease-in-out; /* Adiciona transição para aparecer/desaparecer suavemente */
 }
-.feedback.correto {
-    background-color: #e6ffe6; /* Verde claro */
-    color: #008000; /* Verde escuro */
-    border: 1px solid #008000;
+
+/* Quando o feedback está correto */
+#feedback.correto { 
+    color: #58a700; /* Cor do texto */
+    background-color: #e6ffe6; /* Fundo verde claro */
+    border: 1px solid #008000; /* Borda verde */
+    padding: 10px; /* Adiciona padding quando ativo */
+    min-height: 40px; /* Altura mínima quando ativo */
+    visibility: visible; /* Torna visível */
+    opacity: 1;    /* Torna totalmente opaco */
 }
-.feedback.incorreto {
-    background-color: #ffe6e6; /* Vermelho claro */
-    color: #cc0000; /* Vermelho escuro */
-    border: 1px solid #cc0000;
+/* Quando o feedback está incorreto */
+#feedback.incorreto { 
+    color: #ff4b4b; /* Cor do texto */
+    background-color: #ffe6e6; /* Fundo vermelho claro */
+    border: 1px solid #cc0000; /* Borda vermelha */
+    padding: 10px; /* Adiciona padding quando ativo */
+    min-height: 40px; /* Altura mínima quando ativo */
+    visibility: visible; /* Torna visível */
+    opacity: 1;    /* Torna totalmente opaco */
 }
 /* NOVO: Estilo para o container da imagem principal na tela de tradução */
 #imagem-principal-container {
