@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const licaoId = parseInt(urlParams.get('licaoId'));
     
-    // Encontra a lição atual
     const licaoAtual = DADOS_LICOES.find(l => l.id === licaoId);
 
     if (!licaoAtual) {
@@ -12,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-    // Variáveis para o estado da lição (sem 'vidas')
+    // Variáveis para o estado da lição
     let atividadesOriginais = [...licaoAtual.atividades];
     let atividadesRestantes = [...licaoAtual.atividades];
     let currentIndex = 0;
@@ -22,8 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const feedbackEl = document.getElementById('feedback');
     const btnVerificar = document.getElementById('btnVerificar');
     const progressoAtualEl = document.getElementById('progresso-atual');
-    // REMOVIDO: const vidasEl = document.getElementById('vidas');
-
+    
     // Função para atualizar a barra de progresso
     function atualizarProgresso() {
         const totalAtividades = atividadesOriginais.length;
@@ -33,19 +31,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Função para carregar a próxima atividade
     function carregarProximaAtividade() {
-        feedbackEl.textContent = '';
+        // --- A CORREÇÃO ESTÁ AQUI ---
+        feedbackEl.textContent = ''; // Limpa o texto
+        feedbackEl.className = '';   // Limpa as classes de estilo (correto/incorreto)
+        // --- FIM DA CORREÇÃO ---
+
         document.getElementById('exercicio-associacao').style.display = 'none';
         document.getElementById('exercicio-traducao').style.display = 'none';
         btnVerificar.disabled = true;
 
         if (currentIndex >= atividadesRestantes.length) {
             if (atividadesErradas.length > 0) {
-                // Se houver erros, reinicia a fila com eles
                 atividadesRestantes = atividadesErradas;
                 atividadesErradas = [];
                 currentIndex = 0;
             } else {
-                // Se não houver mais atividades nem erros, a lição acabou
                 alert('Lição concluída! Parabéns!');
                 window.location.href = 'telaAtividade.html';
                 return;
@@ -79,21 +79,22 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isCorreta) {
             feedbackEl.textContent = 'Correto!';
             feedbackEl.className = 'feedback correto';
-            acertos++; // Aumenta o número de acertos para o progresso
+            // Apenas incrementa o acerto se não for uma atividade repetida por erro
+            if (!atividadesErradas.some(err => err.id === atividadeRespondida.id)) {
+                acertos++;
+            }
         } else {
             feedbackEl.textContent = `Incorreto! A resposta era: ${atividadeRespondida.respostaCorreta}`;
             feedbackEl.className = 'feedback incorreto';
-            // Adiciona a atividade à lista de erradas para ser revisada no final
             atividadesErradas.push(atividadesRestantes[currentIndex]);
         }
         
-        currentIndex++; // Sempre avança para a próxima na fila atual
+        currentIndex++;
 
         setTimeout(carregarProximaAtividade, 1500); 
     }
 
-    // --- Funções de Carregamento de Exercícios ---
-
+    // --- Funções de Carregamento de Exercícios (sem alterações) ---
     function carregarExercicioAssociacao(dados) {
         const perguntaEl = document.getElementById('pergunta-associacao');
         const opcoesContainer = document.getElementById('opcoes-imagem');
