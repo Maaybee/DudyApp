@@ -11,38 +11,34 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-    // Variáveis para o estado da lição
-    let atividadesOriginais = [...licaoAtual.atividades];
+    // --- VARIÁVEIS DE ESTADO (AJUSTADAS) ---
+    const atividadesOriginais = [...licaoAtual.atividades];
     let atividadesRestantes = [...licaoAtual.atividades];
     let currentIndex = 0;
     let atividadesErradas = [];
-    let acertos = 0; // Contagem de acertos únicos para a barra de progresso
-    let licaoFinalizada = false; // NOVA FLAG
+    // NOVO: Array para rastrear acertos únicos
+    let atividadesCorretasUnicas = []; 
+    let licaoFinalizada = false;
 
     const feedbackEl = document.getElementById('feedback');
     const btnVerificar = document.getElementById('btnVerificar');
     const progressoAtualEl = document.getElementById('progresso-atual');
     
-    // Elementos do modal de conclusão
     const licaoConcluidaModal = document.getElementById('licao-concluida-modal');
     const btnVoltarMenu = document.getElementById('btnVoltarMenu');
     const atividadeWrapper = document.querySelector('.atividade-wrapper');
     const acoesRodape = document.querySelector('.acoes-rodape');
     const progressoHeader = document.querySelector('.progresso-header');
 
-    // Função para atualizar a barra de progresso
+    // --- FUNÇÃO DE PROGRESSO (CORRIGIDA) ---
     function atualizarProgresso() {
-        const totalAtividadesUnicas = atividadesOriginais.length;
-        // Conta quantas atividades originais foram "passadas" (não estão mais em restantes ou erradas)
-        const acertosUnicos = atividadesOriginais.filter(original => 
-            !atividadesRestantes.some(restante => restante.id === original.id && restante.tipo === original.tipo) && 
-            !atividadesErradas.some(errada => errada.id === original.id && errada.tipo === original.tipo)
-        ).length;
-
-        const percentual = (acertosUnicos / totalAtividadesUnicas) * 100;
+        const totalAtividades = atividadesOriginais.length;
+        // O progresso agora é baseado no número de atividades únicas acertadas
+        const percentual = (atividadesCorretasUnicas.length / totalAtividades) * 100;
         progressoAtualEl.style.width = `${percentual}%`;
     }
-    // Função para carregar a próxima atividade
+
+    // --- FUNÇÃO PARA CARREGAR PRÓXIMA ATIVIDADE (sem alterações) ---
     function carregarProximaAtividade() {
         if (licaoFinalizada) { return; }
 
@@ -53,10 +49,9 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('exercicio-traducao').style.display = 'none';
         btnVerificar.disabled = true;
 
-        // Garante que os containers principais estejam visíveis
-        atividadeWrapper.style.display = 'flex'; 
+        acoesRodape.style.display = 'flex';
         progressoHeader.style.display = 'flex';
-        // REMOVIDO: acoesRodape.style.display = 'flex'; // Esta linha foi removida
+        atividadeWrapper.style.display = 'flex'; 
 
         if (currentIndex >= atividadesRestantes.length) {
             if (atividadesErradas.length > 0) {
@@ -64,7 +59,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 atividadesErradas = [];
                 currentIndex = 0;
             } else {
-                // Lição completa!
                 licaoFinalizada = true;
                 licaoConcluidaModal.style.display = 'flex';
                 
@@ -80,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         if (atividadesRestantes.length === 0 || currentIndex >= atividadesRestantes.length) {
-            console.error("Tentativa de carregar atividade com fila vazia.");
+            console.error("Fila de atividades vazia ou índice inválido.");
             licaoFinalizada = true;
             return;
         }
@@ -90,7 +84,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (!atividadeCompleta) {
             console.error('Detalhes da atividade não encontrados:', proximaAtividadeInfo);
-            document.body.innerHTML = "<h1>Erro ao carregar atividade.</h1>";
             return;
         }
 
@@ -104,9 +97,10 @@ document.addEventListener('DOMContentLoaded', () => {
         
         atualizarProgresso();
     }
-    // Função para lidar com a resposta do usuário
+
+    // --- FUNÇÃO DE VERIFICAÇÃO (CORRIGIDA) ---
     function verificarResposta(isCorreta, atividadeRespondida) {
-        if (licaoFinalizada) return; // Não permite resposta se a lição já finalizou
+        if (licaoFinalizada) return;
 
         btnVerificar.disabled = true;
 
@@ -114,46 +108,24 @@ document.addEventListener('DOMContentLoaded', () => {
             feedbackEl.textContent = 'Correto!';
             feedbackEl.className = 'feedback correto';
             
-            // Incrementa o contador de acertos apenas para atividades que não são repetidas (não estão na lista de erradas)
-            // Para isso, precisamos de um jeito de saber se a 'atividadeRespondida' é uma 'original'
-            // ou se já foi uma 'errada' que está sendo refeita.
-            // Uma forma é ter um campo 'concluida' nos dados ou verificar contra o array original.
-            // Por enquanto, vou manter o 'acertos' para o progresso da forma mais simples, 
-            // que é contar cada acerto que leva a avançar no progresso total.
-            
-            // Esta lógica precisa ser revisada se você quiser contar "acertos de atividades únicas"
-            // de forma mais rigorosa para o progresso. Por enquanto, acertos aumenta em cada acerto.
-            acertos++; 
-
+            // Verifica se a atividade já foi acertada antes
+            const jaAcertou = atividadesCorretasUnicas.some(item => item.id === atividadeRespondida.id);
+            if (!jaAcertou) {
+                // Se for um acerto inédito, adiciona à lista e atualiza o progresso
+                atividadesCorretasUnicas.push(atividadeRespondida);
+                atualizarProgresso();
+            }
         } else {
             feedbackEl.textContent = `Incorreto! A resposta era: ${atividadeRespondida.respostaCorreta}`;
             feedbackEl.className = 'feedback incorreto';
-            
-            // Adiciona a atividade à lista de erradas APENAS SE AINDA NÃO ESTIVER LÁ
-            // E se não for uma atividade já repetida de 'atividadesErradas'
-            // (Para evitar duplicatas excessivas se o usuário errar a mesma atividade várias vezes)
-            const atividadeJaEstaNaListaDeErros = atividadesErradas.some(
-                err => err.id === atividadeRespondida.id && err.tipo === atividadeRespondida.tipo
-            );
-            
-            // Adiciona aos erros se for uma atividade original ou uma que não foi adicionada ainda
-            const isOriginalActivity = atividadesOriginais.some(
-                orig => orig.id === atividadeRespondida.id && orig.tipo === atividadeRespondida.tipo
-            );
-
-            if (isOriginalActivity && !atividadeJaEstaNaListaDeErros) {
-                atividadesErradas.push(atividadeRespondida);
-            } else if (!isOriginalActivity && !atividadeJaEstaNaListaDeErros) { // Se for uma revisada e não duplicada
-                 atividadesErradas.push(atividadeRespondida);
-            }
+            atividadesErradas.push(atividadesRestantes[currentIndex]);
         }
         
-        currentIndex++; 
+        currentIndex++;
         setTimeout(carregarProximaAtividade, 1500); 
     }
 
-    // --- Funções de Carregamento de Exercícios ---
-
+    // --- Funções de Carregamento (sem alterações) ---
     function carregarExercicioAssociacao(dados) {
         const perguntaEl = document.getElementById('pergunta-associacao');
         const opcoesContainer = document.getElementById('opcoes-imagem');
@@ -186,11 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         btnVerificar.onclick = () => {
-            if (respostaSelecionada) { 
-                verificarResposta(respostaSelecionada === dados.respostaCorreta, dados);
-            } else {
-                // Opcional: feedback para selecionar uma opção
-            }
+            verificarResposta(respostaSelecionada === dados.respostaCorreta, dados);
         };
     }
 
@@ -206,7 +174,6 @@ document.addEventListener('DOMContentLoaded', () => {
         perguntaEl.textContent = dados.pergunta;
         spanPalavra.textContent = dados.palavraOriginal;
         inputResposta.value = '';
-        inputResposta.focus(); 
         
         if (dados.imagemPrincipal) {
             imgContainer.style.display = 'flex';
@@ -215,13 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
             imgContainer.style.display = 'none';
         }
         
-        btnAudio.onclick = () => { 
-            if (dados.audio) { 
-                new Audio(dados.audio).play(); 
-            } else {
-                console.warn("Nenhum arquivo de áudio especificado para esta atividade.");
-            }
-        };
+        btnAudio.onclick = () => { new Audio(dados.audio).play(); };
 
         inputResposta.addEventListener('input', () => {
             btnVerificar.disabled = inputResposta.value.trim() === '';
@@ -230,11 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
         btnVerificar.onclick = () => {
             const respostaUsuario = inputResposta.value.trim().toLowerCase();
             const respostaCorreta = dados.respostaCorreta.trim().toLowerCase();
-            if (respostaUsuario) { 
-                verificarResposta(respostaUsuario === respostaCorreta, dados);
-            } else {
-                // Opcional: feedback para digitar uma resposta
-            }
+            verificarResposta(respostaUsuario === respostaCorreta, dados);
         };
     }
 
