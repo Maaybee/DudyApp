@@ -29,48 +29,58 @@ document.addEventListener('DOMContentLoaded', () => {
         progressoAtualEl.style.width = `${percentual}%`;
     }
 
-    // Função para carregar a próxima atividade
-    function carregarProximaAtividade() {
-        // --- A CORREÇÃO ESTÁ AQUI ---
-        feedbackEl.textContent = ''; // Limpa o texto
-        feedbackEl.className = '';   // Limpa as classes de estilo (correto/incorreto)
-        // --- FIM DA CORREÇÃO ---
+// Função para carregar a próxima atividade
+function carregarProximaAtividade() {
+    feedbackEl.textContent = '';
+    document.getElementById('exercicio-associacao').style.display = 'none';
+    document.getElementById('exercicio-traducao').style.display = 'none';
+    btnVerificar.disabled = true;
 
-        document.getElementById('exercicio-associacao').style.display = 'none';
-        document.getElementById('exercicio-traducao').style.display = 'none';
-        btnVerificar.disabled = true;
+    // NOVO: Esconde o footer (onde fica o botão Verificar) e o cabeçalho de progresso
+    document.querySelector('.acoes-rodape').style.display = 'flex'; // Exibe novamente o footer
+    document.querySelector('.progresso-header').style.display = 'flex'; // Exibe o header
 
-        if (currentIndex >= atividadesRestantes.length) {
-            if (atividadesErradas.length > 0) {
-                atividadesRestantes = atividadesErradas;
-                atividadesErradas = [];
-                currentIndex = 0;
-            } else {
-                alert('Lição concluída! Parabéns!');
-                window.location.href = 'telaAtividade.html';
-                return;
-            }
+    if (currentIndex >= atividadesRestantes.length) {
+        if (atividadesErradas.length > 0) {
+            atividadesRestantes = atividadesErradas;
+            atividadesErradas = [];
+            currentIndex = 0;
+        } else {
+            // Lição completa! MOSTRAR O GIF AQUI
+            document.getElementById('licao-concluida-modal').style.display = 'flex';
+            
+            // Oculta os outros elementos da atividade
+            document.querySelector('.atividade-wrapper').style.display = 'none';
+            document.querySelector('.acoes-rodape').style.display = 'none';
+            document.querySelector('.progresso-header').style.display = 'none'; // Oculta o header também
+
+            // Configura o botão de voltar ao menu
+            document.getElementById('btnVoltarMenu').onclick = () => {
+                window.location.href = 'telaAtividade.html'; // Redireciona para o menu
+            };
+            return; // Termina a função aqui, pois a lição acabou
         }
-
-        const proximaAtividadeInfo = atividadesRestantes[currentIndex];
-        const atividadeCompleta = DADOS_ATIVIDADES.find(a => a.id === proximaAtividadeInfo.id && a.tipo === proximaAtividadeInfo.tipo);
-
-        if (!atividadeCompleta) {
-            console.error('Detalhes da atividade não encontrados:', proximaAtividadeInfo);
-            document.body.innerHTML = "<h1>Erro ao carregar atividade.</h1>";
-            return;
-        }
-
-        if (atividadeCompleta.tipo === 'associacao_imagem') {
-            document.getElementById('exercicio-associacao').style.display = 'block';
-            carregarExercicioAssociacao(atividadeCompleta);
-        } else if (atividadeCompleta.tipo === 'traducao') {
-            document.getElementById('exercicio-traducao').style.display = 'block';
-            carregarExercicioTraducao(atividadeCompleta);
-        }
-        
-        atualizarProgresso();
     }
+
+    const proximaAtividadeInfo = atividadesRestantes[currentIndex];
+    const atividadeCompleta = DADOS_ATIVIDADES.find(a => a.id === proximaAtividadeInfo.id && a.tipo === proximaAtividadeInfo.tipo);
+
+    if (!atividadeCompleta) {
+        console.error('Detalhes da atividade não encontrados:', proximaAtividadeInfo);
+        document.body.innerHTML = "<h1>Erro ao carregar atividade.</h1>";
+        return;
+    }
+
+    if (atividadeCompleta.tipo === 'associacao_imagem') {
+        document.getElementById('exercicio-associacao').style.display = 'block';
+        carregarExercicioAssociacao(atividadeCompleta);
+    } else if (atividadeCompleta.tipo === 'traducao') {
+        document.getElementById('exercicio-traducao').style.display = 'block';
+        carregarExercicioTraducao(atividadeCompleta);
+    }
+    
+    atualizarProgresso();
+}
 
     // Função para lidar com a resposta do usuário
     function verificarResposta(isCorreta, atividadeRespondida) {
