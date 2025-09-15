@@ -219,7 +219,7 @@ body {
 }
 
 #conclusao-gif {
-    max-width: 150px; /* Tamanho do GIF */
+    max-width: 250px; /* Tamanho do GIF */
     height: auto;
     margin-bottom: 20px;
 }
