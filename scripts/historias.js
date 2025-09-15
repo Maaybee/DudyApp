@@ -113,7 +113,7 @@ const DADOS_HISTORIAS = [
         titulo: 'Ice Cream Day',
         personagens: 'Carlos and Sofia',
         imagem: '../assets/img/livro verde.png',
-        icone_header: '../assets/img/livro-verde.svg',
+        icone_header: '../assets/img/liro-verde.svg',
         dialogo: [
             { personagem: 'Carlos', fala: 'Sofia, it’s such a hot day today!', audio: 'carlos1' },
             { personagem: 'Sofia', fala: 'It is! I know what would be perfect right now.', audio: 'sofia1' },
