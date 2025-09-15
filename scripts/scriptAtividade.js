@@ -1,6 +1,9 @@
-// Arquivo: scripts/scriptAtividade.js
-
 document.addEventListener('DOMContentLoaded', () => {
+    // --- INICIALIZAÇÃO DO SUPABASE ---
+    const SUPABASE_URL = "SEU_SUPABASE_URL_AQUI";
+    const SUPABASE_ANON_KEY = "SUA_SUPABASE_ANON_KEY_AQUI";
+    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
     const urlParams = new URLSearchParams(window.location.search);
     const licaoId = parseInt(urlParams.get('licaoId'));
     
@@ -11,47 +14,40 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-    // --- VARIÁVEIS DE ESTADO (AJUSTADAS) ---
+    // --- VARIÁVEIS DE ESTADO DA LIÇÃO ---
     const atividadesOriginais = [...licaoAtual.atividades];
     let atividadesRestantes = [...licaoAtual.atividades];
     let currentIndex = 0;
     let atividadesErradas = [];
-    // NOVO: Array para rastrear acertos únicos
-    let atividadesCorretasUnicas = []; 
+    let atividadesCorretasUnicas = [];
     let licaoFinalizada = false;
 
+    // --- ELEMENTOS DA PÁGINA ---
     const feedbackEl = document.getElementById('feedback');
     const btnVerificar = document.getElementById('btnVerificar');
     const progressoAtualEl = document.getElementById('progresso-atual');
-    
     const licaoConcluidaModal = document.getElementById('licao-concluida-modal');
     const btnVoltarMenu = document.getElementById('btnVoltarMenu');
     const atividadeWrapper = document.querySelector('.atividade-wrapper');
     const acoesRodape = document.querySelector('.acoes-rodape');
     const progressoHeader = document.querySelector('.progresso-header');
 
-    // --- FUNÇÃO DE PROGRESSO (CORRIGIDA) ---
+    // --- FUNÇÕES PRINCIPAIS ---
+
     function atualizarProgresso() {
         const totalAtividades = atividadesOriginais.length;
-        // O progresso agora é baseado no número de atividades únicas acertadas
         const percentual = (atividadesCorretasUnicas.length / totalAtividades) * 100;
         progressoAtualEl.style.width = `${percentual}%`;
     }
 
-    // --- FUNÇÃO PARA CARREGAR PRÓXIMA ATIVIDADE (sem alterações) ---
-    function carregarProximaAtividade() {
-        if (licaoFinalizada) { return; }
+    async function carregarProximaAtividade() {
+        if (licaoFinalizada) return;
 
-        feedbackEl.textContent = '';
         feedbackEl.className = '';
-        
+        feedbackEl.textContent = '';
         document.getElementById('exercicio-associacao').style.display = 'none';
         document.getElementById('exercicio-traducao').style.display = 'none';
         btnVerificar.disabled = true;
-
-        acoesRodape.style.display = 'flex';
-        progressoHeader.style.display = 'flex';
-        atividadeWrapper.style.display = 'flex'; 
 
         if (currentIndex >= atividadesRestantes.length) {
             if (atividadesErradas.length > 0) {
@@ -60,30 +56,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 currentIndex = 0;
             } else {
                 licaoFinalizada = true;
-                licaoConcluidaModal.style.display = 'flex';
+                await salvarProgressoDaLicao();
                 
                 atividadeWrapper.style.display = 'none';
                 acoesRodape.style.display = 'none';
                 progressoHeader.style.display = 'none';
-
-                btnVoltarMenu.onclick = () => {
-                    window.location.href = 'telaAtividade.html';
-                };
+                licaoConcluidaModal.style.display = 'flex';
+                btnVoltarMenu.onclick = () => { window.location.href = 'telaAtividade.html'; };
                 return;
             }
         }
-        
-        if (atividadesRestantes.length === 0 || currentIndex >= atividadesRestantes.length) {
-            console.error("Fila de atividades vazia ou índice inválido.");
-            licaoFinalizada = true;
-            return;
-        }
 
-        const proximaAtividadeInfo = atividadesRestantes[currentIndex];
-        const atividadeCompleta = DADOS_ATIVIDADES.find(a => a.id === proximaAtividadeInfo.id && a.tipo === proximaAtividadeInfo.tipo);
+        const idDaProximaAtividade = atividadesRestantes[currentIndex];
+        const atividadeCompleta = DADOS_ATIVIDADES.find(a => a.id === idDaProximaAtividade);
 
         if (!atividadeCompleta) {
-            console.error('Detalhes da atividade não encontrados:', proximaAtividadeInfo);
+            console.error('Detalhes da atividade não encontrados para o ID:', idDaProximaAtividade);
             return;
         }
 
@@ -98,40 +86,63 @@ document.addEventListener('DOMContentLoaded', () => {
         atualizarProgresso();
     }
 
-    // --- FUNÇÃO DE VERIFICAÇÃO (CORRIGIDA) ---
     function verificarResposta(isCorreta, atividadeRespondida) {
         if (licaoFinalizada) return;
-
         btnVerificar.disabled = true;
 
         if (isCorreta) {
             feedbackEl.textContent = 'Correto!';
             feedbackEl.className = 'feedback correto';
             
-            // Verifica se a atividade já foi acertada antes
-            const jaAcertou = atividadesCorretasUnicas.some(item => item.id === atividadeRespondida.id);
+            const jaAcertou = atividadesCorretasUnicas.includes(atividadeRespondida.id);
             if (!jaAcertou) {
-                // Se for um acerto inédito, adiciona à lista e atualiza o progresso
-                atividadesCorretasUnicas.push(atividadeRespondida);
+                atividadesCorretasUnicas.push(atividadeRespondida.id);
                 atualizarProgresso();
             }
         } else {
             feedbackEl.textContent = `Incorreto! A resposta era: ${atividadeRespondida.respostaCorreta}`;
             feedbackEl.className = 'feedback incorreto';
-            atividadesErradas.push(atividadesRestantes[currentIndex]);
+            
+            const jaErrou = atividadesErradas.includes(atividadesRestantes[currentIndex]);
+            if (!jaErrou) {
+                atividadesErradas.push(atividadesRestantes[currentIndex]);
+            }
         }
         
         currentIndex++;
         setTimeout(carregarProximaAtividade, 1500); 
     }
 
-    // --- Funções de Carregamento (sem alterações) ---
+    async function salvarProgressoDaLicao() {
+        const idEstudanteLogado = 1; // VALOR FIXO PARA TESTE
+        const pontuacaoFinal = atividadesCorretasUnicas.length;
+        // Usando um ID de jogo fictício para representar a lição
+        const idDaLicaoComoJogo = licaoAtual.id + 100;
+
+        const { data, error } = await supabaseClient
+            .from('estudanteJogos')
+            .insert([{ 
+                idEstudante: idEstudanteLogado, 
+                idJogos: idDaLicaoComoJogo,
+                pontuacaoObtida: pontuacaoFinal,
+                dataRealizacao: new Date() 
+            }]);
+
+        if (error) {
+            console.error('Erro ao salvar progresso da lição:', error);
+        } else {
+            console.log('Progresso da lição salvo com sucesso!', data);
+        }
+    }
+
+    // --- FUNÇÕES DE CARREGAMENTO DE EXERCÍCIOS ---
+
     function carregarExercicioAssociacao(dados) {
         const perguntaEl = document.getElementById('pergunta-associacao');
         const opcoesContainer = document.getElementById('opcoes-imagem');
         let respostaSelecionada = null;
 
-        perguntaEl.innerHTML = `Qual destas imagens é "<span>${dados.palavraAlvo}</span>"?`;
+        perguntaEl.innerHTML = dados.pergunta;
         opcoesContainer.innerHTML = '';
 
         dados.opcoes.forEach(opcao => {
@@ -167,7 +178,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const btnAudio = document.getElementById('btnAudio');
         const spanPalavra = document.getElementById('palavra-audio');
         const inputResposta = document.getElementById('inputResposta');
-        
         const imgContainer = document.getElementById('imagem-principal-container');
         const imgEl = document.getElementById('imagem-principal');
 
