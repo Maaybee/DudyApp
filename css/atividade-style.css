@@ -143,7 +143,7 @@ body {
     font-size: 20px; 
     font-weight: bold; 
     text-align: center;
-    
+     max-width: 300px;
     /* --- NOVAS PROPRIEDADES PARA FAZER DESAPARECER --- */
     min-height: 0; /* Começa sem altura mínima */
     padding: 0;    /* Remove padding inicial */
@@ -159,7 +159,7 @@ body {
     color: #58a700; /* Cor do texto */
     background-color: #e6ffe6; /* Fundo verde claro */
     border: 1px solid #509700; /* Borda verde */
-     border-radius: 30px; /* Borda verde */
+     border-radius: 10px; /* Borda verde */
     padding: 10px; /* Adiciona padding quando ativo */
     min-height: 40px; /* Altura mínima quando ativo */
     visibility: visible; /* Torna visível */
