@@ -19,7 +19,7 @@ const DADOS_LICOES = [
         id: 3,
         titulo: "Lição 3: Foods ans family",
         descricao: "Identifique objetos do dia a dia.",
-        icone: "/DudyApp/assets/img/pizza.svg", // Ícone para a Lição 3
+        icone: "/DudyApp/assets/pizza.svg", // Ícone para a Lição 3
         atividades: [11, 12, 13, 14, 15] // Sequência de 5 novas atividades
     }
 ];
