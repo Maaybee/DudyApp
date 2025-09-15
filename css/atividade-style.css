@@ -133,11 +133,24 @@ body {
     cursor: not-allowed;
 }
 
-#feedback { margin-bottom: 15px; font-size: 20px; font-weight: bold; }
-#feedback.correto { color: #58a700; }
-#feedback.incorreto { color: #ff4b4b; }
-/* Adicione este código ao final do seu atividade-style.css */
-
+/* Adicione ao seu atividade-style.css */
+.feedback {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+}
+.feedback.correto {
+    background-color: #e6ffe6; /* Verde claro */
+    color: #008000; /* Verde escuro */
+    border: 1px solid #008000;
+}
+.feedback.incorreto {
+    background-color: #ffe6e6; /* Vermelho claro */
+    color: #cc0000; /* Vermelho escuro */
+    border: 1px solid #cc0000;
+}
 /* NOVO: Estilo para o container da imagem principal na tela de tradução */
 #imagem-principal-container {
     /* Estilo similar ao .card-imagem para consistência */
