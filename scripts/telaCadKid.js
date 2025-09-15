@@ -66,7 +66,7 @@ async function enviar_dados() {
     const { data, error } = await supabaseClient
       .from("estudante")
       .insert([{
-        id: idResponsavel,
+        idresponsavel: idResponsavel,
         nome: nome,
         datanasc: dataNasc,
         icone: icone,
