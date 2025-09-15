@@ -1,4 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // --- INICIALIZAÇÃO DO SUPABASE ---
+    const SUPABASE_URL = "SEU_SUPABASE_URL_AQUI";
+    const SUPABASE_ANON_KEY = "SUA_SUPABASE_ANON_KEY_AQUI";
+    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
     // --- ELEMENTOS DA PÁGINA ---
     const header = document.querySelector('.header');
     const personagens = document.querySelector('.personagens');
@@ -18,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- VARIÁVEIS DE ESTADO ---
     let linhaAtual = 0;
     let historia;
-    let pontuacao = 0; // ADICIONADO: Contador de pontuação em tempo real
+    let pontuacao = 0;
 
     // --- LÓGICA DE INÍCIO ---
     if (btnComecarHistoria) {
@@ -49,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
         mostrarLinha(linhaAtual);
     }
 
-    // --- LÓGICA DO DIÁLOGO (sem alterações) ---
+    // --- LÓGICA DO DIÁLOGO ---
     function mostrarLinha(indice) {
         if (indice >= historia.dialogo.length) { iniciarQuiz(); return; }
         
@@ -125,7 +130,6 @@ document.addEventListener('DOMContentLoaded', () => {
         botoesContainer.appendChild(btnFinalizar);
     }
 
-    // --- FUNÇÃO DE VERIFICAR RESPOSTA (ATUALIZADA) ---
     function checarResposta(botaoSelecionado, indicePergunta) {
         const respostaCorreta = historia.quiz.respostasCorretas[indicePergunta];
         const respostaDoUsuario = botaoSelecionado.textContent;
@@ -141,33 +145,46 @@ document.addEventListener('DOMContentLoaded', () => {
         if (respostaDoUsuario !== respostaCorreta) {
             botaoSelecionado.style.backgroundColor = '#FFB6C1';
         } else {
-            // Se a resposta do usuário for a correta, incrementa a pontuação
             pontuacao++;
         }
     }
 
-    // --- FUNÇÃO DE FINALIZAR QUIZ (ATUALIZADA) ---
-    function finalizarQuiz() {
+    async function finalizarQuiz() {
         header.style.display = 'none';
         personagens.style.display = 'none';
         quizContainer.style.display = 'none';
         
-        // A pontuação agora é lida diretamente da variável, sem recontagem
-        const pontuacaoFinal = pontuacao;
+        await salvarProgresso(historia.jogo_id, pontuacao);
 
-        // Mostra o modal de conclusão
         historiaConcluidaModal.style.display = 'flex';
-        
-        // Preenche a pontuação correta no modal
-        document.getElementById('pontuacao-final-texto').textContent = `${pontuacaoFinal} de ${historia.quiz.perguntas.length}`;
-        
-        // Configura o botão de voltar
+        document.getElementById('pontuacao-final-texto').textContent = `${pontuacao} de ${historia.quiz.perguntas.length}`;
         document.getElementById('btnVoltarParaHistorias').onclick = () => {
             window.location.href = '../telas/indexCentrohistorias.html';
         };
     }
 
-    // --- LÓGICA DO POP-UP (sem alterações) ---
+    // --- LÓGICA DE SALVAMENTO ---
+    async function salvarProgresso(jogoId, pontuacaoObtida) {
+        const idEstudanteLogado = 1; // VALOR FIXO PARA TESTE
+
+        const { data, error } = await supabaseClient
+            .from('estudanteJogos')
+            .insert([{ 
+                idEstudante: idEstudanteLogado, 
+                idJogos: jogoId, 
+                pontuacaoObtida: pontuacaoObtida, 
+                dataRealizacao: new Date() 
+            }]);
+
+        if (error) {
+            console.error('Erro ao salvar progresso da história:', error);
+            alert('Não foi possível salvar seu progresso.');
+        } else {
+            console.log('Progresso da história salvo com sucesso!', data);
+        }
+    }
+
+    // --- LÓGICA DO POP-UP ---
     sairBtnPrincipal.addEventListener('click', () => {
         popupOverlay.classList.add('active');
     });
