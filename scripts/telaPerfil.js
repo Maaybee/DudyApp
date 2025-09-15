@@ -79,7 +79,6 @@ document.addEventListener("DOMContentLoaded", () => {
   carregarPerfil(idEstudante);
 });
 
-// Logout
 async function logout() {
   try {
     const { error } = await supabaseClient.auth.signOut();
@@ -100,3 +99,33 @@ function home() {
     window.location.href = '../telas/telaHome.html'; 
 };
 
+function abrirMenu() {
+  const menu = document.getElementById("menu");
+  if (menu.style.display === "none") { 
+    menu.style.display = "block";
+  } else { 
+    menu.style.display = "none";
+  }
+}
+
+function fecharMenu() {
+  document.getElementById("menu").style.display = "none";
+}
+
+async function logout() {
+  try {
+    const { error } = await supabaseClient.auth.signOut();
+    if (error) throw error;
+
+    localStorage.clear();
+    window.location.href = "../index.html";
+  } catch (err) {
+    console.error("Erro inesperado ao sair:", err);
+    alert("Ocorreu um erro. Tente novamente.");
+  }
+
+}
+
+function trocarPerfil (){ 
+  
+}
