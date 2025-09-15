@@ -117,12 +117,12 @@ body {
     width: 100%;
     max-width: 300px;
     padding: 15px;
-    background-color: #58a700;
+    background-color: #0262ff;
     color: white;
     font-size: 18px;
     font-weight: bold;
     border: none;
-    border-bottom: 4px solid #4a8d00;
+    border-bottom: 4px solid #0056e3;
     border-radius: 15px;
     cursor: pointer;
     text-transform: uppercase;
@@ -151,9 +151,9 @@ body {
 
 /* Quando o feedback está correto */
 #feedback.correto { 
-    color: #58a700; /* Cor do texto */
+    color: #0262ff; /* Cor do texto */
     background-color: #e6ffe6; /* Fundo verde claro */
-    border: 1px solid #008000; /* Borda verde */
+    border: 1px solid #0056e3; /* Borda verde */
     padding: 10px; /* Adiciona padding quando ativo */
     min-height: 40px; /* Altura mínima quando ativo */
     visibility: visible; /* Torna visível */
@@ -213,7 +213,7 @@ body {
 }
 
 #conclusao-titulo {
-    color: #58a700; /* Cor verde para o título de parabéns */
+    color: #ff7bac; /* Cor verde para o título de parabéns */
     font-size: 30px;
     margin-bottom: 20px;
 }
@@ -231,13 +231,13 @@ body {
 }
 
 .btn-principal { /* Estilo para o botão de voltar ao menu, use o seu estilo de botão principal */
-    background-color: #58a700;
+    background-color: #0262ff;
     color: white;
     font-size: 18px;
     font-weight: bold;
     padding: 12px 25px;
     border: none;
-    border-bottom: 4px solid #4a8d00;
+    border-bottom: 4px solid #0056e3;
     border-radius: 15px;
     cursor: pointer;
     text-transform: uppercase;
