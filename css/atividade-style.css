@@ -159,6 +159,7 @@ body {
     color: #58a700; /* Cor do texto */
     background-color: #e6ffe6; /* Fundo verde claro */
     border: 1px solid #0056e3; /* Borda verde */
+     border-radius: 30px; /* Borda verde */
     padding: 10px; /* Adiciona padding quando ativo */
     min-height: 40px; /* Altura mínima quando ativo */
     visibility: visible; /* Torna visível */
@@ -168,7 +169,8 @@ body {
 #feedback.incorreto { 
     color: #ff4b4b; /* Cor do texto */
     background-color: #ffe6e6; /* Fundo vermelho claro */
-    border: 1px solid #cc0000; /* Borda vermelha */
+    border: 1px solid #cc0000;
+    border: 30px; /* Borda vermelha */
     padding: 10px; /* Adiciona padding quando ativo */
     min-height: 40px; /* Altura mínima quando ativo */
     visibility: visible; /* Torna visível */
