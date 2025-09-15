@@ -16,71 +16,87 @@ document.addEventListener('DOMContentLoaded', () => {
     let atividadesRestantes = [...licaoAtual.atividades];
     let currentIndex = 0;
     let atividadesErradas = [];
-    let acertos = 0;
+    let acertos = 0; // Contagem de acertos únicos para a barra de progresso
 
     const feedbackEl = document.getElementById('feedback');
     const btnVerificar = document.getElementById('btnVerificar');
     const progressoAtualEl = document.getElementById('progresso-atual');
     
+    // Elementos do modal de conclusão
+    const licaoConcluidaModal = document.getElementById('licao-concluida-modal');
+    const btnVoltarMenu = document.getElementById('btnVoltarMenu');
+    const atividadeWrapper = document.querySelector('.atividade-wrapper');
+    const acoesRodape = document.querySelector('.acoes-rodape');
+    const progressoHeader = document.querySelector('.progresso-header');
+
     // Função para atualizar a barra de progresso
     function atualizarProgresso() {
-        const totalAtividades = atividadesOriginais.length;
-        const percentual = (acertos / totalAtividades) * 100;
+        const totalAtividadesUnicas = atividadesOriginais.length;
+        // Calcula acertos baseados nas atividades originais que não estão mais na fila restantes ou erradas
+        const acertosUnicos = atividadesOriginais.filter(original => 
+            !atividadesRestantes.some(restante => restante.id === original.id) && 
+            !atividadesErradas.some(errada => errada.id === original.id)
+        ).length;
+
+        const percentual = (acertosUnicos / totalAtividadesUnicas) * 100;
         progressoAtualEl.style.width = `${percentual}%`;
     }
 
-// Função para carregar a próxima atividade
-function carregarProximaAtividade() {
-    feedbackEl.textContent = '';
-    document.getElementById('exercicio-associacao').style.display = 'none';
-    document.getElementById('exercicio-traducao').style.display = 'none';
-    btnVerificar.disabled = true;
+    // Função para carregar a próxima atividade
+    function carregarProximaAtividade() {
+        feedbackEl.textContent = '';
+        feedbackEl.className = '';
+        
+        document.getElementById('exercicio-associacao').style.display = 'none';
+        document.getElementById('exercicio-traducao').style.display = 'none';
+        btnVerificar.disabled = true;
 
-    // NOVO: Esconde o footer (onde fica o botão Verificar) e o cabeçalho de progresso
-    document.querySelector('.acoes-rodape').style.display = 'flex'; // Exibe novamente o footer
-    document.querySelector('.progresso-header').style.display = 'flex'; // Exibe o header
+        // Garante que o footer e o header estão visíveis para atividades normais
+        acoesRodape.style.display = 'flex';
+        progressoHeader.style.display = 'flex';
+        atividadeWrapper.style.display = 'flex'; // Garante que o wrapper da atividade está visível
 
-    if (currentIndex >= atividadesRestantes.length) {
-        if (atividadesErradas.length > 0) {
-            atividadesRestantes = atividadesErradas;
-            atividadesErradas = [];
-            currentIndex = 0;
-        } else {
-            // Lição completa! MOSTRAR O GIF AQUI
-            document.getElementById('licao-concluida-modal').style.display = 'flex';
-            
-            // Oculta os outros elementos da atividade
-            document.querySelector('.atividade-wrapper').style.display = 'none';
-            document.querySelector('.acoes-rodape').style.display = 'none';
-            document.querySelector('.progresso-header').style.display = 'none'; // Oculta o header também
+        if (currentIndex >= atividadesRestantes.length) {
+            if (atividadesErradas.length > 0) {
+                // Se houver erros, reinicia a fila com eles
+                atividadesRestantes = atividadesErradas;
+                atividadesErradas = [];
+                currentIndex = 0;
+            } else {
+                // Lição completa! MOSTRA O GIF AQUI E REDIRECIONA PELO BOTÃO
+                licaoConcluidaModal.style.display = 'flex';
+                
+                // Oculta os outros elementos da atividade enquanto o modal está ativo
+                atividadeWrapper.style.display = 'none';
+                acoesRodape.style.display = 'none';
+                progressoHeader.style.display = 'none';
 
-            // Configura o botão de voltar ao menu
-            document.getElementById('btnVoltarMenu').onclick = () => {
-                window.location.href = 'telaAtividade.html'; // Redireciona para o menu
-            };
-            return; // Termina a função aqui, pois a lição acabou
+                btnVoltarMenu.onclick = () => {
+                    window.location.href = 'telaAtividade.html'; // Redireciona para o menu
+                };
+                return; // Termina a função aqui, pois a lição acabou
+            }
         }
-    }
 
-    const proximaAtividadeInfo = atividadesRestantes[currentIndex];
-    const atividadeCompleta = DADOS_ATIVIDADES.find(a => a.id === proximaAtividadeInfo.id && a.tipo === proximaAtividadeInfo.tipo);
+        const proximaAtividadeInfo = actividadesRestantes[currentIndex];
+        const atividadeCompleta = DADOS_ATIVIDADES.find(a => a.id === proximaAtividadeInfo.id && a.tipo === proximaAtividadeInfo.tipo);
 
-    if (!atividadeCompleta) {
-        console.error('Detalhes da atividade não encontrados:', proximaAtividadeInfo);
-        document.body.innerHTML = "<h1>Erro ao carregar atividade.</h1>";
-        return;
-    }
+        if (!atividadeCompleta) {
+            console.error('Detalhes da atividade não encontrados:', proximaAtividadeInfo);
+            document.body.innerHTML = "<h1>Erro ao carregar atividade.</h1>";
+            return;
+        }
 
-    if (atividadeCompleta.tipo === 'associacao_imagem') {
-        document.getElementById('exercicio-associacao').style.display = 'block';
-        carregarExercicioAssociacao(atividadeCompleta);
-    } else if (atividadeCompleta.tipo === 'traducao') {
-        document.getElementById('exercicio-traducao').style.display = 'block';
-        carregarExercicioTraducao(atividadeCompleta);
+        if (atividadeCompleta.tipo === 'associacao_imagem') {
+            document.getElementById('exercicio-associacao').style.display = 'block';
+            carregarExercicioAssociacao(atividadeCompleta);
+        } else if (atividadeCompleta.tipo === 'traducao') {
+            document.getElementById('exercicio-traducao').style.display = 'block';
+            carregarExercicioTraducao(atividadeCompleta);
+        }
+        
+        atualizarProgresso();
     }
-    
-    atualizarProgresso();
-}
 
     // Função para lidar com a resposta do usuário
     function verificarResposta(isCorreta, atividadeRespondida) {
@@ -89,22 +105,26 @@ function carregarProximaAtividade() {
         if (isCorreta) {
             feedbackEl.textContent = 'Correto!';
             feedbackEl.className = 'feedback correto';
-            // Apenas incrementa o acerto se não for uma atividade repetida por erro
-            if (!atividadesErradas.some(err => err.id === atividadeRespondida.id)) {
-                acertos++;
+            // Aumenta o contador de acertos apenas para atividades que não estão na fila de "erradas" (já revisadas)
+            if (!atividadesErradas.includes(atividadeRespondida)) { // Verifica se esta atividade não foi adicionada aos erros ainda
+                 acertos++;
             }
         } else {
             feedbackEl.textContent = `Incorreto! A resposta era: ${atividadeRespondida.respostaCorreta}`;
             feedbackEl.className = 'feedback incorreto';
-            atividadesErradas.push(atividadesRestantes[currentIndex]);
+            // Adiciona a atividade completa à lista de erradas, se ainda não estiver lá
+            if (!atividadesErradas.some(err => err.id === atividadeRespondida.id && err.tipo === atividadeRespondida.tipo)) {
+                 atividadesErradas.push(atividadesRestantes[currentIndex]);
+            }
         }
         
-        currentIndex++;
+        currentIndex++; // Sempre avança para a próxima na fila atual
 
         setTimeout(carregarProximaAtividade, 1500); 
     }
 
-    // --- Funções de Carregamento de Exercícios (sem alterações) ---
+    // --- Funções de Carregamento de Exercícios (com callback para verificarResposta) ---
+
     function carregarExercicioAssociacao(dados) {
         const perguntaEl = document.getElementById('pergunta-associacao');
         const opcoesContainer = document.getElementById('opcoes-imagem');
@@ -136,8 +156,11 @@ function carregarProximaAtividade() {
             });
         });
 
+        // O clique no botão Verificar agora chama a função centralizada verificarResposta
         btnVerificar.onclick = () => {
-            verificarResposta(respostaSelecionada === dados.respostaCorreta, dados);
+            if (respostaSelecionada) { // Só verifica se algo foi selecionado
+                verificarResposta(respostaSelecionada === dados.respostaCorreta, dados);
+            }
         };
     }
 
@@ -153,6 +176,7 @@ function carregarProximaAtividade() {
         perguntaEl.textContent = dados.pergunta;
         spanPalavra.textContent = dados.palavraOriginal;
         inputResposta.value = '';
+        inputResposta.focus(); // Coloca o foco no input
         
         if (dados.imagemPrincipal) {
             imgContainer.style.display = 'flex';
@@ -161,16 +185,26 @@ function carregarProximaAtividade() {
             imgContainer.style.display = 'none';
         }
         
-        btnAudio.onclick = () => { new Audio(dados.audio).play(); };
+        btnAudio.onclick = () => { 
+            if (dados.audio) { // Garante que há um áudio antes de tentar tocar
+                new Audio(dados.audio).play(); 
+            } else {
+                console.warn("Nenhum arquivo de áudio especificado para esta atividade.");
+            }
+        };
 
+        // Habilita o botão Verificar apenas quando o input tem texto
         inputResposta.addEventListener('input', () => {
             btnVerificar.disabled = inputResposta.value.trim() === '';
         });
 
+        // O clique no botão Verificar agora chama a função centralizada verificarResposta
         btnVerificar.onclick = () => {
             const respostaUsuario = inputResposta.value.trim().toLowerCase();
             const respostaCorreta = dados.respostaCorreta.trim().toLowerCase();
-            verificarResposta(respostaUsuario === respostaCorreta, dados);
+            if (respostaUsuario) { // Só verifica se algo foi digitado
+                verificarResposta(respostaUsuario === respostaCorreta, dados);
+            }
         };
     }
 
