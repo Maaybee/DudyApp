@@ -151,7 +151,7 @@ body {
     background-color: transparent; /* Fundo transparente inicialmente */
     visibility: hidden; /* Esconde o elemento por padrão */
     opacity: 0;    /* Garante que não é visível */
-    transition: all 0.3s ease-in-out; /* Adiciona transição para aparecer/desaparecer suavemente */
+    transition: all 0.1s ease-in-out; /* Adiciona transição para aparecer/desaparecer suavemente */
 }
 
 /* Quando o feedback está correto */
@@ -159,7 +159,7 @@ body {
     color: #58a700; /* Cor do texto */
     background-color: #e6ffe6; /* Fundo verde claro */
     border: 1px solid #509700; /* Borda verde */
-     border-radius: 10px; /* Borda verde */
+    border-radius: 5px; /* Borda verde */
     padding: 10px; /* Adiciona padding quando ativo */
     min-height: 40px; /* Altura mínima quando ativo */
     visibility: visible; /* Torna visível */
@@ -170,6 +170,7 @@ body {
     color: #ff4b4b; /* Cor do texto */
     background-color: #ffe6e6; /* Fundo vermelho claro */
     border: 1px solid #cc0000;
+    border-radius: 5px;
     border: 30px; /* Borda vermelha */
     padding: 10px; /* Adiciona padding quando ativo */
     min-height: 40px; /* Altura mínima quando ativo */
