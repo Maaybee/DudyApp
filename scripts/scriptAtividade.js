@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentIndex = 0;
     let atividadesErradas = [];
     let acertos = 0; // Contagem de acertos únicos para a barra de progresso
+    let licaoFinalizada = false; // NOVA FLAG
 
     const feedbackEl = document.getElementById('feedback');
     const btnVerificar = document.getElementById('btnVerificar');
@@ -32,10 +33,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Função para atualizar a barra de progresso
     function atualizarProgresso() {
         const totalAtividadesUnicas = atividadesOriginais.length;
-        // Calcula acertos baseados nas atividades originais que não estão mais na fila restantes ou erradas
+        // Conta quantas atividades originais foram "passadas" (não estão mais em restantes ou erradas)
         const acertosUnicos = atividadesOriginais.filter(original => 
-            !atividadesRestantes.some(restante => restante.id === original.id) && 
-            !atividadesErradas.some(errada => errada.id === original.id)
+            !atividadesRestantes.some(restante => restante.id === original.id && restante.tipo === original.tipo) && 
+            !atividadesErradas.some(errada => errada.id === original.id && errada.tipo === original.tipo)
         ).length;
 
         const percentual = (acertosUnicos / totalAtividadesUnicas) * 100;
@@ -44,6 +45,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Função para carregar a próxima atividade
     function carregarProximaAtividade() {
+        if (licaoFinalizada) { // Se a lição já foi finalizada, não faça mais nada
+            return;
+        }
+
         feedbackEl.textContent = '';
         feedbackEl.className = '';
         
@@ -54,16 +59,16 @@ document.addEventListener('DOMContentLoaded', () => {
         // Garante que o footer e o header estão visíveis para atividades normais
         acoesRodape.style.display = 'flex';
         progressoHeader.style.display = 'flex';
-        atividadeWrapper.style.display = 'flex'; // Garante que o wrapper da atividade está visível
+        atividadeWrapper.style.display = 'flex'; 
 
         if (currentIndex >= atividadesRestantes.length) {
             if (atividadesErradas.length > 0) {
-                // Se houver erros, reinicia a fila com eles
                 atividadesRestantes = atividadesErradas;
                 atividadesErradas = [];
                 currentIndex = 0;
             } else {
-                // Lição completa! MOSTRA O GIF AQUI E REDIRECIONA PELO BOTÃO
+                // Lição completa! MOSTRA O GIF AQUI
+                licaoFinalizada = true; // Marca a lição como finalizada
                 licaoConcluidaModal.style.display = 'flex';
                 
                 // Oculta os outros elementos da atividade enquanto o modal está ativo
@@ -77,8 +82,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 return; // Termina a função aqui, pois a lição acabou
             }
         }
+        
+        // Verifica se atividadesRestantes ainda tem elementos antes de tentar acessá-los
+        if (atividadesRestantes.length === 0 || currentIndex >= atividadesRestantes.length) {
+            // Este caso não deveria acontecer se a lógica acima estiver ok, mas é uma segurança.
+            console.error("Tentativa de carregar atividade com fila vazia ou índice fora do limite.");
+            licaoFinalizada = true; // Para evitar loops
+            return;
+        }
 
-        const proximaAtividadeInfo = actividadesRestantes[currentIndex];
+        const proximaAtividadeInfo = atividadesRestantes[currentIndex];
         const atividadeCompleta = DADOS_ATIVIDADES.find(a => a.id === proximaAtividadeInfo.id && a.tipo === proximaAtividadeInfo.tipo);
 
         if (!atividadeCompleta) {
@@ -100,30 +113,53 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Função para lidar com a resposta do usuário
     function verificarResposta(isCorreta, atividadeRespondida) {
+        if (licaoFinalizada) return; // Não permite resposta se a lição já finalizou
+
         btnVerificar.disabled = true;
 
         if (isCorreta) {
             feedbackEl.textContent = 'Correto!';
             feedbackEl.className = 'feedback correto';
-            // Aumenta o contador de acertos apenas para atividades que não estão na fila de "erradas" (já revisadas)
-            if (!atividadesErradas.includes(atividadeRespondida)) { // Verifica se esta atividade não foi adicionada aos erros ainda
-                 acertos++;
-            }
+            
+            // Incrementa o contador de acertos apenas para atividades que não são repetidas (não estão na lista de erradas)
+            // Para isso, precisamos de um jeito de saber se a 'atividadeRespondida' é uma 'original'
+            // ou se já foi uma 'errada' que está sendo refeita.
+            // Uma forma é ter um campo 'concluida' nos dados ou verificar contra o array original.
+            // Por enquanto, vou manter o 'acertos' para o progresso da forma mais simples, 
+            // que é contar cada acerto que leva a avançar no progresso total.
+            
+            // Esta lógica precisa ser revisada se você quiser contar "acertos de atividades únicas"
+            // de forma mais rigorosa para o progresso. Por enquanto, acertos aumenta em cada acerto.
+            acertos++; 
+
         } else {
             feedbackEl.textContent = `Incorreto! A resposta era: ${atividadeRespondida.respostaCorreta}`;
             feedbackEl.className = 'feedback incorreto';
-            // Adiciona a atividade completa à lista de erradas, se ainda não estiver lá
-            if (!atividadesErradas.some(err => err.id === atividadeRespondida.id && err.tipo === atividadeRespondida.tipo)) {
-                 atividadesErradas.push(atividadesRestantes[currentIndex]);
+            
+            // Adiciona a atividade à lista de erradas APENAS SE AINDA NÃO ESTIVER LÁ
+            // E se não for uma atividade já repetida de 'atividadesErradas'
+            // (Para evitar duplicatas excessivas se o usuário errar a mesma atividade várias vezes)
+            const atividadeJaEstaNaListaDeErros = atividadesErradas.some(
+                err => err.id === atividadeRespondida.id && err.tipo === atividadeRespondida.tipo
+            );
+            
+            // Adiciona aos erros se for uma atividade original ou uma que não foi adicionada ainda
+            const isOriginalActivity = atividadesOriginais.some(
+                orig => orig.id === atividadeRespondida.id && orig.tipo === atividadeRespondida.tipo
+            );
+
+            if (isOriginalActivity && !atividadeJaEstaNaListaDeErros) {
+                atividadesErradas.push(atividadeRespondida);
+            } else if (!isOriginalActivity && !atividadeJaEstaNaListaDeErros) { // Se for uma revisada e não duplicada
+                 atividadesErradas.push(atividadeRespondida);
             }
         }
         
-        currentIndex++; // Sempre avança para a próxima na fila atual
-
+        currentIndex++; 
         setTimeout(carregarProximaAtividade, 1500); 
     }
 
-    // --- Funções de Carregamento de Exercícios (com callback para verificarResposta) ---
+    // --- Funções de Carregamento de Exercícios ---
 
     function carregarExercicioAssociacao(dados) {
         const perguntaEl = document.getElementById('pergunta-associacao');
@@ -156,10 +192,11 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        // O clique no botão Verificar agora chama a função centralizada verificarResposta
         btnVerificar.onclick = () => {
-            if (respostaSelecionada) { // Só verifica se algo foi selecionado
+            if (respostaSelecionada) { 
                 verificarResposta(respostaSelecionada === dados.respostaCorreta, dados);
+            } else {
+                // Opcional: feedback para selecionar uma opção
             }
         };
     }
@@ -176,7 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
         perguntaEl.textContent = dados.pergunta;
         spanPalavra.textContent = dados.palavraOriginal;
         inputResposta.value = '';
-        inputResposta.focus(); // Coloca o foco no input
+        inputResposta.focus(); 
         
         if (dados.imagemPrincipal) {
             imgContainer.style.display = 'flex';
@@ -186,24 +223,24 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         btnAudio.onclick = () => { 
-            if (dados.audio) { // Garante que há um áudio antes de tentar tocar
+            if (dados.audio) { 
                 new Audio(dados.audio).play(); 
             } else {
                 console.warn("Nenhum arquivo de áudio especificado para esta atividade.");
             }
         };
 
-        // Habilita o botão Verificar apenas quando o input tem texto
         inputResposta.addEventListener('input', () => {
             btnVerificar.disabled = inputResposta.value.trim() === '';
         });
 
-        // O clique no botão Verificar agora chama a função centralizada verificarResposta
         btnVerificar.onclick = () => {
             const respostaUsuario = inputResposta.value.trim().toLowerCase();
             const respostaCorreta = dados.respostaCorreta.trim().toLowerCase();
-            if (respostaUsuario) { // Só verifica se algo foi digitado
+            if (respostaUsuario) { 
                 verificarResposta(respostaUsuario === respostaCorreta, dados);
+            } else {
+                // Opcional: feedback para digitar uma resposta
             }
         };
     }

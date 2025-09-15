@@ -17,7 +17,17 @@ const DADOS_LICOES = [
     },
     {
         id: 2,
-        titulo: "Lição 2: A Cidade",
+        titulo: "Lição 2: Foods",
+        descricao: "Explore o vocabulário urbano.",
+        atividades: [
+            { id: 6, tipo: 'traducao' },
+            { id: 7, tipo: 'associacao_imagem' },
+            { id: 8, tipo: 'traducao' }
+        ]
+    },
+    {
+        id: 3,
+        titulo: "Lição 2: Foods",
         descricao: "Explore o vocabulário urbano.",
         atividades: [
             { id: 6, tipo: 'traducao' },
