@@ -48,7 +48,7 @@ const DADOS_ATIVIDADES = [
         pergunta: 'Traduza:',
         palavraOriginal: 'House',
         // ADICIONADO: A imagem que aparecerá na tela
-        imagemPrincipal: '/DudyApp/assets/img/house.png', 
+        imagemPrincipal: '/DudyApp/assets/img/casinha.png', 
         audio: '/DudyApp/assets/audio/house.mp3',
         respostaCorreta: 'Casa'
     },
