@@ -34,9 +34,9 @@ const DADOS_ATIVIDADES = [
         palavraAlvo: 'Maçã',
         respostaCorreta: 'apple',
         opcoes: [
-            { id: 'apple',  imagem: '/DudyApp/assets/img/apple.png',  texto: 'Apple' },
+            { id: 'apple',  imagem: '/DudyApp/assets/img/maça.svg',  texto: 'Apple' },
             { id: 'orange', imagem: '/DudyApp/assets/img/orange.svg', texto: 'Orange' },
-            { id: 'milk',   imagem: '/DudyApp/assets/img/milk.png',   texto: 'Milk' }
+            { id: 'milk',   imagem: '/DudyApp/assets/leite.svg',   texto: 'Milk' }
         ]
     },
     {
@@ -55,8 +55,8 @@ const DADOS_ATIVIDADES = [
         palavraAlvo: 'Leite',
         respostaCorreta: 'milk',
         opcoes: [
-            { id: 'strawberry', imagem: '/DudyApp/assets/img/strawberry.png', texto: 'Strawberry' },
-            { id: 'milk',       imagem: '/DudyApp/assets/img/milk.png',       texto: 'Milk' },
+            { id: 'strawberry', imagem: '/DudyApp/assets/img/morango.svg', texto: 'Strawberry' },
+            { id: 'milk',       imagem: '/DudyApp/assets/leite.svg',       texto: 'Milk' },
             { id: 'orange',     imagem: '/DudyApp/assets/img/orange.svg',     texto: 'Orange' }
         ]
     },
@@ -65,7 +65,7 @@ const DADOS_ATIVIDADES = [
         tipo: 'traducao',
         pergunta: 'Traduza:',
         palavraOriginal: 'Milk',
-        imagemPrincipal: '/DudyApp/assets/img/milk.png',
+        imagemPrincipal: '/DudyApp/assets/leite.svg',
         audio: '/DudyApp/audios/milk.mp3',
         respostaCorreta: 'Leite'
     },
@@ -76,8 +76,8 @@ const DADOS_ATIVIDADES = [
         palavraAlvo: 'Água',
         respostaCorreta: 'water',
         opcoes: [
-            { id: 'pizza',  imagem: '/DudyApp/assets/img/pizza.png',  texto: 'Pizza' },
-            { id: 'water',  imagem: '/DudyApp/assets/img/water.png',  texto: 'Water' },
+            { id: 'pizza',  imagem: '/DudyApp/assets/pizza.svg',  texto: 'Pizza' },
+            { id: 'water',  imagem: '/DudyApp/assets/agua.svg',  texto: 'Water' },
             { id: 'orange', imagem: '/DudyApp/assets/img/orange.svg', texto: 'Orange' }
         ]
     },
