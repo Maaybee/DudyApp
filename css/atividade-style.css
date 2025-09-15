@@ -111,7 +111,12 @@ body {
 .acoes-rodape {
     padding: 20px;
     border-top: 2px solid #e5e5e5;
-    text-align: center;
+    
+    /* REGRAS ATUALIZADAS PARA ALINHAMENTO VERTICAL */
+    display: flex;
+    flex-direction: column; /* Coloca os itens em coluna */
+    align-items: center;    /* Centraliza horizontalmente */
+    gap: 15px;              /* Espaço entre o feedback e o botão */
 }
 #btnVerificar {
     width: 100%;
@@ -219,7 +224,7 @@ body {
 }
 
 #conclusao-gif {
-    max-width: 250px; /* Tamanho do GIF */
+    max-width: 350px; /* Tamanho do GIF */
     height: auto;
     margin-bottom: 20px;
 }

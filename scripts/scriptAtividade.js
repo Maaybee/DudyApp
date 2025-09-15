@@ -42,12 +42,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const percentual = (acertosUnicos / totalAtividadesUnicas) * 100;
         progressoAtualEl.style.width = `${percentual}%`;
     }
-
     // Função para carregar a próxima atividade
     function carregarProximaAtividade() {
-        if (licaoFinalizada) { // Se a lição já foi finalizada, não faça mais nada
-            return;
-        }
+        if (licaoFinalizada) { return; }
 
         feedbackEl.textContent = '';
         feedbackEl.className = '';
@@ -56,10 +53,10 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('exercicio-traducao').style.display = 'none';
         btnVerificar.disabled = true;
 
-        // Garante que o footer e o header estão visíveis para atividades normais
-        acoesRodape.style.display = 'flex';
-        progressoHeader.style.display = 'flex';
+        // Garante que os containers principais estejam visíveis
         atividadeWrapper.style.display = 'flex'; 
+        progressoHeader.style.display = 'flex';
+        // REMOVIDO: acoesRodape.style.display = 'flex'; // Esta linha foi removida
 
         if (currentIndex >= atividadesRestantes.length) {
             if (atividadesErradas.length > 0) {
@@ -67,27 +64,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 atividadesErradas = [];
                 currentIndex = 0;
             } else {
-                // Lição completa! MOSTRA O GIF AQUI
-                licaoFinalizada = true; // Marca a lição como finalizada
+                // Lição completa!
+                licaoFinalizada = true;
                 licaoConcluidaModal.style.display = 'flex';
                 
-                // Oculta os outros elementos da atividade enquanto o modal está ativo
                 atividadeWrapper.style.display = 'none';
                 acoesRodape.style.display = 'none';
                 progressoHeader.style.display = 'none';
 
                 btnVoltarMenu.onclick = () => {
-                    window.location.href = 'telaAtividade.html'; // Redireciona para o menu
+                    window.location.href = 'telaAtividade.html';
                 };
-                return; // Termina a função aqui, pois a lição acabou
+                return;
             }
         }
         
-        // Verifica se atividadesRestantes ainda tem elementos antes de tentar acessá-los
         if (atividadesRestantes.length === 0 || currentIndex >= atividadesRestantes.length) {
-            // Este caso não deveria acontecer se a lógica acima estiver ok, mas é uma segurança.
-            console.error("Tentativa de carregar atividade com fila vazia ou índice fora do limite.");
-            licaoFinalizada = true; // Para evitar loops
+            console.error("Tentativa de carregar atividade com fila vazia.");
+            licaoFinalizada = true;
             return;
         }
 
@@ -110,7 +104,6 @@ document.addEventListener('DOMContentLoaded', () => {
         
         atualizarProgresso();
     }
-
     // Função para lidar com a resposta do usuário
     function verificarResposta(isCorreta, atividadeRespondida) {
         if (licaoFinalizada) return; // Não permite resposta se a lição já finalizou
