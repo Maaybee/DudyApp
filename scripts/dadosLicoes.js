@@ -46,7 +46,7 @@ const DADOS_ATIVIDADES = [
         tipo: 'associacao_imagem',
         palavraAlvo: 'Maçã',
         opcoes: [
-            { id: '1a', imagem: '/DudyApp/assets/img/maça.svg', texto: 'Apple' },
+            { id: 'Apple', imagem: '/DudyApp/assets/img/maça.svg', texto: 'Apple' },
             { id: '1b', imagem: '/DudyApp/assets/img/orange.svg', texto: 'Orange' },
             { id: '1c', imagem: '/DudyApp/assets/leite.svg', texto: 'Milk' }
         ],
@@ -69,7 +69,7 @@ const DADOS_ATIVIDADES = [
         opcoes: [
             { id: '3a', imagem: '/DudyApp/assets/img/morango.svg', texto: 'Water' },
             { id: '3b', imagem: '/DudyApp/assets/leite.svg', texto: 'Milk' },
-            { id: '3c', imagem: '/DudyApp/assets/img/orange.svg', texto: 'Orange' }
+            { id: 'Orange', imagem: '/DudyApp/assets/img/orange.svg', texto: 'Orange' }
         ],
         respostaCorreta: '3c'
     },
@@ -87,7 +87,7 @@ const DADOS_ATIVIDADES = [
         palavraAlvo: 'Água',
         opcoes: [
             { id: '5a', imagem: '/DudyApp/assets/pizza.svg', texto: 'Pizza' },
-            { id: '5b', imagem: '/DudyApp/assets/agua.svg', texto: 'Water' },
+            { id: 'Water', imagem: '/DudyApp/assets/agua.svg', texto: 'Water' },
             { id: '5c', imagem: '/DudyApp/assets/img/orange.svg', texto: 'Orange' }
         ],
         respostaCorreta: '5b'
