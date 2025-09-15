@@ -1,410 +1,35 @@
+/* Arquivo: css/historia-style.css (VERSÃO FINAL E LIMPA) */
+
+/* --- IMPORTAÇÃO DE FONTES --- */
+/* CORRIGIDO: Caminho absoluto para funcionar no GitHub Pages */
 @font-face {
     font-family: 'Baloo Chettan Regular';
-    src: local("☺"), url("../assets/fonts/baloo-chettan-webfont/BalooChettan-Regular.woff") format("woff");
-    font-weight: 900;
-    font-style: normal
+    src: url('/DudyApp/assets/fonts/baloo-chettan-webfont/BalooChettan-Regular.woff') format('woff');
+    font-weight: normal; /* Use 'normal' ou o peso correto, 900 é muito específico */
+    font-style: normal;
 }
 
-:root{
-    --branco:#ffff;
-    --gelo:#f1f1f1;
-    --azul:#0262FF;
-    --preto:#2a2a2a;
-    --rosa: #FF6CE7;
-    --vermelho: #F2383D;
-    --bege:#fff7f7;
-    --cinza:#4a4b5c;
-    --begeEscuro:#ebdfdf;
+/* --- VARIÁVEIS DE COR (Opcional, mas útil) --- */
+:root {
+    --bege: #fff7f7;
+    --cinza: #4a4b5c;
+    --begeEscuro: #ebdfdf;
+    --preto: #2a2a2a;
+    --verde-sucesso: #58a700;
+    --verde-borda: #4a8d00;
+    --vermelho-erro: #F2383D;
+    --verde-sair: #00BF63;
 }
 
-body{
+/* --- ESTILOS GERAIS DA PÁGINA --- */
+body {
     background-color: var(--bege);
+    font-family: 'Baloo Chettan Regular', sans-serif;
     margin: 0;
-    padding: 0;
-
+    padding: 20px;
 }
 
-.header {
-    width: 100%;
-    display: flex;
-    justify-content: center; /* Centraliza o conteúdo no topo */
-    padding-top: 25px;  
-}
-
-.header > div {
-    display: flex;
-    flex-direction: column; /* Alinha os elementos em coluna */
-    align-items: center;    /* Centraliza horizontalmente */
-    gap: 1px;              /* Espaçamento entre os elementos */
-}
-
-.books, .audios {
-    width: 150px;
-    height: 150px;
-}
-
-h4 {
-    margin: 0;
-    font-size: 24px;
-    font-family: 'Baloo Chettan Regular';
-}
-.historia {
-  width: 80%;        /* ou 100%, ou qualquer largura desejada */
-  margin: 0 auto;      /* centraliza na tela */
-  padding: 20px;       /* espaço interno */
-}
-.texto{
-    font-family: 'Baloo Chettan Regular';
-    /* cada link vira um “item” vertical com espaçamento uniforme */
-    display:flex;
-    flex-direction:column;   /* empilha os filhos */
-    gap:12px;                /* distância entre cada linha */
-  }
-  
-  /* estilo para cada link */
-.texto a, p{
-    display:block;           /* força cada <a> ocupar 100 % da linha */
-    color:var(--cinza);
-    font-weight:bold;
-    font-size:large;
-    text-decoration:none; 
-}
-/*b, a{
-    color: var(--cinza);
-    font-family: 'Baloo Chettan 2';
-    font-weight: bold;
-    font-size:large;
-    margin-bottom: auto;
-}*/
-/*.texto {
-    line-height: 2.5;
-    font-family: 'Baloo Chettan 2';
-}*/
-
-.buttons {
-    display: flex;
-    flex-direction: column;
-    margin-top: 18px;
-    align-items: center;
-}
-
-.buttons button {
-    width: 271px;
-    height: 52px;
-    border-radius: 10px;
-    margin-bottom: 30px;
-    background-color: var(--bege);
-    border: 3px solid var(--begeEscuro);
-    font-family: 'Baloo Chettan Regular';
-    color: var(--cinza);
-    font-size: 21.7px;
-    cursor: pointer;
-}
-
-/* Corrigido: aplicar apenas aos botões desabilitados */
-.buttons button:disabled {
-    color: black;
-    cursor: not-allowed;
-}
-
-#sair {
-    width: 20px; 
-    height: 35px;
-    margin-left: 10px;
-    margin-top:10px;
-    position:absolute;
-}
-
-.overlay {
-    position: fixed; /* Fixado para cobrir toda a tela */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7); /* Fundo semi-transparente */
-    display: flex; /* Para centralizar o pop-up */
-    justify-content: center; /* Centraliza horizontalmente */
-    align-items: center; /* Centraliza verticalmente */
-    
-    /* Ocultar por padrão e transição */
-    visibility: hidden;
-    opacity: 0;
-    transition: visibility 0s, opacity 0.3s ease;
-    z-index: 1000; /* Garante que fique acima de tudo */
-}
-
-/* Quando o overlay está ativo, ele se torna visível */
-.overlay.active {
-    visibility: visible;
-    opacity: 1;
-}
-
-/* Seu #pop-up original, mas removendo margin: auto; */
-#pop-up {
-    display: flex;
-    flex-direction: column;
-    background-color: white;
-    border-radius: 15px;
-    width: 314px;
-    height: 194px;
-    /* margin: auto; -- Remova esta linha, o overlay fará a centralização */
-    font-family: 'Baloo Chettan Regular';
-    align-items: center;
-    justify-content: center;
-    transform: scale(0.9); /* Opcional: Efeito de zoom */
-    transition: transform 0.3s ease; /* Transição para o efeito de zoom */
-}
-
-/* Adicione o efeito de zoom quando o overlay estiver ativo */
-.overlay.active #pop-up {
-    transform: scale(1);
-}
-
-
-h2 {
-    font-size: 21px;
-    margin: 0;
-}
-
-h3 {
-    color: #767676;
-    font-size: 18px;
-    margin: 0;
-}
-
-#group {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 15px;
-}
-
-#btnSair {
-    width: 147px;
-    height: 30px;
-    background-color: #F2383D;
-    color: white;
-    text-align: center;
-    border: #F2383D; /* Mantenha border, mas se for apenas cor, pode ser border-color */
-    border-radius: 15px;
-    cursor: pointer; /* Adicione o cursor de ponteiro */
-}
-
-#btnVoltar {
-    width: 147px;
-    height: 30px;
-    background-color: #00BF63;
-    color: white;
-    text-align: center;
-    border: #00BF63; /* Mantenha border, mas se for apenas cor, pode ser border-color */
-    border-radius: 15px;
-    cursor: pointer; /* Adicione o cursor de ponteiro */
-}
-@import url('https://fonts.googleapis.com/css2?family=Baloo+Chettan+2&family=Gelasio&display=swap');
-
-@font-face {
-    font-family: 'Baloo Chettan Regular';
-    src: local("☺"), url("../baloo-chettan-webfont/BalooChettan-Regular.woff") format("woff");
-    font-weight: 900;
-    font-style: normal
-}
-
-:root{
-    --branco:#ffff;
-    --gelo:#f1f1f1;
-    --azul:#0262FF;
-    --preto:#2a2a2a;
-    --rosa: #FF6CE7;
-    --vermelho: #F2383D;
-    --bege:#fff7f7;
-    --cinza:#4a4b5c;
-    --begeEscuro:#ebdfdf;
-}
-
-body{
-    background-color: var(--bege);
-    margin: 0;
-    padding: 0;
-
-}
-
-.header {
-    width: 100%;
-    display: flex;
-    justify-content: center; /* Centraliza o conteúdo no topo */
-    padding-top: 25px;  
-}
-
-.header > div {
-    display: flex;
-    flex-direction: column; /* Alinha os elementos em coluna */
-    align-items: center;    /* Centraliza horizontalmente */
-    gap: 1px;              /* Espaçamento entre os elementos */
-}
-
-.books, .audios {
-    width: 150px;
-    height: 150px;
-}
-
-h4 {
-    margin: 0;
-    font-size: 24px;
-    font-family: 'Baloo Chettan Regular';
-}
-.historia {
-  width: 80%;        /* ou 100%, ou qualquer largura desejada */
-  margin: 0 auto;      /* centraliza na tela */
-  padding: 20px;       /* espaço interno */
-}
-.texto{
-    font-family: 'Baloo Chettan Regular';
-    /* cada link vira um “item” vertical com espaçamento uniforme */
-    display:flex;
-    flex-direction:column;   /* empilha os filhos */
-    gap:12px;                /* distância entre cada linha */
-  }
-  
-  /* estilo para cada link */
-.texto a, p{
-    display:block;           /* força cada <a> ocupar 100 % da linha */
-    color:var(--cinza);
-    font-weight:bold;
-    font-size:large;
-    text-decoration:none; 
-}
-/*b, a{
-    color: var(--cinza);
-    font-family: 'Baloo Chettan 2';
-    font-weight: bold;
-    font-size:large;
-    margin-bottom: auto;
-}*/
-/*.texto {
-    line-height: 2.5;
-    font-family: 'Baloo Chettan 2';
-}*/
-
-.buttons {
-    display: flex;
-    flex-direction: column;
-    margin-top: 18px;
-    align-items: center;
-}
-
-.buttons button {
-    width: 271px;
-    height: 52px;
-    border-radius: 10px;
-    margin-bottom: 30px;
-    background-color: var(--bege);
-    border: 3px solid var(--begeEscuro);
-    font-family: 'Baloo Chettan Regular';
-    color: var(--cinza);
-    font-size: 21.7px;
-    cursor: pointer;
-}
-
-/* Corrigido: aplicar apenas aos botões desabilitados */
-.buttons button:disabled {
-    color: black;
-    cursor: not-allowed;
-}
-
-#sair {
-    width: 20px; 
-    height: 35px;
-    margin-left: 10px;
-    margin-top:10px;
-    position:absolute;
-}
-
-.overlay {
-    position: fixed; /* Fixado para cobrir toda a tela */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7); /* Fundo semi-transparente */
-    display: flex; /* Para centralizar o pop-up */
-    justify-content: center; /* Centraliza horizontalmente */
-    align-items: center; /* Centraliza verticalmente */
-    
-    /* Ocultar por padrão e transição */
-    visibility: hidden;
-    opacity: 0;
-    transition: visibility 0s, opacity 0.3s ease;
-    z-index: 1000; /* Garante que fique acima de tudo */
-}
-
-/* Quando o overlay está ativo, ele se torna visível */
-.overlay.active {
-    visibility: visible;
-    opacity: 1;
-}
-
-/* Seu #pop-up original, mas removendo margin: auto; */
-#pop-up {
-    display: flex;
-    flex-direction: column;
-    background-color: white;
-    border-radius: 15px;
-    width: 314px;
-    height: 194px;
-    /* margin: auto; -- Remova esta linha, o overlay fará a centralização */
-    font-family: 'Baloo Chettan Regular';
-    align-items: center;
-    justify-content: center;
-    transform: scale(0.9); /* Opcional: Efeito de zoom */
-    transition: transform 0.3s ease; /* Transição para o efeito de zoom */
-}
-
-/* Adicione o efeito de zoom quando o overlay estiver ativo */
-.overlay.active #pop-up {
-    transform: scale(1);
-}
-
-
-h2 {
-    font-size: 21px;
-    margin: 0;
-}
-
-h3 {
-    color: #767676;
-    font-size: 18px;
-    margin: 0;
-}
-
-#group {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 15px;
-}
-
-#btnSair {
-    width: 147px;
-    height: 30px;
-    background-color: #F2383D;
-    color: white;
-    text-align: center;
-    border: #F2383D; /* Mantenha border, mas se for apenas cor, pode ser border-color */
-    border-radius: 15px;
-    cursor: pointer; /* Adicione o cursor de ponteiro */
-}
-
-#btnVoltar {
-    width: 147px;
-    height: 30px;
-    background-color: #00BF63;
-    color: white;
-    text-align: center;
-    border: #00BF63; /* Mantenha border, mas se for apenas cor, pode ser border-color */
-    border-radius: 15px;
-    cursor: pointer; /* Adicione o cursor de ponteiro */
-}
-/* Adicione no final do seu historia-style.css */
+/* --- TELA DE INÍCIO (OVERLAY) --- */
 #tela-inicio-overlay {
     position: fixed;
     top: 0;
@@ -415,22 +40,191 @@ h3 {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 2000; /* Garante que fique na frente de tudo */
+    z-index: 2000;
 }
 
 #btnComecarHistoria {
-    padding: 20px 40px;
-    font-size: 24px;
-    font-family: 'Baloo Chettan 2';
+    width: 280px;
     cursor: pointer;
-    border-radius: 15px;
-    border: 3px solid var(--begeEscuro);
-    background-color: white;
+    transition: transform 0.2s ease;
 }
-/* --- NOVO: Estilos para o Modal de Conclusão da História --- */
 
+#btnComecarHistoria:hover {
+    transform: scale(1.05);
+}
+
+/* --- CABEÇALHO DA HISTÓRIA --- */
+#sair {
+    width: 20px;
+    height: 35px;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    cursor: pointer;
+}
+
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 25px;
+    margin-bottom: 20px;
+}
+
+.header > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.books {
+    width: 150px;
+    height: 150px;
+}
+
+.header h4 {
+    margin: 0;
+    font-size: 24px;
+    color: var(--preto);
+}
+
+.personagens {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.personagens span {
+    font-weight: bold;
+    font-size: 20px;
+    color: var(--preto);
+}
+
+
+/* --- DIÁLOGO DA HISTÓRIA --- */
+.historia {
+    width: 90%;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.texto p {
+    color: var(--cinza);
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+    line-height: 1.5;
+    min-height: 50px; /* Garante um espaço mínimo para o texto */
+}
+
+/* --- BOTÕES (NAVEGAÇÃO E QUIZ) --- */
+.buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px; /* Espaço entre os botões 'Anterior' e 'Avançar' se estiverem juntos */
+    margin-top: 20px;
+}
+
+.buttons button {
+    width: 271px;
+    height: 52px;
+    border-radius: 10px;
+    background-color: var(--bege);
+    border: 3px solid var(--begeEscuro);
+    font-family: 'Baloo Chettan Regular';
+    color: var(--cinza);
+    font-size: 21.7px;
+    cursor: pointer;
+}
+
+.buttons button:disabled {
+    cursor: not-allowed;
+    background-color: #cccccc;
+}
+
+
+/* --- LAYOUT DO QUIZ --- */
+.quiz-pergunta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.quiz-pergunta h4 {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 22px;
+}
+
+
+/* --- POP-UP DE SAÍDA --- */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: none; /* Alterado de 'visibility' para 'display' para simplicidade */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.overlay.active {
+    display: flex; /* Mostra o pop-up */
+}
+
+#pop-up {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 15px;
+    width: 314px;
+    height: 194px;
+    font-family: 'Baloo Chettan Regular';
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+#pop-up h2 { font-size: 21px; margin: 0; }
+#pop-up h3 { color: #767676; font-size: 18px; margin: 5px 0 0 0; }
+
+#group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+#btnSair {
+    width: 147px;
+    height: 30px;
+    background-color: var(--vermelho-erro);
+    color: white;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+#btnVoltar {
+    width: 147px;
+    height: 30px;
+    background-color: var(--verde-sair);
+    color: white;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+
+/* --- MODAL DE CONCLUSÃO (GIF) --- */
 #historia-concluida-modal {
-    display: none; /* Começa escondido */
+    display: none;
     justify-content: center;
     align-items: center;
     position: fixed;
@@ -439,7 +233,7 @@ h3 {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.7);
-    z-index: 2000;
+    z-index: 3000;
 }
 
 #historia-concluida-modal .modal-conteudo {
@@ -453,32 +247,31 @@ h3 {
 }
 
 #historia-concluida-modal #conclusao-titulo {
-    color: #58a700;
+    color: var(--verde-sucesso);
     font-size: 30px;
     margin-bottom: 20px;
-    font-family: 'Baloo Chettan Regular';
 }
 
 #historia-concluida-modal #conclusao-gif {
-    max-width: 350px;
+    max-width: 150px;
     height: auto;
     margin-bottom: 20px;
 }
 
 #historia-concluida-modal #conclusao-mensagem {
     font-size: 18px;
-    color: #4c4c4c;
+    color: var(--cinza);
     margin-bottom: 30px;
 }
 
 #historia-concluida-modal .btn-principal {
-    background-color: #58a700;
+    background-color: var(--verde-sucesso);
     color: white;
     font-size: 18px;
     font-weight: bold;
     padding: 12px 25px;
     border: none;
-    border-bottom: 4px solid #4a8d00;
+    border-bottom: 4px solid var(--verde-borda);
     border-radius: 15px;
     cursor: pointer;
     text-transform: uppercase;
