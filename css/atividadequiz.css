@@ -247,13 +247,13 @@ body {
 }
 
 #historia-concluida-modal #conclusao-titulo {
-    color: var(--verde-sucesso);
+    color: #ff7bac;
     font-size: 30px;
     margin-bottom: 20px;
 }
 
 #historia-concluida-modal #conclusao-gif {
-    max-width: 150px;
+    max-width: 350px;
     height: auto;
     margin-bottom: 20px;
 }
@@ -265,13 +265,13 @@ body {
 }
 
 #historia-concluida-modal .btn-principal {
-    background-color: var(--verde-sucesso);
+    background-color: #0056e3;
     color: white;
     font-size: 18px;
     font-weight: bold;
     padding: 12px 25px;
     border: none;
-    border-bottom: 4px solid var(--verde-borda);
+    border-bottom: 4px solid #0056e3;
     border-radius: 15px;
     cursor: pointer;
     text-transform: uppercase;
