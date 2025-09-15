@@ -164,16 +164,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- LÓGICA DE SALVAMENTO ---
+    // Arquivo: scripts/script-historia-individual.js
+
     async function salvarProgresso(jogoId, pontuacaoObtida) {
         const idEstudanteLogado = 1; // VALOR FIXO PARA TESTE
 
+        // A CORREÇÃO ESTÁ AQUI: 'estudanteJogos' agora está em minúsculas
         const { data, error } = await supabaseClient
-            .from('estudanteJogos')
+            .from('estudantejogos')
             .insert([{ 
-                idEstudante: idEstudanteLogado, 
-                idJogos: jogoId, 
-                pontuacaoObtida: pontuacaoObtida, 
-                dataRealizacao: new Date() 
+                idestudante: idEstudanteLogado, // Nomes de colunas também em minúsculas por segurança
+                idjogos: jogoId, 
+                pontuacaoobtida: pontuacaoObtida, 
+                datarealizacao: new Date() 
             }]);
 
         if (error) {
@@ -183,7 +186,6 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('Progresso da história salvo com sucesso!', data);
         }
     }
-
     // --- LÓGICA DO POP-UP ---
     sairBtnPrincipal.addEventListener('click', () => {
         popupOverlay.classList.add('active');

@@ -113,18 +113,21 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(carregarProximaAtividade, 1500); 
     }
 
+    // Arquivo: scripts/scriptAtividade.js
+
     async function salvarProgressoDaLicao() {
         const idEstudanteLogado = 1; // VALOR FIXO PARA TESTE
         const pontuacaoFinal = atividadesCorretasUnicas.length;
         const idDaLicaoComoJogo = licaoAtual.id + 100;
 
+        // A CORREÇÃO ESTÁ AQUI: 'estudanteJogos' agora está em minúsculas
         const { data, error } = await supabaseClient
-            .from('estudanteJogos')
+            .from('estudantejogos')
             .insert([{ 
-                idEstudante: idEstudanteLogado, 
-                idJogos: idDaLicaoComoJogo,
-                pontuacaoObtida: pontuacaoFinal,
-                dataRealizacao: new Date() 
+                idestudante: idEstudanteLogado, 
+                idjogos: idDaLicaoComoJogo,
+                pontuacaoobtida: pontuacaoFinal,
+                datarealizacao: new Date() 
             }]);
 
         if (error) {
@@ -133,8 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('Progresso da lição salvo com sucesso!', data);
         }
     }
-
-    // --- FUNÇÕES DE CARREGAMENTO DE EXERCÍCIOS ---
+        // --- FUNÇÕES DE CARREGAMENTO DE EXERCÍCIOS ---
 
     function carregarExercicioAssociacao(dados) {
         const perguntaEl = document.getElementById('pergunta-associacao');
