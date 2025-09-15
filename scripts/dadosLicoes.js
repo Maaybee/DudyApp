@@ -5,21 +5,21 @@ const DADOS_LICOES = [
         id: 1,
         titulo: "Lição 1: Foods",
         descricao: "Aprenda palavras e frases sobre comidas.",
-        icone: "/DudyApp/assets/img/maça.svg", // Ícone para a Lição 1
+        icone: '/DudyApp/assets/img/maça.svg', // Ícone para a Lição 1
         atividades: [1, 2, 3, 4, 5] // Sequência de 5 atividades
     },
     {
         id: 2,
         titulo: "Lição 2: Foods 2",
         descricao: "Conheça os animais.",
-        icone: "/DudyApp/assets/img/orange.svg", // Ícone para a Lição 2
+        icone: '/DudyApp/assets/img/orange.svg', // Ícone para a Lição 2
         atividades: [6, 7, 8, 9, 10] // Sequência de 5 novas atividades
     },
     {
         id: 3,
         titulo: "Lição 3: Foods 3",
         descricao: "Identifique objetos do dia a dia.",
-        icone: "/DudyApp/assets/pizza.svg", // Ícone para a Lição 3
+        icone: '/DudyApp/assets/pizza.svg', // Ícone para a Lição 3
         atividades: [11, 12, 13, 14, 15] // Sequência de 5 novas atividades
     }
 ];
