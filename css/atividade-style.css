@@ -1,8 +1,34 @@
-/* Arquivo: css/atividade-style.css */
-@import url('https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@700&display=swap');
+@font-face {
+    font-family: 'Baloo Chettan Regular';
+    src: local("☺"), url("../assets/fonts/baloo-chettan-webfont/BalooChettan-Regular.woff") format("woff");
+    font-weight: 900;
+    font-style: normal
+}
+
+@font-face {
+    font-family: 'Gelasio';
+    src: local("☺"), url("../assets/fonts/gelasio-webfont/Gelasio-Regular.woff") format("woff");
+    font-weight: 900;
+    font-style: normal
+}
+
+@font-face { 
+    font-family: 'Arimo';
+    src: local(0), url("../assets/fonts/Arimo/Arimo-Regular.ttf") format("woff");
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face { 
+    font-family: 'Arimo';
+    src: local(0), url("../assets/fonts/Arimo/Arimo-Bold.ttf") format("woff");
+    font-weight: 900;
+    font-style: normal;
+}
+
 
 body {
-    font-family: 'Baloo Chettan 2', sans-serif;
+    font-family: 'Baloo Chettan Regular';
     background-color:#FFF7F7;
     color: #4c4c4c;
     display: flex;

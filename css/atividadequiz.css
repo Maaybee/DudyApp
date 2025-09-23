@@ -1,7 +1,4 @@
-/* Arquivo: css/historia-style.css (VERSÃO FINAL E LIMPA) */
 
-/* --- IMPORTAÇÃO DE FONTES --- */
-/* CORRIGIDO: Caminho absoluto para funcionar no GitHub Pages */
 @font-face {
     font-family: 'Baloo Chettan Regular';
     src: url('/DudyApp/assets/fonts/baloo-chettan-webfont/BalooChettan-Regular.woff') format('woff');

@@ -200,26 +200,9 @@ h3 {
     border-radius: 15px;
     cursor: pointer; /* Adicione o cursor de ponteiro */
 }
-@import url('https://fonts.googleapis.com/css2?family=Baloo+Chettan+2&family=Gelasio&display=swap');
 
-@font-face {
-    font-family: 'Baloo Chettan Regular';
-    src: local("☺"), url("../baloo-chettan-webfont/BalooChettan-Regular.woff") format("woff");
-    font-weight: 900;
-    font-style: normal
-}
 
-:root{
-    --branco:#ffff;
-    --gelo:#f1f1f1;
-    --azul:#0262FF;
-    --preto:#2a2a2a;
-    --rosa: #FF6CE7;
-    --vermelho: #F2383D;
-    --bege:#fff7f7;
-    --cinza:#4a4b5c;
-    --begeEscuro:#ebdfdf;
-}
+
 
 body{
     background-color: var(--bege);
