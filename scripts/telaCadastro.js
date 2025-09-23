@@ -1,9 +1,4 @@
-// URL e chave do Supabase
-// Use estas variáveis para inicializar o cliente.
-const SUPABASE_URL = "https://jqteyocpfokvjmsrdiea.supabase.co";
-const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpxdGV5b2NwZm9rdmptc3JkaWVhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU2MTQwNDIsImV4cCI6MjA3MTE5MDA0Mn0.SNBHJgmoXVIAx6d5uDIBU2OYfzIzyZMbqcigAuoSBtA";
 
-const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 document.addEventListener("DOMContentLoaded", () => {
     const nomeInput = document.getElementById("nome");
@@ -14,39 +9,26 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnCadastro = document.getElementById("btnLogin");
     const subtitle = document.getElementById("subtitle");
 
-    
-
-    // Criar mensagem dinâmica
     const popupOverlay = document.getElementById("popupOverlay");
     const textmessage = document.getElementById("textmessage");
 
-      // Fechar popup clicando fora
+    // Fecha popup ao clicar fora
     popupOverlay.addEventListener("click", (e) => {
-        if (e.target === popupOverlay) {
-            popupOverlay.classList.remove("active");
-        }
+        if (e.target === popupOverlay) popupOverlay.classList.remove("active");
     });
 
-
-    // Mostrar/esconder senha 👁️
+    // Mostrar/ocultar senha
     mostrarSenhaImg.addEventListener("click", () => {
-        if (senhaInput.type === "password") {
-            senhaInput.type = "text";
-            confirmarInput.type = "text";
-            mostrarSenhaImg.src = "../assets/senhaAberto.svg";
-        } else {
-            senhaInput.type = "password";
-            confirmarInput.type = "password";
-            mostrarSenhaImg.src = "../assets/senhaFechado.svg";
-        }
+        const show = senhaInput.type === "password";
+        senhaInput.type = show ? "text" : "password";
+        confirmarInput.type = show ? "text" : "password";
+        mostrarSenhaImg.src = show ? "../assets/senhaAberto.svg" : "../assets/senhaFechado.svg";
     });
 
-    // Redireciona para login
     subtitle.addEventListener("click", () => {
         window.location.href = "../telas/telaLogin.html";
     });
 
-    // Lógica de Cadastro usando a autenticação do Supabase
     btnCadastro.addEventListener("click", async (e) => {
         e.preventDefault();
 
@@ -56,56 +38,46 @@ document.addEventListener("DOMContentLoaded", () => {
         const confirmarSenha = confirmarInput.value.trim();
 
         if (!nome || !email || !senha || !confirmarSenha) {
-            textmessage.style.color = "gray";
-            textmessage.style.fontSize = "20px"
-            popupOverlay.classList.add("active");
-            textmessage.textContent = "Preencha todos os campos!";
+            showPopup("Preencha todos os campos!", "gray");
             return;
         }
-
         if (senha !== confirmarSenha) {
-            textmessage.style.color = "red";
-            popupOverlay.classList.add("active");
-            textmessage.style.fontSize = "20px"
-            textmessage.textContent = "As senhas não coincidem!";
+            showPopup("As senhas não coincidem!", "red");
             return;
         }
 
         try {
-            // Usa o método signUp() para registrar o usuário
-            const { data, error } = await supabaseClient.auth.signUp({
-                email: email,
+            const { data: authData, error: authError } = await supabaseClient.auth.signUp({
+                email,
                 password: senha,
-                options: {
-                    data: { nome: nome }, // Passa o nome para o trigger
-                },
             });
+            if (authError) throw authError;
+            const userId = authData.user.id;
 
-            if (error) {
+            const { data: respData, error: insertError } = await supabaseClient
+                .from("responsavel")
+                .insert([{ id: userId, nome, email }])
+                .select("id")
+                .single();
+            if (insertError) throw insertError;
 
-                textmessage.style.color = "red";
-                popupOverlay.classList.add("active");
-                textmessage.style.fontSize = "20px"
-                textmessage.textContent = "Erro: " + error.message;
-                console.error(error);
-            } else {
-                textmessage.style.color = "green";
-                popupOverlay.classList.add("active");
-                textmessage.textContent = "Cadastro realizado! Verifique seu email.";
-                textmessage.style.fontSize = "20px"
-                console.log("Usuário cadastrado:", data);
+            localStorage.setItem("idResponsavel", respData.id);
 
-                // redireciona para tela de login
-                setTimeout(() => {
-                    window.location.href = "../telas/telaLogin.html";
-                }, 2500);
-            }
+            showPopup("Cadastro realizado! Verifique seu email.", "green");
+
+            setTimeout(() => {
+                window.location.href = "../telas/telaLogin.html";
+            }, 2500);
         } catch (err) {
-            console.error("Erro inesperado:", err);
-            textmessage.style.color = "red";
-            popupOverlay.classList.add("active");
-            textmessage.style.fontSize = "20px"
-            textmessage.textContent = "Ocorreu um erro, tente novamente.";
+            console.error(err);
+            showPopup("Erro: " + err.message, "red");
         }
     });
+
+    function showPopup(msg, color) {
+        textmessage.style.color = color;
+        textmessage.style.fontSize = "20px";
+        textmessage.textContent = msg;
+        popupOverlay.classList.add("active");
+    }
 });
