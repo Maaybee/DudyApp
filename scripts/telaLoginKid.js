@@ -1,100 +1,89 @@
-// Recupera o UUID do responsável do login
-const idResponsavel = localStorage.getItem("id");
 
-// Referência à div que vai conter os perfis
-const listaCriançasDiv = document.getElementById("listaCrianças");
+const listaCriancasDiv = document.getElementById("listaCrianças");
 
-async function carregarCrianças() {
-  if (!idResponsavel) {
-    alert("Não foi possível identificar o responsável. Faça login novamente.");
-    return;
-  }
+async function carregarCriancas() {
+    const { data: { user }, error: userError } = await supabaseClient.auth.getUser();
+    if (userError || !user) {
+        alert("Não foi possível identificar o responsável. Faça login novamente.");
+        return;
+    }
 
-  try {
-    // Busca todas as crianças do responsável
-    const { data: crianças, error } = await supabaseClient
-      .from("estudante")
-      .select("idestudante, nome, icone")
-      .eq("idresponsavel", idResponsavel);
+    // o user.id é o mesmo que responsavel.id
+    const idResponsavel = user.id;
 
-    if (error) throw error;
+    try {
+        const { data: criancas, error } = await supabaseClient
+            .from("estudante")
+            .select("idestudante, nome, icone")
+            .eq("idresponsavel", idResponsavel);
 
-    listaCriançasDiv.innerHTML = crianças.length === 0
-      ? "<p>Nenhuma criança cadastrada.</p>"
-      : "";
+        if (error) throw error;
 
-    crianças.forEach(crianca => {
-      const perfilDiv = document.createElement("div");
-      perfilDiv.classList.add("perfil_kid");
-      perfilDiv.dataset.id = crianca.idestudante;
+        listaCriancasDiv.innerHTML =
+            criancas.length === 0 ? "<p>Nenhuma criança cadastrada.</p>" : "";
 
-      const img = document.createElement("img");
-      img.src = crianca.icone || "../assets/default-kid.png";
-      img.alt = `Ícone de ${crianca.nome}`;
+        criancas.forEach((crianca) => {
+            const perfilDiv = document.createElement("div");
+            perfilDiv.classList.add("perfil_kid");
+            perfilDiv.dataset.id = crianca.idestudante;
 
-      const nomeH1 = document.createElement("h1");
-      nomeH1.textContent = crianca.nome.split(" ")[0];
+            const img = document.createElement("img");
+            img.src = crianca.icone || "../assets/default-kid.png";
+            img.alt = `Ícone de ${crianca.nome}`;
 
-      const iconeDiv = document.createElement("div");
-      iconeDiv.classList.add("icone");
-      iconeDiv.appendChild(img);
+            const nomeH1 = document.createElement("h1");
+            nomeH1.textContent = crianca.nome.split(" ")[0];
 
-      const nomeDiv = document.createElement("div");
-      nomeDiv.classList.add("nome_kid");
-      nomeDiv.appendChild(nomeH1);
+            const iconeDiv = document.createElement("div");
+            iconeDiv.classList.add("icone");
+            iconeDiv.appendChild(img);
 
-      perfilDiv.appendChild(iconeDiv);
-      perfilDiv.appendChild(nomeDiv);
+            const nomeDiv = document.createElement("div");
+            nomeDiv.classList.add("nome_kid");
+            nomeDiv.appendChild(nomeH1);
 
-      // Salva id correto da criança no clique
-      perfilDiv.addEventListener("click", () => {
-        console.log("Criança selecionada:", crianca.idestudante);
-        localStorage.setItem("criancaSelecionada", crianca.idestudante);
-        window.location.href = "../telas/telaPerfil.html";
-      });
+            perfilDiv.appendChild(iconeDiv);
+            perfilDiv.appendChild(nomeDiv);
 
-      listaCriançasDiv.appendChild(perfilDiv);
-    });
+            perfilDiv.addEventListener("click", () => {
+                localStorage.setItem("criancaSelecionada", crianca.idestudante);
+                window.location.href = "../telas/telaPerfil.html";
+            });
 
-  } catch (err) {
-    console.error("Erro ao buscar crianças:", err);
-  }
+            listaCriancasDiv.appendChild(perfilDiv);
+        });
+    } catch (err) {
+        console.error("Erro ao buscar crianças:", err);
+    }
 }
 
-document.addEventListener("DOMContentLoaded", carregarCrianças);
+document.addEventListener("DOMContentLoaded", carregarCriancas);
 
-// Funções auxiliares
-function cadastrar_redirecionamento() { 
-  window.location.href = "../telas/telaCadKid.html";
+function cadastrar_redirecionamento() {
+    window.location.href = "../telas/telaCadKid.html";
 }
 
 function abrirMenu() {
-  const menu = document.getElementById("menu");
-  if (menu.style.display === "none") { 
-    menu.style.display = "block";
-  } else { 
-    menu.style.display = "none";
-  }
+    const menu = document.getElementById("menu");
+    menu.style.display = menu.style.display === "block" ? "none" : "block";
 }
 
 function fecharMenu() {
-  document.getElementById("menu").style.display = "none";
+    document.getElementById("menu").style.display = "none";
 }
 
 async function logout() {
-  try {
-    const { error } = await supabaseClient.auth.signOut();
-    if (error) throw error;
-
-    localStorage.clear();
-    window.location.href = "../index.html";
-  } catch (err) {
-    console.error("Erro inesperado ao sair:", err);
-    alert("Ocorreu um erro. Tente novamente.");
-  }
-
+    try {
+        const { error } = await supabaseClient.auth.signOut();
+        if (error) throw error;
+        localStorage.clear();
+        window.location.href = "../index.html";
+    } catch (err) {
+        console.error("Erro ao sair:", err);
+        alert("Ocorreu um erro. Tente novamente.");
+    }
 }
 
-function direcRemoverKid (){
-  window.location.href = "../telas/removerKid.html";
+function direcRemoverKid() {
+    window.location.href = "../telas/removerKid.html";
 }
