@@ -1,0 +1,32 @@
+#sair {
+    width: 20px;
+    height: 35px;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    cursor: pointer;
+}
+
+.blocks { 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30vh;
+    width: 30vw;
+
+
+}
+
+img {
+    width: 80vw;
+    height: 80vh;
+}
+
+#jogo-memoria{ 
+    background-color: #B8E1FC;
+
+}
+
+#outro{ 
+    background-color: #00d6f7;
+}
