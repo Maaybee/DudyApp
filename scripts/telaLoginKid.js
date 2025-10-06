@@ -64,8 +64,12 @@ function cadastrar_redirecionamento() {
 }
 
 function abrirMenu() {
-    const menu = document.getElementById("menu");
-    menu.style.display = menu.style.display === "block" ? "none" : "block";
+  const menu = document.getElementById("menu");
+  if (menu.style.display === "block") { 
+    menu.style.display = "none";
+  } else { 
+    menu.style.display = "block";
+  }
 }
 
 function fecharMenu() {
