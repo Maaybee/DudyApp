@@ -11,15 +11,22 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 30vh;
-    width: 30vw;
+    height: 110px;
+    width: 110px;
+    border-radius: 20px;
 
 
 }
 
+#box-jogos { 
+    display: flex;
+    flex-direction: row;
+    float: left;
+    gap: 40px;
+}
+
 img {
-    width: 80vw;
-    height: 80vh;
+    height: 8vh;
 }
 
 #jogo-memoria{ 
@@ -29,4 +36,24 @@ img {
 
 #outro{ 
     background-color: #00d6f7;
+}
+
+.col { 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1{ 
+    margin-top: 50px;
+    font-family: 'Baloo Chettan Regular';
+    text-align: center;
+}
+
+h2{
+    font-family: 'Arimo';
+    font-size: 1rem;
+    width: 80px;
+    text-align: center;
 }
