@@ -123,7 +123,6 @@ function historia () {
     window.location.href = '../telas/indexCentrohistorias.html'; 
 }
 
-
-
-
-
+function jogos () { 
+  window.location.href = '../telas/tela_escolhaJogos.html';
+}
