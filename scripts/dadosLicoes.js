@@ -3,7 +3,7 @@
 const DADOS_LICOES = [
     {
         id: 1,
-        titulo: "Lição 1: Foods",
+        titulo: "Foods",
         descricao: "Aprenda palavras e frases sobre comidas.",
         icone: '/DudyApp/assets/img/maça.svg', // Ícone para a Lição 1
         atividades: [1, 2, 3, 4, 5] // Sequência de 5 atividades

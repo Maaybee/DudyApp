@@ -1,0 +1,155 @@
+/* css/mapa-atividades-style.css */
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@700&display=swap');
+
+body {
+    background-color: #FFF7F7;
+    font-family: 'Baloo Chettan 2', sans-serif;
+    margin: 0;
+    padding-top: 25px; /* Espaço para o header */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden; /* Evita scroll horizontal */
+}
+
+/* Estilos do Header Global */
+.header-global {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 375px; /* Largura do seu design de celular */
+    padding: 0 20px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+.header-global .text_menor {
+    font-size: 14px;
+    color: #888;
+    margin-right: auto; /* Empurra o h1 e img para o centro/direita */
+}
+
+.header-global .text_maior {
+    font-size: 28px;
+    color: #333;
+    margin-left: 10px;
+}
+
+.header-global .logo-dudy {
+    width: 50px;
+    height: 50px;
+    margin-left: auto; /* Empurra a logo para a direita */
+}
+
+.btn-voltar {
+    position: absolute; /* Posição fixa em relação ao body */
+    top: 100px; /* Ajuste conforme a altura do seu header */
+    left: 20px; /* Ajuste para a esquerda */
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    z-index: 10; /* Garante que está acima de outros elementos */
+}
+
+/* Container do Mapa */
+.mapa-container {
+    position: relative;
+    width: 100%;
+    max-width: 375px; /* Mesma largura do seu design */
+    margin-top: 20px;
+    padding-bottom: 50px; /* Espaço inferior para garantir que o último item seja visível */
+}
+
+.mapa-caminho-fundo {
+    width: 100%;
+    height: auto; /* Mantém a proporção do SVG */
+    display: block;
+}
+
+#licoes-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Permite cliques nos botões filhos */
+}
+
+.licao-ponto {
+    position: absolute;
+    pointer-events: auto; /* Reativa cliques nos botões */
+    background-color: #f7e099; /* Cor de fundo padrão, será sobrescrita */
+    border-radius: 15px; /* Bordas arredondadas como na imagem */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    min-width: 120px; /* Largura mínima do botão */
+    height: 100px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+    text-decoration: none; /* Se for um link */
+}
+
+.licao-ponto:hover {
+    transform: scale(1.05);
+}
+
+.licao-ponto .icone-licao {
+    width: 50px; /* Tamanho do ícone dentro do botão */
+    height: 50px;
+    object-fit: contain;
+    margin-bottom: 5px;
+}
+
+.licao-ponto p {
+    margin: 0;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+}
+
+/* Cores de fundo específicas para os botões (como na imagem de referência) */
+.licao-ponto.cor-1 { background-color: #F7E099; } /* Amarelo claro */
+.licao-ponto.cor-2 { background-color: #FFB3D9; } /* Rosa claro */
+.licao-ponto.cor-3 { background-color: #A0E6BA; } /* Verde claro */
+.licao-ponto.cor-4 { background-color: #F7E099; } /* Amarelo claro */
+/* Adicione mais cores se tiver mais de 4 lições para repetir o padrão */
+
+
+/* POSICIONAMENTO DOS BOTÕES NO MAPA (ESTE É O MAIS CRÍTICO!) */
+/* Você ajustará estes valores para alinhar os botões sobre o seu SVG 'Caminho_atividades.svg' */
+/* Os valores percentuais são importantes para ser mais responsivo */
+
+.licao-posicao-1 { /* The Picnic */
+    top: 15%; /* Porcentagem do topo do mapa-container */
+    left: 50%;
+    transform: translateX(-50%); /* Centraliza horizontalmente */
+}
+
+.licao-posicao-2 { /* Pizza Time */
+    top: 38%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.licao-posicao-3 { /* The Exame */
+    top: 60%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.licao-posicao-4 { /* The Vegetables */
+    top: 85%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Adicione mais classes de posição conforme o número de lições */
+/* Ex: .licao-posicao-5, .licao-posicao-6, etc. e ajuste top/left */
