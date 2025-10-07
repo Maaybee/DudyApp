@@ -1,10 +1,16 @@
+html{ 
+    margin: 0;
+}
+
 #sair {
     width: 20px;
     height: 35px;
-    position: absolute;
+    position: fixed;
     top: 20px;
     left: 20px;
     cursor: pointer;
+    margin-top: 10px;
+    margin-left: 5px;
 }
 
 .blocks { 
@@ -14,20 +20,26 @@
     height: 110px;
     width: 110px;
     border-radius: 20px;
-
+    cursor: pointer;
 
 }
 
 #box-jogos { 
     display: flex;
     flex-direction: row;
-    float: left;
+    align-items: start;
     gap: 40px;
 }
 
-img {
-    height: 8vh;
+#logo_memoria {
+    height: 9vh;
 }
+
+#embreve { 
+    height: 6vh;
+}
+
+
 
 #jogo-memoria{ 
     background-color: #B8E1FC;
@@ -35,14 +47,30 @@ img {
 }
 
 #outro{ 
-    background-color: #00d6f7;
+    background-color: #FCE5B8;
 }
 
+#outro2{ 
+    background-color: #E2B8FC;
+}
+
+#outro3{ 
+    background-color: #FCB8B8;
+}
+
+#outro4{ 
+    background-color: #B8FCC9;
+}
+
+#outro5{ 
+    background-color: #FCB8EF;
+}
 .col { 
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin: 0;
 }
 
 h1{ 
