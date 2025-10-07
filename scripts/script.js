@@ -115,7 +115,7 @@ function perfil () {
 function atividade () { 
     console.log('Botão clicado, redirecionando...');
 
-    window.location.href = '../telas/telaAtividade.html'; 
+    window.location.href = '../telas/telaMapaLicoes.html'; 
 }
 function historia () { 
     console.log('Botão clicado, redirecionando...');
