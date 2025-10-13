@@ -92,7 +92,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center; /* <<< RESTAURADO: Centraliza os itens horizontalmente */
-    gap: 20px; /* Espaço vertical entre os botões. Ajuste para combinar com seu SVG */
+    gap: 50px; /* Espaço vertical entre os botões. Ajuste para combinar com seu SVG */
     padding: 50px 0; /* Preenchimento no topo e base, sem nas laterais para centralizar */
     box-sizing: border-box;
     /* Adicione uma altura mínima se o conteúdo for muito pequeno e o caminho não aparecer */
