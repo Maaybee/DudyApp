@@ -109,8 +109,8 @@ body {
     align-items: center;
     justify-content: center;
     padding: 10px;
-    width: 186px; /* Largura do botão ajustada para centralizar melhor */
-    height: 125px; 
+    width: 156px; /* Largura do botão ajustada para centralizar melhor */
+    height: 97px; 
     border: none;
     cursor: pointer;
     transition: transform 0.2s;
