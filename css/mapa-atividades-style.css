@@ -1,34 +1,37 @@
-/* css/mapa-atividades-style.css */
+
+/* css/mapa-atividades-style.css (VERSÃO AJUSTADA PARA CENTRALIZAR LIÇÕES) */
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@700&display=swap');
 
 body {
     background-color: #FFF7F7;
     font-family: 'Baloo Chettan 2', sans-serif;
     margin: 0;
-    padding-top: 25px; /* Espaço para o header */
+    padding-top: 25px;
     display: flex;
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
-    overflow-x: hidden; /* Evita scroll horizontal */
+    overflow-x: hidden;
+    overflow-y: auto; /* Permite scroll vertical */
 }
 
-/* Estilos do Header Global */
+/* --- ESTILOS DO HEADER --- */
 .header-global {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    max-width: 375px; /* Largura do seu design de celular */
+    max-width: 375px; 
     padding: 0 20px;
     box-sizing: border-box;
     margin-bottom: 20px;
+    position: relative; /* Para o btn-voltar */
 }
 
 .header-global .text_menor {
     font-size: 14px;
     color: #888;
-    margin-right: auto; /* Empurra o h1 e img para o centro/direita */
+    margin-right: auto; 
 }
 
 .header-global .text_maior {
@@ -40,68 +43,92 @@ body {
 .header-global .logo-dudy {
     width: 50px;
     height: 50px;
-    margin-left: auto; /* Empurra a logo para a direita */
+    margin-left: auto; 
 }
 
+/* Botão de voltar ajustado */
 .btn-voltar {
-    position: absolute; /* Posição fixa em relação ao body */
-    top: 100px; /* Ajuste conforme a altura do seu header */
-    left: 20px; /* Ajuste para a esquerda */
+    position: absolute; 
+    top: 50%; /* Centraliza verticalmente com o header-global */
+    left: 20px; 
+    transform: translateY(-50%); /* Ajuste fino para centralizar */
     width: 30px;
     height: 30px;
     cursor: pointer;
-    z-index: 10; /* Garante que está acima de outros elementos */
+    z-index: 10; 
 }
 
-/* Container do Mapa */
+/* --- CONTAINER DO MAPA --- */
 .mapa-container {
     position: relative;
     width: 100%;
-    max-width: 375px; /* Mesma largura do seu design */
+    max-width: 375px; 
     margin-top: 20px;
-    padding-bottom: 50px; /* Espaço inferior para garantir que o último item seja visível */
+    padding-bottom: 50px; 
+    /* Adicione um background para depurar se o SVG não aparecer */
+    /* background-color: #e0e0e0; */ 
+    min-height: 800px; /* Ajuste esta altura conforme o comprimento do seu SVG e número de lições */
 }
 
 .mapa-caminho-fundo {
     width: 100%;
-    height: auto; /* Mantém a proporção do SVG */
+    height: auto; 
     display: block;
-}
-
-#licoes-container {
-    position: absolute;
+    position: absolute; 
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none; /* Permite cliques nos botões filhos */
+    z-index: 1; /* Fica atrás dos botões */
+    /* Se o seu SVG for longo e você quiser que ele role junto com o conteúdo, */
+    /* considere usar background-image no body ou mapa-container com repeat-y */
+    /* ou certifique-se que o 'min-height' do mapa-container é suficiente para o SVG completo */
 }
 
+/* --- CORREÇÃO PRINCIPAL: CENTRALIZANDO AS LIÇÕES NOVAMENTE --- */
+
+/* Container que organiza os botões das lições */
+#licoes-container {
+    position: relative; 
+    z-index: 2; /* Garante que os botões fiquem na frente do caminho */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* <<< RESTAURADO: Centraliza os itens horizontalmente */
+    gap: 80px; /* Espaço vertical entre os botões. Ajuste para combinar com seu SVG */
+    padding: 50px 0; /* Preenchimento no topo e base, sem nas laterais para centralizar */
+    box-sizing: border-box;
+    /* Adicione uma altura mínima se o conteúdo for muito pequeno e o caminho não aparecer */
+    min-height: calc(100% - 100px); /* Exemplo: Altura mínima para o container de lições */
+}
+
+/* Estilo do botão da lição */
 .licao-ponto {
-    position: absolute;
-    pointer-events: auto; /* Reativa cliques nos botões */
-    background-color: #f7e099; /* Cor de fundo padrão, será sobrescrita */
-    border-radius: 15px; /* Bordas arredondadas como na imagem */
+    background-color: #f7e099;
+    border-radius: 20px; 
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 10px;
-    min-width: 120px; /* Largura mínima do botão */
-    height: 100px;
+    width: 150px; /* Largura do botão ajustada para centralizar melhor */
+    height: 100px; 
     border: none;
     cursor: pointer;
-    transition: transform 0.2s, background-color 0.2s;
-    text-decoration: none; /* Se for um link */
+    transition: transform 0.2s;
+    text-decoration: none;
 }
 
 .licao-ponto:hover {
     transform: scale(1.05);
 }
 
+/* --- REMOVIDAS AS REGRAS DE NTH-CHILD PARA POSICIONAMENTO LATERAL --- */
+/* .licao-ponto:nth-child(odd) { align-self: flex-start; } */
+/* .licao-ponto:nth-child(even) { align-self: flex-end; } */
+/* --- FIM DA CORREÇÃO --- */
+
+
 .licao-ponto .icone-licao {
-    width: 50px; /* Tamanho do ícone dentro do botão */
+    width: 50px;
     height: 50px;
     object-fit: contain;
     margin-bottom: 5px;
@@ -109,47 +136,15 @@ body {
 
 .licao-ponto p {
     margin: 0;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: bold;
     color: #333;
     text-align: center;
+    line-height: 1.2;
 }
 
-/* Cores de fundo específicas para os botões (como na imagem de referência) */
+/* Cores de fundo específicas */
 .licao-ponto.cor-1 { background-color: #F7E099; } /* Amarelo claro */
 .licao-ponto.cor-2 { background-color: #FFB3D9; } /* Rosa claro */
 .licao-ponto.cor-3 { background-color: #A0E6BA; } /* Verde claro */
-.licao-ponto.cor-4 { background-color: #F7E099; } /* Amarelo claro */
-/* Adicione mais cores se tiver mais de 4 lições para repetir o padrão */
-
-
-/* POSICIONAMENTO DOS BOTÕES NO MAPA (ESTE É O MAIS CRÍTICO!) */
-/* Você ajustará estes valores para alinhar os botões sobre o seu SVG 'Caminho_atividades.svg' */
-/* Os valores percentuais são importantes para ser mais responsivo */
-
-.licao-posicao-1 { /* The Picnic */
-    top: 15%; /* Porcentagem do topo do mapa-container */
-    left: 50%;
-    transform: translateX(-50%); /* Centraliza horizontalmente */
-}
-
-.licao-posicao-2 { /* Pizza Time */
-    top: 38%;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.licao-posicao-3 { /* The Exame */
-    top: 60%;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.licao-posicao-4 { /* The Vegetables */
-    top: 85%;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-/* Adicione mais classes de posição conforme o número de lições */
-/* Ex: .licao-posicao-5, .licao-posicao-6, etc. e ajuste top/left */
+.licao-ponto.cor-4 { background-color: #F7E099; } /* Amarelo claro - repetindo */
