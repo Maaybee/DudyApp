@@ -10,14 +10,21 @@ const DADOS_LICOES = [
     },
     {
         id: 2,
-        titulo: "Lição 2: Foods 2",
+        titulo: "Foods 2",
         descricao: "Conheça os animais.",
         icone: '/DudyApp/assets/img/orange.svg', // Ícone para a Lição 2
         atividades: [6, 7, 8, 9, 10] // Sequência de 5 novas atividades
     },
     {
         id: 3,
-        titulo: "Lição 3: Foods 3",
+        titulo: "Foods 3",
+        descricao: "Identifique objetos do dia a dia.",
+        icone: '/DudyApp/assets/pizza.svg', // Ícone para a Lição 3
+        atividades: [11, 12, 13, 14, 15] // Sequência de 5 novas atividades
+    },
+    {
+        id: 4,
+        titulo: "Foods 3",
         descricao: "Identifique objetos do dia a dia.",
         icone: '/DudyApp/assets/pizza.svg', // Ícone para a Lição 3
         atividades: [11, 12, 13, 14, 15] // Sequência de 5 novas atividades
