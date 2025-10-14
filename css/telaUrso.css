@@ -1,0 +1,18 @@
+#titulo{ 
+    font-family: 'Baloo Chettan Regular';
+    margin: 0 auto;
+}
+#tutorial{ 
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    color: white;
+    font-family: 'Baloo Chettan Regular';
+    background-color: #0262FF ;
+    width: 314px;
+    height: 140px;
+    border-radius: 15px;
+    margin: 0 auto;
+    align-items: center;
+
+}

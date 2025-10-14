@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela Urso</title>
+    <link rel="stylesheet" href="../css/telaUrso.css">
+
+</head>
+<body>
+    <div id="telaUrso" class="col-itens2 center">
+        <h2 id="titulo">Dudy Toy</h2>
+
+        <div id="tutorial" class="col-itens3">
+            <h3> Assistir Tutorial</h3>
+        </div>
+
+        <div id="row"> 
+            <div id="collum"> 
+                <div id="quadradoRoxo" class="quadrados"> 
+                    <img src="../assets/balaoChat.png" alt="Balao Chat" class="imgSquare">
+                </div>
+                <div id="quadradoRosa" class="quadrados"> 
+                    <img src="../assets/medalha.png" class="imgSquare"> 
+                </div>
+            </div>
+            <div id="collum"> 
+                <div id="collum2"> 
+                    <h3 id="palavras-texto">0/220</h3>
+                    <h5>Palavras faladas</h5>
+                </div>
+                <div id="collum2"> 
+                    <h3 id="medalhas-texto">0/14</h3 >
+                    <h5>Medalhas da semana</h5>
+                </div>
+            </div>
+        </div>
+
+        <button id="convidar"> Convide um amigo! </button>  
+    
+        <div id="texto">
+            <h6>Conhece algum amigo que gostaria de</h6>
+            <h6>aprender um novo idioma? <span style="font-weight: 900;">Convide-o</span> </h6>
+            <h6><span style="font-weight:900;">pro DudyApp</span> para conseguir novas </h6>
+            <h6>oportunidades </h6>
+            <h6><span style="font-weight:900;">Spread knowledge!</span> </h6>
+        </div>
+
+        <div class="menu"> 
+            <div class="btnsMenu"> 
+                <div class="btnMenuRow"> 
+                    <button class="btnMenu" id="btnHomeHome" onclick="home()"> 
+                        <img src="../assets/home.png" alt="MenuHome"> 
+                    </button>
+                </div>
+                <div class="btnMenuRow"> 
+                    <button class="btnMenu" id="btnPerfilHome" onclick="perfil()"> 
+                        <img src="../assets/perfil.png" alt="MenuPrática" id="fotoPerfil"> 
+                    </button>
+                </div>
+                <div class="btnMenuRow"> 
+                    <button class="btnMenu" id="btnToyHome"> 
+                        <img src="../assets/toy.png" alt="MenuToy">
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="menu"> 
+        <div id="sair"> 
+            <img src="../assets/ci_close-sm.svg" onclick="fecharMenu()"> 
+        </div>
+        <div id="options"> 
+            <h3 onclick="logout()"> Sair da conta </h3>
+            <h3 id="removerCriança" onclick="trocarPerfil ()"> Trocar Perfil </h3>
+            <h3> Suporte </h3>
+        </div>
+
+    </div>
+
+        
+</body>
+<!-- Lib do Supabase -->
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+
+<!-- Seu arquivo de configuração (cria o cliente) -->
+<script src="../scripts/supabaseConfig.js"></script>
+
+<!-- Seu JS desta página -->
+<script src="../scripts/telaPerfil.js"></script>
+
+</html>

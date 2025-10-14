@@ -1,92 +1,64 @@
-/* css/mapa-atividades-style.css (VERSÃO PARA ROLAGEM DO CONTEÚDO INTEIRO) */
+/* css/mapa-atividades-style.css (VERSÃO DEFINITIVA) */
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@700&display=swap');
 
-html, body {
-    height: 100vh; /* Ocupa 100% da altura da tela */
-    margin: 0;
-    padding: 0;
-    overflow: hidden; /* Impede a rolagem no body/html */
+html {
+    scroll-behavior: smooth;
 }
 
 body {
-    background-color: #FFF7F7; /* Cor de fundo principal sólida */
+    background-color: #FFF7F7;
     font-family: 'Baloo Chettan 2', sans-serif;
-    display: flex;
-    flex-direction: column; /* Organiza header e mapa-container em coluna */
-    align-items: center; /* Centraliza o conteúdo principal horizontalmente */
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Impede a rolagem horizontal */
 }
 
-/* --- HEADER FIXO NO TOPO --- */
+/* --- HEADER FIXO --- */
 .main-header {
     width: 100%;
-    max-width: 400px; /* Largura máxima do design */
-    background-color: #FFF7F7; /* Fundo sólido para o cabeçalho */
-    padding: 25px 20px 15px;
+    background-color: #FFF7F7;
+    padding: 15px 10px;
     box-sizing: border-box;
     display: flex;
     align-items: center;
-    flex-shrink: 0; /* Impede o header de encolher na rolagem */
-    z-index: 100; /* Garante que o header esteja sempre por cima */
+    position: sticky; /* Fica fixo no topo da tela enquanto o usuário rola */
+    top: 0;
+    z-index: 100;
 }
 
-/* --- ESTILOS DOS ELEMENTOS DO HEADER --- */
-.main-header .btn-voltar { width: 30px; height: 30px; cursor: pointer; margin-right: 20px; }
-.main-header .header-content { flex-grow: 1; display: flex; align-items: center; justify-content: center; text-align: center; margin: 0 10px; }
+.main-header .btn-voltar { width: 30px; cursor: pointer; margin: 0 10px; }
+.main-header .header-content { flex-grow: 1; text-align: center; }
 .main-header .text_menor { margin: 0; font-size: 14px; color: #888; }
 .main-header .text_maior { margin: 0; font-size: 28px; color: #333; }
-.main-header .logo-dudy { width: 50px; height: 50px; margin-left: auto; }
+.main-header .logo-dudy { width: 50px; height: 50px; margin: 0 10px; }
 
-
-/* --- CONTAINER DO MAPA (COM FUNDO DO CAMINHO E ROLAGEM) --- */
+/* --- MAPA --- */
 .mapa-container {
+    position: relative; /* Container pai para o posicionamento absoluto */
     width: 100%;
-    max-width: 400px; /* Largura máxima do design */
-    flex-grow: 1; /* Ocupa o espaço restante verticalmente na tela */
-    overflow-y: auto; /* AQUI ESTÁ A ROLAGEM PRINCIPAL PARA TODO O MAPA */
-    position: relative; /* Para posicionar lições e cenário */
-
-    /* AQUI É ONDE O SEU SVG DO CAMINHO VAI ENTRAR COMO BACKGROUND */
-    background-image: url('/DudyApp/assets/caminhocompleto.svg');
-    background-size: 100% auto; /* Ajusta a largura para 100% e altura automática. MUITO IMPORTANTE! */
-    background-position: top center;
-    background-repeat: no-repeat; /* Não repete se o SVG for longo */
-
-    /* AJUSTE ESTA ALTURA: Deve ser a altura total do seu SVG de caminho para 20 lições */
-    /* Se 4 lições visíveis por tela, e sua tela tem ~600px de altura útil, então para 20 lições
-       seriam 5 "telas" de altura. Então 5 * 600px = 3000px. Adicione um pouco mais para margem. */
-    min-height: 3500px; /* VALOR CRÍTICO A SER AJUSTADO à altura do seu SVG */
-    padding-top: 50px; /* Espaço do topo antes da primeira lição */
-    padding-bottom: 50px; /* Espaço para a última lição */
-    box-sizing: border-box;
+    max-width: 450px; /* Largura máxima do mapa */
+    margin: 0 auto; /* Centraliza o mapa na página */
 }
 
-/* --- OBJETOS DE CENÁRIO (Caixas de Correio, Grama, etc.) --- */
-.mailbox {
-    position: absolute;
-    width: 60px; /* Ajuste o tamanho */
-    height: auto;
-    z-index: 5; /* Fica acima do caminho, mas abaixo das lições */
+/* Imagem do caminho gigante */
+.mapa-caminho-fundo {
+    width: 100%;
+    height: auto; /* A altura se ajusta à proporção da imagem */
+    display: block;
 }
-.mail-1 { top: 10%; left: 10%; } /* Posição da primeira caixa de correio */
-.mail-2 { top: 30%; right: 15%; } /* Posição da segunda caixa de correio */
-/* Adicione mais classes e posições para outros elementos de cenário */
 
-
-/* --- CONTAINER QUE VAI RECEBER AS LIÇÕES (SE MOVERÁ COM O FUNDO) --- */
+/* Container que segura os botões das lições */
 #licoes-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center; 
-    /* AJUSTE ESTE 'gap' para que os botões se alinhem com as curvas do seu SVG */
-    gap: 150px; /* VALOR CRÍTICO A SER AJUSTADO */
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    position: relative; /* Para garantir o z-index */
-    z-index: 10; /* Fica acima dos elementos de cenário e do background */
-    /* Não precisa de padding aqui, o padding do mapa-container já resolve */
+    height: 100%;
 }
 
-/* --- ESTILOS DOS BOTÕES DAS LIÇÕES --- */
+/* Estilo do botão da lição */
 .licao-ponto {
+    position: absolute; /* POSIÇÃO ABSOLUTA, controlada pelo JavaScript */
     background-color: #f7e099;
     border-radius: 20px; 
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
@@ -95,7 +67,7 @@ body {
     align-items: center;
     justify-content: center;
     padding: 10px;
-    width: 150px; 
+    width: 140px; 
     height: 100px; 
     border: none;
     cursor: pointer;
@@ -106,7 +78,7 @@ body {
 .licao-ponto .icone-licao { width: 50px; height: 50px; object-fit: contain; margin-bottom: 5px; }
 .licao-ponto p { margin: 0; font-size: 16px; font-weight: bold; color: #333; text-align: center; }
 
-/* Cores de fundo específicas para os botões */
+/* Cores dos botões */
 .licao-ponto.cor-1 { background-color: #F7E099; }
 .licao-ponto.cor-2 { background-color: #FFB3D9; }
 .licao-ponto.cor-3 { background-color: #A0E6BA; }

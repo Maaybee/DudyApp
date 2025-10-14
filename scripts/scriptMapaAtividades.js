@@ -1,24 +1,43 @@
-// scripts/scriptMapaAtividades.js (MANTÉM A VERSÃO ANTERIOR)
+// Arquivo: scripts/scriptMapaAtividades.js (VERSÃO DEFINITIVA)
 
 document.addEventListener('DOMContentLoaded', () => {
     const licoesContainer = document.getElementById('licoes-container');
     const btnVoltar = document.querySelector('.btn-voltar');
 
-    const coresBotoes = ['cor-1', 'cor-2', 'cor-3', 'cor-4', 'cor-1', 'cor-2']; 
+    // --- POSIÇÕES DAS LIÇÕES ---
+    // Cada objeto {top, left} define a posição de uma lição no mapa.
+    // 'top' é a distância do topo (em %), 'left' é a distância da esquerda (em %).
+    // Você vai precisar ajustar esses valores para alinhar com o seu SVG.
+    const posicoes = [
+        { top: '8%',  left: '50%' },   // Posição da Lição 1
+        { top: '22%', left: '50%' },   // Posição da Lição 2
+        { top: '36%', left: '50%' },   // Posição da Lição 3
+        { top: '50%', left: '50%' },   // Posição da Lição 4
+        { top: '64%', left: '50%' },   // Posição da Lição 5
+        { top: '78%', left: '50%' },   // Posição da Lição 6
+        { top: '92%', left: '50%' }    // Posição da Lição 7
+        // Adicione mais posições para suas 20 lições...
+    ];
+
+    const coresBotoes = ['cor-1', 'cor-2', 'cor-3', 'cor-4'];
 
     DADOS_LICOES.forEach((licao, index) => {
+        if (!posicoes[index]) return; // Não cria botão se não houver posição definida
+
         const botao = document.createElement('button');
-        
-        // Adiciona as classes para estilo e cor
-        // Remova a classe 'licao-pos-${index}' se ainda estiver lá do teste anterior
-        botao.className = `licao-ponto ${coresBotoes[index % coresBotoes.length]}`; 
-        botao.dataset.licaoId = licao.id; 
+        botao.className = `licao-ponto ${coresBotoes[index % coresBotoes.length]}`;
+        botao.dataset.licaoId = licao.id;
+
+        // Aplica o estilo de posição
+        const pos = posicoes[index];
+        botao.style.top = pos.top;
+        botao.style.left = pos.left;
+        botao.style.transform = 'translateX(-50%)'; // Truque para centralizar horizontalmente
 
         const icone = document.createElement('img');
         icone.src = licao.icone;
-        icone.alt = `Ícone da ${licao.titulo}`;
         icone.className = 'icone-licao';
-
+        
         const titulo = document.createElement('p');
         titulo.textContent = licao.titulo;
 
@@ -26,12 +45,12 @@ document.addEventListener('DOMContentLoaded', () => {
         botao.appendChild(titulo);
 
         botao.addEventListener('click', () => {
-            localStorage.setItem('licaoAtivaId', licao.id);
-            window.location.href = `telaAtividade.html?licaoId=${licao.id}`;
+            window.location.href = `atividade.html?licaoId=${licao.id}`;
         });
-
+        
         licoesContainer.appendChild(botao);
     });
+
 });
 const sairImg = document.getElementById('sair');
 
