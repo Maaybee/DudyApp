@@ -46,7 +46,7 @@ body {
     position: relative; /* Para posicionar lições e cenário */
 
     /* AQUI É ONDE O SEU SVG DO CAMINHO VAI ENTRAR COMO BACKGROUND */
-    background-image: url('/DudyApp/assets/img/Caminho_atividades.svg');
+    background-image: url('/DudyApp/assets/caminhocompleto.svg');
     background-size: 100% auto; /* Ajusta a largura para 100% e altura automática. MUITO IMPORTANTE! */
     background-position: top center;
     background-repeat: no-repeat; /* Não repete se o SVG for longo */
