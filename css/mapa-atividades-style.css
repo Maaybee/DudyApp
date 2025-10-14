@@ -1,109 +1,90 @@
-/* css/mapa-atividades-style.css (VERSÃO AJUSTADA COM SVG COMO BACKGROUND) */
+/* css/mapa-atividades-style.css (VERSÃO FINAL) */
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@700&display=swap');
 
 html, body {
-    height: 100%; /* HTML e Body ocupam 100% da altura da viewport */
+    height: 100%;
     margin: 0;
     padding: 0;
+    overflow: hidden; /* Impede a rolagem no body */
 }
 
 body {
     background-color: #FFF7F7;
     font-family: 'Baloo Chettan 2', sans-serif;
     display: flex;
-    flex-direction: column; /* Organiza header e scroll-wrapper em coluna */
-    align-items: center; /* Centraliza o conteúdo principal horizontalmente */
-    overflow: hidden; /* Evita que o body tenha sua própria barra de rolagem */
+    flex-direction: column;
+    align-items: center;
 }
 
-/* --- HEADER FIXO NO TOPO --- */
+/* --- HEADER FIXO --- */
 .main-header {
     width: 100%;
-    max-width: 375px; /* Largura do seu design de celular */
-    background-color: #FFF7F7; /* Cor de fundo para o header */
-    padding: 25px 20px 20px; /* Padding no topo para 'Dudy Academy' e no final */
+    max-width: 400px;
+    background-color: #FFF7F7;
+    padding: 25px 20px 15px;
     box-sizing: border-box;
     display: flex;
     align-items: center;
-    justify-content: flex-start; /* Alinha o botão de voltar no início */
-    position: sticky; /* Fixa o header no topo da rolagem */
-    top: 0;
-    z-index: 100; /* Garante que o header esteja sempre por cima */
+    z-index: 100;
 }
 
 .main-header .btn-voltar {
     width: 30px;
     height: 30px;
     cursor: pointer;
-    margin-right: 20px; /* Espaçamento entre o botão de voltar e o texto */
 }
 
 .main-header .header-content {
-    flex-grow: 1; /* Permite que o conteúdo do header ocupe o espaço restante */
+    flex-grow: 1;
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Espaçamento entre os elementos do header */
+    justify-content: center;
+    text-align: center;
+    margin: 0 10px;
 }
 
-.main-header .text_menor {
-    font-size: 14px;
-    color: #888;
-    margin: 0; /* Remove margem padrão */
-}
+.main-header .text_menor { font-size: 14px; color: #888; margin: 0; }
+.main-header .text_maior { font-size: 28px; color: #333; margin: 0; }
+.main-header .logo-dudy { width: 50px; height: 50px; }
 
-.main-header .text_maior {
-    font-size: 28px;
-    color: #333;
-    margin: 0 10px; /* Margem entre 'Dudy Academy' e 'Atividades' */
-    white-space: nowrap; /* Evita que o título quebre */
-}
-
-.main-header .logo-dudy {
-    width: 50px;
-    height: 50px;
-    margin-left: auto; /* Empurra a logo para a direita */
-}
-
-/* --- CONTAINER QUE IRÁ ROLAR (TODO O CONTEÚDO DO MAPA) --- */
+/* --- CONTAINER DE ROLAGEM --- */
 .scroll-wrapper {
     width: 100%;
-    max-width: 375px; /* Mantém a largura do design */
-    flex-grow: 1; /* Ocupa o espaço restante verticalmente */
+    max-width: 400px;
+    flex-grow: 1;
     overflow-y: auto; /* ATIVA A ROLAGEM AQUI */
-    -webkit-overflow-scrolling: touch; /* Melhora a rolagem em iOS */
-    position: relative; /* Para posicionar o mapa-container dentro dele */
-    padding-top: 20px; /* Espaço entre o header e o primeiro botão */
+    position: relative;
 }
 
-/* --- CONTAINER DO MAPA (AGORA COM O SVG COMO BACKGROUND) --- */
+/* --- MAPA --- */
 .mapa-container {
     position: relative;
-    width: 100%; /* Ocupa a largura total do scroll-wrapper */
-    min-height: 2000px; /* AJUSTE ESTA ALTURA. Deve ser a altura do seu SVG completo, ou um valor alto o suficiente para as 20 lições */
-    padding-bottom: 50px; 
-    
-    /* AQUI É ONDE O SEU SVG DO CAMINHO VAI ENTRAR COMO BACKGROUND */
-    background-image: url('/DudyApp/assets/img/Caminho_atividades.svg');
-    background-size: contain; /* Faz o SVG se ajustar à largura do container */
-    background-repeat: no-repeat; /* Não repete se for um SVG longo */
-    background-position: center top; /* Centraliza o SVG no topo */
+    width: 100%;
+}
+
+.mapa-caminho-fundo {
+    width: 100%;
+    height: auto;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1; /* Atrás dos botões */
 }
 
 #licoes-container {
     position: relative; 
-    z-index: 2; /* Garante que os botões fiquem na frente do caminho */
+    z-index: 2; /* Na frente do caminho */
     display: flex;
     flex-direction: column;
-    align-items: center; 
-    /* AJUSTE ESTE 'gap' para que os botões se alinhem com as curvas do seu SVG */
-    /* Ex: Se 4 lições por tela (aprox. 600px de altura), e cada botão tem 100px, 
-       então (600 - 4*100) / 3 = 200px. Um bom chute seria uns 150-200px */
-    gap: 150px; /* VALOR A SER AJUSTADO */
-    padding: 50px 0; /* Padding no topo e base para as primeiras/últimas lições */
+    align-items: center;
+    gap: 150px; /* IMPORTANTE: Ajuste este valor para alinhar com seu SVG */
+    padding: 100px 0;
     box-sizing: border-box;
-    width: 100%; /* Ocupa a largura total para centralizar os itens */
+    width: 100%;
 }
 
+/* --- BOTÕES DAS LIÇÕES --- */
 .licao-ponto {
     background-color: #f7e099;
     border-radius: 20px; 
@@ -118,7 +99,6 @@ body {
     border: none;
     cursor: pointer;
     transition: transform 0.2s;
-    text-decoration: none;
 }
 
 .licao-ponto:hover {
@@ -138,11 +118,10 @@ body {
     font-weight: bold;
     color: #333;
     text-align: center;
-    line-height: 1.2;
 }
 
-/* Cores de fundo específicas */
-.licao-ponto.cor-1 { background-color: #F7E099; } /* Amarelo claro */
-.licao-ponto.cor-2 { background-color: #FFB3D9; } /* Rosa claro */
-.licao-ponto.cor-3 { background-color: #A0E6BA; } /* Verde claro */
-.licao-ponto.cor-4 { background-color: #F7E099; } /* Amarelo claro - repetindo */
+/* Cores dos botões */
+.licao-ponto.cor-1 { background-color: #F7E099; }
+.licao-ponto.cor-2 { background-color: #FFB3D9; }
+.licao-ponto.cor-3 { background-color: #A0E6BA; }
+.licao-ponto.cor-4 { background-color: #F7E099; }
