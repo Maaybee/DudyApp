@@ -1,4 +1,43 @@
-#titulo{ 
+@font-face {
+    font-family: 'Baloo Chettan Regular';
+    src: local("☺"), url("../assets/fonts/baloo-chettan-webfont/BalooChettan-Regular.woff") format("woff");
+    font-weight: 900;
+    font-style: normal
+}
+
+@font-face {
+    font-family: 'Gelasio';
+    src: local("☺"), url("../assets/fonts/gelasio-webfont/Gelasio-Regular.woff") format("woff");
+    font-weight: 900;
+    font-style: normal
+}
+
+@font-face { 
+    font-family: 'Arimo';
+    src: local(0), url("../assets/fonts/Arimo/Arimo-Regular.ttf") format("woff");
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face { 
+    font-family: 'Arimo';
+    src: local(0), url("../assets/fonts/Arimo/Arimo-Bold.ttf") format("woff");
+    font-weight: 900;
+    font-style: normal;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    margin-top: 10px;
+    margin-bottom: 50px;
+    display: flex;
+    justify-content: center;
+    background-color: #FFF7F7;
+
+}#titulo{ 
     font-family: 'Baloo Chettan Regular';
     margin: 0 auto;
 }

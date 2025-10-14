@@ -102,7 +102,7 @@ function urso() {
     
     console.log('Botão clicado, redirecionando...');
 
-    window.location.href = '../telas/telaUrso.html'; 
+    window.location.href = '../telas/tel.html'; 
 };
 
 function abrirMenu() {
