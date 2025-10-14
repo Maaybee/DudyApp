@@ -68,7 +68,7 @@ body {
     padding-top: 20px; /* Adiciona um padding no topo do mapa, abaixo do header */
 
     /* AQUI ESTÁ O SEU SVG DO CAMINHO COMO BACKGROUND */
-    background-image: url('/DudyApp/assets/img/Caminho_atividades.svg');
+    background-image: url('/DudyApp/assets/img/caminhocompleto.svg');
     background-size: cover; /* Ajusta a imagem para cobrir o container, pode cortar bordas */
     /* Alternativa: background-size: 100% auto; para cobrir a largura e manter proporção */
     background-position: top center;
