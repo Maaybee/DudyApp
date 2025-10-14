@@ -116,19 +116,19 @@ function atividade () {
     console.log('Botão clicado, redirecionando...');
 
     window.location.href = '../telas/telaMapaLicoes.html'; 
-}
+};
 function historia () { 
     console.log('Botão clicado, redirecionando...');
 
     window.location.href = '../telas/indexCentrohistorias.html'; 
-}
+};
 
 function jogos () { 
   window.location.href = '../telas/tela_escolhaJogos.html';
-}
+};
 function urso () { 
     console.log('Botão clicado, redirecionando...');
 
     window.location.href = '../telas/telaUrso.html'; 
-}
+};
 
