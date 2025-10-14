@@ -1,89 +1,88 @@
-/* css/mapa-atividades-style.css (VERSÃO REVISADA PARA ÚNICO BACKGROUND SVG) */
+/* css/mapa-atividades-style.css (VERSÃO PARA ROLAGEM DO CONTEÚDO INTEIRO) */
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@700&display=swap');
 
 html, body {
     height: 100vh; /* Ocupa 100% da altura da tela */
     margin: 0;
     padding: 0;
-    overflow: hidden; /* Impede a rolagem no body */
+    overflow: hidden; /* Impede a rolagem no body/html */
 }
 
 body {
-    background-color: #FFF7F7; /* Apenas uma cor sólida para o fundo do body */
+    background-color: #FFF7F7; /* Cor de fundo principal sólida */
     font-family: 'Baloo Chettan 2', sans-serif;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: column; /* Organiza header e mapa-container em coluna */
+    align-items: center; /* Centraliza o conteúdo principal horizontalmente */
 }
 
 /* --- HEADER FIXO NO TOPO --- */
 .main-header {
     width: 100%;
-    max-width: 400px;
-    background-color: #FFF7F7; /* Fundo sólido para cobrir o que rola por baixo */
+    max-width: 400px; /* Largura máxima do design */
+    background-color: #FFF7F7; /* Fundo sólido para o cabeçalho */
     padding: 25px 20px 15px;
     box-sizing: border-box;
     display: flex;
     align-items: center;
-    flex-shrink: 0; /* Impede o header de encolher */
+    flex-shrink: 0; /* Impede o header de encolher na rolagem */
     z-index: 100; /* Garante que o header esteja sempre por cima */
 }
 
 /* --- ESTILOS DOS ELEMENTOS DO HEADER --- */
-.main-header .btn-voltar {
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
-    margin-right: 20px; /* Espaçamento entre o botão de voltar e o texto */
-    /* Garanta que o caminho do SVG '/DudyApp/assets/sair.svg' está correto */
-}
-
-.main-header .header-content {
-    flex-grow: 1; /* Permite que o conteúdo do header ocupe o espaço restante */
-    display: flex;
-    align-items: center;
-    justify-content: center; /* Centraliza "Dudy Academy" e "Atividades" */
-    text-align: center;
-    margin: 0 10px;
-}
-
-.main-header .text_menor { font-size: 14px; color: #888; margin: 0; }
-.main-header .text_maior { font-size: 28px; color: #333; margin: 0; }
-
-.main-header .logo-dudy {
-    width: 50px;
-    height: 50px;
-    margin-left: auto; /* Empurra a logo para a direita */
-    /* Garanta que o caminho do SVG '/DudyApp/assets/img/logo.png' está correto */
-}
+.main-header .btn-voltar { width: 30px; height: 30px; cursor: pointer; margin-right: 20px; }
+.main-header .header-content { flex-grow: 1; display: flex; align-items: center; justify-content: center; text-align: center; margin: 0 10px; }
+.main-header .text_menor { margin: 0; font-size: 14px; color: #888; }
+.main-header .text_maior { margin: 0; font-size: 28px; color: #333; }
+.main-header .logo-dudy { width: 50px; height: 50px; margin-left: auto; }
 
 
-/* --- CONTAINER DO MAPA (COM ROLAGEM E IMAGEM DE FUNDO DO CAMINHO) --- */
+/* --- CONTAINER DO MAPA (COM FUNDO DO CAMINHO E ROLAGEM) --- */
 .mapa-container {
     width: 100%;
-    max-width: 400px;
-    flex-grow: 1; /* Ocupa o espaço restante na tela */
-    overflow-y: auto; /* ATIVA A ROLAGEM VERTICAL */
-    position: relative;
-    padding-top: 20px; /* Adiciona um padding no topo do mapa, abaixo do header */
+    max-width: 400px; /* Largura máxima do design */
+    flex-grow: 1; /* Ocupa o espaço restante verticalmente na tela */
+    overflow-y: auto; /* AQUI ESTÁ A ROLAGEM PRINCIPAL PARA TODO O MAPA */
+    position: relative; /* Para posicionar lições e cenário */
 
-    /* AQUI ESTÁ O SEU SVG DO CAMINHO COMO BACKGROUND */
-    background-image: url('/DudyApp/assets/caminhocompleto.svg');
-    background-size: cover; /* Ajusta a imagem para cobrir o container, pode cortar bordas */
-    /* Alternativa: background-size: 100% auto; para cobrir a largura e manter proporção */
+    /* AQUI É ONDE O SEU SVG DO CAMINHO VAI ENTRAR COMO BACKGROUND */
+    background-image: url('/DudyApp/assets/img/Caminho_atividades.svg');
+    background-size: 100% auto; /* Ajusta a largura para 100% e altura automática. MUITO IMPORTANTE! */
     background-position: top center;
-    background-repeat: no-repeat; /* MUITO IMPORTANTE: Não repetir a imagem */
+    background-repeat: no-repeat; /* Não repete se o SVG for longo */
+
+    /* AJUSTE ESTA ALTURA: Deve ser a altura total do seu SVG de caminho para 20 lições */
+    /* Se 4 lições visíveis por tela, e sua tela tem ~600px de altura útil, então para 20 lições
+       seriam 5 "telas" de altura. Então 5 * 600px = 3000px. Adicione um pouco mais para margem. */
+    min-height: 3500px; /* VALOR CRÍTICO A SER AJUSTADO à altura do seu SVG */
+    padding-top: 50px; /* Espaço do topo antes da primeira lição */
+    padding-bottom: 50px; /* Espaço para a última lição */
+    box-sizing: border-box;
 }
 
-/* Container que organiza os botões das lições */
+/* --- OBJETOS DE CENÁRIO (Caixas de Correio, Grama, etc.) --- */
+.mailbox {
+    position: absolute;
+    width: 60px; /* Ajuste o tamanho */
+    height: auto;
+    z-index: 5; /* Fica acima do caminho, mas abaixo das lições */
+}
+.mail-1 { top: 10%; left: 10%; } /* Posição da primeira caixa de correio */
+.mail-2 { top: 30%; right: 15%; } /* Posição da segunda caixa de correio */
+/* Adicione mais classes e posições para outros elementos de cenário */
+
+
+/* --- CONTAINER QUE VAI RECEBER AS LIÇÕES (SE MOVERÁ COM O FUNDO) --- */
 #licoes-container {
     display: flex;
     flex-direction: column;
     align-items: center; 
-    gap: 150px; /* IMPORTANTE: Ajuste este valor para alinhar com seu SVG */
-    padding: 100px 0; /* Padding no topo e base para as primeiras/últimas lições */
-    box-sizing: border-box;
+    /* AJUSTE ESTE 'gap' para que os botões se alinhem com as curvas do seu SVG */
+    gap: 150px; /* VALOR CRÍTICO A SER AJUSTADO */
     width: 100%;
+    position: relative; /* Para garantir o z-index */
+    z-index: 10; /* Fica acima dos elementos de cenário e do background */
+    /* Não precisa de padding aqui, o padding do mapa-container já resolve */
 }
 
 /* --- ESTILOS DOS BOTÕES DAS LIÇÕES --- */
@@ -101,7 +100,6 @@ body {
     border: none;
     cursor: pointer;
     transition: transform 0.2s;
-    text-decoration: none;
 }
 
 .licao-ponto:hover { transform: scale(1.05); }
