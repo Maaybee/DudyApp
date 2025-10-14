@@ -98,6 +98,12 @@ function home() {
 
     window.location.href = '../telas/telaHome.html'; 
 };
+function urso() { 
+    
+    console.log('Botão clicado, redirecionando...');
+
+    window.location.href = '../telas/telaUrso.html'; 
+};
 
 function abrirMenu() {
   const menu = document.getElementById("menu");
