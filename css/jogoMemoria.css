@@ -135,3 +135,31 @@ h10 {
     border-radius: 15px;
     cursor: pointer; /* Adicione o cursor de ponteiro */
 }
+
+#container { 
+    background-color: rgba(0, 0, 0, 0.7);
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: -1.3vh;
+}
+
+h12 { 
+    font-family: 'Baloo Chettan Regular';
+    text-align: center;
+    margin: 0;
+    font-size: 3rem;
+    color: white;
+}
+
+h11 { 
+    font-family: 'Baloo Chettan Regular';
+    text-align: center;
+    margin: 0;
+    font-size: 4rem;
+    color: white;
+}
