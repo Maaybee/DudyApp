@@ -126,3 +126,9 @@ function historia () {
 function jogos () { 
   window.location.href = '../telas/tela_escolhaJogos.html';
 }
+function urso () { 
+    console.log('Botão clicado, redirecionando...');
+
+    window.location.href = '../telas/telaUrso.html'; 
+}
+
