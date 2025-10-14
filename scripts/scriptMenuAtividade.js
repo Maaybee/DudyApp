@@ -30,10 +30,15 @@ document.addEventListener('DOMContentLoaded', () => {
         containerLicoes.appendChild(botao);
     });
 
-    const sairImg = document.getElementById('sair');
-    if (sairImg) {
-        sairImg.addEventListener('click', () => {
-            window.location.href = 'telaHome.html'; // Verifique se este é o nome correto da sua home
-        });
-    }
+ 
 });
+const sairImg = document.getElementById('sair');
+
+if (sairImg) {
+    sairImg.addEventListener('click', function() {
+        // Esta função só será executada quando a imagem 'sair' for clicada
+        window.location.href = '../telas/telaHome.html';
+    });
+} else {
+    console.warn("Elemento com ID 'sair' não encontrado. O botão de saída do pop-up pode não funcionar.");
+}
