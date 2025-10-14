@@ -1,90 +1,92 @@
-/* css/mapa-atividades-style.css (VERSÃO FINAL) */
+/* css/mapa-atividades-style.css (VERSÃO REVISADA PARA ÚNICO BACKGROUND SVG) */
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@700&display=swap');
 
 html, body {
-    height: 100%;
+    height: 100vh; /* Ocupa 100% da altura da tela */
     margin: 0;
     padding: 0;
     overflow: hidden; /* Impede a rolagem no body */
 }
 
 body {
-    background-color: #FFF7F7;
+    background-color: #FFF7F7; /* Apenas uma cor sólida para o fundo do body */
     font-family: 'Baloo Chettan 2', sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-/* --- HEADER FIXO --- */
+/* --- HEADER FIXO NO TOPO --- */
 .main-header {
     width: 100%;
     max-width: 400px;
-    background-color: #FFF7F7;
+    background-color: #FFF7F7; /* Fundo sólido para cobrir o que rola por baixo */
     padding: 25px 20px 15px;
     box-sizing: border-box;
     display: flex;
     align-items: center;
-    z-index: 100;
+    flex-shrink: 0; /* Impede o header de encolher */
+    z-index: 100; /* Garante que o header esteja sempre por cima */
 }
 
+/* --- ESTILOS DOS ELEMENTOS DO HEADER --- */
 .main-header .btn-voltar {
     width: 30px;
     height: 30px;
     cursor: pointer;
+    margin-right: 20px; /* Espaçamento entre o botão de voltar e o texto */
+    /* Garanta que o caminho do SVG '/DudyApp/assets/sair.svg' está correto */
 }
 
 .main-header .header-content {
-    flex-grow: 1;
+    flex-grow: 1; /* Permite que o conteúdo do header ocupe o espaço restante */
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center; /* Centraliza "Dudy Academy" e "Atividades" */
     text-align: center;
     margin: 0 10px;
 }
 
 .main-header .text_menor { font-size: 14px; color: #888; margin: 0; }
 .main-header .text_maior { font-size: 28px; color: #333; margin: 0; }
-.main-header .logo-dudy { width: 50px; height: 50px; }
 
-/* --- CONTAINER DE ROLAGEM --- */
-.scroll-wrapper {
+.main-header .logo-dudy {
+    width: 50px;
+    height: 50px;
+    margin-left: auto; /* Empurra a logo para a direita */
+    /* Garanta que o caminho do SVG '/DudyApp/assets/img/logo.png' está correto */
+}
+
+
+/* --- CONTAINER DO MAPA (COM ROLAGEM E IMAGEM DE FUNDO DO CAMINHO) --- */
+.mapa-container {
     width: 100%;
     max-width: 400px;
-    flex-grow: 1;
-    overflow-y: auto; /* ATIVA A ROLAGEM AQUI */
+    flex-grow: 1; /* Ocupa o espaço restante na tela */
+    overflow-y: auto; /* ATIVA A ROLAGEM VERTICAL */
     position: relative;
+    padding-top: 20px; /* Adiciona um padding no topo do mapa, abaixo do header */
+
+    /* AQUI ESTÁ O SEU SVG DO CAMINHO COMO BACKGROUND */
+    background-image: url('/DudyApp/assets/img/Caminho_atividades.svg');
+    background-size: cover; /* Ajusta a imagem para cobrir o container, pode cortar bordas */
+    /* Alternativa: background-size: 100% auto; para cobrir a largura e manter proporção */
+    background-position: top center;
+    background-repeat: no-repeat; /* MUITO IMPORTANTE: Não repetir a imagem */
 }
 
-/* --- MAPA --- */
-.mapa-container {
-    position: relative;
-    width: 100%;
-}
-
-.mapa-caminho-fundo {
-    width: 100%;
-    height: auto;
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1; /* Atrás dos botões */
-}
-
+/* Container que organiza os botões das lições */
 #licoes-container {
-    position: relative; 
-    z-index: 2; /* Na frente do caminho */
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center; 
     gap: 150px; /* IMPORTANTE: Ajuste este valor para alinhar com seu SVG */
-    padding: 100px 0;
+    padding: 100px 0; /* Padding no topo e base para as primeiras/últimas lições */
     box-sizing: border-box;
     width: 100%;
 }
 
-/* --- BOTÕES DAS LIÇÕES --- */
+/* --- ESTILOS DOS BOTÕES DAS LIÇÕES --- */
 .licao-ponto {
     background-color: #f7e099;
     border-radius: 20px; 
@@ -99,28 +101,14 @@ body {
     border: none;
     cursor: pointer;
     transition: transform 0.2s;
+    text-decoration: none;
 }
 
-.licao-ponto:hover {
-    transform: scale(1.05);
-}
+.licao-ponto:hover { transform: scale(1.05); }
+.licao-ponto .icone-licao { width: 50px; height: 50px; object-fit: contain; margin-bottom: 5px; }
+.licao-ponto p { margin: 0; font-size: 16px; font-weight: bold; color: #333; text-align: center; }
 
-.licao-ponto .icone-licao {
-    width: 50px;
-    height: 50px;
-    object-fit: contain;
-    margin-bottom: 5px;
-}
-
-.licao-ponto p {
-    margin: 0;
-    font-size: 16px;
-    font-weight: bold;
-    color: #333;
-    text-align: center;
-}
-
-/* Cores dos botões */
+/* Cores de fundo específicas para os botões */
 .licao-ponto.cor-1 { background-color: #F7E099; }
 .licao-ponto.cor-2 { background-color: #FFB3D9; }
 .licao-ponto.cor-3 { background-color: #A0E6BA; }
