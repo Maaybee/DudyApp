@@ -1,5 +1,4 @@
-
-/* css/mapa-atividades-style.css (VERSÃO AJUSTADA PARA CENTRALIZAR LIÇÕES) */
+/* css/mapa-atividades-style.css (VERSÃO FINAL PARA SVG LONGO E 4 ITENS VISÍVEIS) */
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@700&display=swap');
 
 body {
@@ -10,24 +9,26 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: 100vh;
-    overflow-x: hidden;
-    overflow-y: auto; /* Permite scroll vertical */
+    /* Remover min-height daqui e colocar no container de rolagem */
+    /* overflow-x: hidden; já está bom */
+    /* overflow-y: auto; já está bom */
+    height: 100vh; /* Faz o body preencher a altura da tela para que o container de rolagem funcione */
 }
 
 /* --- ESTILOS DO HEADER --- */
 .header-global {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     width: 100%;
     max-width: 375px; 
-    padding: 0 60px;
+    padding: 0 20px;
     box-sizing: border-box;
-    margin-bottom: 5px;
-    position: relative; /* Para o btn-voltar */
+    margin-bottom: 20px;
+    position: relative; 
+    z-index: 10; /* Garante que o header esteja sempre visível no topo */
+    background-color: #FFF7F7; /* Fundo para cobrir o conteúdo rolável por baixo */
 }
-
 
 .header-global .text_menor {
     font-size: 14px;
@@ -47,60 +48,61 @@ body {
     margin-left: auto; 
 }
 
-/* Botão de voltar ajustado */
 .btn-voltar {
     position: absolute; 
-    top: 50%; /* Centraliza verticalmente com o header-global */
+    top: 50%; 
     left: 20px; 
-    transform: translateY(-50%); /* Ajuste fino para centralizar */
+    transform: translateY(-50%); 
     width: 30px;
     height: 30px;
     cursor: pointer;
-    z-index: 10; 
+    z-index: 11; /* Acima do header */
 }
 
-/* --- CONTAINER DO MAPA --- */
+/* --- NOVO CONTAINER PARA ROLAGEM --- */
+.scroll-container {
+    width: 100%;
+    max-width: 375px; /* Mantém a largura do design */
+    flex-grow: 1; /* Permite que este container preencha o espaço restante verticalmente */
+    overflow-y: scroll; /* ATIVA A ROLAGEM AQUI */
+    -webkit-overflow-scrolling: touch; /* Melhora a rolagem em iOS */
+    position: relative; /* Para posicionar o mapa-container dentro dele */
+}
+
+/* --- CONTAINER DO MAPA (AGORA DENTRO DO SCROLL-CONTAINER) --- */
 .mapa-container {
     position: relative;
-    width: 100%;
-    max-width: 375px; 
-    margin-top: 40px;
-    padding-bottom: 0px; 
-    /* Adicione um background para depurar se o SVG não aparecer */
-    /* background-color: #e0e0e0; */ 
-    min-height: 800px; /* Ajuste esta altura conforme o comprimento do seu SVG e número de lições */
+    width: 100%; /* Ocupa a largura total do scroll-container */
+    margin-top: 0px; /* Não precisa de margem superior aqui */
+    padding-bottom: 50px; 
+    /* A altura deste container será definida pelo SVG e pelos botões */
+    /* NÃO use min-height aqui. Deixe o conteúdo definir a altura. */
 }
 
 .mapa-caminho-fundo {
-    width: 320%;
-    height: auto; 
+    width: 100%; /* SVG preenche a largura do mapa-container */
+    height: auto; /* Mantém a proporção do SVG. Ele se estenderá verticalmente */
     display: block;
     position: absolute; 
     top: 0;
     left: 0;
     z-index: 1; /* Fica atrás dos botões */
-    /* Se o seu SVG for longo e você quiser que ele role junto com o conteúdo, */
-    /* considere usar background-image no body ou mapa-container com repeat-y */
-    /* ou certifique-se que o 'min-height' do mapa-container é suficiente para o SVG completo */
 }
 
-/* --- CORREÇÃO PRINCIPAL: CENTRALIZANDO AS LIÇÕES NOVAMENTE --- */
-
-/* Container que organiza os botões das lições */
 #licoes-container {
     position: relative; 
     z-index: 2; /* Garante que os botões fiquem na frente do caminho */
     display: flex;
     flex-direction: column;
-    align-items: center; /* <<< RESTAURADO: Centraliza os itens horizontalmente */
-    gap: 50px; /* Espaço vertical entre os botões. Ajuste para combinar com seu SVG */
-    padding: 50px 0; /* Preenchimento no topo e base, sem nas laterais para centralizar */
+    align-items: center; 
+    /* Ajuste este 'gap' para que os botões se alinhem com as curvas do seu SVG */
+    /* Se 4 lições por tela, o gap precisa ser proporcional à altura do SVG entre os pontos */
+    gap: 150px; /* VALOR A SER AJUSTADO: Se 4 lições por tela, altura total / 4 */
+    padding: 100px 0; /* Padding no topo e base para as primeiras/últimas lições */
     box-sizing: border-box;
-    /* Adicione uma altura mínima se o conteúdo for muito pequeno e o caminho não aparecer */
-    min-height: calc(100% - 100px); /* Exemplo: Altura mínima para o container de lições */
+    /* min-height NÃO é necessário aqui se o SVG for longo */
 }
 
-/* Estilo do botão da lição */
 .licao-ponto {
     background-color: #f7e099;
     border-radius: 20px; 
@@ -110,8 +112,8 @@ body {
     align-items: center;
     justify-content: center;
     padding: 10px;
-    width: 156px; /* Largura do botão ajustada para centralizar melhor */
-    height: 97px; 
+    width: 150px; 
+    height: 100px; 
     border: none;
     cursor: pointer;
     transition: transform 0.2s;
@@ -121,12 +123,6 @@ body {
 .licao-ponto:hover {
     transform: scale(1.05);
 }
-
-/* --- REMOVIDAS AS REGRAS DE NTH-CHILD PARA POSICIONAMENTO LATERAL --- */
-/* .licao-ponto:nth-child(odd) { align-self: flex-start; } */
-/* .licao-ponto:nth-child(even) { align-self: flex-end; } */
-/* --- FIM DA CORREÇÃO --- */
-
 
 .licao-ponto .icone-licao {
     width: 50px;
