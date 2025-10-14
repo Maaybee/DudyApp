@@ -7,13 +7,17 @@
     <link rel="stylesheet" href="../css/mapa-atividades-style.css">
 </head>
 <body>
-    <div class="header-global">
-        <h1 class="text_maior">Atividades</h1>
+    <header class="main-header">
         <img src="../assets/sair.svg" class="btn-voltar" alt="Voltar">
-    </div>
+        <div class="header-content">
+            <p class="text_menor">Dudy Academy</p>
+            <h1 class="text_maior">Atividades</h1>
+            <img src="/DudyApp/assets/img/logo.png" class="logo-dudy" alt="Dudy App Logo">
+        </div>
+    </header>
     
     
-     <div class="scroll-container">
+     <div class="scroll-wrapper">
         <div class="mapa-container">
             <img src="/DudyApp/assets/caminhocompleto.svg" alt="Caminho das Atividades" class="mapa-caminho-fundo">
             <div id="licoes-container"></div>
@@ -22,6 +26,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="../scripts/supabaseConfig.js"></script> 
-    
-    <script src="../scripts/dadosLicoes.js"></script> <script src="../scripts/scriptMapaAtividades.js"></script> </body>
+    <script src="../scripts/dadosLicoes.js"></script>
+    <script src="../scripts/scriptMapaAtividades.js"></script> </body>
 </html>
