@@ -4,19 +4,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const licoesContainer = document.getElementById('licoes-container');
     const btnVoltar = document.querySelector('.btn-voltar');
 
-    // --- POSIÇÕES DAS LIÇÕES ---
-    // Cada objeto {top, left} define a posição de uma lição no mapa.
-    // 'top' é a distância do topo (em %), 'left' é a distância da esquerda (em %).
-    // Você vai precisar ajustar esses valores para alinhar com o seu SVG.
+    // --- POSIÇÕES DAS LIÇÕES (CENTRALIZADAS) ---
+    // 'top' é a distância do topo (em %). Ajuste estes valores para alinhar com o seu SVG.
+    // Se 4 lições devem aparecer na tela, a distância entre cada 'top' deve ser de ~20-25%.
     const posicoes = [
-        { top: '8%',  left: '50%' },   // Posição da Lição 1
-        { top: '22%', left: '50%' },   // Posição da Lição 2
-        { top: '36%', left: '50%' },   // Posição da Lição 3
-        { top: '50%', left: '50%' },   // Posição da Lição 4
-        { top: '64%', left: '50%' },   // Posição da Lição 5
-        { top: '78%', left: '50%' },   // Posição da Lição 6
-        { top: '92%', left: '50%' }    // Posição da Lição 7
-        // Adicione mais posições para suas 20 lições...
+        { top: '15%', left: '50%' },   // Posição da Lição 1
+        { top: '30%', left: '50%' },   // Posição da Lição 2
+        { top: '45%', left: '50%' },   // Posição da Lição 3
+        { top: '60%', left: '50%' },   // Posição da Lição 4
+        { top: '75%', left: '50%' },   // Posição da Lição 5
+        // ... adicione as posições para as suas 20 lições aqui
+        // Ex: { top: '90%', left: '50%' },
+        // Ex: { top: '105%', left: '50%' }, etc.
     ];
 
     const coresBotoes = ['cor-1', 'cor-2', 'cor-3', 'cor-4'];
@@ -28,11 +27,10 @@ document.addEventListener('DOMContentLoaded', () => {
         botao.className = `licao-ponto ${coresBotoes[index % coresBotoes.length]}`;
         botao.dataset.licaoId = licao.id;
 
-        // Aplica o estilo de posição
+        // Aplica o estilo de posição exato
         const pos = posicoes[index];
         botao.style.top = pos.top;
         botao.style.left = pos.left;
-        botao.style.transform = 'translateX(-50%)'; // Truque para centralizar horizontalmente
 
         const icone = document.createElement('img');
         icone.src = licao.icone;
@@ -51,14 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
         licoesContainer.appendChild(botao);
     });
 
+    if (btnVoltar) {
+        btnVoltar.addEventListener('click', () => { window.history.back(); });
+    }
 });
-const sairImg = document.getElementById('sair');
-
-if (sairImg) {
-    sairImg.addEventListener('click', function() {
-        // Esta função só será executada quando a imagem 'sair' for clicada
-        window.location.href = '../telas/telaHome.html';
-    });
-} else {
-    console.warn("Elemento com ID 'sair' não encontrado. O botão de saída do pop-up pode não funcionar.");
-}

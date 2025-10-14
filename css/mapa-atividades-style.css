@@ -1,16 +1,12 @@
-/* css/mapa-atividades-style.css (VERSÃO DEFINITIVA) */
+/* css/mapa-atividades-style.css (VERSÃO DEFINITIVA PARA PÁGINA ROLÁVEL) */
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@700&display=swap');
-
-html {
-    scroll-behavior: smooth;
-}
 
 body {
     background-color: #FFF7F7;
     font-family: 'Baloo Chettan 2', sans-serif;
     margin: 0;
     padding: 0;
-    overflow-x: hidden; /* Impede a rolagem horizontal */
+    overflow-x: hidden; /* Permite apenas rolagem vertical */
 }
 
 /* --- HEADER FIXO --- */
@@ -21,44 +17,52 @@ body {
     box-sizing: border-box;
     display: flex;
     align-items: center;
-    position: sticky; /* Fica fixo no topo da tela enquanto o usuário rola */
+    position: sticky; /* Fica fixo no topo enquanto o usuário rola */
     top: 0;
     z-index: 100;
+    max-width: 450px; /* Mantém o header alinhado com o mapa */
+    margin: 0 auto; /* Centraliza o header */
 }
-
-.main-header .btn-voltar { width: 30px; cursor: pointer; margin: 0 10px; }
+/* ... (outras regras do seu header, como .btn-voltar, etc.) ... */
+.main-header .btn-voltar { width: 30px; cursor: pointer; }
 .main-header .header-content { flex-grow: 1; text-align: center; }
-.main-header .text_menor { margin: 0; font-size: 14px; color: #888; }
-.main-header .text_maior { margin: 0; font-size: 28px; color: #333; }
-.main-header .logo-dudy { width: 50px; height: 50px; margin: 0 10px; }
+.main-header .text_menor { margin: 0; }
+.main-header .text_maior { margin: 0; }
+.main-header .logo-dudy { width: 50px; }
+
 
 /* --- MAPA --- */
 .mapa-container {
-    position: relative; /* Container pai para o posicionamento absoluto */
+    position: relative; /* O "Mundo" onde tudo será posicionado */
     width: 100%;
-    max-width: 450px; /* Largura máxima do mapa */
+    max-width: 450px;
     margin: 0 auto; /* Centraliza o mapa na página */
 }
 
 /* Imagem do caminho gigante */
 .mapa-caminho-fundo {
     width: 100%;
-    height: auto; /* A altura se ajusta à proporção da imagem */
+    height: auto; /* A altura se ajusta para não distorcer a imagem */
     display: block;
+    position: relative; /* Ocupa espaço e define a altura do mapa-container */
+    z-index: 1;
 }
 
-/* Container que segura os botões das lições */
+/* Container que segura os botões (agora um overlay absoluto) */
 #licoes-container {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 100%; /* Ocupa o mesmo espaço que a imagem do caminho */
+    z-index: 2; /* Fica na frente do caminho */
 }
 
 /* Estilo do botão da lição */
 .licao-ponto {
-    position: absolute; /* POSIÇÃO ABSOLUTA, controlada pelo JavaScript */
+    position: absolute; /* CADA LIÇÃO SERÁ POSICIONADA INDIVIDUALMENTE */
+    transform: translateX(-50%); /* Truque para centralizar o botão na sua coordenada 'left' */
+    
     background-color: #f7e099;
     border-radius: 20px; 
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
@@ -74,7 +78,7 @@ body {
     transition: transform 0.2s;
 }
 
-.licao-ponto:hover { transform: scale(1.05); }
+.licao-ponto:hover { transform: scale(1.05) translateX(-50%); }
 .licao-ponto .icone-licao { width: 50px; height: 50px; object-fit: contain; margin-bottom: 5px; }
 .licao-ponto p { margin: 0; font-size: 16px; font-weight: bold; color: #333; text-align: center; }
 
