@@ -3,78 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tela Urso</title>
+    <title>Dudy Toy</title>
     <link rel="stylesheet" href="../css/telaUrso.css">
-
 </head>
 <body>
-    <div id="telaUrso" class="col-itens2 center">
-        <h2 id="titulo">Dudy Toy</h2>
+    <div id="main-container">
+        <h2 id="titulo">Dudy toy</h2>
+        
+        <p class="introducao-texto">Conecte seu Toy ao App para aproveitar todos os recursos. Assita a como conectar no vídeo abaixo:</p>
 
-        <div id="tutorial" class="col-itens3">
-            <h3> Assistir Tutorial</h3>
-        </div>
+        <button id="tutorial-button" class="blue-button">
+            <h3>Assistir tutorial</h3>
+            <img src="../assets/img/play-icon.png" alt="Ícone Play" class="play-icon">
+        </button>
 
-        <div id="row"> 
-            <div id="collum"> 
-                <div class="quadrados"> 
-                    <img src="../assets/img/livro roxo.png" alt="storys" class="imgSquare">
+        <div class="divider"></div>
+
+        <div id="funcionalidades-grid">
+            <div class="funcionalidade-card">
+                <div class="icone-quadrado pink-bg">
+                    <img src="../assets/img/livro roxo.png" alt="Storys" class="img-square">
                 </div>
-                <div class="quadrados"> 
-                    <img src="../assets/img/cards.png" class="imgSquare"> 
-                </div class="quadrados"> 
-                    <img src="../assets/img/magic.png" class="imgSquare"> 
-                </div>
-                <div class="quadrados"> 
-                    <img src="../assets/img/keyboard.png" class="imgSquare"> 
-                </div>
+                <p class="card-titulo">Storys</p>
             </div>
-            <div id="collum"> 
-                <div id="collum2"> 
-                    <h3 id="palavras-texto">Storys</h3>
+
+            <div class="funcionalidade-card">
+                <div class="icone-quadrado purple-bg">
+                    <img src="../assets/img/cards.png" alt="Let's Talk" class="img-square coming-soon-overlay">
+                    <span class="coming-soon-text">COMING SOON</span>
                 </div>
-                <div id="collum2"> 
-                    <h3 id="palavras-texto">Let's Talk</h3 >
-                </div>
-                <div id="collum2"> 
-                    <h3 id="palavras-texto">magics</h3 >
-                </div>
-                <div id="collum2"> 
-                    <h3 id="palavras-texto">Songs</h3 >
-                </div>
+                <p class="card-titulo">Let's Talk?</p>
             </div>
-        </div>
 
+            <div class="funcionalidade-card">
+                <div class="icone-quadrado light-purple-bg">
+                    <img src="../assets/img/keyboard.png" alt="Songs" class="img-square coming-soon-overlay">
+                     <span class="coming-soon-text">COMING SOON</span>
+                </div>
+                <p class="card-titulo">Songs</p>
+            </div>
 
-        <div class="menu"> 
-            <div class="btnsMenu"> 
-                <div class="btnMenuRow"> 
-                    <button class="btnMenu" id="btnHomeHome" onclick="home()"> 
-                        <img src="../assets/home.png" alt="MenuHome"> 
-                    </button>
+            <div class="funcionalidade-card">
+                <div class="icone-quadrado green-bg">
+                    <img src="../assets/img/magic.png" alt="Magics" class="img-square coming-soon-overlay">
+                    <span class="coming-soon-text">COMING SOON</span>
                 </div>
-                <div class="btnMenuRow"> 
-                    <button class="btnMenu" id="btnPerfilHome" onclick="perfil()"> 
-                        <img src="../assets/perfil.png" alt="MenuPrática" id="fotoPerfil"> 
-                    </button>
-                </div>
-                <div class="btnMenuRow"> 
-                    <button class="btnMenu" id="btnToyHome" onclick="urso()"> 
-                        <img src="../assets/toy.png" alt="MenuToy">
-                    </button>
-                </div>
+                <p class="card-titulo">Magics</p>
             </div>
         </div>
+
+        <nav class="bottom-menu"> 
+            <button class="menu-item" onclick="home()"> 
+                <img src="../assets/home.png" alt="Ícone Pratica"> 
+                <span>Pratica</span>
+            </button>
+            <button class="menu-item" onclick="perfil()"> 
+                <img src="../assets/perfil.png" alt="Ícone Perfil"> 
+                <span>Perfil</span>
+            </button>
+            <button class="menu-item active" onclick="urso()"> 
+                <img src="../assets/toy.png" alt="Ícone Toy Toy">
+                <span>Toy Toy</span>
+            </button>
+        </nav>
     </div>
         
 </body>
-<!-- Lib do Supabase -->
 <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
 
-<!-- Seu arquivo de configuração (cria o cliente) -->
 <script src="../scripts/supabaseConfig.js"></script>
 
-<!-- Seu JS desta página -->
 <script src="../scripts/telaUrso.js"></script>
-
 </html>
