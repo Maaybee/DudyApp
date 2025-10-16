@@ -6,7 +6,7 @@ body {
     font-family: 'Baloo Chettan 2', sans-serif;
     margin: 0;
     padding: 0;
-    overflow-x: hidden; /* Permite apenas rolagem vertical */
+    overflow-x: hidden; /* Permite apenas a rolagem vertical */
 }
 
 /* --- HEADER FIXO --- */
@@ -17,25 +17,23 @@ body {
     box-sizing: border-box;
     display: flex;
     align-items: center;
-    position: sticky; /* Fica fixo no topo enquanto o usuário rola */
+    position: sticky; /* FICA FIXO NO TOPO ENQUANTO O USUÁRIO ROLA */
     top: 0;
     z-index: 100;
-    max-width: 450px; /* Mantém o header alinhado com o mapa */
-    margin: 0 auto; /* Centraliza o header */
+    max-width: 450px;
+    margin: 0 auto;
 }
-/* ... (outras regras do seu header, como .btn-voltar, etc.) ... */
 .main-header .btn-voltar { width: 30px; cursor: pointer; }
 .main-header .header-content { flex-grow: 1; text-align: center; }
 .main-header .text_menor { margin: 0; }
 .main-header .text_maior { margin: 0; }
 .main-header .logo-dudy { width: 50px; }
 
-
 /* --- MAPA --- */
 .mapa-container {
     position: relative; /* O "Mundo" onde tudo será posicionado */
     width: 100%;
-    max-width: 450px;
+    max-width: 450px; /* Largura máxima do mapa */
     margin: 0 auto; /* Centraliza o mapa na página */
 }
 
@@ -43,12 +41,10 @@ body {
 .mapa-caminho-fundo {
     width: 100%;
     height: auto; /* A altura se ajusta para não distorcer a imagem */
-    display: block;
-    position: relative; /* Ocupa espaço e define a altura do mapa-container */
-    z-index: 1;
+    display: block; /* Garante que a imagem ocupe seu espaço e empurre o conteúdo para baixo */
 }
 
-/* Container que segura os botões (agora um overlay absoluto) */
+/* Container que segura os botões (um overlay absoluto) */
 #licoes-container {
     position: absolute;
     top: 0;
