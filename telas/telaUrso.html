@@ -26,52 +26,34 @@
                 </div>
                 <p class="card-titulo">Storys</p>
             </div>
-
-            <div class="funcionalidade-card">
-                <div class="icone-quadrado purple-bg">
-                    <img src="../assets/img/cards.png" alt="Let's Talk" class="img-square coming-soon-overlay">
-                    <span class="coming-soon-text">COMING SOON</span>
-                </div>
-                <p class="card-titulo">Let's Talk?</p>
             </div>
-
-            <div class="funcionalidade-card">
-                <div class="icone-quadrado light-purple-bg">
-                    <img src="../assets/img/keyboard.png" alt="Songs" class="img-square coming-soon-overlay">
-                     <span class="coming-soon-text">COMING SOON</span>
-                </div>
-                <p class="card-titulo">Songs</p>
-            </div>
-
-            <div class="funcionalidade-card">
-                <div class="icone-quadrado green-bg">
-                    <img src="../assets/img/magic.png" alt="Magics" class="img-square coming-soon-overlay">
-                    <span class="coming-soon-text">COMING SOON</span>
-                </div>
-                <p class="card-titulo">Magics</p>
-            </div>
-        </div>
-
-        <nav class="bottom-menu"> 
-            <button class="menu-item" onclick="home()"> 
-                <img src="../assets/home.png" alt="Ícone Pratica"> 
-                <span>Pratica</span>
-            </button>
-            <button class="menu-item" onclick="perfil()"> 
-                <img src="../assets/perfil.png" alt="Ícone Perfil"> 
-                <span>Perfil</span>
-            </button>
-            <button class="menu-item active" onclick="urso()"> 
-                <img src="../assets/toy.png" alt="Ícone Toy Toy">
-                <span>Toy Toy</span>
-            </button>
-        </nav>
     </div>
         
+    <div class="menu"> 
+        <div class="btnsMenu"> 
+            <div class="btnMenuRow"> 
+                <button class="btnMenu" id="btnHomeHome" onclick="home()"> 
+                    <img src="../assets/home.png" alt="MenuHome"> 
+                </button>
+                <h4>Prática</h4>
+            </div>
+            <div class="btnMenuRow"> 
+                <button class="btnMenu" id="btnPerfilHome" onclick="perfil()"> 
+                    <img src="../assets/perfil.png" alt="MenuPerfil"> 
+                </button>
+                <h4>Perfil</h4>
+            </div>
+            <div class="btnMenuRow"> 
+                <button class="btnMenu" id="btnToyHome" onclick="urso()"> 
+                    <img src="../assets/toy.png" alt="MenuToy">
+                </button>
+                <h4>Toy Toy</h4>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="../scripts/supabaseConfig.js"></script>
+    <script src="../scripts/telaUrso.js"></script>
 </body>
-<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
-
-<script src="../scripts/supabaseConfig.js"></script>
-
-<script src="../scripts/telaUrso.js"></script>
 </html>
