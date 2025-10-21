@@ -6,7 +6,6 @@
     
 }
 
-
 .col { 
     display: flex;
     align-items: center;
@@ -22,14 +21,10 @@
     width: 110px;
     border-radius: 20px;
     cursor: pointer;
-    /* Adicione esta transição para um efeito visual suave */
     transition: all 0.5s ease; 
-
-    /* Configura a carta para ser um container de visualização 3D */
     transform-style: preserve-3d; 
     position: relative; 
-    
-     transform: rotateY(0deg); /* Começa com o verso para a frente */
+     transform: rotateY(0deg); 
 }
 
 .block img {
@@ -37,7 +32,7 @@
     width: 80%; /* Ajuste o tamanho da imagem */
     height: 80%;
     object-fit: contain;
-    position: absolute; /* Para que a frente e o verso fiquem no mesmo lugar */
+    position: absolute;
 }
 
 
@@ -157,7 +152,7 @@ h10 {
     text-align: center;
     border: #00BF63; /* Mantenha border, mas se for apenas cor, pode ser border-color */
     border-radius: 15px;
-    cursor: pointer; /* Adicione o cursor de ponteiro */
+    cursor: pointer; /* cursor de ponteiro */
 }
 
 #container { 
