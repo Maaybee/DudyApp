@@ -1,4 +1,4 @@
-/* css/mapa-atividades-style.css (VERSÃO DEFINITIVA PARA PÁGINA ROLÁVEL) */
+/* css/mapa-atividades-style.css (VERSÃO PARA DUAS IMAGENS DE FUNDO) */
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@700&display=swap');
 
 body {
@@ -6,7 +6,7 @@ body {
     font-family: 'Baloo Chettan 2', sans-serif;
     margin: 0;
     padding: 0;
-    overflow-x: hidden; /* Permite apenas a rolagem vertical */
+    overflow-x: hidden; /* Permite apenas rolagem vertical */
 }
 
 /* --- HEADER FIXO --- */
@@ -17,31 +17,49 @@ body {
     box-sizing: border-box;
     display: flex;
     align-items: center;
-    position: sticky; /* FICA FIXO NO TOPO ENQUANTO O USUÁRIO ROLA */
+    position: sticky; /* Fixo no topo enquanto o usuário rola */
     top: 0;
     z-index: 100;
     max-width: 450px;
     margin: 0 auto;
 }
+/* ... (outras regras do seu header, como .btn-voltar, etc.) ... */
 .main-header .btn-voltar { width: 30px; cursor: pointer; }
 .main-header .header-content { flex-grow: 1; text-align: center; }
 .main-header .text_menor { margin: 0; }
 .main-header .text_maior { margin: 0; }
 .main-header .logo-dudy { width: 50px; }
 
+
 /* --- MAPA --- */
 .mapa-container {
-    position: relative; /* O "Mundo" onde tudo será posicionado */
+    position: relative; /* Container pai para o posicionamento absoluto */
     width: 100%;
-    max-width: 450px; /* Largura máxima do mapa */
+    max-width: 450px;
     margin: 0 auto; /* Centraliza o mapa na página */
 }
 
-/* Imagem do caminho gigante */
-.mapa-caminho-fundo {
+/* Container para as imagens de fundo */
+.mapa-background-images {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: auto; /* A altura se ajusta para não distorcer a imagem */
-    display: block; /* Garante que a imagem ocupe seu espaço e empurre o conteúdo para baixo */
+    height: auto; /* A altura será a soma das imagens */
+    z-index: 1; /* Fica atrás das lições */
+    /* Garante que as imagens se empilhem verticalmente */
+    display: flex;
+    flex-direction: column; 
+}
+
+/* Estilo para cada imagem de fundo */
+.mapa-caminho-parte {
+    width: 100%;
+    height: auto; /* Mantém a proporção */
+    display: block; /* Remove espaços extras abaixo da imagem */
+    margin: 0; /* Remove margens */
+    padding: 0; /* Remove preenchimentos */
+    line-height: 0; /* Ajuda a remover espaços extras */
 }
 
 /* Container que segura os botões (um overlay absoluto) */
@@ -50,15 +68,17 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%; /* Ocupa o mesmo espaço que a imagem do caminho */
+    /* A altura deste container precisa ser igual à altura TOTAL das imagens de fundo juntas. */
+    /* O JavaScript pode calcular isso, ou você pode definir manualmente aqui se souber a altura total. */
+    /* Exemplo: height: 3000px; */
+    height: 100%; /* Vamos tentar 100% primeiro, o JS pode ajustar se necessário */
     z-index: 2; /* Fica na frente do caminho */
 }
 
-/* Estilo do botão da lição */
+/* Estilo do botão da lição (igual ao anterior) */
 .licao-ponto {
-    position: absolute; /* CADA LIÇÃO SERÁ POSICIONADA INDIVIDUALMENTE */
-    transform: translateX(-50%); /* Truque para centralizar o botão na sua coordenada 'left' */
-    
+    position: absolute;
+    transform: translateX(-50%);
     background-color: #f7e099;
     border-radius: 20px; 
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
@@ -73,12 +93,11 @@ body {
     cursor: pointer;
     transition: transform 0.2s;
 }
-
 .licao-ponto:hover { transform: scale(1.05) translateX(-50%); }
 .licao-ponto .icone-licao { width: 50px; height: 50px; object-fit: contain; margin-bottom: 5px; }
 .licao-ponto p { margin: 0; font-size: 16px; font-weight: bold; color: #333; text-align: center; }
 
-/* Cores dos botões */
+/* Cores dos botões (iguais ao anterior) */
 .licao-ponto.cor-1 { background-color: #F7E099; }
 .licao-ponto.cor-2 { background-color: #FFB3D9; }
 .licao-ponto.cor-3 { background-color: #A0E6BA; }
