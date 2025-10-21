@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { top: '10%', left: '50%' },   // Posição da Lição 1
         { top: '25%', left: '50%' },   // Posição da Lição 2
         { top: '40%', left: '50%' },   // Posição da Lição 3
-        { top: '55%', left: '50%' },   // Posição da Lição 4
+        { top: '55%', left: '80%' },   // Posição da Lição 4
         { top: '70%', left: '50%' },   // Posição da Lição 5
         // ... adicione as posições para as suas 20 lições aqui
     ];
