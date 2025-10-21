@@ -1,11 +1,6 @@
 // Acesso a 'subtitle' fora do DOMContentLoaded é aceitável,
 // JÁ QUE SEU SCRIPT ESTÁ NO FINAL DO <body>.
-// Se o script estivesse no <head>, esta linha também precisaria ser movida para dentro do DOMContentLoaded.
 const subtitle = document.getElementById("subtitle");
-
-// NOTA: A variável mostrarSenhaImg NÃO é mais declarada aqui.
-// Ela será declarada e inicializada dentro do DOMContentLoaded.
-
 
 if (subtitle) {
   subtitle.addEventListener("click", () => {
@@ -17,7 +12,8 @@ if (subtitle) {
 document.addEventListener("DOMContentLoaded", () => {
   // TODAS as referências a elementos do DOM são feitas AQUI,
   // garantindo que os elementos já foram carregados e analisados pelo navegador.
-  const mostrarSenhaImg = document.getElementById("mostrarSenha");
+
+  // const mostrarSenhaImg = document.getElementById("mostrarSenha"); // <-- LINHA REMOVIDA
   const loginForm = document.getElementById("loginForm");
   const emailInput = document.getElementById("emailLogin");
   const senhaInput = document.getElementById("senhaLogin");
@@ -25,41 +21,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const textmessage = document.getElementById("textmessage");
 
 
-  // === Mostrar/esconder senha ===
-  // Verificação de segurança, embora os IDs existam no HTML.
-  if (mostrarSenhaImg && senhaInput) { 
-    mostrarSenhaImg.addEventListener("click", () => {
-
-      // ================================================================
-      // INÍCIO DA CORREÇÃO: Salva e restaura o valor da senha
-      // ================================================================
-
-      // 1. Salva o valor atual do input ANTES de qualquer mudança.
-      const valorSenha = senhaInput.value;
-
-      // 2. Muda o tipo do input (e a imagem)
-      const fundo = mostrarSenhaImg.src;
-      if (fundo.includes("senhaFechado.svg")) {
-        mostrarSenhaImg.src = "../assets/senhaAberto.svg";
-        senhaInput.type = "text";
-      } else {
-        mostrarSenhaImg.src = "../assets/senhaFechado.svg";
-        senhaInput.type = "password";
-      }
-
-      // 3. Restaura o valor no input.
-      //    Isso corrige o "bug" em navegadores mobile que apagam
-      //    o campo ao mudar o tipo de volta para 'password'.
-      senhaInput.value = valorSenha;
-
-      // 4. Devolve o foco ao campo (melhoria de UX)
-      senhaInput.focus(); 
-
-      // ================================================================
-      // FIM DA CORREÇÃO
-      // ================================================================
-    });
-  }
+  // ================================================================
+  // O BLOCO DE CÓDIGO INTEIRO "=== Mostrar/esconder senha ==="
+  // QUE ESTAVA AQUI FOI COMPLETAMENTE REMOVIDO.
+  // ================================================================
 
 
   // === Fechar popup clicando fora ===
@@ -90,8 +55,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       try {
         // 1) Autentica (SUPABASE)
-        // **ATENÇÃO: A variável 'supabaseClient' não foi definida neste trecho, 
-        // assumo que ela é carregada pelo script 'supabaseConfig.js'.**
         const { data: authData, error: authError } =
           await supabaseClient.auth.signInWithPassword({
             email,
@@ -121,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
           if (popupOverlay && textmessage) {
             popupOverlay.classList.add("active");
             textmessage.style.color = "red";
-            textmessage.textContent = "Perfil de responsável não encontrado!"; // Adicionei mensagem de erro mais clara
+            textmessage.textContent = "Perfil de responsável não encontrado!"; 
           }
           return;
         }
@@ -142,7 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Redirecionamento com delay
         const redirecionar = () => {
           if (count === 0) window.location.href = "../telas/telaCadKid.html";
-          else if (count >= 1) // Simplificado, já que 'else if (count === 1)' e 'else if (count === 2)' levam ao mesmo lugar
+          else if (count >= 1) 
             window.location.href = "../telas/telaCadKid_1.html";
         };
 
@@ -151,7 +114,6 @@ document.addEventListener("DOMContentLoaded", () => {
         console.error("Erro inesperado:", err);
         let errorMessage = "Erro inesperado. Tente novamente.";
 
-        // Tentativa de extrair mensagem de erro mais útil, se disponível
         if (err && err.message && err.message.includes("Invalid login credentials")) {
             errorMessage = "Usuário ou senha incorretos.";
         } else if (err && err.message) {
