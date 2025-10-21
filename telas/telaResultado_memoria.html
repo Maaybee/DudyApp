@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/telaResultado_memoria.css">
+
+</head>
+<body>
+    <img id="logo" src="../assets/jogoMemoria/logoResultado.svg">
+
+    <div class="block" id="pontuacao"> 
+        <h2> Pontuação </h2>
+        <div class="block block_inside" id="pontua_inside"> 
+            <h3 id="pontuacaoTxt"> 0 </h3>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="block blockrow" id="tempo">
+            <h2 > Tempo </h2>
+            <div class="block block_inside insideRow" id="tempo_inside">
+                
+                <h4 id="tempoTxt"> 0:00 </h4>
+            </div>
+        </div> 
+        <div class="block blockrow" id="record"> 
+            <h2> Record </h2>
+
+            <div class="block block_inside insideRow" id="record_inside"> 
+                <h4 id="recordTxt"> 0:00 </h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="row_buttons">
+        <button class="btns" id="voltar"> SAIR </button>
+        <button class="btns" id="proxAtv"> PRÓXIMA ATIVIDADE</button>
+
+    </div>
+
+</body>
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+<script src="../scripts/supabaseConfig.js"></script>
+<script src="../scripts/telaResultado_memoria.js"></script>
+</html>
