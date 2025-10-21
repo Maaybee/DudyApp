@@ -330,19 +330,14 @@ input::placeholder {
     font-size: 16px;
 }
 
-/* ================================================= */
-/* INÍCIO DAS CORREÇÕES DE LOGIN            */
-/* ================================================= */
 
 input { 
     background-color: #FFF7F7;
     border: none;
     outline: none;
     flex-grow: 1;
-    
-    /* width: 50px; */   /* <-- 1. REMOVIDO: Isso limitava o input e causava quebra */
-    width: 100%;      /* <-- 1. ADICIONADO: Input agora ocupa o espaço disponível */
-    min-width: 0;     /* <-- 1. ADICIONADO: Boa prática de flexbox para inputs */
+    width: 100%;      /* (Mantida da correção anterior) */
+    min-width: 0;     /* (Mantida da correção anterior) */
 }
 
 .col-itens { 
@@ -363,10 +358,8 @@ input {
 .row-itens { 
     display: flex;
     flex-direction: row;
-    
-    /* gap: 50px; */  /* <-- 2. REMOVIDO: Este gap era muito grande e "empurrava" os ícones */
-    gap: 15px;       /* <-- 2. ADICIONADO: Um gap razoável que não quebra o layout */
-    align-items: center; /* <-- 2. ADICIONADO: Alinha os ícones e o input verticalmente */
+    gap: 15px;       /* (Mantido da correção anterior) */
+    align-items: center; /* (Mantido da correção anterior) */
 }
 
 .linhaInput { 
@@ -375,11 +368,6 @@ input {
     border: #0262FF;
     width: 274px;
 }
-
-/* ================================================= */
-/* FIM DAS CORREÇÕES DE LOGIN              */
-/* ================================================= */
-
 
 .center { 
     display: flex;
@@ -466,18 +454,11 @@ input {
 
 }
 
-/* Remove o botão nativo de mostrar senha no Chrome, Edge, Opera */
-input[type="password"]::-ms-reveal,
-input[type="password"]::-ms-clear,
-input[type="password"]::-webkit-credentials-auto-fill-button,
-input[type="password"]::-webkit-password-toggle-button {
-    display: none !important;
-}
+/* ================================================================ */
+/* O BLOCO DE CÓDIGO QUE ESCONDIA O ÍCONE NATIVO FOI REMOVIDO DAQUI */
+/* (input[type="password"]::-ms-reveal, etc.)                       */
+/* ================================================================ */
 
-/* Safari */
-input[type="password"]::-webkit-textfield-decoration-container {
-    display: none !important;
-}
 
 #loginForm{ 
     display: flex;
@@ -494,46 +475,37 @@ input[type="password"]::-webkit-textfield-decoration-container {
 }
 
 #cadeado { 
-    /* margin-right: 9px; */ /* <-- 3. REMOVIDO: O 'gap' em .row-itens já cuida disso */
+     /* margin-right: 9px; (Removido na correção anterior) */
 }
 
 #pessoa {
     margin-right: 4px;
 }
 
-/* =================================================
-   REGRAS DUPLICADAS REMOVIDAS DAQUI PARA BAIXO.
-   O arquivo original tinha várias regras repetidas.
-   =================================================
-*/
+/* ... (resto do seu CSS, removi as duplicatas) ... */
 
-
-/* Novas regras (atividades) que não estavam duplicadas */
 #Atividades {
     display: flex;
     text-align: center;
     flex-direction: column;
-    margin-bottom: 30px; /* Valor corrigido (ex: 30px) */
+    margin-bottom: 30px; 
 }
 
-/* Estilo para o botão transparente */
 button.circle {
     background-color: transparent;
     border: none;
     padding: 0;
     cursor: pointer;
-    
-    /* Mantém o layout que você já tinha */
     display: flex;
     text-align: center;
-    align-items: center; /* Ajuda a alinhar o ícone e o texto verticalmente */
+    align-items: center; 
 }
 
 button.circle h2 {
     padding: 8px;
     font-family: 'Baloo Chettan Regular', sans-serif;
     margin-left: 4%;
-    font-size: 21.7px; /* Movido para cá para ser mais específico */
+    font-size: 21.7px; 
 }
 
 #icone {
@@ -544,25 +516,14 @@ button.circle h2 {
 
 #iconefinal {
     width: 110px;
-    margin-top: 20px; /* Removida a duplicação de margin-top */
+    margin-top: 20px; 
     margin-left: 15%;
 }
 
-/* ================================================= */
-/* 4. ADICIONADO: Regra de Z-INDEX para segurança    */
-/* Isso força o input a ter prioridade de clique    */
-/* ================================================= */
-
-#senhaLogin {
-  position: relative; 
-  z-index: 5; /* Garante que o input fique por CIMA */
-}
-
-#mostrarSenha {
-  position: relative;
-  z-index: 2; /* Garante que o ícone fique por BAIXO */
-  cursor: pointer; /* Bônus: vira "mãozinha" no clique */
-}
+/* ================================================================ */
+/* AS REGRAS DE Z-INDEX PARA #senhaLogin e #mostrarSenha 
+   FORAM REMOVIDAS DAQUI, POIS NÃO SÃO MAIS NECESSÁRIAS. 
+/* ================================================================ */
 
 
 /* Smartphones grandes e tablets pequenos */
