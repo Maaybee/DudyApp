@@ -55,7 +55,7 @@ body {
     max-width: 280px;
 }
 #tutorial-button h3 { font-size: 20px; margin: 0; }
-.play-icon { width: 24px; height: 24px; filter: invert(1); }
+.play-icon { width: 24px; height: 24px; filter: invert(1); } /* Ícone branco */
 
 .divider {
     width: 80%;
@@ -66,8 +66,8 @@ body {
 
 #funcionalidades-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
+    grid-template-columns: 1fr 1fr; /* DUAS COLUNAS */
+    gap: 15px; /* ESPAÇAMENTO ENTRE OS CARDS */
     width: 100%;
     max-width: 320px;
 }
@@ -86,9 +86,13 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* ADICIONADO box-shadow */
     position: relative;
 }
-.img-square { max-width: 100%; max-height: 100%; object-fit: contain; }
+.img-square { max-width: 60px; max-height: 60px; object-fit: contain; } /* Reduzi o tamanho das imagens dentro dos quadrados */
+
+/* Cores de fundo (adicionado pink-bg) */
+.pink-bg { background-color: #FFB3D9; } 
 .purple-bg { background-color: #8C52FF; }
 .light-purple-bg { background-color: #B2A4FF; }
 .green-bg { background-color: #A0E6BA; }
@@ -97,7 +101,7 @@ body {
 .coming-soon-overlay { filter: grayscale(1) brightness(0.7); }
 .coming-soon-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-15deg); font-family: 'Baloo Chettan 2', sans-serif; font-size: 14px; font-weight: bold; color: white; background-color: rgba(0,0,0,0.6); padding: 5px 10px; border-radius: 5px; white-space: nowrap; }
 
-/* --- NOVO: ESTILOS DO MENU FIXO (COPIADO E ADAPTADO DA telaPerfil.css) --- */
+/* --- MENU FIXO --- */
 .menu {
     position: fixed;
     bottom: 20px;
@@ -150,16 +154,14 @@ body {
 
 .btnMenuRow h4 {
     font-size: 10px;
-    font-family: 'Baloo Chettan Regular';
+    font-family: 'Baloo Chettan 2', sans-serif; /* Usando Baloo Chettan 2 aqui também */
     margin-top: -5px;
     text-align: center;
-    color: #888; /* Cor padrão para texto do menu */
+    color: #888;
 }
 
-/* Estilo para o item ativo no menu */
 .menu .active h4 {
-    color: #007bff; /* Cor do texto do item ativo */
+    color: #007bff;
 }
 .menu .active img {
-    filter: invert(28%) sepia(85%) saturate(3015%) hue-rotate(200deg) brightness(100%) contrast(100%); /* Ícone azul */
-}
+    filter: invert(2
