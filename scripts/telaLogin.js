@@ -29,6 +29,15 @@ document.addEventListener("DOMContentLoaded", () => {
   // Verificação de segurança, embora os IDs existam no HTML.
   if (mostrarSenhaImg && senhaInput) { 
     mostrarSenhaImg.addEventListener("click", () => {
+
+      // ================================================================
+      // INÍCIO DA CORREÇÃO: Salva e restaura o valor da senha
+      // ================================================================
+
+      // 1. Salva o valor atual do input ANTES de qualquer mudança.
+      const valorSenha = senhaInput.value;
+
+      // 2. Muda o tipo do input (e a imagem)
       const fundo = mostrarSenhaImg.src;
       if (fundo.includes("senhaFechado.svg")) {
         mostrarSenhaImg.src = "../assets/senhaAberto.svg";
@@ -37,6 +46,18 @@ document.addEventListener("DOMContentLoaded", () => {
         mostrarSenhaImg.src = "../assets/senhaFechado.svg";
         senhaInput.type = "password";
       }
+
+      // 3. Restaura o valor no input.
+      //    Isso corrige o "bug" em navegadores mobile que apagam
+      //    o campo ao mudar o tipo de volta para 'password'.
+      senhaInput.value = valorSenha;
+
+      // 4. Devolve o foco ao campo (melhoria de UX)
+      senhaInput.focus(); 
+
+      // ================================================================
+      // FIM DA CORREÇÃO
+      // ================================================================
     });
   }
 
