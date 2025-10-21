@@ -71,20 +71,17 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.buttons button { 
     width: 271px;
     height: 52px;
     border-radius: 10px;
     margin-bottom: 30px;
     background-color: #FFF7F7;
     border: 3px solid #EBDFDF;
-    font-family: 'Baloo Chettan Regular';
+    font-family: 'Baloo Chettan Regular', sans-serif;
     font-size: 21.7px;
 }
 
-.buttons :disabled { 
+.buttons:disabled { 
     color: black;
 }
 
@@ -333,19 +330,25 @@ input::placeholder {
     font-size: 16px;
 }
 
+/* ================================================= */
+/* INÍCIO DAS CORREÇÕES DE LOGIN            */
+/* ================================================= */
+
 input { 
     background-color: #FFF7F7;
     border: none;
     outline: none;
     flex-grow: 1;
-    width: 50px;
-
+    
+    /* width: 50px; */   /* <-- 1. REMOVIDO: Isso limitava o input e causava quebra */
+    width: 100%;      /* <-- 1. ADICIONADO: Input agora ocupa o espaço disponível */
+    min-width: 0;     /* <-- 1. ADICIONADO: Boa prática de flexbox para inputs */
 }
+
 .col-itens { 
     display: flex;
     flex-direction: column;
     gap: 50px;
-
 }
 
 .col-itens-input { 
@@ -360,7 +363,10 @@ input {
 .row-itens { 
     display: flex;
     flex-direction: row;
-    gap: 50px;
+    
+    /* gap: 50px; */  /* <-- 2. REMOVIDO: Este gap era muito grande e "empurrava" os ícones */
+    gap: 15px;       /* <-- 2. ADICIONADO: Um gap razoável que não quebra o layout */
+    align-items: center; /* <-- 2. ADICIONADO: Alinha os ícones e o input verticalmente */
 }
 
 .linhaInput { 
@@ -369,6 +375,11 @@ input {
     border: #0262FF;
     width: 274px;
 }
+
+/* ================================================= */
+/* FIM DAS CORREÇÕES DE LOGIN              */
+/* ================================================= */
+
 
 .center { 
     display: flex;
@@ -483,39 +494,21 @@ input[type="password"]::-webkit-textfield-decoration-container {
 }
 
 #cadeado { 
-    margin-right: 9px;
+    /* margin-right: 9px; */ /* <-- 3. REMOVIDO: O 'gap' em .row-itens já cuida disso */
 }
 
 #pessoa {
     margin-right: 4px;
 }
 
-.group {
-    margin-left: 20px;
-}
-.text_menor { 
-    font-size: 15.7px;
-    margin-bottom: -10px;
-    font-family:'Gelasio';
-}
+/* =================================================
+   REGRAS DUPLICADAS REMOVIDAS DAQUI PARA BAIXO.
+   O arquivo original tinha várias regras repetidas.
+   =================================================
+*/
 
-.text_maior {
-    font-size: 38.7px;
-    margin: 0;
-    font-family:'Baloo Chettan Regular';
-    font-weight: 900;
-}
 
-#linha { 
-    height: 1px;
-    width: 330px;
-}
-
-.imagens { 
-    margin-top: 10px;
-    display: flex;
-    justify-content: center;
-}
+/* Novas regras (atividades) que não estavam duplicadas */
 #Atividades {
     display: flex;
     text-align: center;
@@ -555,65 +548,22 @@ button.circle h2 {
     margin-left: 15%;
 }
 
-/* Regra .buttons combinada e corrigida */
-.buttons { 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 271px;
-    height: 52px;
-    border-radius: 10px;
-    margin-bottom: 30px;
-    background-color: #FFF7F7;
-    border: 3px solid #EBDFDF;
-    font-family: 'Baloo Chettan Regular', sans-serif;
-    font-size: 21.7px;
+/* ================================================= */
+/* 4. ADICIONADO: Regra de Z-INDEX para segurança    */
+/* Isso força o input a ter prioridade de clique    */
+/* ================================================= */
+
+#senhaLogin {
+  position: relative; 
+  z-index: 5; /* Garante que o input fique por CIMA */
 }
 
-/* Seletor :disabled corrigido */
-.buttons:disabled { 
-    color: black;
+#mostrarSenha {
+  position: relative;
+  z-index: 2; /* Garante que o ícone fique por BAIXO */
+  cursor: pointer; /* Bônus: vira "mãozinha" no clique */
 }
 
-#buttonsLogin button { 
-    background-color: #0262FF;
-    border-radius: 30px;
-    color: white;
-    border: 1px solid #0262FF;
-    height: 50px;
-    width: 340px;
-    margin-top: 30px;
-    font-family:'Baloo Chettan Regular';
-    font-size: 18px;
-}
-
-#logoInicial { 
-    margin-top: 50px;
-    height: 303px;
-    width: 292px;
-}
-
-#home {
-    display: flex;
-    flex-direction: row;
-    margin: auto;
-    justify-content: space-between; 
-    align-items: center; 
-    margin-top: -10px;
-}
-
-#logo { 
-    height: 62px;
-    width: 62px;
-    margin-right: 20px;
-}
-
-#textHome { 
-    font-family:'Baloo Chettan Regular';
-    font-size: 21px;
-    margin-left: 25px;
-    margin-top: 10px;
-}
 
 /* Smartphones grandes e tablets pequenos */
 @media (min-width: 390px) {
