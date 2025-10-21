@@ -1,0 +1,135 @@
+@font-face {
+    font-family: 'Baloo Chettan Regular';
+    src: local("☺"), url("../assets/fonts/baloo-chettan-webfont/BalooChettan-Regular.woff") format("woff");
+    font-weight: 900;
+    font-style: normal
+}
+
+body, html {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    gap: 5vh;
+    padding: 20px;
+}
+
+#logo {
+    width: 70vw;
+}
+
+.block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: plum;
+    width: 77vw;
+    height: 15vh;
+    border-radius: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    gap: 5px;
+}
+
+.block_inside{
+    width: 47vw;
+    height: 6vh;
+    border-radius: 15px;
+}
+
+#pontuacao, #tempo {
+    background-color: #553399;
+}
+
+#pontua_inside, #tempo_inside { 
+    background-color: #ABACE3;
+}
+
+h2{
+    color: white;
+    font-family: 'Baloo Chettan Regular';
+    font-size: 1.6rem;
+    margin: 0;
+
+}
+
+h3 { 
+    color: white;
+    font-family: 'Baloo Chettan Regular';
+    font-size: 4rem;
+    margin: 0;
+}
+
+.blockrow{ 
+    width: 37vw;
+    height: 15vh;
+}
+
+.row { 
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+
+.insideRow { 
+    width: 25vw;
+    height: 5.5vh;
+}
+
+h4{
+    color: white;
+    font-family: 'Baloo Chettan Regular';
+    font-size: 2rem;
+    margin: 0;
+}
+
+#record{ 
+    background-color: #FF7BAC;
+}
+
+#record_inside{
+    background-color: #FFB8D2;
+}
+
+#row_buttons { 
+    display: flex;
+    justify-content: center; 
+    align-items: center;     
+    gap: 15px;               
+    margin: 0;
+}
+
+.btns {
+    border:none;
+    background-color: #0262FF;
+    width: 138px;
+    height: 67px;
+    color: white;
+    font-family:'Baloo Chettan Regular';
+    text-align: center;
+    cursor: pointer;
+    min-height: 67px; 
+    font-size: 19px;
+    display: inline-block; 
+    vertical-align: middle;  
+}
+
+
+
+#voltar { 
+    border-bottom-left-radius: 15px;
+    border-top-left-radius: 15px;
+
+}
+
+#proxAtv {
+    border-bottom-right-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.text_b { 
+    font-size: 45px;
+}
+
