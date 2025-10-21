@@ -80,8 +80,8 @@ body {
 }
 
 .icone-quadrado {
-    width: 90px;
-    height: 90px;
+    width: 100px;
+    height: 100px;
     border-radius: 15px;
     display: flex;
     align-items: center;
@@ -89,16 +89,16 @@ body {
     box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* ADICIONADO box-shadow */
     position: relative;
 }
-.img-square { max-width: 60px; max-height: 60px; object-fit: contain; } /* Reduzi o tamanho das imagens dentro dos quadrados */
+.img-square { max-width: 70%; max-height: 70%; object-fit: contain; } /* Reduzi o tamanho das imagens dentro dos quadrados */
 
 /* Cores de fundo (adicionado pink-bg) */
-.pink-bg { background-color: #FFB3D9; } 
+.pink-bg { background-color: #ff6ce7; } 
 .purple-bg { background-color: #8C52FF; }
-.light-purple-bg { background-color: #B2A4FF; }
-.green-bg { background-color: #A0E6BA; }
+.light-purple-bg { background-color: #0262ff; }
+.green-bg { background-color: #00bf63; }
 .card-titulo { font-family: 'Baloo Chettan 2', sans-serif; font-size: 16px; color: #333; margin: 0; }
 
-.coming-soon-overlay { filter: grayscale(1) brightness(0.7); }
+.coming-soon-overlay { filter: grayscale(0.5) brightness(0.7); }
 .coming-soon-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-15deg); font-family: 'Baloo Chettan 2', sans-serif; font-size: 14px; font-weight: bold; color: white; background-color: rgba(0,0,0,0.6); padding: 5px 10px; border-radius: 5px; white-space: nowrap; }
 
 /* --- MENU FIXO --- */
@@ -163,5 +163,3 @@ body {
 .menu .active h4 {
     color: #007bff;
 }
-.menu .active img {
-    filter: invert(2
