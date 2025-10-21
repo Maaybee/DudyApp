@@ -89,6 +89,7 @@ body {
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     position: relative;
 }
+.img-square { max-width: 90px; max-height: 90px; object-fit: contain; }
 .purple-bg { background-color: #8C52FF; }
 .light-purple-bg { background-color: #B2A4FF; }
 .green-bg { background-color: #A0E6BA; }
