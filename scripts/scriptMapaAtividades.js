@@ -1,23 +1,26 @@
-// Arquivo: scripts/scriptMapaAtividades.js (MANTENHA A VERSÃO ANTERIOR)
+// Arquivo: scripts/scriptMapaAtividades.js
 
 document.addEventListener('DOMContentLoaded', () => {
     const licoesContainer = document.getElementById('licoes-container');
     const btnVoltar = document.querySelector('.btn-voltar');
 
-    // --- POSIÇÕES DAS LIÇÕES ---
-    // Ajuste 'top' e 'left' para alinhar com seu SVG combinado.
-    // 'top' agora é relativo à altura TOTAL das duas imagens juntas.
+    // --- POSIÇÕES DAS LIÇÕES (AJUSTE AQUI!) ---
+    // 'top': Distância do topo do mapa (em %). Aumente para descer.
+    // 'left': Distância da esquerda (em %). 50% = centro.
     const posicoes = [
-        { top: '10%', left: '50%' },   // Posição da Lição 1
-        { top: '25%', left: '50%' },   // Posição da Lição 2
-        { top: '40%', left: '50%' },   // Posição da Lição 3
-        { top: '55%', left: '50%' },   // Posição da Lição 4
-        { top: '70%', left: '50%' },   // Posição da Lição 5
-        // ... continue ajustando e adicionando ...
+        // Valores de exemplo - VOCÊ PRECISA AJUSTAR ESTES VALORES
+        { top: '10%', left: '50%' },   // Posição da Lição 1 (Foods) - Tente aumentar o top
+        { top: '25%', left: '50%' },   // Posição da Lição 2 (Foods 2) - Tente aumentar o top
+        { top: '40%', left: '50%' },   // Posição da Lição 3 (Foods 3) - Tente aumentar o top
+        { top: '55%', left: '50%' },   // Posição da Lição 4 (Foods 4) - Tente aumentar o top
+        // Adicione as posições para as outras 16 lições aqui...
+        // Ex: { top: '70%', left: '40%' }, // Um pouco à esquerda
+        // Ex: { top: '85%', left: '60%' }, // Um pouco à direita
     ];
 
-    const coresBotoes = ['cor-1', 'cor-2', 'cor-3', 'cor-4'];
+    const coresBotoes = ['cor-1', 'cor-2', 'cor-3', 'cor-4']; // Cores dos botões
 
+    // Cria os botões (O restante do código permanece o mesmo)
     DADOS_LICOES.forEach((licao, index) => {
         if (!posicoes[index]) return; 
 
@@ -28,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const pos = posicoes[index];
         botao.style.top = pos.top;
         botao.style.left = pos.left;
+        botao.style.transform = 'translateX(-50%)'; // Mantém centralizado horizontalmente
 
         const icone = document.createElement('img');
         icone.src = licao.icone;
