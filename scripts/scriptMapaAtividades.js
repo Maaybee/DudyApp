@@ -10,15 +10,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- POSIÇÕES DAS LIÇÕES (AJUSTE AQUI!) ---
     // Você ainda precisará ajustar estes valores após a tela ficar com a rolagem correta.
     const posicoes = [
-        { top: '10%', left: '50%' },   // Posição da Lição 1
-        { top: '25%', left: '50%' },   // Posição da Lição 2
-        { top: '40%', left: '50%' },   // Posição da Lição 3
-        { top: '55%', left: '80%' },   // Posição da Lição 4
-        { top: '70%', left: '50%' },   // Posição da Lição 5
-        // ... adicione as posições para as suas 20 lições aqui
+        { top: '22%', left: '40%' },   // Posição da Lição 1
+        { top: '47%', left: '52%' },   // Posição da Lição 2
+        { top: '68%', left: '39%' },   // Posição da Lição 3
+        { top: '84%', left: '77%' },   // Posição da Lição 4
+        // ... adicione as posições para as suas 20 lições 8
     ];
 
-    const coresBotoes = ['cor-1', 'cor-2', 'cor-3', 'cor-4'];
+    const coresBotoes = ['cor-1', 'cor-2', 'cor-3', 'cor-4', 'cor-2',  'cor-3'];
 
     // Função para criar e posicionar os botões
     const criarLicoes = () => {

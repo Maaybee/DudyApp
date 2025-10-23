@@ -28,6 +28,20 @@ const DADOS_LICOES = [
         descricao: "Identifique objetos do dia a dia.",
         icone: '/DudyApp/assets/pizza.svg', // Ícone para a Lição 3
         atividades: [11, 12, 13, 14, 15] // Sequência de 5 novas atividades
+    },
+    {
+        id: 6,
+        titulo: "Foods 6",
+        descricao: "Identifique objetos do dia a dia.",
+        icone: '/DudyApp/assets/pizza.svg', // Ícone para a Lição 3
+        atividades: [11, 12, 13, 14, 15] // Sequência de 5 novas atividades
+    },
+     {
+        id: 5,
+        titulo: "Foods 5",
+        descricao: "Identifique objetos do dia a dia.",
+        icone: '/DudyApp/assets/pizza.svg', // Ícone para a Lição 3
+        atividades: [11, 12, 13, 14, 15] // Sequência de 5 novas atividades
     }
 ];
 
