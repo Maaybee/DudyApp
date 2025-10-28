@@ -130,4 +130,26 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+
+
+  const toggleIcon = document.getElementById('toggleSenhaIcone');
+    
+
+  const iconeOlhoFechado = '../assets/senhaFechado.svg';
+  const iconeOlhoAberto = '../assets/senhaAberto.svg';
+
+  if (senhaInput && toggleIcon) {
+      toggleIcon.addEventListener('click', () => {
+
+          if (senhaInput.type === 'password') {
+              // Se for senha, muda para texto (revela)
+              senhaInput.type = 'text';
+              toggleIcon.src = iconeOlhoAberto;
+          } else {
+              // Se for texto, muda para senha (oculta)
+              senhaInput.type = 'password';
+              toggleIcon.src = iconeOlhoFechado;
+          }
+      });
+  }
 });
