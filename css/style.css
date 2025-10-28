@@ -604,3 +604,47 @@ button.circle h2 {
 }
 
 }
+
+.row-itens {
+    /* (Seus estilos existentes... display: flex, gap, etc.) */
+    position: relative; /* MUITO IMPORTANTE! */
+}
+
+/* 2. Posicione o ícone do olho de forma absoluta, dentro do 'pai' */
+#toggleSenhaIcone {
+    position: absolute;
+    right: 5px; /* Posição a 5px da borda direita */
+    
+    /* Centraliza verticalmente (se necessário) */
+    top: 50%;
+    transform: translateY(-50%); 
+    
+    cursor: pointer; /* Muda o mouse para uma "mãozinha" */
+    width: 20px;     /* Ajuste o tamanho do seu ícone */
+    height: 20px;    /* Ajuste o tamanho do seu ícone */
+    
+}
+
+/* 3. (Opcional) Adicione um 'padding' no input da senha 
+      para o texto não passar por baixo do ícone */
+#senhaLogin {
+    /* Adiciona um espaço à direita do input */
+    padding-right: 35px; /* (O 'right' + 'width' do ícone) */
+}
+
+.input{ 
+    text-align: center;
+    margin: 0;
+}
+
+input[type="password"]::-ms-reveal {
+  display: none;
+}
+input::-webkit-credentials-auto-fill-button {
+  display: none;
+  visibility: hidden;
+}
+
+#emailLogin{
+    padding-right: 40px;
+}
