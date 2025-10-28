@@ -34,6 +34,7 @@ body {
     display: flex;
     justify-content: center;
     background-color: #FFF7F7;
+    margin-top: 2vh;
 
 }
 
@@ -648,4 +649,8 @@ input {
     color: #b4b4b4;
     font-family: 'Baloo Chettan Regular';
 
+}
+
+#espacoEmBranco{ 
+    height: 100px;
 }
