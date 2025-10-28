@@ -648,3 +648,9 @@ input::-webkit-credentials-auto-fill-button {
 #emailLogin{
     padding-right: 40px;
 }
+
+input {
+    color: #b4b4b4;
+    font-family: 'Baloo Chettan Regular';
+
+}
