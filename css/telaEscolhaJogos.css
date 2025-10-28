@@ -17,8 +17,8 @@ html{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 110px;
-    width: 110px;
+    height: 12vh;
+    width: 30vw;
     border-radius: 20px;
     cursor: pointer;
 
@@ -28,7 +28,7 @@ html{
     display: flex;
     flex-direction: row;
     align-items: start;
-    gap: 40px;
+    gap: 6vh;
 }
 
 #logo_memoria {
@@ -74,7 +74,7 @@ html{
 }
 
 h1{ 
-    margin-top: 50px;
+    margin-top: 9vh;
     font-family: 'Baloo Chettan Regular';
     text-align: center;
 }
@@ -84,4 +84,12 @@ h2{
     font-size: 1rem;
     width: 80px;
     text-align: center;
+}
+
+.col-block { 
+    margin-top: 8vh;
+    align-items: center;
+    flex-direction: column;
+    display: flex;
+    gap: 5vh;
 }
