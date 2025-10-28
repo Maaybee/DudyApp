@@ -21,10 +21,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const textmessage = document.getElementById("textmessage");
 
 
-  // ================================================================
-  // O BLOCO DE CÓDIGO INTEIRO "=== Mostrar/esconder senha ==="
-  // QUE ESTAVA AQUI FOI COMPLETAMENTE REMOVIDO.
-  // ================================================================
 
 
   // === Fechar popup clicando fora ===
