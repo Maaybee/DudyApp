@@ -44,7 +44,7 @@ async function carregarPerfil(idEstudante) {
     
 // --- NOVO: calcula a porcentagem com base na pontuação total ---
     const pontuacaoTotal = crianca.pontuacao_total ?? 0;
-    const porcentagem = Math.min((pontuacaoTotal / 3000) * 100, 100); // garante max 100%
+    const porcentagem = Math.min((pontuacaoTotal / 8000) * 100, 100); // garante max 100%
 
     const progressoElem = document.getElementById("progresso-preenchimento");
     const progressoText = document.getElementById("progresso");
@@ -135,3 +135,4 @@ async function logout() {
 function trocarPerfil (){ 
   window.location.href = "telaCadKid_1.html"
 }
+
