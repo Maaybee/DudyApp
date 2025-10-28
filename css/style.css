@@ -31,8 +31,6 @@ body {
     margin: 0;
     padding: 0;
     height: 100%;
-    margin-top: 10px;
-    margin-bottom: 50px;
     display: flex;
     justify-content: center;
     background-color: #FFF7F7;
@@ -528,9 +526,6 @@ button.circle h2 {
 
 /* Smartphones grandes e tablets pequenos */
 @media (min-width: 390px) {
-  html { 
-    margin-top: 40px;
-  }
 
   #telaHomeInt{ 
     gap: 20px;
