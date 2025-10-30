@@ -1,0 +1,40 @@
+workflows:
+  ionic-ios-build:
+    name: Ionic iOS Build (Codemagic)
+    instance_type: mac_mini_m2 # Usar a máquina M2 gratuita
+    environment:
+      # Definir as variáveis de ambiente, como o Node.js
+      vars:
+        NODE_VERSION: 20.x
+        
+    scripts:
+      # 1. Instalar o Node.js
+      - name: Set up Node.js
+        script: nvm install $NODE_VERSION
+      
+      # 2. Instalar dependências e construir a parte web
+      - name: Install dependencies and build web
+        script: |
+          npm install
+          npm install -g @ionic/cli
+          npm run build
+          
+      # 3. Adicionar plataforma iOS e sincronizar
+      - name: Add and Sync iOS platform
+        script: |
+          npx cap add ios
+          npx cap sync ios
+          
+      # 4. Instalar CocoaPods (a dependência nativa)
+      - name: Install CocoaPods dependencies
+        script: |
+          cd ios/App
+          pod install
+          
+    # 5. Saída: compactar o projeto Xcode para download
+    artifacts:
+      - $HOME/clone/ios/App/App.xcodeproj # Projeto Xcode
+      - $HOME/clone/ios/App/Podfile.lock
+      - $HOME/clone/ios/App/Podfile
+      - $HOME/clone/ios/**/*.xcworkspace
+      - 'build/**'
