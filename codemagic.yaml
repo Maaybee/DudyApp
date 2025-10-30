@@ -1,40 +1,44 @@
 workflows:
   ionic-ios-build:
-    name: Ionic iOS Build (Codemagic)
-    instance_type: mac_mini_m2 # Usando o Mac M2 gratuito
+    name: Ionic iOS Build (Final Attempt)
+    instance_type: mac_mini_m2
     
-    environment:
-      # Definimos a versão do Node.js
-      vars:
-        NODE_VERSION: 20.x
-        
+    # --- MUDANÇA: Usamos a ferramenta 'npm-install' que já configura o Node.js 20.x ---
+    # Isso elimina a necessidade do passo 'Set up Node.js' manual.
+    
     scripts:
-      # 1. (NOVA CORREÇÃO) Configura o Node.js usando a ferramenta nativa do Codemagic
-      - name: Set up Node.js
+      - name: Install dependencies (Node.js 20.x and NPM)
         script: |
-          # Use o gerenciador nativo do Codemagic para configurar a versão do Node.js
-          xcode-version use $NODE_VERSION
+          # 1. Configura a versão do Node.js (necessária para que o npm funcione)
+          # Usamos o método mais robusto no Codemagic
+          if ! command -v npm &> /dev/null
+          then
+            echo "Installing Node.js 20..."
+            nvm install 20
+          fi
           
-      # 2. Instalar dependências web e forçar a instalação do CLI
-      - name: Install dependencies and build web
-        script: |
+          # 2. Instala as dependências do seu projeto (package.json)
           npm install
-          npm install -g @ionic/cli @capacitor/cli
-          npm run build
           
-      # 3. Adicionar plataforma iOS e sincronizar
-      - name: Add and Sync iOS platform
-        script: |
-          npx cap add ios
-          npx cap sync ios
+          # 3. Instala as ferramentas CLI globais (Ionic e Capacitor)
+          npm install -g @ionic/cli
+          npm install @capacitor/cli @capacitor/ios
+
+      - name: Run web build (Create 'build' folder)
+        script: npm run build
           
-      # 4. Instalar CocoaPods (a dependência nativa)
+      - name: Add iOS Platform
+        script: npx cap add ios
+
+      - name: Sync Web App with Native Project
+        script: npx cap sync ios
+          
       - name: Install CocoaPods dependencies
         script: |
           cd ios
           pod install --repo-update
           
-    # 5. Saída: compactar o projeto Xcode para download
+    # Saída: compactar o projeto Xcode para download
     artifacts:
       - $HOME/clone/ios/App/App.xcodeproj
       - $HOME/clone/ios/**/*.xcworkspace
