@@ -34,3 +34,4 @@ jobs:
     - name: Sync Web App with Native Project
       run: npx cap sync ios
       
+    # - run: npm test
