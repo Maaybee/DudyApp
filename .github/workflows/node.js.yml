@@ -1,0 +1,37 @@
+name: Node.js CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Use Node.js 18.x
+      uses: actions/setup-node@v4
+      with:
+        node-version: 18.x
+        
+    - name: Install dependencies
+      run: npm install
+        
+    - name: Run build
+      run: npm run build --if-present
+    
+    - name: Install Ionic and Capacitor CLIs
+      run: npm install -g @ionic/cli && npm install @capacitor/cli
+      
+    - name: Add iOS Platform
+      run: npx cap add ios
+
+    - name: Sync Web App with Native Project
+      run: npx cap sync ios
+      
+    # - run: npm test
