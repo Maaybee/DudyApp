@@ -1,6 +1,5 @@
 name: Node.js CI
 
-# O 'on:' está correto, pois você está na 'main'
 on:
   push:
     branches: [ "main" ]
@@ -10,10 +9,8 @@ on:
 jobs:
   build:
 
-    # 1. MUDANÇA IMPORTANTE: Mudando para macOS para o build iOS
     runs-on: macos-latest
 
-    # 2. MUDANÇA: Removemos a "matrix" (não precisamos testar 3 versões)
     steps:
     - uses: actions/checkout@v4
     
@@ -21,18 +18,12 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: 18.x
-        # 3. MUDANÇA: Removemos 'cache: 'npm'' para parar o erro
         
     - name: Install dependencies
-      # 4. MUDANÇA: Garantindo que está 'npm install'
       run: npm install
-
-      # ... (aqui estão seus passos 'checkout', 'Use Node.js', 'Install', 'Run build')
-
+        
     - name: Run build
       run: npm run build --if-present
-
-    # --- ADICIONE ESTAS 4 LINHAS ABAIXO ---
     
     - name: Install Ionic and Capacitor CLIs
       run: npm install -g @ionic/cli && npm install @capacitor/cli
@@ -42,8 +33,4 @@ jobs:
 
     - name: Sync Web App with Native Project
       run: npx cap sync ios
-    - name: Run build
-      run: npm run build --if-present
-    
-    # 5. MUDANÇA: Desativando 'npm test' por enquanto
-    # - run: npm test
+      
