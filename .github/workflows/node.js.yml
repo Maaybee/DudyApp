@@ -10,31 +10,50 @@ jobs:
   build:
     runs-on: macos-latest
     steps:
+      # 1. Baixa seu código
       - uses: actions/checkout@v4
       
+      # 2. Configura o Node.js
       - name: Use Node.js 20.x
         uses: actions/setup-node@v4
         with:
           node-version: 20.x
           
+      # 3. Instala as dependências web
       - name: Install dependencies
         run: npm install
           
+      # 4. Compila o app web (cria a pasta 'build')
       - name: Run build
         run: npm run build
       
+      # 5. Instala as ferramentas do Ionic/Capacitor
       - name: Install Ionic and Capacitor
         run: |
           npm install -g @ionic/cli
           npm install @capacitor/cli @capacitor/ios
         
+      # 6. Cria o projeto iOS nativo
       - name: Add iOS Platform
         run: npx cap add ios
 
+      # 7. Sincroniza o app web com o projeto nativo
       - name: Sync Web App with Native Project
         run: npx cap sync ios
       
+      # 8. Instala as dependências nativas (Pods)
       - name: Install CocoaPods
         run: |
           cd ios/App
           pod install
+      
+      # --- 9. (NOVO) Compacta a pasta 'ios' ---
+      - name: Compactar o projeto iOS
+        run: zip -r DudyApp_XcodeProject.zip ./ios
+
+      # --- 10. (NOVO) Faz o upload do arquivo .zip ---
+      - name: Fazer Upload do Projeto iOS (Zip)
+        uses: actions/upload-artifact@v4
+        with:
+          name: DudyApp-Xcode-Project
+          path: DudyApp_XcodeProject.zip
