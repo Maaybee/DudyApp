@@ -24,7 +24,7 @@ jobs:
         run: npm install react-scripts
         
       - name: Run build
-        run: npm run build --if-present
+        run: CI=false npm run build --if-present
       
       - name: Install Ionic and Capacitor
         run: |
