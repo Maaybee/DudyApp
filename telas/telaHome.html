@@ -4,95 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DudyApp</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/telaHome.css">
 </head>
 <body>
     <div id="telaHome">
-        <div id="home">
-            <div class="group">
-                <p class="text_menor"> Dudy Academy </p>
-                <p class="text_maior"> Practice </p>
+
+        <H2> Dudy Academy </H2>
+        <h1> Practice </h1>
+
+        <div id="blocosHome"> 
+
+            <div class="blocos" id="Atividades" onclick="atividade()">
+                <h3> Atividades </h3>
+                <img src="../assets/imgAtv.svg" alt="Atividades" id="imgAtv">
+                 
+
             </div>
-            <img src="../assets/logo.png" id="logo" alt="img">
+            <div class="blocos" id="jogos" onclick="jogos()"> 
+                <img src="../assets/imgjg.svg" alt="Jogos" id="imgjg">
+                <h3> Jogos </h3>
+
+            </div>
+            <div class="blocos" id="historias" onclick="historia()">
+                <h3> Histórias </h3>
+                <img src="../assets/imghis.svg" alt="Historias" id="imghis">
+
+
+            </div>
+            <div class="blocos" id="vdtutoriais">
+                <img src="../assets/imgvd.svg" alt="Videos" id="imgvd">
+                <h3> Vídeos Tutoriais </h3>
+
+            </div>
         </div>
-        <hr id="linha">
 
-        <div id="telaHomeInt"> 
-            <h1 id="textHome"> Pratique & revise </h1>
+            
+        <div class="menu"> 
 
-            <div id="blocos">
-
-                <button id="blocoAzul"> 
-                    <img src="../assets/livro.png" id="livro" alt="livro">
-                    <div id="juntarTXT"> 
-                        <h3> Minhas</h3>
-                        <h3 style="color: #FFD317;"> X </h3>
-                    </div>
-                    <h3 >Sentenças</h3>
+            <div class="btnsMenu"> 
+                <button class="btnMenu" id="btnHomeHome"> 
+                    <img src="../assets/home.png" alt="MenuHome"> 
                 </button>
-
-                <button id="blocoRosa">
-                    <img src="../assets/cerebro.png" id="cerebro" alt="livro">
-                    <div id="juntarTXT"> 
-                        <h3> Minhas</h3>
-                        <h3 style="color: #FFD317;"> X </h3>
-                    </div>
-                    <h3 >Palavras</h3>
-
+                <button class="btnMenu" id="btnPerfilHome" onclick="perfil()"> 
+                    <img  id="fotoPerfil" src="../assets/perfil.png" alt="MenuPrática" > 
                 </button>
-            </div>
-
-            <button id="blocoRevise"> 
-                <img src="../assets/coracao.png" id="coracao" alt="coracao">
-                <div id="juntarTXTLinha"> 
-                    <h3> Revise </h3>
-                    <h3 style="color: #FFD317;"> X </h3>
-                    <h3> erros</h3>
-                </div> 
-            </button>
-
-            <h2> A prática leva a perfeição! </h2>
-            <div id="btns"> 
-
-                 <button id="atividades" class="btnHome" onclick="atividade()"> 
-                    <img src="../assets/tinta 1.png" id="tinta" alt="fone">
-                    <h3> Atividades</h3>
+                <button class="btnMenu" id="btnToyHome" onclick="urso()"> 
+                    <img src="../assets/toy.png" alt="MenuToy">
                 </button>
-                <br>
-                <br>
-                <button id="histórias" class="btnHome" onclick="historia()">
-                    <img src="../assets/fone.png" id="fone" alt="fone">
-                    <h3> Histórias</h3>
-                </button>
-                <br>
-                <br>
-                <button class="btnHome" onclick="jogos()"> 
-                    <img src="../assets/bussola.png" id="bussola" alt="bussola">
-                    <h3>Jogos</h3>
-                </button>
-
-                <div id="espacoEmBranco"></div>
-
-            </div>
-
-            <div class="menu"> 
-
-                <div class="btnsMenu"> 
-                    <button class="btnMenu" id="btnHomeHome"> 
-                        <img src="../assets/home.png" alt="MenuHome"> 
-                    </button>
-
-                    <button class="btnMenu" id="btnPerfilHome" onclick="perfil()"> 
-                        <img  id="fotoPerfil" src="../assets/perfil.png" alt="MenuPrática" > 
-                    </button>
-
-                    <button class="btnMenu" id="btnToyHome" onclick="urso()"> 
-                        <img src="../assets/toy.png" alt="MenuToy">
-                    </button>
-                </div>
             </div>
         </div>
     </div>
+
+    <div id="espacoEmBranco"> </div>
+
 </body>
 <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
 <script src="../scripts/supabaseConfig.js"></script>
