@@ -1,45 +1,49 @@
-workflows:
-  ionic-ios-build:
-    name: Ionic iOS Build (Final Attempt)
-    instance_type: mac_mini_m2
-    
-    # --- MUDANÇA: Usamos a ferramenta 'npm-install' que já configura o Node.js 20.x ---
-    # Isso elimina a necessidade do passo 'Set up Node.js' manual.
-    
-    scripts:
-      - name: Install dependencies (Node.js 20.x and NPM)
-        script: |
-          # 1. Configura a versão do Node.js (necessária para que o npm funcione)
-          # Usamos o método mais robusto no Codemagic
-          if ! command -v npm &> /dev/null
-          then
-            echo "Installing Node.js 20..."
-            nvm install 20
-          fi
+name: Node.js CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
           
-          # 2. Instala as dependências do seu projeto (package.json)
-          npm install
+      - name: Install dependencies
+        run: npm install
           
-          # 3. Instala as ferramentas CLI globais (Ionic e Capacitor)
-          npm install -g @ionic/cli
+      - name: Run build (Web assets)
+        run: npm run build
+      
+      # --- NOVA CORREÇÃO: Forçar a instalação e adicionar a plataforma ---
+      - name: Install Capacitor and Add iOS Platform
+        run: |
+          # 1. Instala o CLI do Capacitor e a plataforma iOS
           npm install @capacitor/cli @capacitor/ios
-
-      - name: Run web build (Create 'build' folder)
-        script: npm run build
           
-      - name: Add iOS Platform
-        script: npx cap add ios
-
+          # 2. Adiciona a plataforma iOS (Esta etapa CRIA o Podfile)
+          npx cap add ios
+        
       - name: Sync Web App with Native Project
-        script: npx cap sync ios
+        run: npx cap sync ios
           
       - name: Install CocoaPods dependencies
-        script: |
+        run: |
+          # 3. Roda o pod install DENTRO da pasta iOS/App
           cd ios
-          pod install --repo-update
+          pod install
           
-    # Saída: compactar o projeto Xcode para download
-    artifacts:
-      - $HOME/clone/ios/App/App.xcodeproj
-      - $HOME/clone/ios/**/*.xcworkspace
-      - 'build/**'
+      # 4. Saída: compactar o projeto Xcode para download (Artifacts)
+      - name: Compactar o projeto iOS
+        uses: actions/upload-artifact@v4
+        with:
+          name: DudyApp-Xcode-Project
+          path: ios/
