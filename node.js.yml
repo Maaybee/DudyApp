@@ -26,7 +26,22 @@ jobs:
     - name: Install dependencies
       # 4. MUDANÇA: Garantindo que está 'npm install'
       run: npm install
+
+      # ... (aqui estão seus passos 'checkout', 'Use Node.js', 'Install', 'Run build')
+
+    - name: Run build
+      run: npm run build --if-present
+
+    # --- ADICIONE ESTAS 4 LINHAS ABAIXO ---
+    
+    - name: Install Ionic and Capacitor CLIs
+      run: npm install -g @ionic/cli && npm install @capacitor/cli
       
+    - name: Add iOS Platform
+      run: npx cap add ios
+
+    - name: Sync Web App with Native Project
+      run: npx cap sync ios
     - name: Run build
       run: npm run build --if-present
     
