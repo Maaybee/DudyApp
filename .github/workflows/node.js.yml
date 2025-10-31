@@ -1,4 +1,4 @@
-name: Ionic iOS Build (v3 - A Versão Correta)
+name: Ionic iOS Build
 
 on:
   push:
@@ -25,20 +25,20 @@ jobs:
       - name: Rodar Build Web (Criar pasta 'build')
         run: npm run build
       
-      # 3. Limpa qualquer pasta 'ios' antiga
+      # 3. Limpar pasta iOS
       - name: Limpar a plataforma iOS antiga
         run: rm -rf ios
         
-      # 4. CRIA o projeto iOS (Este é o passo que cria o Podfile)
-      - name: Adicionar Plataforma iOS
-        run: npx cap add ios
-            
-      # 5. SINCRONIZA o app web (copia a pasta 'build' para dentro)
-      - name: Sincronizar App Web
-        run: npx cap sync ios
-              
-      # 6. INSTALA os Pods (Agora na pasta correta 'ios/App')
+      # 4. (NOVO) Instala as ferramentas nativas ANTES
       - name: Instalar CocoaPods
+        run: sudo gem install cocoapods
+
+      # 5. Sincroniza o Capacitor (Isso vai rodar 'add ios' e criar o Podfile)
+      - name: Sincronizar Capacitor (Cria Podfile)
+        run: npx cap sync ios
+          
+      # 6. Instala as dependências do Podfile
+      - name: Instalar Dependências do CocoaPods
         run: |
           cd ios/App
           pod install
