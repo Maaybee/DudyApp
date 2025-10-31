@@ -1,4 +1,4 @@
-name: Ionic iOS Build
+name: Ionic iOS Build (v3 - A Versão Correta)
 
 on:
   push:
@@ -10,40 +10,42 @@ jobs:
   build:
     runs-on: macos-latest
     steps:
+      # 1. Baixa o código
       - uses: actions/checkout@v4
       
+      # 2. Configura o Node.js 20
       - name: Use Node.js 20.x
         uses: actions/setup-node@v4
         with:
           node-version: 20.x
           
-      # 1. Instala todas as dependências (React, Ionic, Capacitor, react-scripts)
+      # 3. Instala todas as dependências
       - name: Instalar todas as dependências
         run: npm install
           
-      # 2. Roda o build web (cria a pasta 'build')
+      # 4. Roda o build web (cria a pasta 'build')
       - name: Rodar Build Web (Criar pasta 'build')
         run: npm run build
       
-      # 3. Limpar pasta iOS
+      # 5. Limpa qualquer pasta 'ios' antiga
       - name: Limpar a plataforma iOS antiga
         run: rm -rf ios
         
-      # 4. (NOVO) Instala as ferramentas nativas ANTES
-      - name: Instalar CocoaPods
-        run: sudo gem install cocoapods
-
-      # 5. Sincroniza o Capacitor (Isso vai rodar 'add ios' e criar o Podfile)
-      - name: Sincronizar Capacitor (Cria Podfile)
+      # 6. CRIA o projeto iOS (Este é o passo que cria o Podfile)
+      - name: Adicionar Plataforma iOS
+        run: npx cap add ios
+            
+      # 7. SINCRONIZA o app web (copia a pasta 'build' para dentro)
+      - name: Sincronizar App Web
         run: npx cap sync ios
-          
-      # 6. Instala as dependências do Podfile
-      - name: Instalar Dependências do CocoaPods
+              
+      # 8. INSTALA os Pods (Agora na pasta correta 'ios/App')
+      - name: Instalar CocoaPods
         run: |
           cd ios/App
           pod install
 
-      # 7. SAÍDA: Compacta e sobe o projeto para download
+      # 9. SAÍDA: Compacta e sobe o projeto para download
       - name: Fazer Upload do Projeto iOS (Zip)
         uses: actions/upload-artifact@v4
         with:
