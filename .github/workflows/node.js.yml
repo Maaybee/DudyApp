@@ -17,33 +17,36 @@ jobs:
         with:
           node-version: 20.x
           
-      # Instala todas as dependências (React, Ionic, Capacitor, react-scripts)
+      # 1. Instala as dependências (React, Ionic, Capacitor, react-scripts)
       - name: Instalar todas as dependências
         run: npm install
           
-      # Roda o build web (cria a pasta 'build')
+      # 2. Roda o build web (cria a pasta 'build')
       - name: Rodar Build Web (Criar pasta 'build')
         run: npm run build
       
-      # --- PASSO CRUCIAL: LIMPAR E RE-CRIAR A ESTRUTURA NATIVA ---
-      # Remove a pasta 'ios' antiga, para garantir que o Podfile seja gerado.
+      # 3. Limpar pasta iOS
       - name: Limpar a plataforma iOS antiga
         run: rm -rf ios
 
-      # Adicionar e Sincronizar Plataforma iOS (Cria o Podfile em ios/App/)
+      # 4. Adicionar e Sincronizar Plataforma iOS (Cria o Podfile em ios/App/)
       - name: Adicionar e Sincronizar Plataforma iOS
         run: |
           npx cap add ios
           npx cap sync ios
           
-      # Instala as dependências nativas (CocoaPods)
-      # O 'cd ios/App' está correto para acessar o Podfile
-      - name: Instalar CocoaPods
+      # 5. --- CORREÇÃO FINAL: FORÇAR ATUALIZAÇÃO E INSTALAÇÃO DOS PODS ---
+      - name: Instalar CocoaPods e dependências (sudo)
         run: |
+          # 5a. Entra na pasta correta
           cd ios/App
+          # 5b. Força a atualização do repositório (evita o erro No Podfile's)
+          # Isso é frequentemente necessário em máquinas CI/CD novas
+          sudo pod repo update 
+          # 5c. Roda a instalação
           pod install
-
-      # --- SAÍDA: Compacta e sobe o projeto para download ---
+          
+      # 6. SAÍDA: Compacta e sobe o projeto para download
       - name: Fazer Upload do Projeto iOS (Zip)
         uses: actions/upload-artifact@v4
         with:
