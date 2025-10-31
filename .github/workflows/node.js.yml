@@ -17,32 +17,33 @@ jobs:
         with:
           node-version: 20.x
           
-      # 1. Instala as dependências web (cria node_modules)
-      - name: Instalar dependências e CLI
+      # 1. Instala todas as dependências (React, Ionic, Capacitor, react-scripts)
+      - name: Instalar todas as dependências
         run: npm install
-
+          
       # 2. Roda o build web (cria a pasta 'build')
       - name: Rodar Build Web (Criar pasta 'build')
         run: npm run build
       
-      # 3. Limpa e RE-CRIA a estrutura nativa
-      - name: Limpar e Adicionar Plataforma iOS
-        run: |
-          rm -rf ios # Limpa a pasta iOS
-          npx cap add ios # Cria a pasta iOS/App e o Podfile
-          npx cap sync ios
+      # 3. Limpar pasta iOS
+      - name: Limpar a plataforma iOS antiga
+        run: rm -rf ios
+        
+      # 4. (NOVO) Instala as ferramentas nativas ANTES
+      - name: Instalar CocoaPods
+        run: sudo gem install cocoapods
+
+      # 5. Sincroniza o Capacitor (Isso vai rodar 'add ios' e criar o Podfile)
+      - name: Sincronizar Capacitor (Cria Podfile)
+        run: npx cap sync ios
           
-      # 4. INSTALAÇÃO DO COCOAPODS (CORREÇÃO DE PERMISSÃO E CAMINHO)
-      - name: Instalar dependências nativas (CocoaPods)
-        # Usa 'working-directory' para entrar na pasta correta sem chance de erro
-        working-directory: ios/App 
+      # 6. Instala as dependências do Podfile
+      - name: Instalar Dependências do CocoaPods
         run: |
-          # 4a. Força a atualização do repositório (evita problemas de cache)
-          sudo pod repo update 
-          # 4b. Roda a instalação
+          cd ios/App
           pod install
 
-      # 5. SAÍDA: Compacta e sobe o projeto para download
+      # 7. SAÍDA: Compacta e sobe o projeto para download
       - name: Fazer Upload do Projeto iOS (Zip)
         uses: actions/upload-artifact@v4
         with:
