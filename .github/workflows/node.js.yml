@@ -1,4 +1,4 @@
-name: Node.js CI
+name: Ionic iOS Build
 
 on:
   push:
@@ -17,32 +17,34 @@ jobs:
         with:
           node-version: 20.x
           
-      - name: Install dependencies
+      # Instala todas as dependências (React, Ionic, Capacitor, react-scripts)
+      - name: Instalar todas as dependências
         run: npm install
           
-      - name: Run build (Web assets)
+      # Roda o build web (cria a pasta 'build')
+      - name: Rodar Build Web (Criar pasta 'build')
         run: npm run build
       
-      # --- NOVA CORREÇÃO: Forçar a instalação e adicionar a plataforma ---
-      - name: Install Capacitor and Add iOS Platform
+      # --- PASSO CRUCIAL: LIMPAR E RE-CRIAR A ESTRUTURA NATIVA ---
+      # Remove a pasta 'ios' antiga, para garantir que o Podfile seja gerado.
+      - name: Limpar a plataforma iOS antiga
+        run: rm -rf ios
+
+      # Adicionar e Sincronizar Plataforma iOS (Cria o Podfile em ios/App/)
+      - name: Adicionar e Sincronizar Plataforma iOS
         run: |
-          # 1. Instala o CLI do Capacitor e a plataforma iOS
-          npm install @capacitor/cli @capacitor/ios
-          
-          # 2. Adiciona a plataforma iOS (Esta etapa CRIA o Podfile)
           npx cap add ios
-        
-      - name: Sync Web App with Native Project
-        run: npx cap sync ios
+          npx cap sync ios
           
-      - name: Install CocoaPods dependencies
+      # Instala as dependências nativas (CocoaPods)
+      # O 'cd ios/App' está correto para acessar o Podfile
+      - name: Instalar CocoaPods
         run: |
-          # 3. Roda o pod install DENTRO da pasta iOS/App
           cd ios/App
           pod install
-          
-      # 4. Saída: compactar o projeto Xcode para download (Artifacts)
-      - name: Compactar o projeto iOS
+
+      # --- SAÍDA: Compacta e sobe o projeto para download ---
+      - name: Fazer Upload do Projeto iOS (Zip)
         uses: actions/upload-artifact@v4
         with:
           name: DudyApp-Xcode-Project
