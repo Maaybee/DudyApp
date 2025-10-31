@@ -1,44 +1,38 @@
 workflows:
   ionic-ios-build:
     name: Ionic iOS Build (Codemagic)
-    # 1. USA A MÁQUINA M2 GRATUITA
-    instance_type: mac_mini_m2 
+    instance_type: mac_mini_m2 # Usando o Mac M2 gratuito
     
+    # --- A CORREÇÃO ESTÁ AQUI ---
+    # Define a versão do Node.js para TODA a máquina
+    # Isso é feito ANTES de qualquer script rodar.
     environment:
-      # 2. DEFINE A VERSÃO DO NODE.JS
-      vars:
-        NODE_VERSION: 20.x
+      node: 20 # Solicita o Node 20
 
     scripts:
-      # 3. INSTALA O NODE.JS (O JEITO CERTO DO CODEMAGIC)
-      - name: Set up Node.js
-        script: |
-          # Carrega o 'nvm' (gerenciador de versão do Node)
-          . $HOME/.nvm/nvm.sh
-          nvm install $NODE_VERSION
-          nvm use $NODE_VERSION
-          
-      # 4. INSTALA AS DEPENDÊNCIAS E COMPILA A WEB
+      # 1. (REMOVIDO) O passo 'Set up Node.js' não é mais necessário.
+      
+      # 2. (AGORA PASSO 1) Instala dependências e compila
       - name: Install dependencies and build web
         script: |
+          echo "Verificando a versão do Node (deve ser 20): $(node --version)"
           npm install
           npm run build
               
-      # 5. CRIA O PROJETO IOS E O PODFILE
+      # 3. (AGORA PASSO 2) Cria o projeto iOS e o Podfile
       - name: Add and Sync iOS platform (Creates Podfile)
         script: |
           npm install @capacitor/cli @capacitor/ios # Garante que eles estão instalados
           npx cap add ios
           npx cap sync ios
               
-      # 6. --- A CORREÇÃO ESTÁ AQUI ---
+      # 4. (AGORA PASSO 3) Instala os CocoaPods
       - name: Install CocoaPods dependencies
         script: |
-          # O Podfile está DENTRO de ios/App
           cd ios/App 
           pod install
 
-    # 7. DISPONIBILIZA O ARQUIVO .ZIP PARA DOWNLOAD
+    # 5. (AGORA PASSO 4) DISPONIBILIZA O ARQUIVO .ZIP PARA DOWNLOAD
     artifacts:
       # Compacta a pasta 'ios' inteira para download
       - ios/
