@@ -38,7 +38,7 @@ jobs:
       - name: Install CocoaPods dependencies
         run: |
           # 3. Roda o pod install DENTRO da pasta iOS/App
-          cd ios
+          cd ios/App
           pod install
           
       # 4. Saída: compactar o projeto Xcode para download (Artifacts)
