@@ -89,17 +89,16 @@ body {
     border-radius: 30px;
     color: white;
     border: 1px solid #0262FF;
-    height: 50px;
-    width: 340px;
+    height: 8vh;
+    width: 90vw;
     margin-top: 30px;
     font-family: 'Baloo Chettan Regular';
-    font-size: 18px;
+    font-size: 1.5rem;
 }
 
 #logoInicial { 
-    margin-top: 50px;
-    height: 303px;
-    width: 292px;
+    margin-top: 10vh;
+    height: 50vh; 
 }
 
 #home {
@@ -469,8 +468,7 @@ input {
 }
 
 #imgTelaLogin { 
-    width: 306px;
-    height: 306px;
+    height: 50vh;
 }
 
 #cadeado { 
