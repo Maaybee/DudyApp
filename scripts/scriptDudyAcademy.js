@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', async () => {
    const idEstudanteAtivo = localStorage.getItem('idEstudante'); // <<< Mudei para 'idEstudante'
     // OU, se a chave que guarda o ID do estudante for 'CriancaSelecionada':
     // const idEstudanteAtivo = localStorage.getItem('CriancaSelecionada');
+    
     if (!idEstudanteAtivo) {
         console.warn('Nenhum estudante ativo. O progresso não será exibido.');
         // Se não houver estudante ativo, o script para aqui e as barras ficam em 0%.
