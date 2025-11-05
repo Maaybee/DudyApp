@@ -2,10 +2,9 @@
 
 document.addEventListener('DOMContentLoaded', async () => {
     
-    // 1. VERIFICA QUAL ALUNO ESTÁ LOGADO
-    // Pega o ID do estudante que foi salvo na tela de seleção de perfil
-    const idEstudanteAtivo = localStorage.getItem('idEstudanteAtivo');
-    
+   const idEstudanteAtivo = localStorage.getItem('idEstudante'); // <<< Mudei para 'idEstudante'
+    // OU, se a chave que guarda o ID do estudante for 'CriancaSelecionada':
+    // const idEstudanteAtivo = localStorage.getItem('CriancaSelecionada');
     if (!idEstudanteAtivo) {
         console.warn('Nenhum estudante ativo. O progresso não será exibido.');
         // Se não houver estudante ativo, o script para aqui e as barras ficam em 0%.
