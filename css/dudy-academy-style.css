@@ -1,0 +1,150 @@
+/* css/dudy-academy-style.css (VERSÃO FINAL COM ANEL E PROGRESSO FUNCIONANDO) */
+
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@700&family=Arimo:wght@400;700&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arimo', sans-serif;
+    background-color: #F8F8F8; /* Fundo cinza claro */
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+#main-container-academy {
+    width: 100%;
+    max-width: 400px; /* Largura máxima do conteúdo */
+    background-color: #FFF7F7; /* Fundo branco/rosa claro */
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    padding-bottom: 30px; /* Espaço para o final da tela */
+}
+
+/* --- HEADER --- */
+.academy-header {
+    display: flex;
+    align-items: center;
+    padding: 20px 15px 10px 15px;
+    background-color: #FFF7F7;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+.academy-header .btn-voltar { width: 28px; height: 28px; cursor: pointer; margin-right: 15px; }
+.header-content-academy { flex-grow: 1; text-align: center; }
+.header-content-academy .text_menor { font-family: 'Arimo', sans-serif; font-size: 13px; color: #888; margin: 0; text-align: center; line-height: 1; }
+.header-content-academy .text_maior { font-family: 'Baloo Chettan 2', sans-serif; font-size: 28px; color: #333; margin: 0; text-align: center; line-height: 1.2; }
+
+/* --- CARD DE DESTAQUE --- */
+.destaque-card {
+    background-color: #FFDEFA;
+    border-radius: 20px;
+    margin: 20px 20px 30px 20px;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+.mascote-dudy { width: 80px; height: auto; flex-shrink: 0; }
+.destaque-texto { font-family: 'Baloo Chettan 2', sans-serif; font-size: 19px; color: #555; margin: 0; line-height: 1.4; }
+
+/* --- TÍTULO DA SEÇÃO --- */
+.section-title {
+    font-family: 'Baloo Chettan 2', sans-serif;
+    font-size: 24px;
+    color: #333;
+    margin: 0 20px 20px 20px;
+}
+
+/* --- LISTA DE ATIVIDADES --- */
+.atividades-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 0 20px;
+}
+.atividade-card {
+    background-color: white;
+    border-radius: 15px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+.atividade-card:hover { transform: translateY(-3px); }
+
+.icone-atividade {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+.pink-circle { background-color: #FFC0CB; }
+.light-blue-circle { background-color: #B0E0E6; }
+.purple-circle { background-color: #DDA0DD; }
+.light-green-circle { background-color: #98FB98; }
+
+.detalhes-atividade { flex-grow: 1; }
+.atividade-titulo { font-family: 'Baloo Chettan 2', sans-serif; font-size: 18px; color: #333; margin: 0; }
+.atividade-licoes { font-family: 'Arimo', sans-serif; font-size: 13px; color: #888; margin: 0; }
+
+/* --- ESTILO CORRIGIDO DA BARRA DE PROGRESSO (ANEL) --- */
+.progresso-atividade {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    width: 50px; /* Define o tamanho do container */
+    height: 50px;
+}
+
+.progresso-circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    
+    /* 1. O GRADIENDE CÔNICO (COR E CINZA) */
+    background: conic-gradient(
+        var(--color) var(--progress, 0%), /* Cor da lição preenche ATÉ o progresso */
+        #E0E0E0 var(--progress, 0%) 100% /* O resto, a partir do progresso, é cinza */
+    );
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transform: rotate(-90deg); /* Começa do topo */
+}
+
+/* 2. O "BURACO" BRANCO NO MEIO */
+.progresso-circle::after {
+    content: '';
+    position: absolute;
+    width: 40px;  /* 10px menor que o círculo pai (50px - 10px = 40px) */
+    height: 40px;
+    background-color: white; /* Cor do fundo do card para criar o buraco */
+    border-radius: 50%;
+    z-index: 1; /* Garante que o buraco esteja ACIMA do gradiente, mas ABAIXO do texto */
+}
+
+/* 3. O TEXTO DA PORCENTAGEM */
+.progresso-porcentagem {
+    font-family: 'Baloo Chettan 2', sans-serif;
+    font-size: 16px; 
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Apenas centraliza */
+    z-index: 2; /* Garante que o texto fique acima de TUDO */
+}
+
+/* Cores específicas para o progresso */
+.pink-progress { --color: #FFC0CB; }
+.light-blue-progress { --color: #B0E0E6; }
+.purple-progress { --color: #DDA0DD; }
+.light-green-progress { --color: #98FB98; }
