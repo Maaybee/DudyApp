@@ -1,30 +1,31 @@
-// Arquivo: scripts/scriptDudyAcademy.js (VERSÃO FINAL E CORRIGIDA)
+// Arquivo: scripts/scriptDudyAcademy.js (AJUSTADO PARA A CHAVE 'criancaSelecionada')
 
 document.addEventListener('DOMContentLoaded', async () => {
-    
-   const idEstudanteAtivo = localStorage.getItem('idEstudante'); // <<< Mudei para 'idEstudante'
-    // OU, se a chave que guarda o ID do estudante for 'CriancaSelecionada':
-    // const idEstudanteAtivo = localStorage.getItem('CriancaSelecionada');
+    // 1. VERIFICA QUAL ALUNO ESTÁ LOGADO
+    // Pega o ID do estudante que foi salvo na tela de seleção de perfil
+    // *** AGORA BUSCA PELA CHAVE CORRETA: 'criancaSelecionada' ***
+    const idEstudanteAtivo = localStorage.getItem('criancaSelecionada');
     
     if (!idEstudanteAtivo) {
         console.warn('Nenhum estudante ativo. O progresso não será exibido.');
-        // Se não houver estudante ativo, o script para aqui e as barras ficam em 0%.
-        return;
+        // Não vamos retornar aqui para que a funcionalidade de clique ainda funcione,
+        // mas vamos alertar o usuário se ele tentar clicar em um card.
     }
 
     // --- 2. BUSCA O PROGRESSO SALVO NO SUPABASE ---
     let progressoSalvo = [];
-    try {
-        const { data, error } = await supabaseClient
-            .from('estudantejogos') // Nome da tabela em minúsculas
-            .select('idjogos, pontuacaoobtida')
-            .eq('idestudante', idEstudanteAtivo); // Filtra pelo ID do estudante selecionado
+    if (idEstudanteAtivo) { // Só busca o progresso se tiver um estudante válido
+        try {
+            const { data, error } = await supabaseClient
+                .from('estudantejogos') 
+                .select('idjogos, pontuacaoobtida')
+                .eq('idestudante', idEstudanteAtivo);
 
-        if (error) throw error;
-        progressoSalvo = data;
-
-    } catch (error) {
-        console.error("Erro ao buscar progresso do estudante:", error);
+            if (error) throw error;
+            progressoSalvo = data;
+        } catch (error) {
+            console.error("Erro ao buscar progresso do estudante:", error);
+        }
     }
 
     // --- 3. ATUALIZA CADA CARD NA TELA ---
@@ -35,42 +36,38 @@ document.addEventListener('DOMContentLoaded', async () => {
         const licaoInfo = DADOS_LICOES.find(l => l.id === licaoId);
         if (!licaoInfo) return;
 
-        const idLicaoNoSupabase = licaoId + 100;
+        const idLicaoNoSupabase = licaoId + 100; // Supondo que você mapeia IDs de lição para Supabase assim
         const totalAtividades = licaoInfo.atividades.length;
 
         const licoesTexto = card.querySelector('.atividade-licoes');
-        if (licoesTexto) {
-            licoesTexto.textContent = `${totalAtividades} lições`;
-        }
+        if (licoesTexto) licoesTexto.textContent = `${totalAtividades} lições`;
 
         const registro = progressoSalvo.find(p => p.idjogos === idLicaoNoSupabase);
-        
         let pontuacao = 0;
-        if (registro) {
-            pontuacao = registro.pontuacaoobtida;
-        }
+        if (registro) pontuacao = registro.pontuacaoobtida;
 
-        // --- 4. CALCULA A PORCENTAGEM REAL ---
         const percentual = totalAtividades > 0 ? (pontuacao / totalAtividades) * 100 : 0;
         const percentualArredondado = Math.round(percentual);
 
-        // --- 5. ATUALIZA O HTML COM OS VALORES VARIÁVEIS ---
         const porcentagemTexto = card.querySelector('.progresso-porcentagem');
         const circuloProgresso = card.querySelector('.progresso-circle');
 
-        if (porcentagemTexto) {
-            porcentagemTexto.textContent = `${percentualArredondado}%`;
-        }
-        if (circuloProgresso) {
-            circuloProgresso.style.setProperty('--progress', `${percentualArredondado}%`);
-        }
+        if (porcentagemTexto) porcentagemTexto.textContent = `${percentualArredondado}%`;
+        if (circuloProgresso) circuloProgresso.style.setProperty('--progress', `${percentualArredondado}%`);
     });
 
-    // --- 6. ADICIONA CLIQUES AOS CARDS ---
+    // --- 4. ADICIONA CLIQUES AOS CARDS ---
     todosOsCards.forEach(card => {
         card.addEventListener('click', () => {
+            // Se não houver estudante ativo, alerta e redireciona para a seleção de perfil
+            if (!idEstudanteAtivo) {
+                alert("Por favor, selecione um perfil de criança antes de iniciar as atividades!");
+                // Redireciona para a tela de seleção de criança (supondo que é telaCadKid.html)
+                window.location.href = '../telas/telacadastrokid.html'; 
+                return;
+            }
             const licaoId = card.dataset.licaoId;
-            window.location.href = `atividade.html?licaoId=${licaoId}`;
+            window.location.href = `atividade.html?licaoId=${licaoId}`; // Caminho para sua tela de atividades
         });
     });
 
