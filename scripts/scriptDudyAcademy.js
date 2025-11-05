@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const btnVoltar = document.querySelector('.btn-voltar');
     if(btnVoltar) {
         btnVoltar.addEventListener('click', () => {
-            window.history.back(); // Volta para a página anterior
+            window.location.href = '../telas/telaHome.html';
         });
     }
 });
