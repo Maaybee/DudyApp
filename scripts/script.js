@@ -115,7 +115,7 @@ function perfil () {
 function atividade () { 
     console.log('Botão clicado, redirecionando...');
 
-    window.location.href = '../telas/telaMapaLicoes.html'; 
+    window.location.href = '../telas/telaDudyAcademy.html'; 
 };
 function historia () { 
     console.log('Botão clicado, redirecionando...');
