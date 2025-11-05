@@ -3,12 +3,12 @@
 document.addEventListener('DOMContentLoaded', async () => {
     
     // 1. VERIFICA QUAL ALUNO ESTÁ LOGADO
+    // Pega o ID do estudante que foi salvo na tela de seleção de perfil
     const idEstudanteAtivo = localStorage.getItem('idEstudanteAtivo');
     
     if (!idEstudanteAtivo) {
         console.warn('Nenhum estudante ativo. O progresso não será exibido.');
-        // Opcional: Redirecionar para a tela de seleção de perfil se nenhum estudante estiver ativo
-        // window.location.href = 'telaSelecaoKid.html';
+        // Se não houver estudante ativo, o script para aqui e as barras ficam em 0%.
         return;
     }
 
@@ -16,13 +16,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     let progressoSalvo = [];
     try {
         const { data, error } = await supabaseClient
-            .from('estudantejogos') // Nome da tabela em minúsculas (verifique o nome exato no Supabase)
+            .from('estudantejogos') // Nome da tabela em minúsculas
             .select('idjogos, pontuacaoobtida')
-            .eq('idestudante', idEstudanteAtivo);
+            .eq('idestudante', idEstudanteAtivo); // Filtra pelo ID do estudante selecionado
 
         if (error) throw error;
         progressoSalvo = data;
-        console.log('Progresso do estudante ativo (ID:', idEstudanteAtivo, '):', progressoSalvo);
+
     } catch (error) {
         console.error("Erro ao buscar progresso do estudante:", error);
     }
@@ -32,26 +32,17 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     todosOsCards.forEach(card => {
         const licaoId = parseInt(card.dataset.licaoId);
-        
-        // Encontra a lição correspondente no "banco de dados" JS (dadosLicoes.js)
         const licaoInfo = DADOS_LICOES.find(l => l.id === licaoId);
-        if (!licaoInfo) {
-            console.warn(`Dados para a lição com ID ${licaoId} não encontrados em DADOS_LICOES.`);
-            return;
-        }
+        if (!licaoInfo) return;
 
-        // IDs que o Supabase usa para lições (ex: 101, 102...)
-        // Assumindo que seu idjogos no Supabase é licaoId + 100
-        const idLicaoNoSupabase = licaoId + 100; 
+        const idLicaoNoSupabase = licaoId + 100;
         const totalAtividades = licaoInfo.atividades.length;
 
-        // Atualiza o número de lições no card (ex: "20 lições")
         const licoesTexto = card.querySelector('.atividade-licoes');
         if (licoesTexto) {
             licoesTexto.textContent = `${totalAtividades} lições`;
         }
 
-        // Procura o registro de progresso para esta lição específica no que veio do Supabase
         const registro = progressoSalvo.find(p => p.idjogos === idLicaoNoSupabase);
         
         let pontuacao = 0;
@@ -61,28 +52,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         // --- 4. CALCULA A PORCENTAGEM REAL ---
         const percentual = totalAtividades > 0 ? (pontuacao / totalAtividades) * 100 : 0;
-        let percentualArredondado = Math.round(percentual);
+        const percentualArredondado = Math.round(percentual);
 
-        // --- INÍCIO: PARA TESTAR MANUALMENTE O PROGRESSO DA BARRINHA ---
-        // Você pode descomentar e ajustar os valores aqui para ver o efeito.
-         //Lembre-se de comentar/remover para usar os dados reais do Supabase.
-        
-        if (licaoId === 1) { // Para a lição "Comidas"
-            percentualArredondado = 50; 
-        } else if (licaoId === 2) { // Para a lição "Animais"
-            percentualArredondado = 75;
-        } else if (licaoId === 3) { // Para a lição "Família"
-            percentualArredondado = 10;
-        } else if (licaoId === 4) { // Para a lição "Escola"
-            percentualArredondado = 90;
-        } else if (licaoId === 5) { // Para a lição "Viagens"
-            percentualArredondado = 25;
-        }
-    
-        // --- FIM: PARA TESTAR MANUALMENTE ---
-
-
-        // --- 5. ATUALIZA OS ELEMENTOS VISUAIS NO CARD ---
+        // --- 5. ATUALIZA O HTML COM OS VALORES VARIÁVEIS ---
         const porcentagemTexto = card.querySelector('.progresso-porcentagem');
         const circuloProgresso = card.querySelector('.progresso-circle');
 
@@ -90,17 +62,15 @@ document.addEventListener('DOMContentLoaded', async () => {
             porcentagemTexto.textContent = `${percentualArredondado}%`;
         }
         if (circuloProgresso) {
-            // A CORREÇÃO CRUCIAL: Adicionamos o "%" ao valor da variável CSS
             circuloProgresso.style.setProperty('--progress', `${percentualArredondado}%`);
         }
     });
 
-    // --- 6. ADICIONA LÓGICA DE CLIQUE AOS CARDS ---
+    // --- 6. ADICIONA CLIQUES AOS CARDS ---
     todosOsCards.forEach(card => {
         card.addEventListener('click', () => {
             const licaoId = card.dataset.licaoId;
-            // Redireciona para o mapa de atividades dessa lição/categoria
-            window.location.href = `telaMapaAtividades.html?licaoId=${licaoId}`;
+            window.location.href = `atividade.html?licaoId=${licaoId}`;
         });
     });
 
@@ -108,7 +78,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const btnVoltar = document.querySelector('.btn-voltar');
     if(btnVoltar) {
         btnVoltar.addEventListener('click', () => {
-            window.location.href = '../telas/telaHome.html';
+            window.history.back();
         });
     }
 });
