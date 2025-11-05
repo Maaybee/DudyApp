@@ -166,30 +166,8 @@ document.addEventListener('DOMContentLoaded', async () => {
      * Salva ou atualiza o progresso da lição atual no Supabase.
      * Usa 'upsert' para garantir que o registro seja criado ou atualizado corretamente.
      */
-    async function salvarProgressoDaLicao() {
-        const idEstudanteLogado = idEstudanteAtivo; // Pega o ID do estudante do localStorage
-        const pontuacaoFinal = atividadesCorretasUnicas.length; // Número de atividades únicas acertadas
-        const idDaLicaoComoJogo = licaoAtual.id + 100; // ID da lição no Supabase (ex: Lição 1 -> ID 101)
-
-        // Usa 'upsert' para inserir um novo registro ou atualizar um existente
-        const { data, error } = await supabaseClient
-            .from('estudantejogos') // Nome da sua tabela de progresso no Supabase
-            .upsert([{ 
-                idestudante: idEstudanteLogado, 
-                idjogos: idDaLicaoComoJogo,
-                pontuacaoobtida: pontuacaoFinal,
-                datarealizacao: new Date().toISOString() // Salva a data atual em formato ISO
-            }], { 
-                onConflict: ['idestudante', 'idjogos'], // Se houver conflito nessas colunas, atualiza
-                ignoreDuplicates: false // Garante que a atualização será feita
-            });
-
-        if (error) {
-            console.error('Erro ao salvar/atualizar progresso da lição:', error.message);
-        } else {
-            console.log('Progresso da lição salvo/atualizado com sucesso!', data);
-        }
-    }
+    // Encontra a lição atual nos DADOS_LICOES
+    
 
     // --- FUNÇÕES DE CARREGAMENTO DE EXERCÍCIOS ESPECÍFICOS ---
 
