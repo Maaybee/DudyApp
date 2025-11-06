@@ -3,19 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DudyApp</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
+    <title>DudyApp - Boas-Vindas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../css/tela-inicial.css"> </head>
 <body>
 
-    <div id="efetuarLogin" class="center"> 
-        <img src="assets/logoInicial.png" id="logoInicial" alt="img">
-        <div id="buttonsLogin" class="center"> 
-            <button id="bntlogin" onclick="login()"> <span class="btns"> Login </span>  </button>
-            <button id="btncadastro" onclick="cadastro()"> <span class="btns"> Cadastre-se </span>  </button>
+    <div class="tela-inicial-container">
+        <div class="conteudo-superior">
+            <p class="slogan">Aprender brincando é mais divertido!</p>
+            <h1 class="titulo-principal">Vamos começar?</h1>
+            <div class="botoes-acao">
+                <button id="btnComeceAgora" class="btn-primario" onclick="login()"> <span class="btns"> Comece agora</span>  </button>
+                <button id="btnJaTenhoConta" class="btn-secundario" onclick="cadastro()">Já tenho uma conta</button>
+            </div>
+        </div>
+
+        <div class="imagem-fundo">
+            <img src="../assets/img/ursocarrosel.png" alt="Urso brincando no carrossel">
         </div>
     </div>
     
+    <script src="scripts/script.js"> </script>
 </body>
-<script src="scripts/script.js"> </script>
 </html>

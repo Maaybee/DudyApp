@@ -1,0 +1,156 @@
+/* --- Arquivo: css/tela-inicial.css --- */
+
+/* Reset Básico para garantir consistência em todos os navegadores */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilo Básico do Corpo (para garantir fundo branco e fontes) */
+body {
+    font-family: 'Baloo Chettan 2', sans-serif; /* Usando sua fonte preferida */
+    background-color: #03cbee; /* Um cinza bem clarinho para o fundo da página */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Alinha o conteúdo no topo da tela */
+    min-height: 100vh;
+    overflow-x: hidden; /* Evita scroll horizontal */
+    -webkit-font-smoothing: antialiased; /* Suaviza as fontes para melhor leitura */
+    -moz-osx-font-smoothing: grayscale; /* Suaviza as fontes para melhor leitura */
+}
+
+.tela-inicial-container {
+    width: 100%;
+/* Largura máxima para simular um celular */
+    background-color: #03cbee; /* Fundo branco do "celular" */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    min-height: 100vh; /* Para garantir que o container ocupe toda a altura */
+    display: flex;
+    flex-direction: column;
+    position: relative; /* Para posicionar a imagem de fundo */
+    overflow: hidden; /* Para a imagem de fundo não vazar */
+}
+
+.conteudo-superior {
+   
+    color: white;
+    margin-top: 40px;
+    text-align: center;
+    position: relative;
+    z-index: 10; /* Garante que o texto e botões fiquem acima da imagem */
+}
+
+.slogan {
+    font-size: 1.1em;
+    font-weight: 500;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.9; /* Um pouco mais suave */
+    margin-bottom: 15px;
+}
+
+.titulo-principal {
+    font-family: 'Baloo Chettan 2', sans-serif;
+    font-size: 2.8em;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 30px;
+    line-height: 1.2;
+}
+
+.botoes-acao {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Espaço entre os botões */
+    margin-top: 30px;
+}
+
+.btn-primario,
+.btn-secundario {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 30px; /* Botões arredondados */
+    font-family: 'Baloo Chettan 2', sans-serif;
+    font-size: 1.2em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-decoration: none; /* Para usar em links se preferir */
+    display: block; /* Para que o padding funcione bem */
+    text-align: center;
+    -webkit-appearance: none; /* Remove estilos padrão de botões em alguns browsers */
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.btn-primario {
+    background-color: #00b2ee; /* Azul claro do botão "Comece agora" */
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 191, 255, 0.3); /* Sombra para destaque */
+}
+
+.btn-primario:hover {
+    background-color: #00AEEC;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 191, 255, 0.4);
+}
+
+.btn-secundario {
+    background-color: white; /* Branco para o botão "Já tenho uma conta" */
+    color: #1a73e8; /* Cor do texto azul do botão secundário */
+    border: 2px solid #1a73e8; /* Borda azul */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra mais sutil */
+}
+
+.btn-secundario:hover {
+    background-color: #e0eaff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.imagem-fundo {
+    position: absolute; /* Posiciona a imagem absolutamente */
+    bottom: 0; /* Alinha na parte inferior */
+    left: 0;
+
+    height: auto; /* Altura automática para manter proporção */
+    display: flex;
+    justify-content: center;
+    align-items: flex-end; /* Alinha a imagem na parte inferior */
+    z-index: 5; /* Fica abaixo do conteúdo superior, mas acima do fundo */
+   
+}
+
+.imagem-fundo img {
+    max-width: 100%; /* Ajusta o tamanho da imagem */
+    height: auto;
+    display: block;
+    object-fit: contain; /* Garante que a imagem se ajuste sem cortar */
+    filter: drop-shadow(0 5px 10px rgba(0,0,0,0.2)); /* Adiciona uma sombra na imagem */
+}
+
+/* Opcional: Efeitos de responsividade para telas menores que 400px */
+@media (max-width: 400px) {
+    .conteudo-superior {
+        padding: 30px 20px 180px;
+    }
+    .titulo-principal {
+        font-size: 2.5em;
+    }
+    .slogan {
+        font-size: 1em;
+    }
+}
+
+/* Estilo para rodapé de créditos, se houver */
+.creditos {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+    font-size: 0.8em;
+    color: #888;
+    z-index: 10;
+}
