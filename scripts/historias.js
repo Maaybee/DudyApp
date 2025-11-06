@@ -16,7 +16,7 @@ const DADOS_HISTORIAS = [
             { personagem: 'Emma', fala: 'Let’s sit under the tree.', audio: 'emma3' },
             { tipo: 'acao', texto: '(They sit and eat.)' },
             { personagem: 'Leo', fala: 'This sandwich is so good!', audio: 'leo3' },
-            { personagem: 'Emma', fala: 'And this apple is sweet!', audio: 'emma4' },
+            { personagem: 'Emma', fala: 'And this apple is so sweet!', audio: 'emma4' },
             { personagem: 'Leo', fala: 'I’m happy. Picnics are fun!', audio: 'leo4' },
             { personagem: 'Emma', fala: 'Yes, very fun!', audio: 'emma5' }
         ],
