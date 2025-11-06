@@ -1,0 +1,79 @@
+/* --- Arquivo: css/telaLogin.css (SOLUÇÃO AGRESSIVA PARA TELA CHEIA) --- */
+
+/* Reset mais abrangente para html e body para garantir que sobreponha o style.css */
+html, body {
+    margin: 0 !important; /* Força remover qualquer margem */
+    padding: 0 !important; /* Força remover qualquer padding */
+    height: 100% !important; /* Força altura total */
+    width: 100% !important; /* Força largura total */
+    min-height: 100vh !important; /* Garante altura mínima da viewport */
+    background-color: transparent !important; /* Remove o fundo do style.css e será definido abaixo */
+    display: block !important; /* Reseta para block para depois o body ser flex */
+}
+
+/* O fundo azul e o flexbox para centralizar AGORA FICAM NO BODY */
+body {
+    background-color: #5AC8FA !important; /* ESTA É A COR DE FUNDO AZUL DE TELA CHEIA */
+    display: flex !important; /* Torna o body um container flexível */
+    justify-content: center !important; /* Centraliza o conteúdo horizontalmente */
+    align-items: center !important; /* Centraliza o conteúdo verticalmente */
+    flex-direction: column !important; /* Empilha os itens verticalmente */
+    overflow: hidden !important; /* Evita barras de rolagem indesejadas */
+    /* Você pode adicionar a font-family aqui se ela for específica da tela de login */
+    font-family: 'Baloo Chettan 2', sans-serif !important; 
+}
+
+
+/* O #login-screen-wrapper AGORA SERÁ UM CONTAINER PURO PARA O CONTEÚDO DA PÁGINA DE LOGIN */
+#login-screen-wrapper {
+    background-color: transparent !important; /* Garante que não tenha fundo aqui */
+    width: 100% !important; /* Ocupa a largura total disponível no body flex */
+    height: 100% !important; /* Ocupa a altura total disponível no body flex */
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important; /* Centraliza o conteúdo horizontalmente (urso, form) */
+    justify-content: center !important; /* Centraliza o conteúdo verticalmente (urso, form) */
+    padding: 20px !important; /* Padding para não colar nas bordas */
+    box-shadow: none !important; /* Remove qualquer sombra */
+    box-sizing: border-box !important; /* Garante que padding não adicione tamanho */
+}
+
+/* O container para o urso e o formulário. Pode ter uma largura máxima para legibilidade. */
+.col-itens.center {
+    width: 100% !important; /* Ocupa 100% da largura do seu pai (#login-screen-wrapper) */
+    max-width: 400px !important; /* Limita a largura do conteúdo para não ficar muito esticado */
+    /* Remover 'max-width' se você realmente quer que o conteúdo se estique totalmente */
+    
+    /* Suas regras de flexbox do style.css para .col-itens e .center devem funcionar aqui,
+       mas adicionei !important para garantir a centralização */
+    display: flex !important; 
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 2px !important; /* Espaçamento entre os elementos (urso, form, etc.) */
+}
+
+/* Imagem do urso (LOGO) */
+#login-bear-logo {
+    width: 400px !important; /* URSO MAIOR */
+    height: auto !important;
+    margin-bottom: 3spx !important; /* Espaço entre o urso e o formulário */
+}
+
+/*
+   NADA MAIS AQUI. Os estilos para inputs, botões, ícones, fontes (exceto a do body),
+   linhas, subtítulo e popup virão EXCLUSIVAMENTE do seu 'style.css'.
+   Não adicionei nenhuma regra para nuvens ou cores de ícones aqui.
+*/
+
+
+/* Media query para ajustar o urso em telas muito pequenas, se necessário */
+@media (max-width: 350px) {
+    #login-bear-logo {
+        width: 180px !important; /* Ajusta o urso para ser um pouco menor em telas bem pequenas */
+        margin-bottom: 30px !important;
+    }
+    .col-itens.center {
+        padding: 0 10px !important; /* Ajusta o padding para telas muito pequenas */
+    }
+}
