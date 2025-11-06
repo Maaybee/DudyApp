@@ -55,7 +55,7 @@ body {
 
 /* Imagem do urso (LOGO) */
 #login-bear-logo {
-    width: 400px !important; /* URSO MAIOR */
+    width: 450px !important; /* URSO MAIOR */
     height: auto !important;
     margin-bottom: 3spx !important; /* Espaço entre o urso e o formulário */
 }
