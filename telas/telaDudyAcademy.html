@@ -9,7 +9,9 @@
 <body>
     <div id="main-container-academy">
         <header class="academy-header">
-            <img src="../assets/sair.svg" class="btn-voltar" alt="Voltar">
+            <a href="javascript:history.back()" class="btn-voltar">
+                <img src="../assets/sair.svg" alt="Voltar">
+            </a>
             <div class="header-content-academy">
                 <p class="text_menor">Dudy Academy</p>
                 <h1 class="text_maior">Atividades</h1>
@@ -23,57 +25,56 @@
 
         <h2 class="section-title">Let's do it!</h2>
 
-        <div class="atividades-list">
-            
+        <div id="lessons-list" class="atividades-list">
             <div class="atividade-card" data-licao-id="1">
                 <div class="icone-atividade pink-circle"></div>
                 <div class="detalhes-atividade">
                     <p class="atividade-titulo">Comidas</p>
-                    <p class="atividade-licoes">20 lições</p> </div>
+                    <p class="atividade-licoes">4 lições</p> </div>
                 <div class="progresso-atividade">
-                    <p class="progresso-porcentagem">0%</p> <div class="progresso-circle pink-progress" style="--progress: 0;"></div> </div>
+                    <p class="progresso-porcentagem">0%</p>
+                    <div class="progresso-circle pink-progress" style="--progress: 0;"></div>
+                </div>
             </div>
 
             <div class="atividade-card" data-licao-id="2">
                 <div class="icone-atividade light-blue-circle"></div>
                 <div class="detalhes-atividade">
                     <p class="atividade-titulo">Animais</p>
-                    <p class="atividade-licoes">15 lições</p>
-                </div>
+                    <p class="atividade-licoes">4 lições</p> </div>
                 <div class="progresso-atividade">
                     <p class="progresso-porcentagem">0%</p>
                     <div class="progresso-circle light-blue-progress" style="--progress: 0;"></div>
                 </div>
             </div>
-             <div class="atividade-card" data-licao-id="3">
+            
+            <div class="atividade-card" data-licao-id="3">
                 <div class="icone-atividade purple-circle"></div>
                 <div class="detalhes-atividade">
                     <p class="atividade-titulo">Familia</p>
-                    <p class="atividade-licoes">15 lições</p>
-                </div>
+                    <p class="atividade-licoes">4 lições</p> </div>
                 <div class="progresso-atividade">
                     <p class="progresso-porcentagem">0%</p>
                     <div class="progresso-circle purple-progress" style="--progress: 0;"></div>
                 </div>
             </div>
-              <div class="atividade-card" data-licao-id="4">
+            
+            <div class="atividade-card" data-licao-id="4">
                 <div class="icone-atividade light-green-circle"></div>
                 <div class="detalhes-atividade">
                     <p class="atividade-titulo">Escola</p>
-                    <p class="atividade-licoes">15 lições</p>
-                </div>
+                    <p class="atividade-licoes">4 lições</p> </div>
                 <div class="progresso-atividade">
                     <p class="progresso-porcentagem">0%</p>
                     <div class="progresso-circle light-green-progress" style="--progress: 0;"></div>
                 </div>
             </div>
-            
-            </div>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="../scripts/supabaseConfig.js"></script>
-    <script src="../scripts/dadosLicoes.js"></script> <script src="../scripts/scriptDudyAcademy.js"></script>
-
- </body>
+    <script src="../scripts/dadosLicoes.js"></script> 
+    <script src="../scripts/dudyAcademy.js"></script> 
+</body>
 </html>

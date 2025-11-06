@@ -1,4 +1,4 @@
-/* css/dudy-academy-style.css (VERSÃO FINAL COM ANEL E PROGRESSO FUNCIONANDO) */
+/* css/dudy-academy-style.css */
 
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@700&family=Arimo:wght@400;700&display=swap');
 
@@ -15,7 +15,7 @@ body {
 #main-container-academy {
     width: 100%;
     max-width: 400px; /* Largura máxima do conteúdo */
-    background-color: #FFF7F7; /* Fundo branco/rosa claro */
+    background-color: #FFF7F7; /* Fundo branco/rosa claro, como na imagem */
     box-shadow: 0 0 10px rgba(0,0,0,0.05);
     padding-bottom: 30px; /* Espaço para o final da tela */
 }
@@ -25,19 +25,36 @@ body {
     display: flex;
     align-items: center;
     padding: 20px 15px 10px 15px;
-    background-color: #FFF7F7;
-    position: sticky;
+    background-color: #FFF7F7; /* Fundo igual ao container principal */
+    position: relative; /* Para posicionar o botão de voltar */
     top: 0;
     z-index: 10;
 }
-.academy-header .btn-voltar { width: 28px; height: 28px; cursor: pointer; margin-right: 15px; }
+
+/* Ajuste para o botão de voltar - imagem de seta */
+.academy-header .btn-voltar {
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    margin-right: 0; /* Removido margin-right */
+    position: absolute; /* Posiciona a seta de voltar */
+    left: 15px;
+    display: flex; /* Para centralizar a imagem dentro do link */
+    align-items: center;
+    justify-content: center;
+}
+.academy-header .btn-voltar img {
+    width: 24px; /* Tamanho da imagem da seta */
+    height: 24px;
+}
+
 .header-content-academy { flex-grow: 1; text-align: center; }
 .header-content-academy .text_menor { font-family: 'Arimo', sans-serif; font-size: 13px; color: #888; margin: 0; text-align: center; line-height: 1; }
 .header-content-academy .text_maior { font-family: 'Baloo Chettan 2', sans-serif; font-size: 28px; color: #333; margin: 0; text-align: center; line-height: 1.2; }
 
 /* --- CARD DE DESTAQUE --- */
 .destaque-card {
-    background-color: #FFDEFA;
+    background-color: #FFDEFA; /* Fundo rosa claro, como na imagem */
     border-radius: 20px;
     margin: 20px 20px 30px 20px;
     padding: 15px 20px;
@@ -83,6 +100,7 @@ body {
     border-radius: 50%;
     flex-shrink: 0;
 }
+/* As cores dos círculos estão OK */
 .pink-circle { background-color: #FFC0CB; }
 .light-blue-circle { background-color: #B0E0E6; }
 .purple-circle { background-color: #DDA0DD; }
@@ -92,7 +110,7 @@ body {
 .atividade-titulo { font-family: 'Baloo Chettan 2', sans-serif; font-size: 18px; color: #333; margin: 0; }
 .atividade-licoes { font-family: 'Arimo', sans-serif; font-size: 13px; color: #888; margin: 0; }
 
-/* --- ESTILO CORRIGIDO DA BARRA DE PROGRESSO (ANEL) --- */
+/* --- ESTILO DO ANEL DE PROGRESSO --- */
 .progresso-atividade {
     display: flex;
     align-items: center;
@@ -107,7 +125,7 @@ body {
     height: 50px;
     border-radius: 50%;
     
-    /* 1. O GRADIENDE CÔNICO (COR E CINZA) */
+    /* 1. O GRADIENTE CÔNICO (COR E CINZA) */
     background: conic-gradient(
         var(--color) var(--progress, 0%), /* Cor da lição preenche ATÉ o progresso */
         #E0E0E0 var(--progress, 0%) 100% /* O resto, a partir do progresso, é cinza */
@@ -124,7 +142,7 @@ body {
 .progresso-circle::after {
     content: '';
     position: absolute;
-    width: 40px;  /* 10px menor que o círculo pai (50px - 10px = 40px) */
+    width: 40px;   /* 10px menor que o círculo pai (50px - 10px = 40px) */
     height: 40px;
     background-color: white; /* Cor do fundo do card para criar o buraco */
     border-radius: 50%;
@@ -141,6 +159,7 @@ body {
     left: 50%;
     transform: translate(-50%, -50%); /* Apenas centraliza */
     z-index: 2; /* Garante que o texto fique acima de TUDO */
+    color: #333; /* Cor do texto da porcentagem */
 }
 
 /* Cores específicas para o progresso */
@@ -148,3 +167,13 @@ body {
 .light-blue-progress { --color: #B0E0E6; }
 .purple-progress { --color: #DDA0DD; }
 .light-green-progress { --color: #98FB98; }
+
+/* Responsividade básica, se necessário */
+@media (max-width: 380px) {
+    .destaque-card, .section-title, .atividades-list {
+        margin-left: 15px;
+        margin-right: 15px;
+        padding-left: 0;
+        padding-right: 0;
+    }
+}

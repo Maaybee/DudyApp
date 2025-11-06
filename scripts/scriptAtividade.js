@@ -1,227 +1,243 @@
-// Arquivo: scripts/scriptAtividade.js (VERSÃO COMPLETA E CORRIGIDA)
+// scripts/scriptAtividade.js
 
-document.addEventListener('DOMContentLoaded', async () => {
-    // --- INICIALIZAÇÃO DO SUPABASE ---
-    // (O supabaseClient deve ser pego do supabaseConfig.js)
-    if (typeof supabaseClient === 'undefined') {
-        console.error('Supabase client não foi encontrado. Verifique se supabaseConfig.js está sendo carregado ANTES deste script.');
-        return;
-    }
+document.addEventListener('DOMContentLoaded', () => {
+    // --- Referências aos elementos HTML ---
+    const progressoAtual = document.getElementById('progresso-atual');
+    const fecharBtn = document.querySelector('.fechar-btn'); // Botão "X" para voltar
 
-    // --- PEGA O ID DA LIÇÃO DA URL ---
-    const urlParams = new URLSearchParams(window.location.search);
-    const licaoId = parseInt(urlParams.get('licaoId'));
-    const licaoAtual = DADOS_LICOES.find(l => l.id === licaoId);
+    // Exercício de Associação de Imagem (Imagem 2)
+    const exercicioAssociacao = document.getElementById('exercicio-associacao');
+    const perguntaAssociacao = document.getElementById('pergunta-associacao');
+    const opcoesImagem = document.getElementById('opcoes-imagem');
+    const btnContinuarAssociacao = document.getElementById('btnContinuarAssociacao');
 
-    if (!licaoAtual) {
-        document.body.innerHTML = "<h1>Erro: Lição não encontrada.</h1>";
-        return;
-    }
+    // Exercício de Tradução (Imagem 3)
+    const exercicioTraducao = document.getElementById('exercicio-traducao');
+    const perguntaTraducao = document.getElementById('pergunta-traducao');
+    const imagemPrincipal = document.getElementById('imagem-principal');
+    const btnContinuarTraducao = document.getElementById('btnContinuarTraducao');
 
-    // --- PEGA O ID DO ESTUDANTE ATIVO DO LOCALSTORAGE ---
-    // Pega a chave 'criancaSelecionada' que sua tela de seleção salva
-    const idEstudanteAtivo = localStorage.getItem('criancaSelecionada'); 
-    
-    if (!idEstudanteAtivo) {
-        alert("Erro: Estudante não identificado. Voltando ao menu.");
-        window.location.href = 'telaDudyAcademy.html';
-        return;
-    }
+    // Exercício de Seleção de Texto (Imagem 1)
+    const exercicioSelecaoTexto = document.getElementById('exercicio-selecao-texto');
+    const perguntaSelecaoTexto = document.getElementById('pergunta-selecao-texto');
+    const imagemSelecao = document.getElementById('imagem-selecao');
+    const opcoesTexto = document.getElementById('opcoes-texto');
+    const btnContinuarSelecao = document.getElementById('btnContinuarSelecao');
 
-    // --- VARIÁVEIS DE ESTADO DA LIÇÃO ---
-    const atividadesOriginais = [...licaoAtual.atividades];
-    let atividadesRestantes = [...licaoAtual.atividades];
-    let currentIndex = 0;
-    let atividadesErradas = [];
-    let atividadesCorretasUnicas = [];
-    let licaoFinalizada = false;
-
-    // --- ELEMENTOS DA PÁGINA ---
-    const feedbackEl = document.getElementById('feedback');
-    const btnVerificar = document.getElementById('btnVerificar');
-    const progressoAtualEl = document.getElementById('progresso-atual');
+    // Modal de Lição Concluída
     const licaoConcluidaModal = document.getElementById('licao-concluida-modal');
     const btnVoltarMenu = document.getElementById('btnVoltarMenu');
-    const atividadeWrapper = document.querySelector('.atividade-wrapper');
-    const acoesRodape = document.querySelector('.acoes-rodape');
-    const progressoHeader = document.querySelector('.progresso-header');
 
-    // --- FUNÇÕES PRINCIPAIS ---
+    // --- Variáveis de Estado da Atividade ---
+    let currentLessonId = null; // ID da lição atual (ex: "1" para Comidas)
+    let currentActivities = []; // Array das atividades para a lição atual
+    let currentActivityIndex = 0; // Índice da atividade atual no array
+    let selectedOptionId = null; // Para guardar a opção selecionada em exercícios de múltipla escolha
+    let isCorrectAnswerGiven = false; // Para habilitar o botão de continuar após a resposta correta
 
-    function atualizarProgresso() {
-        const totalAtividades = atividadesOriginais.length;
-        const percentual = (atividadesCorretasUnicas.length / totalAtividades) * 100;
-        progressoAtualEl.style.width = `${percentual}%`;
+    // --- Funções de Ajuda ---
+
+    // Obtém o parâmetro lessonId da URL
+    function getLessonIdFromUrl() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get('lessonId');
     }
 
-    async function carregarProximaAtividade() {
-        if (licaoFinalizada) return;
+    // Esconde todos os containers de exercício
+    function hideAllExercises() {
+        exercicioAssociacao.style.display = 'none';
+        exercicioTraducao.style.display = 'none';
+        exercicioSelecaoTexto.style.display = 'none';
+    }
 
-        feedbackEl.className = '';
-        feedbackEl.textContent = '';
-        document.getElementById('exercicio-associacao').style.display = 'none';
-        document.getElementById('exercicio-traducao').style.display = 'none';
-        btnVerificar.disabled = true;
-
-        if (currentIndex >= atividadesRestantes.length) {
-            if (atividadesErradas.length > 0) {
-                atividadesRestantes = atividadesErradas;
-                atividadesErradas = [];
-                currentIndex = 0;
-            } else {
-                licaoFinalizada = true;
-                // CHAMA A FUNÇÃO DE SALVAR AQUI
-                await salvarProgressoDaLicao(); 
-                
-                atividadeWrapper.style.display = 'none';
-                acoesRodape.style.display = 'none';
-                progressoHeader.style.display = 'none';
-                licaoConcluidaModal.style.display = 'flex';
-                btnVoltarMenu.onclick = () => { window.location.href = 'telaDudyAcademy.html'; };
-                return;
-            }
+    // Atualiza a barra de progresso visualmente
+    function updateProgressBar() {
+        if (currentActivities.length === 0) {
+            progressoAtual.style.width = '0%';
+            return;
         }
+        const progressPercentage = ((currentActivityIndex) / currentActivities.length) * 100;
+        progressoAtual.style.width = `${progressPercentage}%`;
+    }
 
-        const idDaProximaAtividade = atividadesRestantes[currentIndex];
-        const atividadeCompleta = DADOS_ATIVIDADES.find(a => a.id === idDaProximaAtividade);
+    // --- Lógica de Carregamento da Lição e Atividades ---
 
-        if (!atividadeCompleta) {
-            console.error('Detalhes da atividade não encontrados para o ID:', idDaProximaAtividade);
+    function loadLesson() {
+        currentLessonId = getLessonIdFromUrl();
+
+        if (!currentLessonId || !licoesData[currentLessonId]) {
+            console.error("Lição não encontrada ou ID inválido.");
+            alert("Lição não encontrada! Redirecionando para o menu.");
+            window.location.href = "telaDudyAcademy.html"; // Redireciona de volta
             return;
         }
 
-        if (atividadeCompleta.tipo === 'associacao_imagem') {
-            document.getElementById('exercicio-associacao').style.display = 'block';
-            carregarExercicioAssociacao(atividadeCompleta);
-        } else if (atividadeCompleta.tipo === 'traducao') {
-            document.getElementById('exercicio-traducao').style.display = 'block';
-            carregarExercicioTraducao(atividadeCompleta);
-        }
-        
-        atualizarProgresso();
+        currentActivities = licoesData[currentLessonId].activities;
+        currentActivityIndex = 0; // Inicia sempre na primeira atividade
+        loadCurrentActivity();
     }
 
-    function verificarResposta(isCorreta, atividadeRespondida) {
-        if (licaoFinalizada) return;
-        btnVerificar.disabled = true;
+    function loadCurrentActivity() {
+        hideAllExercises(); // Esconde todos os exercícios antes de renderizar o novo
+        selectedOptionId = null; // Reseta a opção selecionada
+        isCorrectAnswerGiven = false; // Reseta o estado da resposta
 
-        if (isCorreta) {
-            feedbackEl.textContent = 'Correto!';
-            feedbackEl.className = 'feedback correto';
-            
-            const jaAcertou = atividadesCorretasUnicas.includes(atividadeRespondida.id);
-            if (!jaAcertou) {
-                atividadesCorretasUnicas.push(atividadeRespondida.id);
-                atualizarProgresso();
+        if (currentActivityIndex >= currentActivities.length) {
+            // Todas as atividades da lição foram concluídas
+            showLessonCompletedModal();
+            // AQUI: Salvar o progresso da lição como 100% no localStorage
+            if (window.saveLessonProgress) { // Verifica se a função existe (do dudyAcademy.js)
+                window.saveLessonProgress(currentLessonId, 100);
+            } else {
+                console.warn("Função saveLessonProgress não disponível. Progresso não salvo.");
             }
-        } else {
-            feedbackEl.textContent = `Incorreto! A resposta era: ${atividadeRespondida.respostaCorreta}`;
-            feedbackEl.className = 'feedback incorreto';
-            
-            const jaErrou = atividadesErradas.includes(atividadesRestantes[currentIndex]);
-            if (!jaErrou) {
-                atividadesErradas.push(atividadesRestantes[currentIndex]);
-            }
+            return;
         }
-        
-        currentIndex++;
-        setTimeout(carregarProximaAtividade, 1500); 
+
+        const activity = currentActivities[currentActivityIndex];
+
+        // Desabilita os botões de continuar por padrão, eles serão habilitados
+        // APENAS APÓS uma interação válida (seleção ou confirmação de tradução).
+        btnContinuarAssociacao.disabled = true;
+        btnContinuarTraducao.disabled = true;
+        btnContinuarSelecao.disabled = true;
+
+
+        switch (activity.type) {
+            case "traducao":
+                renderTraducaoActivity(activity);
+                exercicioTraducao.style.display = 'flex';
+                // Para tradução simples (como a Imagem 3 sem input), o "Continuar"
+                // significa que o usuário "viu" a resposta, então pode habilitar.
+                btnContinuarTraducao.disabled = false;
+                break;
+            case "associacao-imagem":
+                renderAssociacaoImagemActivity(activity);
+                exercicioAssociacao.style.display = 'flex';
+                break;
+            case "selecao-texto":
+                renderSelecaoTextoActivity(activity);
+                exercicioSelecaoTexto.style.display = 'flex';
+                break;
+            default:
+                console.error("Tipo de atividade desconhecido:", activity.type);
+                // Em caso de erro, avança para a próxima atividade para não travar
+                currentActivityIndex++;
+                loadCurrentActivity();
+                break;
+        }
+        updateProgressBar();
     }
 
-    // --- FUNÇÃO DE SALVAMENTO (ESTAVA FALTANDO NO SEU SCRIPT NO GITHUB) ---
-    async function salvarProgressoDaLicao() {
-        const pontuacaoFinal = atividadesCorretasUnicas.length;
-        const idDaLicaoComoJogo = licaoAtual.id + 100;
+    // --- Funções de Renderização Específicas por Tipo de Atividade ---
 
-        console.log(`Salvando progresso: Estudante ${idEstudanteAtivo}, Jogo ${idDaLicaoComoJogo}, Pontuação ${pontuacaoFinal}`);
-
-        const { data, error } = await supabaseClient
-            .from('estudantejogos')
-            .upsert({ 
-                idestudante: idEstudanteAtivo, 
-                idjogos: idDaLicaoComoJogo,
-                pontuacaoobtida: pontuacaoFinal,
-                datarealizacao: new Date().toISOString() 
-            }, { 
-                onConflict: 'idestudante, idjogos'
-            });
-
-        if (error) {
-            console.error('Erro ao salvar/atualizar progresso da lição:', error.message);
-        } else {
-            console.log('Progresso da lição salvo/atualizado com sucesso!', data);
-        }
+    function renderTraducaoActivity(activity) {
+        perguntaTraducao.innerHTML = `${activity.question} <span class="palavra-destaque">${activity.word}</span>`;
+        imagemPrincipal.src = activity.image;
+        imagemPrincipal.alt = activity.word;
+        // Não há input de resposta nesta versão da tradução.
+        // O botão "Continuar" aqui simplesmente avança.
     }
 
-    // --- FUNÇÕES DE CARREGAMENTO DE EXERCÍCIOS ---
-    function carregarExercicioAssociacao(dados) {
-        const perguntaEl = document.getElementById('pergunta-associacao');
-        const opcoesContainer = document.getElementById('opcoes-imagem');
-        let respostaSelecionada = null;
+    function renderAssociacaoImagemActivity(activity) {
+        perguntaAssociacao.innerHTML = `${activity.question} <span class="palavra-destaque">${activity.word}</span>`;
+        opcoesImagem.innerHTML = ''; // Limpa opções anteriores
 
-        perguntaEl.innerHTML = dados.pergunta;
-        opcoesContainer.innerHTML = '';
-
-        dados.opcoes.forEach(opcao => {
+        activity.options.forEach(option => {
             const card = document.createElement('div');
             card.className = 'card-imagem';
-            card.dataset.resposta = opcao.id;
-            
-            const img = document.createElement('img');
-            img.src = opcao.imagem;
-            
-            const p = document.createElement('p');
-            p.textContent = opcao.texto;
-
-            card.appendChild(img);
-            card.appendChild(p);
-            opcoesContainer.appendChild(card);
+            card.dataset.optionId = option.id;
+            card.style.backgroundColor = option.bgColor;
+            card.innerHTML = `<img src="${option.image}" alt="${option.text}"><p>${option.text}</p>`;
 
             card.addEventListener('click', () => {
                 document.querySelectorAll('.card-imagem').forEach(c => c.classList.remove('selecionado'));
                 card.classList.add('selecionado');
-                respostaSelecionada = card.dataset.resposta;
-                btnVerificar.disabled = false;
+                selectedOptionId = option.id;
+                btnContinuarAssociacao.disabled = false; // Habilita o botão ao selecionar
             });
+            opcoesImagem.appendChild(card);
         });
-
-        btnVerificar.onclick = () => {
-            verificarResposta(respostaSelecionada === dados.respostaCorreta, dados);
-        };
     }
 
-    function carregarExercicioTraducao(dados) {
-        const perguntaEl = document.getElementById('pergunta-traducao');
-        const btnAudio = document.getElementById('btnAudio');
-        const spanPalavra = document.getElementById('palavra-audio');
-        const inputResposta = document.getElementById('inputResposta');
-        const imgContainer = document.getElementById('imagem-principal-container');
-        const imgEl = document.getElementById('imagem-principal');
+    function renderSelecaoTextoActivity(activity) {
+        perguntaSelecaoTexto.innerHTML = `${activity.question} <span class="palavra-destaque">${activity.word}</span>`;
+        imagemSelecao.src = activity.image;
+        imagemSelecao.alt = activity.word;
+        opcoesTexto.innerHTML = ''; // Limpa opções anteriores
 
-        perguntaEl.textContent = dados.pergunta;
-        spanPalavra.textContent = dados.palavraOriginal;
-        inputResposta.value = '';
-        
-        if (dados.imagemPrincipal) {
-            imgContainer.style.display = 'flex';
-            imgEl.src = dados.imagemPrincipal;
-        } else {
-            imgContainer.style.display = 'none';
+        activity.options.forEach(option => {
+            const button = document.createElement('button');
+            button.className = 'opcao-texto';
+            button.dataset.optionId = option.id;
+            button.textContent = option.text;
+
+            button.addEventListener('click', () => {
+                document.querySelectorAll('.opcao-texto').forEach(b => b.classList.remove('selecionado', 'incorreto')); // Limpa seleções e feedbacks
+                button.classList.add('selecionado');
+                selectedOptionId = option.id;
+                btnContinuarSelecao.disabled = false; // Habilita o botão ao selecionar
+            });
+            opcoesTexto.appendChild(button);
+        });
+    }
+
+    // --- Lógica de Continuação/Verificação ---
+
+    function handleContinuar(btn) {
+        const activity = currentActivities[currentActivityIndex];
+        let isAnswerCorrect = true; // Por padrão, avança se não houver verificação explícita
+
+        if (activity.type === "associacao-imagem" || activity.type === "selecao-texto") {
+            const options = activity.options;
+            const selectedOption = options.find(opt => opt.id === selectedOptionId);
+            isAnswerCorrect = selectedOption ? selectedOption.isCorrect : false;
+
+            // AQUI: Feedback visual imediato ao clicar em continuar para seleção/associação
+            if (selectedOption) {
+                const element = document.querySelector(`[data-option-id="${selectedOption.id}"]`);
+                if (isAnswerCorrect) {
+                    element.classList.add('selecionado'); // Já está selecionado, pode reforçar
+                    // Pode adicionar um feedback de sucesso aqui
+                } else {
+                    element.classList.add('incorreto'); // Mostra que a resposta está errada
+                    // Opcional: mostrar qual seria a resposta correta por um breve momento
+                    // Por simplicidade, vamos apenas marcar a incorreta e avançar.
+                }
+            }
         }
         
-        btnAudio.onclick = () => { new Audio(dados.audio).play(); };
+        // Em todas as atividades, após o clique em "Continuar", avançamos.
+        // A lógica de "correto/incorreto" serve para feedback, mas o fluxo avança.
+        currentActivityIndex++;
+        
+        // AQUI: Salvar progresso no localStorage após CADA atividade
+        if (window.saveLessonProgress) {
+            const newProgress = Math.floor((currentActivityIndex / currentActivities.length) * 100);
+            window.saveLessonProgress(currentLessonId, newProgress);
+        }
 
-        inputResposta.addEventListener('input', () => {
-            btnVerificar.disabled = inputResposta.value.trim() === '';
-        });
-
-        btnVerificar.onclick = () => {
-            const respostaUsuario = inputResposta.value.trim().toLowerCase();
-            const respostaCorreta = dados.respostaCorreta.trim().toLowerCase();
-            verificarResposta(respostaUsuario === respostaCorreta, dados);
-        };
+        loadCurrentActivity(); // Carrega a próxima atividade ou exibe o modal de conclusão
     }
 
-    // Inicia a primeira atividade da lição
-    carregarProximaAtividade();
+    // --- Adição de Event Listeners ---
+    btnContinuarAssociacao.addEventListener('click', () => handleContinuar(btnContinuarAssociacao));
+    btnContinuarTraducao.addEventListener('click', () => handleContinuar(btnContinuarTraducao));
+    btnContinuarSelecao.addEventListener('click', () => handleContinuar(btnContinuarSelecao));
+
+    fecharBtn.addEventListener('click', () => {
+        window.location.href = "telaDudyAcademy.html"; // Volta para a tela de lições
+    });
+
+    // --- Modal de Lição Concluída ---
+    function showLessonCompletedModal() {
+        licaoConcluidaModal.classList.add('active'); // Adiciona a classe 'active'
+    }
+
+    btnVoltarMenu.addEventListener('click', () => {
+        window.location.href = "telaDudyAcademy.html"; // Redireciona para o menu de lições
+    });
+
+    // --- Início: Carrega a lição ao carregar a página ---
+    loadLesson();
 });

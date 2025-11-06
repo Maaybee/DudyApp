@@ -17,52 +17,47 @@
 
     <main class="atividade-wrapper">
         <div id="exercicio-associacao" class="exercicio-container" style="display: none;">
-            <h2 id="pergunta-associacao"></h2>
+            <h2 id="pergunta-associacao">Selecione <span class="palavra-destaque">Book</span></h2>
             <div id="opcoes-imagem" class="opcoes-imagem">
-            </div>
+                </div>
+            <button id="btnContinuarAssociacao" class="btn-principal">Continuar</button>
         </div>
 
-        <div id="exercicio-traducao" class="exercicio-container" style="display: none;">
-            <h2 id="pergunta-traducao"></h2>
-
-            <div class="prompt-audio">
-                <button id="btnAudio">
-                    <img src="../assets/img/audio.svg" alt="Ouvir">
-                    <span id="palavra-audio"></span>
-                </button>
-            </div>
+        <div id="exercicio-traducao" class="exercicio-container" style="display: flex;">
+            <h2 id="pergunta-traducao">Traduza <span class="palavra-destaque">Orange</span></h2>
             
             <div id="imagem-principal-container">
-                <img id="imagem-principal" src="" alt="Imagem da atividade">
+                <img id="imagem-principal" src="../assets/img/orange.png" alt="Orange">
             </div>
 
-            <div class="area-resposta">
-                <input type="text" id="inputResposta" placeholder="Escreva em português...">
-            </div>
+            <button id="btnContinuarTraducao" class="btn-principal">Continuar</button>
         </div>
+
+        <div id="exercicio-selecao-texto" class="exercicio-container" style="display: none;">
+            <h2 id="pergunta-selecao-texto">Selecione o nome <span class="palavra-destaque">em inglês</span></h2>
+            <div id="imagem-principal-container-selecao">
+                <img id="imagem-selecao" src="../assets/img/house.png" alt="House">
+            </div>
+            <div id="opcoes-texto" class="opcoes-texto">
+                <button class="opcao-texto">House</button>
+                <button class="opcao-texto">Cat</button>
+                <button class="opcao-texto">AirPlane</button>
+            </div>
+            <button id="btnContinuarSelecao" class="btn-principal">Continuar</button>
+        </div>
+
     </main>
     
-    <div id="licao-concluida-modal" style="display: none;">
-        <div class="modal-conteudo">
+    <div id="licao-concluida-modal" class="modal"> <div class="modal-conteudo">
             <h2 id="conclusao-titulo">Lição Concluída!</h2>
-            <img id="conclusao-gif" src="/DudyApp/assets/img/congratulations.gif" alt="Parabéns!">
-            <p id="conclusao-mensagem">Parabéns por completar esta lição!</p>
+            <img id="conclusao-gif" src="../assets/img/congratulations.gif" alt="Parabéns!"> <p id="conclusao-mensagem">Parabéns por completar esta lição!</p>
             <button id="btnVoltarMenu" class="btn-principal">Voltar ao Menu</button>
         </div>
     </div>
-
-     <footer class="acoes-rodape">
-        <div id="feedback"></div>
-        <button id="btnVerificar" disabled>Verificar</button>
-    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="../scripts/supabaseConfig.js"></script>
     
     <script src="../scripts/dadosLicoes.js"></script> 
-    
-    <script src="../scripts/scriptAtividade.js"></script> 
- 
-    
-</body>
+    <script src="../scripts/scriptAtividade.js"></script> <script src="../scripts/dudyAcademy.js"></script> </body>
 </html>
