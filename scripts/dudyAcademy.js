@@ -12,44 +12,53 @@ document.addEventListener('DOMContentLoaded', () => {
         { id: 4, name: 'Escola', totalActivities: 4, progress: 0, iconColor: '#d1ffb7' },
     ];
 
-    // Função para carregar o progresso de uma lição (simulado por enquanto)
+    // --- FUNÇÃO CORRIGIDA PARA OBTER O PROGRESSO DO LOCALSTORAGE ---
     function getLessonProgress(lessonId) {
-        // Exemplo de como você pode armazenar e recuperar do localStorage:
-        // let progress = localStorage.getItem(`lesson_${lessonId}_progress`);
-        // return progress ? parseInt(progress, 10) : 0;
-
-        // Por enquanto, vamos retornar um progresso fixo para cada lição para fins de demonstração
-        // Para testes, vamos dar um progresso diferente para cada lição:
-        if (lessonId === "1") return 25; // Comidas com 25%
-        if (lessonId === "2") return 50; // Animais com 50%
-        if (lessonId === "3") return 75; // Família com 75%
-        if (lessonId === "4") return 100; // Escola com 100%
-        return 0; // Padrão para 0%
+        // Tenta obter o progresso salvo para esta lição do localStorage
+        let progress = localStorage.getItem(`lesson_${lessonId}_progress`);
+        
+        // Se não houver progresso salvo, retorna 0.
+        // Caso contrário, converte para inteiro e garante que seja entre 0 e 100.
+        return progress ? Math.max(0, Math.min(100, parseInt(progress, 10))) : 0;
     }
 
-    // Adiciona o evento de clique e ATUALIZA O PROGRESSO para cada card de lição
+    // --- FUNÇÃO PARA SALVAR O PROGRESSO NO LOCALSTORAGE (GLOBALMENTE ACESSÍVEL) ---
+    // Esta função é chamada do scriptAtividade.js
+    window.saveLessonProgress = (lessonId, newProgress) => {
+        // Converte para inteiro e garante que seja entre 0 e 100 antes de salvar
+        newProgress = Math.max(0, Math.min(100, parseInt(newProgress, 10)));
+        localStorage.setItem(`lesson_${lessonId}_progress`, newProgress);
+        console.log(`Progresso da lição ${lessonId} salvo: ${newProgress}%`);
+        
+        // Opcional: Atualizar a exibição DO CARD ESPECÍFICO na tela de listagem
+        // caso o usuário esteja nesta tela e o progresso seja atualizado por algum motivo
+        // (ex: outra aba, ou uma função futura). Para o fluxo atual, o progresso
+        // será lido ao CARREGAR a tela telaDudyAcademy.html.
+        const cardToUpdate = document.querySelector(`.atividade-card[data-licao-id="${lessonId}"]`);
+        if (cardToUpdate) {
+            const progressoCircle = cardToUpdate.querySelector('.progresso-circle');
+            const progressoPorcentagem = cardToUpdate.querySelector('.progresso-porcentagem');
+            progressoCircle.style.setProperty('--progress', `${newProgress}%`);
+            progressoPorcentagem.textContent = `${newProgress}%`;
+        }
+    };
+
+
+    // --- Inicialização: Renderiza e adiciona eventos para CADA card de lição ---
     lessonCards.forEach(card => {
         const lessonId = card.dataset.licaoId;
         const progressoCircle = card.querySelector('.progresso-circle');
         const progressoPorcentagem = card.querySelector('.progresso-porcentagem');
 
-        // 1. ATUALIZA O PROGRESSO VISUAL DO ANEL E TEXTO
+        // 1. LÊ O PROGRESSO SALVO E ATUALIZA O VISUAL DO ANEL E TEXTO
         const currentProgress = getLessonProgress(lessonId);
         progressoCircle.style.setProperty('--progress', `${currentProgress}%`);
         progressoPorcentagem.textContent = `${currentProgress}%`;
 
         // 2. ADICIONA O EVENTO DE CLIQUE
         card.addEventListener('click', (event) => {
-            // O lessonId já foi obtido acima
             window.location.href = `atividade.html?lessonId=${lessonId}`;
         });
     });
 
-    // Função para salvar o progresso (será chamada de `scriptAtividade.js` ao completar uma atividade/lição)
-    // Exportamos essa função para que `scriptAtividade.js` possa usá-la.
-    window.saveLessonProgress = (lessonId, newProgress) => {
-        localStorage.setItem(`lesson_${lessonId}_progress`, newProgress);
-        // Opcional: Re-renderizar os cards na tela Dudy Academy se o usuário voltar para ela
-        // (Isso é mais complexo, por enquanto, o usuário verá o progresso atualizado ao RECARREGAR a tela)
-    };
 });
