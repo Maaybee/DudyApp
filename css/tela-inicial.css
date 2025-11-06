@@ -114,7 +114,7 @@ body {
     position: absolute; /* Posiciona a imagem absolutamente */
     bottom: 0; /* Alinha na parte inferior */
     left: 0;
-
+    margin-bottom: -30px;
     height: auto; /* Altura automática para manter proporção */
     display: flex;
     justify-content: center;
