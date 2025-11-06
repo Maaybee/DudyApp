@@ -28,7 +28,7 @@ const DADOS_HISTORIAS = [
             ],
             alternativas: [
                 ['Apples and sandwiches.', 'Juice and cookies.', 'Bananas and pears.'],
-                ['This apple is sweet!', 'I have juice and cookies.', 'I’m hungry.'],
+                ['This apple is so sweet!', 'I have juice and cookies.', 'I’m hungry.'],
                 ['Picnics are boring.', 'Picnics are fun!', 'I’m sleepy.']
             ],
             respostasCorretas: [
