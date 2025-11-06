@@ -1,13 +1,34 @@
+html, body {
+    margin: 0 !important; /* Força remover qualquer margem */
+    padding: 0 !important; /* Força remover qualquer padding */
+    height: 100% !important; /* Força altura total */
+    width: 100% !important; /* Força largura total */
+    background-color: #5AC8FA !important; /* ESTA É A COR DE FUNDO AZUL DE TELA CHEIA */
+   
+    display: block !important; /* Reseta para block para depois o body ser flex */
+}
+
+/* O fundo azul e o flexbox para centralizar AGORA FICAM NO BODY */
+body {
+    background-color: #5AC8FA !important; /* ESTA É A COR DE FUNDO AZUL DE TELA CHEIA */
+    display: flex !important; /* Torna o body um container flexível */
+    justify-content: center !important; /* Centraliza o conteúdo horizontalmente */
+    align-items: center !important; /* Centraliza o conteúdo verticalmente */
+    flex-direction: column !important; /* Empilha os itens verticalmente */
+    overflow: hidden !important; /* Evita barras de rolagem indesejadas */
+    /* Você pode adicionar a font-family aqui se ela for específica da tela de login */
+    font-family: 'Baloo Chettan 2', sans-serif !important; 
+}
 #imgTelaCadastro{ 
-    height: 30vh;
-    margin-bottom: -10vh;
-    margin-top: 5vh;
+    margin-bottom: -50px;
+    margin-top: -70px;
+    width: 400px;
 }
 
 input {
-    color: #b4b4b4;
     font-family: 'Baloo Chettan Regular';
     font-size: 1rem;
+    background-color: #5AC8FA;
 }
 
 
@@ -24,6 +45,7 @@ input {
     flex-direction: row;
     align-items: start ;
     gap: 5vh;
+    background-color: #5AC8FA !important;
 }
 .linhaInput { 
     margin: 0;
@@ -32,10 +54,12 @@ input {
 
 .input { 
     width: 50vw;
+    background-color: #5AC8FA;
 }
 
 .col-itens-input { 
     width: 70vw;
+    background-color: #5AC8FA;
 }
 
 #btnLogin { 

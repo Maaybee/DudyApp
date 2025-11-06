@@ -330,7 +330,6 @@ input::placeholder {
 
 
 input { 
-    background-color: #FFF7F7;
     border: none;
     outline: none;
     flex-grow: 1;
@@ -471,9 +470,8 @@ input {
     height: 50vh;
 }
 
-#cadeado { 
+/*#cadeado { 
      /* margin-right: 9px; (Removido na correção anterior) */
-}
 
 #pessoa {
     margin-right: 4px;
@@ -644,7 +642,6 @@ input::-webkit-credentials-auto-fill-button {
 }
 
 input {
-    color: #b4b4b4;
     font-family: 'Baloo Chettan Regular';
 
 }
