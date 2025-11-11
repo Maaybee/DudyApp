@@ -1,0 +1,145 @@
+/* Reseta estilos padrão e define a fonte principal */
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #FEF9F6; /* Cor de fundo creme/rosado claro */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding-top: 20px;
+}
+
+.game-wrapper {
+    width: 100%;
+    max-width: 400px; /* Largura máxima para manter o layout de celular */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* --- Cabeçalho --- */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.header-text p {
+    margin: 0;
+    font-size: 0.9em;
+    color: #555;
+}
+
+.header-text h1 {
+    margin: 0;
+    font-size: 2em;
+    color: #111;
+}
+
+.header-logo {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* --- Área Principal do Jogo --- */
+#game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px; /* Espaço entre a imagem, as lacunas e as letras */
+}
+
+#object-image {
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+    min-height: 250px; 
+    object-fit: contain;
+}
+
+/* --- Lacunas e Banco de Letras --- */
+.drop-zone {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    width: 100%;
+}
+
+#answer-slots {
+    min-height: 65px; /* Altura mínima para quando estiver vazio */
+}
+
+#letter-bank {
+    background-color: #EBF5FF; /* Fundo azul claro */
+    padding: 20px;
+    border-radius: 30px;
+    box-sizing: border-box;
+    min-height: 65px;
+}
+
+.divider {
+    height: 1px;
+    width: 80%;
+    background-color: #E0E0E0;
+    margin: 10px 0;
+}
+
+/* --- Lacunas --- */
+.slot {
+    width: 65px;
+    height: 65px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px; 
+    font-size: 2.2em;
+    font-weight: 700;
+    background-color: #E9EFF5; 
+    border: 2px dashed #D0D9E3;
+}
+
+/* --- Letras (COM MELHORIA DE FLUIDEZ) --- */
+.letter {
+    width: 65px;
+    height: 65px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    font-size: 2.2em;
+    font-weight: 700;
+    background-color: #FFFFFF;
+    color: #333;
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+
+    /* Anima suavemente qualquer mudança */
+    transition: box-shadow 0.2s ease, 
+                transform 0.2s ease, 
+                opacity 0.2s ease;
+}
+
+.letter.dragging {
+    cursor: grabbing;
+    /* Efeito de "levantar" */
+    opacity: 0.9;
+    transform: scale(1.1); 
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* --- Feedback --- */
+#feedback {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #28a745;
+    height: 30px;
+}
