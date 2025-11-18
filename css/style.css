@@ -85,10 +85,10 @@ body {
 }
 
 #buttonsLogin button { 
-    background-color: #0262FF;
+    background-color: #00BEFF;
     border-radius: 30px;
     color: white;
-    border: 1px solid #0262FF;
+    border: 1px solid #00BEFF;
     height: 8vh;
     width: 90vw;
     margin-top: 30px;
@@ -126,7 +126,7 @@ body {
 #blocoAzul { 
     width: 130px;
     height: 153px;
-    background-color: #0262FF;
+    background-color: #00BEFF;
     border-radius: 7px;
     margin: auto;
     box-shadow: 8px 8px 0px #0553D2;
@@ -323,7 +323,7 @@ body {
 
 
 input::placeholder { 
-    color: #0262FF;
+    color: #00BEFF;
     font-family: 'Baloo Chettan Regular';
     font-size: 16px;
 }
@@ -360,9 +360,9 @@ input {
 }
 
 .linhaInput { 
-    background-color: #0262FF;
+    background-color: #00BEFF;
     height: 0.5px;
-    border: #0262FF;
+    border: #00BEFF;
     width: 274px;
 }
 
@@ -375,8 +375,8 @@ input {
 }
 
 .btns-blue{ 
-    background-color: #0262FF;
-    border: #0262FF;
+    background-color: #00BEFF;
+    border: #00BEFF;
     border-radius: 20px;
     color: white;
 }
