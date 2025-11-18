@@ -1,6 +1,5 @@
 #estatuaLiberdade { 
-    width: 59px;
-    height: 133px;
+    width: 23vw;
 }
 
 #nomePerfil{ 
@@ -14,7 +13,7 @@
     text-align: center;
     color: white;
     font-family: 'Baloo Chettan Regular';
-    background-color: #0262FF ;
+    background-color: #00BEFF ;
     width: 314px;
     height: 140px;
     border-radius: 15px;
@@ -61,7 +60,7 @@ h4 {
 }
 
 #barraProgresso {
-    background-color: #0553D2;
+    background-color: #009CD0;
     width: 192px;
     height: 32px;
     border-radius: 50px;
@@ -90,11 +89,11 @@ h3{
 }
 
 #quadradoRoxo { 
-    background-color: #8C52FF ;
+    background-color: #FCE5B8 ;
 }
 
 #quadradoRosa { 
-    background-color: #FF7BAC ;
+    background-color: #FCB8EF ;
 }
 
 .quadrados { 
