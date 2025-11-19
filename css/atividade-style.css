@@ -1,13 +1,9 @@
+/* css/atividade.css */
+
+/* --- Fontes --- */
 @font-face {
     font-family: 'Baloo Chettan Regular';
     src: local("☺"), url("../assets/fonts/baloo-chettan-webfont/BalooChettan-Regular.woff") format("woff");
-    font-weight: 900;
-    font-style: normal
-}
-
-@font-face {
-    font-family: 'Gelasio';
-    src: local("☺"), url("../assets/fonts/gelasio-webfont/Gelasio-Regular.woff") format("woff");
     font-weight: 900;
     font-style: normal
 }
@@ -19,387 +15,299 @@
     font-style: normal;
 }
 
-@font-face { 
-    font-family: 'Arimo';
-    src: local(0), url("../assets/fonts/Arimo/Arimo-Bold.ttf") format("woff");
-    font-weight: 900;
-    font-style: normal;
-}
-
-/* --- ESTILOS GERAIS DA PÁGINA --- */
+/* --- GERAL --- */
 body {
-    font-family: 'Baloo Chettan Regular', sans-serif; /* Usando sua fonte Baloo Chettan Regular */
-    background-color: #fcf8f5; /* Fundo creme/off-white */
-    color: #333333; /* Cor de texto mais escura e moderna */
+    font-family: 'Baloo Chettan Regular', sans-serif;
+    background-color: #FFFDFB;
+    color: #333;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    height: 100vh;
     margin: 0;
     padding: 0;
-    box-sizing: border-box; /* Garante que padding e border sejam incluídos na width/height */
+    overflow: hidden; 
 }
 
-/* --- CABEÇALHO DE PROGRESSO --- */
+/* --- HEADER --- */
 .progresso-header {
     display: flex;
     align-items: center;
-    gap: 10px; /* Reduzido o gap */
-    padding: 15px 20px; /* Padding ajustado */
-    background-color: #fcf8f5; /* Fundo igual ao body */
-    /* Removida a borda inferior para um visual mais limpo como na imagem */
+    gap: 15px;
+    padding: 20px;
+    background-color: #FFFDFB;
+    width: 100%;
+    box-sizing: border-box;
+    flex-shrink: 0;
 }
 
 .fechar-btn { 
-    font-size: 28px; /* Maior para ser mais visível */
-    color: #cccccc; /* Cor cinza mais clara */
+    font-family: sans-serif;
+    font-size: 28px;
+    color: #dedede;
     text-decoration: none; 
-    margin-right: 5px; /* Ajuste o espaçamento */
-    font-weight: bold; /* Deixa o X mais marcado */
-    line-height: 1; /* Alinha o X verticalmente */
+    font-weight: bold;
+    cursor: pointer; 
+    line-height: 1;
+    border: none;
+    background: none;
+    padding: 0;
 }
 
 .barra-progresso { 
     flex-grow: 1; 
-    height: 12px; /* Altura da barra */
-    background-color: #e0e0e0; /* Fundo da barra de progresso mais claro */
-    border-radius: 6px; 
-    overflow: hidden; /* Garante que o progresso-atual não "vaze" */
+    height: 16px;
+    background-color: #dedede; 
+    border-radius: 10px; 
+    overflow: hidden; 
 }
 
 .progresso-atual { 
     height: 100%; 
-    background-color: #007bff; /* Cor azul forte para o progresso, como na imagem */
-    border-radius: 6px; 
-    width: 50%; /* Exemplo: Defina via JS para o progresso real */
-    transition: width 0.3s ease-in-out; /* Animação suave para o progresso */
+    background-color: #1cb0f6; 
+    border-radius: 10px; 
+    width: 0%; 
+    transition: width 0.5s ease-in-out; 
 }
 
-/* --- WRAPPER DA ATIVIDADE E EXERCÍCIO --- */
+/* --- CORPO DA ATIVIDADE --- */
 .atividade-wrapper {
     flex-grow: 1;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     padding: 20px;
+    padding-bottom: 150px; 
+    overflow-y: auto;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .exercicio-container {
     width: 100%;
-    max-width: 500px; /* Limita a largura em telas maiores */
-    display: flex; /* Torna o container flex para organizar os itens verticalmente */
+    max-width: 500px;
+    display: flex;
     flex-direction: column;
-    align-items: center; /* Centraliza horizontalmente o conteúdo */
-    gap: 25px; /* Espaçamento entre os elementos (título, imagem, botões) */
-    padding: 0 10px; /* Padding horizontal para não colar nas bordas */
-}
-
-.exercicio-container h2 {
-    font-size: 32px; /* Aumenta o tamanho do título */
-    text-align: center;
-    margin: 0; /* Remove margem padrão para controlar com gap */
-    font-weight: 900; /* Baloo Chettan Regular já tem bold, mas reforça */
-    color: #333333; /* Cor preta para a parte padrão do título */
-}
-
-.palavra-destaque {
-    color: #ff7bac; /* Cor rosa vibrante para a palavra destacada */
-    font-weight: 900; /* Garante que a palavra rosa seja bem destacada */
-}
-
-/* --- ESTILOS PARA TRADUÇÃO (IMAGEM 3: Traduza Orange) --- */
-#exercicio-traducao #imagem-principal-container {
-    border: none; /* Remove a borda padrão do seu código */
-    background-color: #ffeae0; /* Fundo creme claro com leve tom pêssego */
-    border-radius: 20px; /* Cantos bem arredondados */
-    padding: 25px; /* Padding interno generoso */
-    margin: 0; /* Remove margem para controlar com gap do container */
-    width: 90%;
-    max-width: 250px; /* Tamanho da caixa da imagem */
-    display: flex;
-    justify-content: center;
     align-items: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Sombra suave */
+    gap: 30px;
+    animation: fadeIn 0.3s ease-in;
 }
 
-#exercicio-traducao #imagem-principal {
-    width: 100%;
-    height: auto;
-    max-height: 200px; /* Limita a altura máxima da imagem */
-    object-fit: contain;
-}
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-/* --- ESTILOS GERAIS PARA O BOTÃO PRINCIPAL (Continuar) --- */
-.btn-principal { 
-    background-color: #007bff; /* Azul forte */
-    color: white;
-    font-size: 20px; /* Um pouco maior */
-    font-weight: bold;
-    padding: 15px 30px; /* Padding ajustado */
-    border: none;
-    border-bottom: 6px solid #0056e3; /* Borda inferior mais pronunciada */
-    border-radius: 30px; /* Cantos bem arredondados */
-    cursor: pointer;
-    text-transform: uppercase;
-    transition: all 0.2s ease-in-out; /* Transição para hover */
-    width: 80%; /* Ocupa boa parte da largura */
-    max-width: 300px; /* Largura máxima */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
-}
-
-.btn-principal:hover {
-    background-color: #0069d9; /* Azul um pouco mais escuro no hover */
-    border-bottom-color: #003d8f;
-    transform: translateY(-2px); /* Efeito de "levantar" */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-}
-
-.btn-principal:active {
-    transform: translateY(2px); /* Efeito de "pressionar" */
-    border-bottom-width: 2px;
-}
-
-/* --- ESTILOS PARA ASSOCIAÇÃO DE IMAGEM (IMAGEM 2: Selecione Book) --- */
-.opcoes-imagem { 
-    display: grid; /* Usar grid para melhor controle dos 4 cards */
-    grid-template-columns: repeat(2, 1fr); /* Duas colunas iguais */
-    gap: 15px; /* Espaçamento entre os cards */
-    width: 100%;
-    max-width: 350px; /* Limita a largura do grid de cards */
-    margin: 0 auto; /* Centraliza o grid */
-}
-
-.card-imagem { 
-    border: none; /* Remove a borda padrão */
-    border-radius: 15px; /* Cantos arredondados */
-    padding: 10px;
-    text-align: center; 
-    cursor: pointer; 
-    transition: all 0.2s; 
-    width: 100%; /* Ocupa a largura da coluna do grid */
-    height: 120px; /* Altura fixa para todos os cards */
-    display: flex; 
-    flex-direction: column; 
-    justify-content: center; /* Centraliza a imagem verticalmente */
-    align-items: center; 
-    box-sizing: border-box; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08); /* Sombra suave */
-    background-color: #ffffff; /* Fundo branco padrão, se não for definido por JS */
-}
-
-/* Cores de fundo dos cards (seriam definidas via JS, mas como exemplo no CSS) */
-.card-imagem.cor1 { background-color: #ffb7d4; /* Rosa */ }
-.card-imagem.cor2 { background-color: #a0d8ff; /* Azul */ }
-.card-imagem.cor3 { background-color: #d1ffb7; /* Verde claro */ }
-.card-imagem.cor4 { background-color: #e0b0ff; /* Roxo claro */ }
-
-
-.card-imagem:hover { 
-    transform: translateY(-3px); /* Efeito de "levantar" no hover */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-}
-
-.card-imagem.selecionado { 
-    border: 3px solid #007bff; /* Borda azul para selecionado */
-    transform: scale(1.03); /* Leve aumento de escala */
-}
-
-.card-imagem img { 
-    width: 70px; /* Imagem um pouco menor */
-    height: 70px; 
-    object-fit: contain; 
-    flex-shrink: 0; 
-}
-
-.card-imagem p { 
-    margin: 5px 0 0 0; 
-    font-size: 14px; 
-    line-height: 1.2; 
-    color: #333333;
-}
-
-/* --- ESTILOS PARA SELEÇÃO DE TEXTO (IMAGEM 1: Selecione o nome em inglês) --- */
-#exercicio-selecao-texto #imagem-principal-container-selecao {
-    border: none;
-    background-color: #ffffff; /* Fundo branco para a imagem da casa */
-    border-radius: 20px;
-    padding: 20px;
+.titulo-exercicio {
+    font-size: 32px;
+    text-align: center;
     margin: 0;
-    width: 90%;
-    max-width: 300px; /* Tamanho da caixa da imagem da casa */
+    color: #3c3c3c;
+    line-height: 1.2;
+}
+
+.palavra-destaque { color: #ff7bac; }
+.palavra-destaque-orange { color: #ff9600; display: block; margin-top: 5px; font-size: 32px; }
+
+/* --- IMAGENS --- */
+.imagem-destaque {
+    width: 100%;
+    max-width: 280px;
+    height: 200px;
+    border-radius: 20px;
     display: flex;
-    justify-content: center;
     align-items: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    justify-content: center;
+    font-size: 100px;
+    overflow: hidden;
+    background-color: #ffe0b2;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
 }
+.imagem-destaque img { width: 100%; height: 100%; object-fit: contain; }
 
-#exercicio-selecao-texto #imagem-selecao {
-    width: 100%;
-    height: auto;
-    max-height: 200px;
-    object-fit: contain;
-}
+/* --- OPÇÕES E INPUT DE TEXTO --- */
 
-.opcoes-texto {
+.opcoes-grid {
     display: flex;
-    flex-direction: column; /* Coloca os botões um abaixo do outro */
-    gap: 15px; /* Espaço entre os botões */
+    flex-direction: column;
+    gap: 15px;
     width: 100%;
-    max-width: 300px; /* Largura máxima dos botões de opção */
-    margin: 0 auto;
+    max-width: 300px;
 }
 
-.opcao-texto {
-    background-color: #ffffff; /* Fundo branco */
-    color: #333333; /* Texto escuro */
-    font-size: 18px;
-    font-weight: bold;
-    padding: 15px 20px;
-    border: 2px solid #e0e0e0; /* Borda cinza clara */
-    border-radius: 15px; /* Cantos arredondados */
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
+.opcoes-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
     width: 100%;
-    box-sizing: border-box; /* Inclui padding e border na largura */
-    text-align: center;
+    max-width: 300px;
 }
 
-.opcao-texto:hover {
-    border-color: #bbbbbb; /* Borda um pouco mais escura no hover */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-.opcao-texto.selecionado {
-    background-color: #28a745; /* Fundo verde para opção correta */
-    color: white;
-    border-color: #218838; /* Borda verde mais escura */
-    transform: scale(1.02); /* Leve aumento de escala */
-    box-shadow: 0 4px 8px rgba(39, 169, 58, 0.3); /* Sombra verde */
-}
-
-.opcao-texto.incorreto { /* Se houver feedback de incorreto */
-    background-color: #dc3545; /* Fundo vermelho */
-    color: white;
-    border-color: #c82333;
-}
-
-
-/* --- MODAL DE LIÇÃO CONCLUÍDA --- */
-#licao-concluida-modal {
-    display: flex; 
-    justify-content: center;
-    align-items: center;
-    position: fixed; 
-    top: 0;
-    left: 0;
+/* NOVA CLASSE: Área de Texto para digitar */
+.area-texto {
     width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6); /* Fundo um pouco mais escuro */
-    z-index: 1000; 
-    opacity: 0; /* Começa invisível */
-    visibility: hidden; /* Oculta totalmente */
-    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-}
-
-#licao-concluida-modal.active { /* Classe para ativar o modal */
-    opacity: 1;
-    visibility: visible;
-}
-
-.modal-conteudo {
-    background-color: #fff;
-    padding: 35px; /* Padding ajustado */
-    border-radius: 20px; /* Mais arredondado */
-    text-align: center;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25); /* Sombra mais intensa */
-    max-width: 400px; /* Largura máxima do modal */
-    width: 90%; 
-    transform: translateY(20px); /* Efeito inicial para a animação */
-    transition: transform 0.3s ease-in-out;
-}
-
-#licao-concluida-modal.active .modal-conteudo {
-    transform: translateY(0); /* Posição final da animação */
-}
-
-#conclusao-titulo {
-    color: #ff7bac; /* Cor rosa para o título de parabéns */
-    font-size: 36px; /* Título maior */
-    margin-bottom: 25px;
-}
-
-#conclusao-gif {
-    max-width: 180px; /* GIF um pouco maior */
-    height: auto;
-    margin-bottom: 25px;
-}
-
-#conclusao-mensagem {
+    max-width: 300px;
+    height: 150px;
+    padding: 15px;
+    font-family: 'Arimo', sans-serif; /* Fonte mais legível para digitar */
     font-size: 20px;
-    color: #555555; /* Cor de texto mais suave */
-    margin-bottom: 35px;
+    color: #4b4b4b;
+    background-color: #f7f7f7;
+    border: 2px solid #dedede;
+    border-bottom: 4px solid #dedede;
+    border-radius: 16px;
+    resize: none; /* Impede o usuário de redimensionar */
+    box-sizing: border-box;
+    outline: none;
+    transition: all 0.2s;
 }
 
-/* --- ESTILOS RESPONSIVOS --- */
-@media (max-width: 480px) {
-    .progresso-header {
-        padding: 10px 15px;
-    }
-    .fechar-btn {
-        font-size: 24px;
-    }
-    .progresso-barra {
-        height: 10px;
-    }
-    .exercicio-container {
-        gap: 20px;
-        padding: 0 5px;
-    }
-    .exercicio-container h2 {
-        font-size: 26px;
-    }
-    #exercicio-traducao #imagem-principal-container,
-    #exercicio-selecao-texto #imagem-principal-container-selecao {
-        max-width: 200px;
-        padding: 20px;
-    }
-    .btn-principal {
-        font-size: 18px;
-        padding: 12px 25px;
-        max-width: 280px;
-    }
-    .opcoes-imagem {
-        grid-template-columns: 1fr; /* Em telas muito pequenas, 1 coluna para os cards de imagem */
-        max-width: 200px; /* Limita a largura dos cards */
-    }
-    .card-imagem {
-        height: 100px;
-        padding: 8px;
-    }
-    .card-imagem img {
-        width: 60px;
-        height: 60px;
-    }
-    .card-imagem p {
-        font-size: 13px;
-    }
-    .opcoes-texto {
-        max-width: 280px;
-    }
-    .opcao-texto {
-        font-size: 16px;
-        padding: 12px 15px;
-    }
-    .modal-conteudo {
-        padding: 25px;
-        border-radius: 15px;
-    }
-    #conclusao-titulo {
-        font-size: 30px;
-    }
-    #conclusao-gif {
-        max-width: 120px;
-    }
-    #conclusao-mensagem {
-        font-size: 16px;
-    }
+.area-texto:focus {
+    background-color: #fff;
+    border-color: #1cb0f6;
+    border-bottom-color: #1cb0f6;
+}
+
+/* Feedback visual na caixa de texto */
+.area-texto.correto {
+    background-color: #d7ffb8;
+    border-color: #58cc02;
+    color: #58cc02;
+}
+.area-texto.incorreto {
+    background-color: #ffdfe0;
+    border-color: #ff4b4b;
+    color: #ff4b4b;
+}
+
+
+/* --- CARDS DE OPÇÃO --- */
+.card-opcao {
+    background-color: #fff;
+    border: 2px solid #dedede;
+    border-bottom: 4px solid #dedede;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.1s;
+    position: relative;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+
+.card-opcao:active { transform: translateY(2px); border-bottom-width: 2px; }
+
+.card-imagem {
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 60px;
+    background-color: #e0f2f7;
+}
+.card-imagem[style*="#ffd1dc"] { background-color: #ffd1dc !important; } 
+.card-imagem[style*="#d4f9d4"] { background-color: #d4f9d4 !important; } 
+.card-imagem[style*="#bae6fd"] { background-color: #bae6fd !important; } 
+.card-imagem[style*="#e9d5ff"] { background-color: #e9d5ff !important; } 
+
+.card-texto {
+    padding: 18px;
+    font-size: 19px;
+    font-weight: bold;
+    color: #4b4b4b;
+    text-align: center;
+}
+
+/* --- ESTADOS --- */
+.card-opcao.selecionado {
+    background-color: #e6f2ff;
+    border-color: #1cb0f6;
+    border-bottom-color: #1cb0f6; 
+    color: #1cb0f6;
+}
+.card-opcao.correto {
+    background-color: #d7ffb8;
+    border-color: #58cc02;
+    border-bottom-color: #58cc02;
+    color: #58cc02;
+}
+.card-opcao.incorreto {
+    background-color: #ffdfe0;
+    border-color: #ff4b4b;
+    border-bottom-color: #ff4b4b;
+    color: #ff4b4b;
+}
+
+/* --- RODAPÉ --- */
+.feedback-area {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    background-color: #fff; 
+    border-top: 2px solid #e5e5e5;
+    z-index: 100;
+    display: flex; 
+    flex-direction: column;
+    gap: 20px;
+    box-shadow: 0 -4px 10px rgba(0,0,0,0.05);
+}
+
+.feedback-content {
+    display: none; 
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+}
+
+.feedback-area.com-feedback .feedback-content { display: flex; }
+.feedback-area.correto { background-color: #d7ffb8; border-top-color: transparent; }
+.feedback-area.erro { background-color: #ffdfe0; border-top-color: transparent; }
+
+.feedback-icon-circle {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background-color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px; font-weight: bold;
+    color: #555;
+}
+.feedback-area.correto .feedback-icon-circle { color: #58cc02; }
+.feedback-area.erro .feedback-icon-circle { color: #ff4b4b; }
+
+.feedback-text h3 { margin: 0; font-size: 24px; font-weight: 900; }
+.feedback-text p { margin: 0; font-size: 16px; }
+.feedback-area.correto .feedback-text h3 { color: #58cc02; }
+.feedback-area.erro .feedback-text h3 { color: #ff4b4b; }
+
+/* --- BOTÃO PRINCIPAL --- */
+.btn-principal {
+    width: 100%;
+    padding: 15px;
+    border-radius: 16px;
+    font-family: 'Baloo Chettan Regular', sans-serif;
+    font-size: 20px;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: #c9c9c9;
+    background-color: #e5e5e5;
+    border: none;
+    box-shadow: 0 4px 0 #cccccc;
+    cursor: default;
+    transition: all 0.2s;
+}
+
+.btn-principal.ativo {
+    background-color: #1cb0f6;
+    color: white;
+    box-shadow: 0 4px 0 #188ecb;
+    cursor: pointer;
+}
+.btn-principal.ativo:active { transform: translateY(4px); box-shadow: none; }
+.feedback-area.erro .btn-principal { background-color: #ff4b4b; box-shadow: 0 4px 0 #e64242; }
+.feedback-area.correto .btn-principal { background-color: #58cc02; box-shadow: 0 4px 0 #4ca800; }
+
+/* --- MODAL --- */
+#licao-concluida-modal {
+    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5); z-index: 999; justify-content: center; align-items: center;
+}
+#licao-concluida-modal.visivel { display: flex; }
+.modal-conteudo {
+    background: white; padding: 40px; border-radius: 20px; text-align: center; width: 80%; max-width: 350px;
 }
