@@ -25,20 +25,25 @@
     transform-style: preserve-3d; 
     position: relative; 
     transform: rotateY(0deg); 
+    box-shadow: 5px 5px 0px #54B8DA; /* Sombra suave */
     
 }
 
 .block img {
-    /* Estilos da imagem (tanto frente quanto verso) */
-    width: 80%; /* Ajuste o tamanho da imagem */
-    height: 80%;
+    width: 60%;  /* Tamanho bom para o ponto de interrogação */
+    height: auto;
     object-fit: contain;
-    position: absolute;
+    position: relative; /* Mudamos de absolute para relative para respeitar o flexbox */
+    /* removemos o top: 5% daqui */
 }
 
 
 .block.flipped {
-    transform: rotateY(180deg); /* Gira a carta */
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column; /* Empilha verticalmente: imagem em cima, texto embaixo */
+    justify-content: center; /* Centraliza o conteúdo no meio do quadrado */
+    align-items: center;
 }
 
 .block.flipped img {
@@ -185,20 +190,37 @@ h11 {
     color: white;
 }
 
-/* Estilo para o nome da fruta que vai aparecer */
 .card-text {
-    position: absolute;
-    bottom: 10px; /* Fica na parte de baixo da carta */
+    /* Adicione isso para esconder o texto quando a carta estiver fechada */
+    display: none; 
+
+    /* O resto continua igual ao que fizemos antes */
+    position: relative; 
+    bottom: auto;
     font-family: 'Baloo Chettan Regular', sans-serif;
-    font-size: 14px;
+    font-size: 1rem;
     font-weight: bold;
     text-align: center;
+    margin: 0;
     width: 100%;
-    z-index: 2;
-    display: none; /* Escondido por padrão */
+    transform: rotateY(180deg); 
+
 }
 
-/* Quando a carta vira, o texto aparece */
+/* Atualize esta regra para garantir que o display funcione */
 .block.flipped .card-text {
-    display: block;
+    display: block; /* Flexbox no pai já alinha, então block é suficiente */
+}
+#interrogacao { 
+    height: 80%;
+}
+
+.block.flipped img {
+    width: 53%; /* A fruta pode ser um pouco menor para caber o texto */
+    height: 53%;
+    margin-bottom: -5px; /* Espaço entre a fruta e o texto */
+    transform: rotateY(180deg);
+    /* Garante que a posição é relativa */
+    position: relative; 
+    top: auto;
 }
