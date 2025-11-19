@@ -3,61 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DudyApp - Atividade</title>
+    <title>Dudy Academy - Lição</title>
+    <link rel="stylesheet" href="../css/dudy-academy-style.css">
     <link rel="stylesheet" href="../css/atividade-style.css">
 </head>
 <body>
 
     <div class="progresso-header">
-        <a href="telaDudyAcademy.html" class="fechar-btn">X</a>
+        <a href="javascript:history.back()" class="fechar-btn" onclick="return confirmExit()">✕</a>
         <div class="barra-progresso">
-            <div id="progresso-atual" class="progresso-atual"></div>
+            <div id="progresso-atual" class="progresso-atual" style="width: 0%;"></div>
         </div>
     </div>
 
-    <main class="atividade-wrapper">
-        <div id="exercicio-associacao" class="exercicio-container" style="display: none;">
-            <h2 id="pergunta-associacao">Selecione <span class="palavra-destaque">Book</span></h2>
-            <div id="opcoes-imagem" class="opcoes-imagem">
-                </div>
-            <button id="btnContinuarAssociacao" class="btn-principal">Continuar</button>
+    <div id="atividade-wrapper" class="atividade-wrapper">
         </div>
 
-        <div id="exercicio-traducao" class="exercicio-container" style="display: flex;">
-            <h2 id="pergunta-traducao">Traduza <span class="palavra-destaque">Orange</span></h2>
-            
-            <div id="imagem-principal-container">
-                <img id="imagem-principal" src="../assets/img/orange.png" alt="Orange">
+    <div id="feedback-area" class="feedback-area hidden">
+        <div class="feedback-content">
+            <div class="feedback-icon-circle">
+                <span id="feedback-icon"></span> </div>
+            <div class="feedback-text">
+                <h3 id="feedback-title"></h3>
+                <p id="feedback-message"></p>
             </div>
-
-            <button id="btnContinuarTraducao" class="btn-principal">Continuar</button>
         </div>
+        <button id="btn-principal" class="btn-principal">VERIFICAR</button>
+    </div>
 
-        <div id="exercicio-selecao-texto" class="exercicio-container" style="display: none;">
-            <h2 id="pergunta-selecao-texto">Selecione o nome <span class="palavra-destaque">em inglês</span></h2>
-            <div id="imagem-principal-container-selecao">
-                <img id="imagem-selecao" src="../assets/img/house.png" alt="House">
-            </div>
-            <div id="opcoes-texto" class="opcoes-texto">
-                <button class="opcao-texto">House</button>
-                <button class="opcao-texto">Cat</button>
-                <button class="opcao-texto">AirPlane</button>
-            </div>
-            <button id="btnContinuarSelecao" class="btn-principal">Continuar</button>
-        </div>
-
-    </main>
-    
-    <div id="licao-concluida-modal" class="modal"> <div class="modal-conteudo">
-            <h2 id="conclusao-titulo">Lição Concluída!</h2>
-            <img id="conclusao-gif" src="../assets/img/congratulations.gif" alt="Parabéns!"> <p id="conclusao-mensagem">Parabéns por completar esta lição!</p>
-            <button id="btnVoltarMenu" class="btn-principal">Voltar ao Menu</button>
+    <div id="licao-concluida-modal">
+        <div class="modal-conteudo">
+            <h2 id="conclusao-titulo">Lição Completa!</h2>
+            <div style="font-size: 80px; margin-bottom: 20px;">🏆</div>
+            <p id="conclusao-mensagem">Você mandou muito bem!</p>
+            <button id="btn-finalizar" class="btn-principal">CONTINUAR</button>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="../scripts/supabaseConfig.js"></script>
-    
-    <script src="../scripts/dadosLicoes.js"></script> 
-    <script src="../scripts/scriptAtividade.js"></script> <script src="../scripts/dudyAcademy.js"></script> </body>
+    <script src="../scripts/dudyAcademy.js"></script>
+    <script src="../scripts/scriptAtividade.js"></script>
+
+    <script>
+        // Previne saída acidental
+        function confirmExit() {
+            return confirm("Sair agora fará você perder o progresso atual. Deseja sair?");
+        }
+    </script>
+</body>
 </html>
