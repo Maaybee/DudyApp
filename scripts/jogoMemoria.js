@@ -17,28 +17,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const pontuacaoTotal = 80; 
     const colors = ['#FCE5B8', '#98E8AC', '#DFB8FC', '#FCB8EF', '#FFD278', '#5590BC'];
     const shadow = ['#D2B98A', '#6FBC82', '#C6A7DD', '#D894CB', '#E5B75A', '#3077AE'];
-    const fontColor = ['#DBA778','#50A766','#B679E4','#DB5DC3','#E4AB39','#1A5F94']
+    const fontColor = ['#ca9363ff','#50A766','#9d62caff','#DB5DC3','#DBA22F','#0B5289']
 
     let pontuacaoAtual = pontuacaoTotal;
 
     let cards = [
-        { id: 'idApple', name: 'Maçã', image: '../assets/jogoMemoria/apple.svg', color: colors[0], boxShadow: shadow[0], fontColor: fontColor[0]},
-        { id: 'idApple2', name: 'Maçã', image: '../assets/jogoMemoria/apple.svg', color: colors[0], boxShadow: shadow[0], fontColor: fontColor[0]},
+        { id: 'idApple', name: 'Apple', image: '../assets/jogoMemoria/apple.svg', color: colors[0], boxShadow: shadow[0], fontColor: fontColor[0]},
+        { id: 'idApple2', name: 'Apple', image: '../assets/jogoMemoria/apple.svg', color: colors[0], boxShadow: shadow[0], fontColor: fontColor[0]},
         
-        { id: 'idGrape', name: 'Uva', image: '../assets/jogoMemoria/grape.svg', color: colors[1], boxShadow: shadow[1], fontColor: fontColor[1] },
-        { id: 'idGrape2', name: 'Uva', image: '../assets/jogoMemoria/grape.svg', color: colors[1], boxShadow: shadow[1], fontColor: fontColor[1] },
+        { id: 'idGrape', name: 'Grape', image: '../assets/jogoMemoria/grape.svg', color: colors[1], boxShadow: shadow[1], fontColor: fontColor[1] },
+        { id: 'idGrape2', name: 'Grape', image: '../assets/jogoMemoria/grape.svg', color: colors[1], boxShadow: shadow[1], fontColor: fontColor[1] },
         
-        { id: 'idStrawberry', name: 'Morango', image: '../assets/jogoMemoria/strawberry.svg', color: colors[2], boxShadow: shadow[2], fontColor: fontColor[2] },
-        { id: 'idStrawberry2', name: 'Morango', image: '../assets/jogoMemoria/strawberry.svg', color: colors[2], boxShadow: shadow[2], fontColor: fontColor[2] },
+        { id: 'idStrawberry', name: 'Strawberry', image: '../assets/jogoMemoria/strawberry.svg', color: colors[2], boxShadow: shadow[2], fontColor: fontColor[2] },
+        { id: 'idStrawberry2', name: 'Strawberry', image: '../assets/jogoMemoria/strawberry.svg', color: colors[2], boxShadow: shadow[2], fontColor: fontColor[2] },
         
-        { id: 'idOrange', name: 'Laranja', image: '../assets/jogoMemoria/orange.svg', color: colors[3], boxShadow: shadow[3], fontColor: fontColor[3] },
-        { id: 'idOrange2', name: 'Laranja', image: '../assets/jogoMemoria/orange.svg', color: colors[3], boxShadow: shadow[3], fontColor: fontColor[3] },
+        { id: 'idOrange', name: 'Orange', image: '../assets/jogoMemoria/orange.svg', color: colors[3], boxShadow: shadow[3], fontColor: fontColor[3] },
+        { id: 'idOrange2', name: 'Orange', image: '../assets/jogoMemoria/orange.svg', color: colors[3], boxShadow: shadow[3], fontColor: fontColor[3] },
         
-        { id: 'idWatermelon', name: 'Melancia', image: '../assets/jogoMemoria/watermelon.svg', color: colors[4], boxShadow: shadow[4], fontColor: fontColor[4] },
-        { id: 'idWatermelon2', name: 'Melancia', image: '../assets/jogoMemoria/watermelon.svg', color: colors[4], boxShadow: shadow[4], fontColor: fontColor[4] },
+        { id: 'idWatermelon', name: 'Watermelon', image: '../assets/jogoMemoria/watermelon.svg', color: colors[4], boxShadow: shadow[4], fontColor: fontColor[4] },
+        { id: 'idWatermelon2', name: 'Watermelon', image: '../assets/jogoMemoria/watermelon.svg', color: colors[4], boxShadow: shadow[4], fontColor: fontColor[4] },
         
-        { id: 'idPineapple', name: 'Abacaxi', image: '../assets/jogoMemoria/pineapple.svg', color: colors[5], boxShadow: shadow[5], fontColor: fontColor[5] },
-        { id: 'idPineapple2', name: 'Abacaxi', image: '../assets/jogoMemoria/pineapple.svg', color: colors[5], boxShadow: shadow[5], fontColor: fontColor[5] }
+        { id: 'idPineapple', name: 'Pineapple', image: '../assets/jogoMemoria/pineapple.svg', color: colors[5], boxShadow: shadow[5], fontColor: fontColor[5] },
+        { id: 'idPineapple2', name: 'Pineapple', image: '../assets/jogoMemoria/pineapple.svg', color: colors[5], boxShadow: shadow[5], fontColor: fontColor[5] }
     ];
 
     let flippedCards = [];
@@ -154,12 +154,11 @@ document.addEventListener('DOMContentLoaded', () => {
             
             img.src = '../assets/memorygame.svg';  
             block.style.backgroundColor = '#6FD3F5';  
-            block.style.boxShadow = '#54B8DA';
+            block.style.boxShadow = 'none';
 
             // --- NOVO CÓDIGO PARA CRIAR O TEXTO ---
             // Remove texto antigo se existir (para não duplicar)
             const oldText = block.querySelector('.card-text');
-            if(oldText) oldText.remove();
 
             // Cria o novo elemento de texto
             const p = document.createElement('p');
@@ -184,7 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const img = block.querySelector('img');
         img.src = card.image; 
         block.style.backgroundColor = card.color;  
-        block.style.boxShadow = `6px 6px ${card.boxShadow}`;  
+        block.style.boxShadow = `5px 5px 0px ${card.boxShadow}`;  
         
         // --- ADICIONE ESTA LINHA ---
         block.style.color = card.fontColor; 
