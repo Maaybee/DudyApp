@@ -1,243 +1,341 @@
-// scripts/scriptAtividade.js
-
 document.addEventListener('DOMContentLoaded', () => {
-    // --- Referências aos elementos HTML ---
-    const progressoAtual = document.getElementById('progresso-atual');
-    const fecharBtn = document.querySelector('.fechar-btn'); // Botão "X" para voltar
-
-    // Exercício de Associação de Imagem (Imagem 2)
-    const exercicioAssociacao = document.getElementById('exercicio-associacao');
-    const perguntaAssociacao = document.getElementById('pergunta-associacao');
-    const opcoesImagem = document.getElementById('opcoes-imagem');
-    const btnContinuarAssociacao = document.getElementById('btnContinuarAssociacao');
-
-    // Exercício de Tradução (Imagem 3)
-    const exercicioTraducao = document.getElementById('exercicio-traducao');
-    const perguntaTraducao = document.getElementById('pergunta-traducao');
-    const imagemPrincipal = document.getElementById('imagem-principal');
-    const btnContinuarTraducao = document.getElementById('btnContinuarTraducao');
-
-    // Exercício de Seleção de Texto (Imagem 1)
-    const exercicioSelecaoTexto = document.getElementById('exercicio-selecao-texto');
-    const perguntaSelecaoTexto = document.getElementById('pergunta-selecao-texto');
-    const imagemSelecao = document.getElementById('imagem-selecao');
-    const opcoesTexto = document.getElementById('opcoes-texto');
-    const btnContinuarSelecao = document.getElementById('btnContinuarSelecao');
-
-    // Modal de Lição Concluída
-    const licaoConcluidaModal = document.getElementById('licao-concluida-modal');
-    const btnVoltarMenu = document.getElementById('btnVoltarMenu');
-
-    // --- Variáveis de Estado da Atividade ---
-    let currentLessonId = null; // ID da lição atual (ex: "1" para Comidas)
-    let currentActivities = []; // Array das atividades para a lição atual
-    let currentActivityIndex = 0; // Índice da atividade atual no array
-    let selectedOptionId = null; // Para guardar a opção selecionada em exercícios de múltipla escolha
-    let isCorrectAnswerGiven = false; // Para habilitar o botão de continuar após a resposta correta
-
-    // --- Funções de Ajuda ---
-
-    // Obtém o parâmetro lessonId da URL
-    function getLessonIdFromUrl() {
-        const urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get('lessonId');
-    }
-
-    // Esconde todos os containers de exercício
-    function hideAllExercises() {
-        exercicioAssociacao.style.display = 'none';
-        exercicioTraducao.style.display = 'none';
-        exercicioSelecaoTexto.style.display = 'none';
-    }
-
-    // Atualiza a barra de progresso visualmente
-    function updateProgressBar() {
-        if (currentActivities.length === 0) {
-            progressoAtual.style.width = '0%';
-            return;
-        }
-        const progressPercentage = ((currentActivityIndex) / currentActivities.length) * 100;
-        progressoAtual.style.width = `${progressPercentage}%`;
-    }
-
-    // --- Lógica de Carregamento da Lição e Atividades ---
-
-    function loadLesson() {
-        currentLessonId = getLessonIdFromUrl();
-
-        if (!currentLessonId || !licoesData[currentLessonId]) {
-            console.error("Lição não encontrada ou ID inválido.");
-            alert("Lição não encontrada! Redirecionando para o menu.");
-            window.location.href = "telaDudyAcademy.html"; // Redireciona de volta
-            return;
-        }
-
-        currentActivities = licoesData[currentLessonId].activities;
-        currentActivityIndex = 0; // Inicia sempre na primeira atividade
-        loadCurrentActivity();
-    }
-
-    function loadCurrentActivity() {
-        hideAllExercises(); // Esconde todos os exercícios antes de renderizar o novo
-        selectedOptionId = null; // Reseta a opção selecionada
-        isCorrectAnswerGiven = false; // Reseta o estado da resposta
-
-        if (currentActivityIndex >= currentActivities.length) {
-            // Todas as atividades da lição foram concluídas
-            showLessonCompletedModal();
-            // AQUI: Salvar o progresso da lição como 100% no localStorage
-            if (window.saveLessonProgress) { // Verifica se a função existe (do dudyAcademy.js)
-                window.saveLessonProgress(currentLessonId, 100);
-            } else {
-                console.warn("Função saveLessonProgress não disponível. Progresso não salvo.");
-            }
-            return;
-        }
-
-        const activity = currentActivities[currentActivityIndex];
-
-        // Desabilita os botões de continuar por padrão, eles serão habilitados
-        // APENAS APÓS uma interação válida (seleção ou confirmação de tradução).
-        btnContinuarAssociacao.disabled = true;
-        btnContinuarTraducao.disabled = true;
-        btnContinuarSelecao.disabled = true;
-
-
-        switch (activity.type) {
-            case "traducao":
-                renderTraducaoActivity(activity);
-                exercicioTraducao.style.display = 'flex';
-                // Para tradução simples (como a Imagem 3 sem input), o "Continuar"
-                // significa que o usuário "viu" a resposta, então pode habilitar.
-                btnContinuarTraducao.disabled = false;
-                break;
-            case "associacao-imagem":
-                renderAssociacaoImagemActivity(activity);
-                exercicioAssociacao.style.display = 'flex';
-                break;
-            case "selecao-texto":
-                renderSelecaoTextoActivity(activity);
-                exercicioSelecaoTexto.style.display = 'flex';
-                break;
-            default:
-                console.error("Tipo de atividade desconhecido:", activity.type);
-                // Em caso de erro, avança para a próxima atividade para não travar
-                currentActivityIndex++;
-                loadCurrentActivity();
-                break;
-        }
-        updateProgressBar();
-    }
-
-    // --- Funções de Renderização Específicas por Tipo de Atividade ---
-
-    function renderTraducaoActivity(activity) {
-        perguntaTraducao.innerHTML = `${activity.question} <span class="palavra-destaque">${activity.word}</span>`;
-        imagemPrincipal.src = activity.image;
-        imagemPrincipal.alt = activity.word;
-        // Não há input de resposta nesta versão da tradução.
-        // O botão "Continuar" aqui simplesmente avança.
-    }
-
-    function renderAssociacaoImagemActivity(activity) {
-        perguntaAssociacao.innerHTML = `${activity.question} <span class="palavra-destaque">${activity.word}</span>`;
-        opcoesImagem.innerHTML = ''; // Limpa opções anteriores
-
-        activity.options.forEach(option => {
-            const card = document.createElement('div');
-            card.className = 'card-imagem';
-            card.dataset.optionId = option.id;
-            card.style.backgroundColor = option.bgColor;
-            card.innerHTML = `<img src="${option.image}" alt="${option.text}"><p>${option.text}</p>`;
-
-            card.addEventListener('click', () => {
-                document.querySelectorAll('.card-imagem').forEach(c => c.classList.remove('selecionado'));
-                card.classList.add('selecionado');
-                selectedOptionId = option.id;
-                btnContinuarAssociacao.disabled = false; // Habilita o botão ao selecionar
-            });
-            opcoesImagem.appendChild(card);
-        });
-    }
-
-    function renderSelecaoTextoActivity(activity) {
-        perguntaSelecaoTexto.innerHTML = `${activity.question} <span class="palavra-destaque">${activity.word}</span>`;
-        imagemSelecao.src = activity.image;
-        imagemSelecao.alt = activity.word;
-        opcoesTexto.innerHTML = ''; // Limpa opções anteriores
-
-        activity.options.forEach(option => {
-            const button = document.createElement('button');
-            button.className = 'opcao-texto';
-            button.dataset.optionId = option.id;
-            button.textContent = option.text;
-
-            button.addEventListener('click', () => {
-                document.querySelectorAll('.opcao-texto').forEach(b => b.classList.remove('selecionado', 'incorreto')); // Limpa seleções e feedbacks
-                button.classList.add('selecionado');
-                selectedOptionId = option.id;
-                btnContinuarSelecao.disabled = false; // Habilita o botão ao selecionar
-            });
-            opcoesTexto.appendChild(button);
-        });
-    }
-
-    // --- Lógica de Continuação/Verificação ---
-
-    function handleContinuar(btn) {
-        const activity = currentActivities[currentActivityIndex];
-        let isAnswerCorrect = true; // Por padrão, avança se não houver verificação explícita
-
-        if (activity.type === "associacao-imagem" || activity.type === "selecao-texto") {
-            const options = activity.options;
-            const selectedOption = options.find(opt => opt.id === selectedOptionId);
-            isAnswerCorrect = selectedOption ? selectedOption.isCorrect : false;
-
-            // AQUI: Feedback visual imediato ao clicar em continuar para seleção/associação
-            if (selectedOption) {
-                const element = document.querySelector(`[data-option-id="${selectedOption.id}"]`);
-                if (isAnswerCorrect) {
-                    element.classList.add('selecionado'); // Já está selecionado, pode reforçar
-                    // Pode adicionar um feedback de sucesso aqui
-                } else {
-                    element.classList.add('incorreto'); // Mostra que a resposta está errada
-                    // Opcional: mostrar qual seria a resposta correta por um breve momento
-                    // Por simplicidade, vamos apenas marcar a incorreta e avançar.
+    
+    // ========================================================
+    // DADOS DAS LIÇÕES (ATUALIZADOS PARA DIGITAÇÃO)
+    // ========================================================
+    const modulesContent = {
+        // MÓDULO 1: COMIDAS 
+        '1': {
+            // NÍVEL 1
+            '1': [
+                { 
+                    id: 'mod1_niv1_q1', type: 'select_image', title: 'escolha-imagem', highlight: 'Book', correct: 'book',
+                    options: [
+                        { id: 'orange', image: '🍊', color: '#ffd1dc' },
+                        { id: 'apple', image: '🍎', color: '#d4f9d4' },
+                        { id: 'banana', image: '🍌', color: '#bae6fd' },
+                        { id: 'book', image: '📕', color: '#e9d5ff' } 
+                    ]
+                },
+                // TRADUÇÃO: Removi 'options', agora só importa o 'correct'
+                { 
+                    id: 'mod1_niv1_q2', type: 'translate', title: 'traducao', highlight: 'Apple', image: '🍎', correct: 'Maçã'
+                },
+                { 
+                    id: 'mod1_niv1_q3', type: 'select_word', title: 'escolha-palavra', image: '🏠', imageColor: '#d1e6fa',
+                    correct: 'House', options: ['House', 'Cat', 'AirPlane']
+                },
+                { 
+                    id: 'mod1_niv1_q4', type: 'select_image', title: 'escolha-imagem', highlight: 'Book', correct: 'book',
+                    options: [
+                        { id: 'orange', image: '🍊', color: '#ffd1dc' },
+                        { id: 'apple', image: '🍎', color: '#d4f9d4' },
+                        { id: 'banana', image: '🍌', color: '#bae6fd' },
+                        { id: 'book', image: '📕', color: '#e9d5ff' } 
+                    ]
+                },
+                 { 
+                    id: 'mod1_niv1_q5', type: 'translate', title: 'traducao', highlight: 'Apple', image: '🍎', correct: 'Maçã'
                 }
+            ],
+            // NÍVEL 2
+            '2': [
+                { 
+                    id: 'mod1_niv2_q1', type: 'select_word', title: 'escolha-palavra', image: '🍌', imageColor: '#ffe0b2',
+                    correct: 'Banana', options: ['Apple', 'Banana', 'Carrot']
+                },
+                { 
+                    id: 'mod1_niv2_q2', type: 'select_image', title: 'escolha-imagem', highlight: 'Orange', correct: 'orange',
+                    options: [
+                        { id: 'banana', image: '🍌', color: '#bae6fd' },
+                        { id: 'orange', image: '🍊', color: '#ffd1dc' },
+                        { id: 'grape', image: '🍇', color: '#e9d5ff' },
+                    ]
+                },
+                { 
+                    id: 'mod1_niv2_q3', type: 'translate', title: 'traducao', highlight: 'Orange', image: '🍊', correct: 'Laranja'
+                }
+            ],
+            // NÍVEL 3
+            '3': [
+                { 
+                    id: 'mod1_niv3_q1', type: 'translate', title: 'traducao', highlight: 'Carrot', image: '🥕', correct: 'Cenoura'
+                },
+                { 
+                    id: 'mod1_niv3_q2', type: 'select_image', title: 'escolha-imagem', highlight: 'Broccoli', correct: 'broccoli',
+                    options: [
+                        { id: 'carrot', image: '🥕', color: '#ffe0b2' },
+                        { id: 'broccoli', image: '🥦', color: '#d4f9d4' },
+                        { id: 'pizza', image: '🍕', color: '#ffd1dc' },
+                    ]
+                },
+                { 
+                    id: 'mod1_niv3_q3', type: 'select_word', title: 'escolha-palavra', image: '🥔', imageColor: '#e9d5ff',
+                    correct: 'Potato', options: ['Tomato', 'Potato', 'Onion']
+                }
+            ],
+            // NÍVEL 4
+            '4': [
+                { 
+                    id: 'mod1_niv4_q1', type: 'select_word', title: 'escolha-palavra', image: '🍞', imageColor: '#fff3e0',
+                    correct: 'Bread', options: ['Bread', 'Milk', 'Egg']
+                },
+                { 
+                    id: 'mod1_niv4_q2', type: 'translate', title: 'traducao', highlight: 'Milk', image: '🥛', correct: 'Leite'
+                },
+                { 
+                    id: 'mod1_niv4_q3', type: 'select_image', title: 'escolha-imagem', highlight: 'Coffee', correct: 'coffee',
+                    options: [
+                        { id: 'milk', image: '🥛', color: '#bae6fd' },
+                        { id: 'coffee', image: '☕', color: '#ffe0b2' },
+                        { id: 'tea', image: '🍵', color: '#d4f9d4' },
+                    ]
+                }
+            ],
+            // NÍVEL 5
+            '5': [
+                { 
+                    id: 'mod1_niv5_q1', type: 'select_image', title: 'escolha-imagem', highlight: 'Burger', correct: 'burger',
+                    options: [
+                        { id: 'pizza', image: '🍕', color: '#ffd1dc' },
+                        { id: 'burger', image: '🍔', color: '#d4f9d4' },
+                        { id: 'fries', image: '🍟', color: '#ffe0b2' },
+                    ]
+                },
+                { 
+                    id: 'mod1_niv5_q2', type: 'select_word', title: 'escolha-palavra', image: '🍳', imageColor: '#ffe0b2',
+                    correct: 'Egg', options: ['Egg', 'Bacon', 'Sausage']
+                },
+                { 
+                    id: 'mod1_niv5_q3', type: 'translate', title: 'traducao', highlight: 'Cheese', image: '🧀', correct: 'Queijo'
+                }
+            ]
+        },
+        
+        '2': { '1': [], '2': [], '3': [], '4': [], '5': [] },
+        '3': { '1': [], '2': [], '3': [], '4': [], '5': [] },
+        '4': { '1': [], '2': [], '3': [], '4': [], '5': [] }
+    };
+
+    // ========================================================
+    // LÓGICA DO PROGRAMA
+    // ========================================================
+    const urlParams = new URLSearchParams(window.location.search);
+    const moduleId = urlParams.get('moduleId') || '1';
+    const currentLevel = parseInt(urlParams.get('level')) || 1;
+
+    let currentQueue = [];
+    if (modulesContent[moduleId] && modulesContent[moduleId][currentLevel]) {
+        currentQueue = [...modulesContent[moduleId][currentLevel]];
+    }
+
+    let totalQuestions = currentQueue.length;
+    let completedCount = 0; 
+    let currentState = 'idle'; 
+    let currentSelection = null; 
+    let isCorrect = false;
+
+    // DOM Elements
+    const wrapper = document.getElementById('atividade-wrapper');
+    const btnPrincipal = document.getElementById('btn-principal');
+    const feedbackArea = document.getElementById('feedback-area');
+    const feedbackTitle = document.getElementById('feedback-title');
+    const feedbackMessage = document.getElementById('feedback-message');
+    const feedbackIcon = document.getElementById('feedback-icon');
+    const progressBar = document.getElementById('progresso-atual');
+    const modalConclusao = document.getElementById('licao-concluida-modal');
+    const btnFinalizar = document.getElementById('btn-finalizar');
+
+    function updateProgress() {
+        const percentage = totalQuestions === 0 ? 0 : (completedCount / totalQuestions) * 100;
+        progressBar.style.width = `${percentage}%`;
+    }
+
+    function renderCurrentActivity() {
+        wrapper.innerHTML = '';
+        currentSelection = null;
+        currentState = 'idle';
+        resetFeedbackUI();
+
+        if (currentQueue.length === 0) {
+            showSummary();
+            return;
+        }
+
+        const activity = currentQueue[0];
+        const container = document.createElement('div');
+        container.className = 'exercicio-container';
+
+        // --- LÓGICA DE RENDERIZAÇÃO ---
+        if (activity.type === 'select_image') {
+            container.innerHTML = `
+                <h2 class="titulo-exercicio">escolha-imagem <span class="palavra-destaque">${activity.highlight}</span></h2>
+                <div class="opcoes-grid">
+                    ${activity.options.map(opt => `
+                        <div class="card-opcao card-imagem" style="background-color: ${opt.color};" data-value="${opt.id}">
+                            <span style="pointer-events:none">${opt.image}</span>
+                        </div>
+                    `).join('')}
+                </div>`;
+        }
+        else if (activity.type === 'select_word') {
+            container.innerHTML = `
+                <h2 class="titulo-exercicio">escolha-palavra</h2>
+                <div class="imagem-destaque" style="background-color: ${activity.imageColor || '#ffe0b2'};">
+                    ${activity.image.startsWith('http') ? `<img src="${activity.image}" alt="${activity.image}" />` : activity.image}
+                </div>
+                <div class="opcoes-lista">
+                    ${activity.options.map(opt => `
+                        <div class="card-opcao card-texto" data-value="${opt}">${opt}</div>
+                    `).join('')}
+                </div>`;
+        }
+        // --- AQUI MUDOU: INPUT DE TEXTO ---
+        else if (activity.type === 'translate') {
+            container.innerHTML = `
+                <h2 class="titulo-exercicio">traducao</h2>
+                <span class="palavra-destaque-orange">${activity.highlight}</span>
+                <div class="imagem-destaque" style="background-color: #ffe0b2;">
+                    ${activity.image.startsWith('http') ? `<img src="${activity.image}" alt="${activity.image}" />` : activity.image}
+                </div>
+                
+                <textarea id="resposta-texto" class="area-texto" placeholder="Escreva em português"></textarea>
+            `;
+        }
+
+        wrapper.appendChild(container);
+
+        // LISTENERS
+        if (activity.type === 'translate') {
+            // Listener para Digitação
+            const textArea = document.getElementById('resposta-texto');
+            textArea.addEventListener('input', (e) => {
+                currentSelection = e.target.value; // Armazena o que foi digitado
+                
+                // Habilita botão se tiver texto
+                if (currentSelection.trim().length > 0) {
+                    btnPrincipal.disabled = false;
+                    btnPrincipal.classList.add('ativo');
+                } else {
+                    btnPrincipal.disabled = true;
+                    btnPrincipal.classList.remove('ativo');
+                }
+            });
+        } else {
+            // Listener para Click (Botões)
+            const cards = container.querySelectorAll('.card-opcao');
+            cards.forEach(card => {
+                card.addEventListener('click', () => handleOptionSelect(card, cards));
+            });
+        }
+    }
+
+    function handleOptionSelect(selectedCard, allCards) {
+        if (currentState === 'checked') return;
+        allCards.forEach(c => c.classList.remove('selecionado'));
+        selectedCard.classList.add('selecionado');
+        currentSelection = selectedCard.dataset.value;
+        btnPrincipal.disabled = false;
+        btnPrincipal.classList.add('ativo');
+        btnPrincipal.innerText = "VERIFICAR";
+    }
+
+    btnPrincipal.addEventListener('click', () => {
+        if (currentState === 'idle') {
+            if (currentSelection) checkAnswer();
+        } else if (currentState === 'checked') {
+            nextQuestion();
+        }
+    });
+
+    function checkAnswer() {
+        const activity = currentQueue[0];
+        
+        // --- VERIFICAÇÃO ---
+        let isCorrectAnswer = false;
+
+        if (activity.type === 'translate') {
+            // Compara Texto (ignora espaços e maiúsculas)
+            const respostaUsuario = currentSelection.trim().toLowerCase();
+            const respostaCerta = activity.correct.trim().toLowerCase();
+            isCorrectAnswer = (respostaUsuario === respostaCerta);
+
+            // Feedback visual no textarea
+            const textArea = document.getElementById('resposta-texto');
+            if(textArea) {
+                textArea.disabled = true; // Bloqueia digitação
+                textArea.classList.add(isCorrectAnswer ? 'correto' : 'incorreto');
             }
+
+        } else {
+            // Compara ID/Valor do botão
+            isCorrectAnswer = (currentSelection === activity.correct);
+            
+            // Feedback visual nos cards
+            const allCards = document.querySelectorAll('.card-opcao');
+            allCards.forEach(card => {
+                if (card.dataset.value === currentSelection) {
+                    card.classList.remove('selecionado');
+                    card.classList.add(isCorrectAnswer ? 'correto' : 'incorreto');
+                }
+            });
         }
+
+        isCorrect = isCorrectAnswer;
+        currentState = 'checked';
         
-        // Em todas as atividades, após o clique em "Continuar", avançamos.
-        // A lógica de "correto/incorreto" serve para feedback, mas o fluxo avança.
-        currentActivityIndex++;
+        feedbackArea.classList.add('com-feedback');
         
-        // AQUI: Salvar progresso no localStorage após CADA atividade
+        if (isCorrect) {
+            feedbackArea.classList.add('correto');
+            feedbackTitle.innerText = "Incrível!";
+            feedbackMessage.innerText = "";
+            feedbackIcon.innerText = "✔"; 
+        } else {
+            feedbackArea.classList.add('erro');
+            feedbackTitle.innerText = "Ops, errou!";
+            feedbackMessage.innerHTML = `A resposta correta é: <strong>${activity.correct}</strong>`;
+            feedbackIcon.innerText = "✕"; 
+        }
+        btnPrincipal.innerText = "CONTINUAR";
+    }
+
+    function nextQuestion() {
+        const finishedActivity = currentQueue.shift();
+        if (isCorrect) {
+            completedCount++;
+            updateProgress();
+        } else {
+            currentQueue.push(finishedActivity);
+        }
+        renderCurrentActivity();
+    }
+
+    function resetFeedbackUI() {
+        feedbackArea.classList.remove('com-feedback', 'correto', 'erro');
+        btnPrincipal.disabled = true;
+        btnPrincipal.classList.remove('ativo');
+        btnPrincipal.innerText = "VERIFICAR";
+    }
+
+    function showSummary() {
         if (window.saveLessonProgress) {
-            const newProgress = Math.floor((currentActivityIndex / currentActivities.length) * 100);
-            window.saveLessonProgress(currentLessonId, newProgress);
+            const percentPerLevel = 20; 
+            const newTotalProgress = currentLevel * percentPerLevel;
+            window.saveLessonProgress(moduleId, newTotalProgress);
         }
-
-        loadCurrentActivity(); // Carrega a próxima atividade ou exibe o modal de conclusão
+        document.getElementById('conclusao-titulo').textContent = `Nível ${currentLevel} Completo!`;
+        modalConclusao.classList.add('visivel');
     }
 
-    // --- Adição de Event Listeners ---
-    btnContinuarAssociacao.addEventListener('click', () => handleContinuar(btnContinuarAssociacao));
-    btnContinuarTraducao.addEventListener('click', () => handleContinuar(btnContinuarTraducao));
-    btnContinuarSelecao.addEventListener('click', () => handleContinuar(btnContinuarSelecao));
-
-    fecharBtn.addEventListener('click', () => {
-        window.location.href = "telaDudyAcademy.html"; // Volta para a tela de lições
+    btnFinalizar.addEventListener('click', () => {
+        window.location.href = 'teladudyacademy.html';
     });
 
-    // --- Modal de Lição Concluída ---
-    function showLessonCompletedModal() {
-        licaoConcluidaModal.classList.add('active'); // Adiciona a classe 'active'
+    // Inicializa
+    if (currentQueue.length === 0) {
+        wrapper.innerHTML = `<h2 style="text-align:center; margin-top:50px; color:#888;">Nível vazio.</h2>`;
+    } else {
+        renderCurrentActivity();
     }
-
-    btnVoltarMenu.addEventListener('click', () => {
-        window.location.href = "telaDudyAcademy.html"; // Redireciona para o menu de lições
-    });
-
-    // --- Início: Carrega a lição ao carregar a página ---
-    loadLesson();
 });
