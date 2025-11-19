@@ -1,64 +1,63 @@
-// scripts/dudyAcademy.js
-
 document.addEventListener('DOMContentLoaded', () => {
     const lessonCards = document.querySelectorAll('.atividade-card');
 
-    // Mantenho a definição das lições para referência.
-    // Usaremos o `id` para buscar o progresso.
-    const lessonsData = [
-        { id: 1, name: 'Comidas', totalActivities: 4, progress: 0, iconColor: '#ffb3b3' },
-        { id: 2, name: 'Animais', totalActivities: 4, progress: 0, iconColor: '#a0d8ff' },
-        { id: 3, name: 'Família', totalActivities: 4, progress: 0, iconColor: '#e0b0ff' },
-        { id: 4, name: 'Escola', totalActivities: 4, progress: 0, iconColor: '#d1ffb7' },
-    ];
+    // Configuração: Quantos níveis existem por módulo e quanto vale cada um?
+    const TOTAL_LEVELS = 5;
+    const PERCENT_PER_LEVEL = 100 / TOTAL_LEVELS; // 20%
 
-    // --- FUNÇÃO CORRIGIDA PARA OBTER O PROGRESSO DO LOCALSTORAGE ---
+    // --- FUNÇÃO PARA OBTER O PROGRESSO (Segura contra erros) ---
     function getLessonProgress(lessonId) {
-        // Tenta obter o progresso salvo para esta lição do localStorage
         let progress = localStorage.getItem(`lesson_${lessonId}_progress`);
-        
-        // Se não houver progresso salvo, retorna 0.
-        // Caso contrário, converte para inteiro e garante que seja entre 0 e 100.
         return progress ? Math.max(0, Math.min(100, parseInt(progress, 10))) : 0;
     }
 
-    // --- FUNÇÃO PARA SALVAR O PROGRESSO NO LOCALSTORAGE (GLOBALMENTE ACESSÍVEL) ---
-    // Esta função é chamada do scriptAtividade.js
+    // --- FUNÇÃO GLOBAL PARA SALVAR (Usada pelo scriptAtividade.js) ---
     window.saveLessonProgress = (lessonId, newProgress) => {
-        // Converte para inteiro e garante que seja entre 0 e 100 antes de salvar
         newProgress = Math.max(0, Math.min(100, parseInt(newProgress, 10)));
         localStorage.setItem(`lesson_${lessonId}_progress`, newProgress);
         console.log(`Progresso da lição ${lessonId} salvo: ${newProgress}%`);
-        
-        // Opcional: Atualizar a exibição DO CARD ESPECÍFICO na tela de listagem
-        // caso o usuário esteja nesta tela e o progresso seja atualizado por algum motivo
-        // (ex: outra aba, ou uma função futura). Para o fluxo atual, o progresso
-        // será lido ao CARREGAR a tela telaDudyAcademy.html.
-        const cardToUpdate = document.querySelector(`.atividade-card[data-licao-id="${lessonId}"]`);
-        if (cardToUpdate) {
-            const progressoCircle = cardToUpdate.querySelector('.progresso-circle');
-            const progressoPorcentagem = cardToUpdate.querySelector('.progresso-porcentagem');
-            progressoCircle.style.setProperty('--progress', `${newProgress}%`);
-            progressoPorcentagem.textContent = `${newProgress}%`;
-        }
     };
 
+    // --- Inicialização dos Cards ---
+    if (lessonCards.length > 0) {
+        lessonCards.forEach(card => {
+            const lessonId = card.dataset.licaoId; // ID do Módulo (ex: "1")
+            const progressoCircle = card.querySelector('.progresso-circle');
+            const progressoPorcentagem = card.querySelector('.progresso-porcentagem');
+            const textoLicoes = card.querySelector('.atividade-licoes'); // Para mostrar "Nível 1/5"
 
-    // --- Inicialização: Renderiza e adiciona eventos para CADA card de lição ---
-    lessonCards.forEach(card => {
-        const lessonId = card.dataset.licaoId;
-        const progressoCircle = card.querySelector('.progresso-circle');
-        const progressoPorcentagem = card.querySelector('.progresso-porcentagem');
+            if (lessonId && progressoCircle && progressoPorcentagem) {
+                // 1. Ler Progresso Atual
+                const currentProgress = getLessonProgress(lessonId);
+                
+                // 2. Atualizar Visual (Barra Circular)
+                progressoCircle.style.setProperty('--progress', `${currentProgress}%`);
+                progressoPorcentagem.textContent = `${currentProgress}%`;
 
-        // 1. LÊ O PROGRESSO SALVO E ATUALIZA O VISUAL DO ANEL E TEXTO
-        const currentProgress = getLessonProgress(lessonId);
-        progressoCircle.style.setProperty('--progress', `${currentProgress}%`);
-        progressoPorcentagem.textContent = `${currentProgress}%`;
+                // 3. Calcular qual nível o usuário está
+                // Se tem 0%, nivel atual é 1. Se tem 20%, nivel atual é 2.
+                // Math.floor(20 / 20) = 1 + 1 = 2.
+                let currentLevel = Math.floor(currentProgress / PERCENT_PER_LEVEL) + 1;
+                if (currentLevel > TOTAL_LEVELS) currentLevel = TOTAL_LEVELS; // Trava no último se já acabou
 
-        // 2. ADICIONA O EVENTO DE CLIQUE
-        card.addEventListener('click', (event) => {
-            window.location.href = `atividade.html?lessonId=${lessonId}`;
+                // Atualiza o textozinho "4 lições" para mostrar o nível atual
+                if(textoLicoes) {
+                    if (currentProgress === 100) textoLicoes.textContent = "Concluído!";
+                    else textoLicoes.textContent = `Nível ${currentLevel} de ${TOTAL_LEVELS}`;
+                }
+
+                // 4. Evento de Clique Inteligente
+                card.addEventListener('click', () => {
+                    if (currentProgress === 100) {
+                        if(confirm("Você já completou este módulo! Quer refazer o último nível?")) {
+                             window.location.href = `atividade.html?moduleId=${lessonId}&level=${TOTAL_LEVELS}`;
+                        }
+                    } else {
+                        // Manda para a atividade com o ID do módulo E o nível calculado
+                        window.location.href = `atividade.html?moduleId=${lessonId}&level=${currentLevel}`;
+                    }
+                });
+            }
         });
-    });
-
+    }
 });
