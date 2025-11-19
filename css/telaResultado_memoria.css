@@ -24,9 +24,8 @@ body, html {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: plum;
-    width: 77vw;
-    height: 15vh;
+    width: 26.67vw;
+    height: 9.85vh;
     border-radius: 20px;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -40,6 +39,8 @@ body, html {
 }
 
 #pontuacao, #tempo {
+    width: 26.67vw;
+    height: 9.85vh;
     background-color: #553399;
 }
 
@@ -74,8 +75,9 @@ h3 {
 }
 
 .insideRow { 
-    width: 25vw;
-    height: 5.5vh;
+    background-color: white;
+    width: 20.13vw;
+    height: 3.42vh;
 }
 
 h4{
@@ -86,11 +88,13 @@ h4{
 }
 
 #record{ 
+    width: 26.67vw;
+    height: 9.85vh;
     background-color: #FF7BAC;
 }
 
 #record_inside{
-    background-color: #FFB8D2;
+
 }
 
 #row_buttons { 
