@@ -50,7 +50,7 @@ h1 {
 }
 
 #nivel { 
-    color: #FFD317 ;
+    color: #4A68B2 ;
     margin-top: -5px;
 }
 
@@ -89,11 +89,11 @@ h3{
 }
 
 #quadradoRoxo { 
-    background-color: #FCE5B8 ;
+    background-color: #F8D798 ;
 }
 
 #quadradoRosa { 
-    background-color: #FCB8EF ;
+    background-color: #F894E5 ;
 }
 
 .quadrados { 
@@ -216,4 +216,10 @@ h6{
     display: flex;
     justify-content: end;
     margin: 10px;
+}
+
+#telaPerfil { 
+    display: flex;
+    flex-direction: column;
+    gap: 3vh;
 }
