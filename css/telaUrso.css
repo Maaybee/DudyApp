@@ -163,6 +163,7 @@ body {
     color: #888;
 }
 
-.menu .active h4 {
-    color: #007bff;
+#fotoPerfil {
+    width: 45px;
+    height: 45px;
 }
