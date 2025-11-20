@@ -6,8 +6,9 @@ const DADOS_HISTORIAS = [
         jogo_id: 3,
         titulo: 'The Picnic',
         personagens: 'Leo and Emma',
-        imagem: '../assets/img/livro rosa.png', // Imagem do menu
-        icone_header: '../assets/img/livro-rosa.svg', // Ícone do cabeçalho na página da história
+        imagem: '../assets/historias/picnic.svg', // Imagem do menu
+        icone_header: '../assets/historias/picnic.svg', // Ícone do cabeçalho na página da história
+        color_text: "#DBA778",
         dialogo: [
             { personagem: 'Emma', fala: 'Hi Leo! Are you ready for the picnic?', audio: 'emma1' },
             { personagem: 'Leo', fala: 'Yes! I have apples and sandwiches.', audio: 'leo1' },
@@ -43,8 +44,10 @@ const DADOS_HISTORIAS = [
         jogo_id: 4,
         titulo: 'Pizza Time',
         personagens: 'Mia and Sam',
-        imagem: '../assets/img/livro azul.png',
-        icone_header: '../assets/img/livro-azul.svg', // Crie um ícone para a pizza se quiser
+        imagem: '../assets/historias/pizza.svg',
+        icone_header: '../assets/historias/pizza.svg', // Crie um ícone para a pizza se quiser
+        color_text: "#2E6B80",
+
         dialogo: [
             { personagem: 'Mia', fala: 'Hi Sam! Are you hungry?', audio: 'mia1' },
             { personagem: 'Sam', fala: 'Yes, I am! What should we eat?', audio: 'sam1' },
@@ -73,8 +76,9 @@ const DADOS_HISTORIAS = [
         jogo_id: 5,
         titulo: 'Baking a Cake',
         personagens: 'Ana and Dad',
-        imagem: '../assets/img/livro laranja.png',
-        icone_header: '../assets/img/livro-laranja.svg',
+        imagem: '../assets/historias/cake.svg',
+        icone_header: '../assets/historias/cake.svg',
+        color_text: "#DB5DC3",
         dialogo: [
             { personagem: 'Ana', fala: 'Dad, can we bake something today?', audio: 'ana1' },
             { personagem: 'Dad', fala: 'Of course, Ana! What should we bake?', audio: 'dad1' },
@@ -112,8 +116,9 @@ const DADOS_HISTORIAS = [
         jogo_id: 6,
         titulo: 'Ice Cream Day',
         personagens: 'Carlos and Sofia',
-        imagem: '../assets/img/livro verde.png',
-        icone_header: '../assets/img/liro-verde.svg',
+        imagem: '../assets/historias/icecream.svg',
+        icone_header: '../assets/historias/icecream.svg',
+        color_text: "#4DB467",
         dialogo: [
             { personagem: 'Carlos', fala: 'Sofia, it’s such a hot day today!', audio: 'carlos1' },
             { personagem: 'Sofia', fala: 'It is! I know what would be perfect right now.', audio: 'sofia1' },
@@ -149,10 +154,11 @@ const DADOS_HISTORIAS = [
     {
         id: 'morning-smoothie',
         jogo_id: 7,
-        titulo: 'Morning Smoothie',
+        titulo: 'Smoothie',
         personagens: 'Lucas and Julia',
-        imagem: '../assets/img/livro roxo.png',
-        icone_header: '../assets/img/livro-roxo.svg',
+        imagem: '../assets/historias/smoothie.svg',
+        icone_header: '../assets/historias/smoothie.svg',
+        color_text: "#A457E8",
         dialogo: [
             { personagem: 'Lucas', fala: 'I want a quick and healthy breakfast.', audio: 'lucas1' },
             { personagem: 'Julia', fala: 'Let’s make a smoothie! It’s super easy.', audio: 'julia1' },
