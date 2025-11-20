@@ -1,6 +1,9 @@
-/* telaUrso.css (VERSÃO FINAL E CORRIGIDA) */
-
-@import url('https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@700&family=Arimo:wght@400;700&display=swap');
+@font-face {
+    font-family: 'Baloo Chettan Regular';
+    src: local("☺"), url("../assets/fonts/baloo-chettan-webfont/BalooChettan-Regular.woff") format("woff");
+    font-weight: 900;
+    font-style: normal
+}
 
 body {
     margin: 0;
@@ -9,6 +12,7 @@ body {
     font-family: 'Arimo', sans-serif;
     background-color: #FFF7F7;
     display: flex;
+    flex-direction: column;
     justify-content: center;
 }
 
@@ -20,54 +24,49 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: 5vh;
 }
 
 #titulo {
-    font-family: 'Baloo Chettan 2', sans-serif;
-    font-size: 32px;
+    font-family: 'Baloo Chettan Regular', sans-serif;
+    font-size: 3rem;
     color: #333;
-    margin-top: 20px;
     margin-bottom: 0;
+    text-align: left;
+    width: 100%;
 }
 
+
 .introducao-texto {
-    font-size: 14px;
+    font-size: 1rem;
     color: #666;
-    text-align: center;
+    text-align: justify;
     line-height: 1.5;
+    margin: 0;
 }
 
 #tutorial-button {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #007bff;
+    background-color: #00BEFF;
     color: white;
     border: none;
-    border-radius: 15px;
-    padding: 15px 30px;
-    font-family: 'Baloo Chettan 2', sans-serif;
+    border-radius: 50px;
+    font-family: 'Baloo Chettan Regular', sans-serif;
     cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
-    gap: 10px;
-    width: 80%;
-    max-width: 280px;
+    width: 80vw;
+    height: 7vh;
 }
-#tutorial-button h3 { font-size: 20px; margin: 0; }
-.play-icon { width: 24px; height: 24px; filter: invert(1); } /* Ícone branco */
-
-.divider {
-    width: 80%;
-    height: 1px;
-    background-color: #e0e0e0;
-    margin: 30px 0;
+#tutorial-button h3 { 
+    font-size: 1.5rem; 
+    margin: 0; 
 }
 
 #funcionalidades-grid {
     display: grid;
     grid-template-columns: 1fr 1fr; /* DUAS COLUNAS */
-    gap: 15px; /* ESPAÇAMENTO ENTRE OS CARDS */
+    gap: 10vw; /* ESPAÇAMENTO ENTRE OS CARDS */
     width: 100%;
     max-width: 320px;
 }
@@ -76,30 +75,34 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: 1vh;
 }
 
 .icone-quadrado {
-    width: 100px;
-    height: 100px;
+    width: 30vw;
+    height: 14vh;
     border-radius: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* ADICIONADO box-shadow */
     position: relative;
 }
-.img-square { max-width: 70%; max-height: 70%; object-fit: contain; } /* Reduzi o tamanho das imagens dentro dos quadrados */
+.img-square { 
+    max-width: 70%; 
+    max-height: 70%; 
+    object-fit: contain; 
+} /* Reduzi o tamanho das imagens dentro dos quadrados */
 
 /* Cores de fundo (adicionado pink-bg) */
-.pink-bg { background-color: #ff6ce7; } 
-.purple-bg { background-color: #8C52FF; }
-.light-purple-bg { background-color: #0262ff; }
-.green-bg { background-color: #00bf63; }
-.card-titulo { font-family: 'Baloo Chettan 2', sans-serif; font-size: 16px; color: #333; margin: 0; }
-
-.coming-soon-overlay { filter: grayscale(0.5) brightness(0.7); }
-.coming-soon-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-15deg); font-family: 'Baloo Chettan 2', sans-serif; font-size: 14px; font-weight: bold; color: white; padding: 5px 10px; border-radius: 5px; white-space: nowrap; }
+.pink-bg { background-color: #FCB8EF; } 
+.purple-bg { background-color: #DCB8FC; }
+.light-purple-bg { background-color: #B8FCC9; }
+.green-bg { background-color: #B0EBFF; }
+.card-titulo { 
+    font-family: 'Baloo Chettan Regular', sans-serif; 
+    font-size: 1.5rem; 
+    color: #333; margin: 0; 
+}
 
 /* --- MENU FIXO --- */
 .menu {
@@ -154,7 +157,7 @@ body {
 
 .btnMenuRow h4 {
     font-size: 10px;
-    font-family: 'Baloo Chettan 2', sans-serif; /* Usando Baloo Chettan 2 aqui também */
+    font-family: 'Baloo Chettan Regular', sans-serif; /* Usando Baloo Chettan 2 aqui também */
     margin-top: -5px;
     text-align: center;
     color: #888;
