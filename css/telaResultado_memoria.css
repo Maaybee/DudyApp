@@ -11,12 +11,12 @@ body, html {
     justify-content: center;
     align-items: center;
     height: 100%;
-    gap: 5vh;
+    gap: 6vh;
     padding: 20px;
 }
 
 #logo {
-    width: 70vw;
+    width: 80vw;
 }
 
 .block {
@@ -38,28 +38,48 @@ body, html {
     border-radius: 15px;
 }
 
-#pontuacao, #tempo {
+#pontuacao {
     width: 26.67vw;
     height: 9.85vh;
-    background-color: #553399;
+    background-color: #B1EBFF;
+
+    & h2 { 
+        color: #30CAFE;
+    }
+    
 }
 
-#pontua_inside, #tempo_inside { 
-    background-color: #ABACE3;
+#tempo {
+    width: 26.67vw;
+    height: 9.85vh;
+    background-color: #FCB8EF;
+
+    & h2 {
+        color: #DB5DC3;
+    }
+}
+
+
+#pontua_inside { 
+    background-color: white;
+}
+
+#tempo_inside { 
+    background-color: white;
 }
 
 h2{
-    color: white;
+    color: black;
     font-family: 'Baloo Chettan Regular';
-    font-size: 1.6rem;
+    font-size: 1rem;
     margin: 0;
 
 }
 
 h3 { 
-    color: white;
+    color: black;
     font-family: 'Baloo Chettan Regular';
-    font-size: 4rem;
+    font-size: 1.5rem;
     margin: 0;
 }
 
@@ -81,16 +101,20 @@ h3 {
 }
 
 h4{
-    color: white;
+    color: black;
     font-family: 'Baloo Chettan Regular';
-    font-size: 2rem;
+    font-size: 1.5rem;
     margin: 0;
 }
 
 #record{ 
     width: 26.67vw;
     height: 9.85vh;
-    background-color: #FF7BAC;
+    background-color: #FDDEA1;
+
+    & h2 { 
+        color: #FEBE3F;
+    }
 }
 
 #record_inside{
@@ -107,7 +131,7 @@ h4{
 
 .btns {
     border:none;
-    background-color: #0262FF;
+    background-color: #00BEFF;
     width: 138px;
     height: 67px;
     color: white;
@@ -135,5 +159,11 @@ h4{
 
 .text_b { 
     font-size: 45px;
+}
+
+h1 { 
+    font-family: 'Baloo Chettan Regular';
+    color: #00BEFF;
+    font-size: 2.3rem;
 }
 
