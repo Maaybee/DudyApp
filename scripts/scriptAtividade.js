@@ -114,15 +114,12 @@ document.addEventListener('DOMContentLoaded', () => {
         '3': { '1': [], '2': [], '3': [], '4': [], '5': [] },
         '4': { '1': [], '2': [], '3': [], '4': [], '5': [] }
     };
-
     // ========================================================
-    // CONFIGURAÇÃO E VARIÁVEIS
+    // CONFIGURAÇÃO
     // ========================================================
     const urlParams = new URLSearchParams(window.location.search);
     const moduleId = urlParams.get('moduleId') || '1';
     const currentLevel = parseInt(urlParams.get('level')) || 1;
-
-    // Recupera o ID da criança logada
     const idEstudante = localStorage.getItem("criancaSelecionada");
 
     let currentQueue = [];
@@ -136,7 +133,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentSelection = null; 
     let isCorrect = false;
 
-    // Elementos do DOM
     const wrapper = document.getElementById('atividade-wrapper');
     const btnPrincipal = document.getElementById('btn-principal');
     const feedbackArea = document.getElementById('feedback-area');
@@ -150,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const mensagemModal = document.getElementById('conclusao-mensagem');
 
     // ========================================================
-    // LÓGICA DE RENDERIZAÇÃO
+    // RENDERIZAÇÃO
     // ========================================================
     function updateProgress() {
         const percentage = totalQuestions === 0 ? 0 : (completedCount / totalQuestions) * 100;
@@ -172,7 +168,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const container = document.createElement('div');
         container.className = 'exercicio-container';
 
-        // --- RENDERIZAÇÃO POR TIPO ---
         if (activity.type === 'select_image') {
             container.innerHTML = `
                 <h2 class="titulo-exercicio">${activity.title} <span class="palavra-destaque">${activity.highlight}</span></h2>
@@ -209,7 +204,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         wrapper.appendChild(container);
 
-        // Listeners
         if (activity.type === 'translate') {
             const textArea = document.getElementById('resposta-texto');
             textArea.addEventListener('input', (e) => {
@@ -230,9 +224,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // ========================================================
-    // LÓGICA DE INTERAÇÃO
-    // ========================================================
     function handleOptionSelect(selectedCard, allCards) {
         if (currentState === 'checked') return;
         allCards.forEach(c => c.classList.remove('selecionado'));
@@ -251,22 +242,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-   function checkAnswer() {
+    function checkAnswer() {
         const activity = currentQueue[0];
         let isCorrectAnswer = false;
 
         if (activity.type === 'translate') {
-            // Pega o que o usuário digitou, tira espaços extras e põe em minúsculo
             const respostaUsuario = currentSelection.trim().toLowerCase();
             
-            // LÓGICA NOVA: Verifica se 'correct' é uma lista (Array) ou um texto simples
             if (Array.isArray(activity.correct)) {
-                // Se for lista: Transforma todas as respostas certas em minúsculo também
                 const respostasAceitas = activity.correct.map(r => r.trim().toLowerCase());
-                // Verifica se o que o usuário digitou está na lista
                 isCorrectAnswer = respostasAceitas.includes(respostaUsuario);
             } else {
-                // Se for texto simples (lógica antiga): compara direto
                 const respostaCerta = activity.correct.trim().toLowerCase();
                 isCorrectAnswer = (respostaUsuario === respostaCerta);
             }
@@ -300,12 +286,7 @@ document.addEventListener('DOMContentLoaded', () => {
             feedbackArea.classList.add('erro');
             feedbackTitle.innerText = "Ops, errou!";
             
-            // NOVA LÓGICA DE FEEDBACK: Se for lista, mostra a primeira opção bonita
-            let respostaParaMostrar = activity.correct;
-            if (Array.isArray(activity.correct)) {
-                respostaParaMostrar = activity.correct[0]; // Mostra a primeira opção da lista como a "ideal"
-            }
-            
+            let respostaParaMostrar = Array.isArray(activity.correct) ? activity.correct[0] : activity.correct;
             feedbackMessage.innerHTML = `A resposta correta é: <strong>${respostaParaMostrar}</strong>`;
             feedbackIcon.innerText = "✕"; 
         }
@@ -331,7 +312,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ========================================================
-    // INTEGRAÇÃO COM SUPABASE E SALVAMENTO
+    // SALVAMENTO NO BANCO (COM PALAVRAS)
     // ========================================================
 
     async function finalizarNivel() {
@@ -342,25 +323,25 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         tituloModal.textContent = `Nível ${currentLevel} Completo!`;
-        mensagemModal.textContent = "Salvando sua pontuação...";
+        mensagemModal.textContent = "Salvando...";
         modalConclusao.classList.add('visivel');
         btnFinalizar.disabled = true; 
-        btnFinalizar.textContent = "Salvando...";
 
         await salvarNoBanco();
     }
 
     async function salvarNoBanco() {
         if (!idEstudante) {
-            console.error("Erro: Nenhum estudante selecionado no localStorage.");
+            console.error("Erro: Nenhum estudante selecionado.");
             atualizarModalSucesso();
             return;
         }
 
         const PONTOS_GANHOS = 20;
+        const PALAVRAS_NOVAS = 4; // <--- Regra das 4 palavras novas
 
         try {
-            // PASSO A: Inserir registro na tabela 'estudantejogos'
+            // 1. Salva registro no histórico de jogos
             const { error: errorInsert } = await supabaseClient
                 .from('estudantejogos')
                 .insert({
@@ -372,38 +353,47 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (errorInsert) throw errorInsert;
 
-            // PASSO B: Buscar a pontuação atual do estudante
+            // 2. Busca dados atuais (pontos E palavras)
             const { data: estudanteData, error: errorSelect } = await supabaseClient
                 .from('estudante')
-                .select('pontuacao_total')
+                .select('pontuacao_total, palavras_total') // <--- Pega as palavras também
                 .eq('idestudante', parseInt(idEstudante))
                 .single();
 
             if (errorSelect) throw errorSelect;
 
-            // PASSO C: Somar e Atualizar a pontuação total
+            // 3. Calcula novos totais
             const novaPontuacao = (estudanteData.pontuacao_total || 0) + PONTOS_GANHOS;
+            const novasPalavras = (estudanteData.palavras_total || 0) + PALAVRAS_NOVAS; // <--- Soma as palavras
 
+            // 4. Atualiza o perfil com ambos os valores
             const { error: errorUpdate } = await supabaseClient
                 .from('estudante')
-                .update({ pontuacao_total: novaPontuacao })
+                .update({ 
+                    pontuacao_total: novaPontuacao,
+                    palavras_total: novasPalavras // <--- Salva no banco
+                })
                 .eq('idestudante', parseInt(idEstudante));
 
             if (errorUpdate) throw errorUpdate;
 
-            console.log("Progresso salvo com sucesso! Nova pontuação:", novaPontuacao);
-            atualizarModalSucesso(novaPontuacao);
+            console.log(`Sucesso! Pontos: ${novaPontuacao}, Palavras: ${novasPalavras}`);
+            atualizarModalSucesso(novaPontuacao, novasPalavras);
 
         } catch (error) {
-            console.error("Erro ao salvar no Supabase:", error);
-            mensagemModal.textContent = "Erro ao salvar pontuação, mas o nível foi concluído!";
+            console.error("Erro ao salvar:", error);
+            mensagemModal.textContent = "Erro ao salvar dados, mas você concluiu!";
             btnFinalizar.disabled = false;
             btnFinalizar.textContent = "CONTINUAR";
         }
     }
 
-    function atualizarModalSucesso(pontos) {
-        mensagemModal.innerHTML = `Você ganhou +20 pontos!<br>Pontuação Total: ${pontos || '...'}`;
+    function atualizarModalSucesso(pontos, palavras) {
+        mensagemModal.innerHTML = `
+            <strong>+20 Pontos!</strong><br>
+            <strong>+4 Palavras novas!</strong><br><br>
+            Total de palavras aprendidas: ${palavras || '...'}
+        `;
         btnFinalizar.disabled = false;
         btnFinalizar.textContent = "CONTINUAR";
     }
