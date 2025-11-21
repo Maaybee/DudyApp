@@ -3,14 +3,14 @@ html, body {
     padding: 0 !important; /* Força remover qualquer padding */
     height: 100% !important; /* Força altura total */
     width: 100% !important; /* Força largura total */
-    background-color: #5AC8FA !important; /* ESTA É A COR DE FUNDO AZUL DE TELA CHEIA */
+    background-color: #FFF9F9; /* ESTA É A COR DE FUNDO AZUL DE TELA CHEIA */
    
     display: block !important; /* Reseta para block para depois o body ser flex */
 }
 
 /* O fundo azul e o flexbox para centralizar AGORA FICAM NO BODY */
 body {
-    background-color: #5AC8FA !important; /* ESTA É A COR DE FUNDO AZUL DE TELA CHEIA */
+    background-color: #FFF9F9 !important; /* ESTA É A COR DE FUNDO AZUL DE TELA CHEIA */
     display: flex !important; /* Torna o body um container flexível */
     justify-content: center !important; /* Centraliza o conteúdo horizontalmente */
     align-items: center !important; /* Centraliza o conteúdo verticalmente */
@@ -20,15 +20,15 @@ body {
     font-family: 'Baloo Chettan 2', sans-serif !important; 
 }
 #imgTelaCadastro{ 
-    margin-bottom: -50px;
-    margin-top: -70px;
-    width: 400px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    height: 50vh;
 }
 
 input {
     font-family: 'Baloo Chettan Regular';
     font-size: 1rem;
-    background-color: #5AC8FA;
+    background-color: #FFF9F9;
 }
 
 
@@ -45,7 +45,7 @@ input {
     flex-direction: row;
     align-items: start ;
     gap: 5vh;
-    background-color: #5AC8FA !important;
+    background-color: #FFF9F9 !important;
 }
 .linhaInput { 
     margin: 0;
@@ -54,16 +54,26 @@ input {
 
 .input { 
     width: 50vw;
-    background-color: #5AC8FA;
+    background-color: #FFF9F9;
 }
 
 .col-itens-input { 
     width: 70vw;
-    background-color: #5AC8FA;
+    background-color: #FFF9F9;
 }
 
 #btnLogin { 
     height: 5vh;
     width: 60vw;
     font-size: 1.3rem;
+}
+
+input::placeholder { 
+    color: #6B6B6B;
+    font-family: 'Baloo Chettan Regular';
+    font-size: 16px;
+}
+
+#senha2, #senha, #email, #nome {
+    color: black;
 }
