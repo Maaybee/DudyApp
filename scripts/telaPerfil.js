@@ -1,3 +1,5 @@
+// scripts/telaperfil.js
+
 // Pega o id da criança selecionada
 const idEstudante = localStorage.getItem("criancaSelecionada");
 
@@ -26,12 +28,12 @@ async function carregarPerfil(idEstudante) {
     }
 
     // Atualiza os elementos da página
-
     const nomeElem = document.getElementById("nomePerfil");
     if (nomeElem) nomeElem.textContent = crianca.nome ?? "Sem nome";
 
     const experienciaElem = document.getElementById("experiencia");
-    if (experienciaElem) experienciaElem.textContent = crianca.experiencia ?? 0;
+    // A experiência agora é o reflexo da pontuação total (Lições + Jogos)
+    if (experienciaElem) experienciaElem.textContent = crianca.pontuacao_total ?? 0;
 
     const iconeElem = document.getElementById("fotoPerfil");
     if (iconeElem) {
@@ -42,15 +44,25 @@ async function carregarPerfil(idEstudante) {
     const nivelElem = document.getElementById("nivel");
     if (nivelElem) nivelElem.textContent = crianca.nivel ?? "Iniciante";
     
-// --- NOVO: calcula a porcentagem com base na pontuação total ---
+    // ============================================================
+    // CÁLCULO DA BARRA DE PROGRESSO (LIÇÕES + JOGOS)
+    // ============================================================
     const pontuacaoTotal = crianca.pontuacao_total ?? 0;
-    const porcentagem = Math.min((pontuacaoTotal / 8000) * 100, 100); // garante max 100%
+    
+    // META_PONTOS: Define quantos pontos são necessários para ter 100% do curso.
+    // Se 1 Módulo (100pts) vale 5%, então o total é 2000.
+    // O Jogo da Memória (~80pts) vai contribuir com aprox. 4% a cada vitória.
+    const META_PONTOS = 2000; 
+
+    const porcentagem = Math.min((pontuacaoTotal / META_PONTOS) * 100, 100); 
 
     const progressoElem = document.getElementById("progresso-preenchimento");
     const progressoText = document.getElementById("progresso");
 
     if (progressoElem) progressoElem.style.width = `${porcentagem}%`;
-    if (progressoText) progressoText.textContent = `${Math.round(porcentagem)}%`;
+    if (progressoText) progressoText.textContent = `${Math.floor(porcentagem)}%`;
+
+    // ============================================================
 
     // --- Palavras faladas ---
     const palavrasTotal = crianca.palavras_total ?? 0;
@@ -93,15 +105,12 @@ async function logout() {
 }
 
 function home() { 
-    
     console.log('Botão clicado, redirecionando...');
-
     window.location.href = '../telas/telaHome.html'; 
 };
-function urso() { 
-    
-    console.log('Botão clicado, redirecionando...');
 
+function urso() { 
+    console.log('Botão clicado, redirecionando...');
     window.location.href = '../telas/telaUrso.html'; 
 };
 
@@ -118,21 +127,6 @@ function fecharMenu() {
   document.getElementById("menu").style.display = "none";
 }
 
-async function logout() {
-  try {
-    const { error } = await supabaseClient.auth.signOut();
-    if (error) throw error;
-
-    localStorage.clear();
-    window.location.href = "../index.html";
-  } catch (err) {
-    console.error("Erro inesperado ao sair:", err);
-    alert("Ocorreu um erro. Tente novamente.");
-  }
-
-}
-
 function trocarPerfil (){ 
   window.location.href = "telaCadKid_1.html"
 }
-
