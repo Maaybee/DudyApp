@@ -1,128 +1,127 @@
 document.addEventListener('DOMContentLoaded', () => {
-    
+
     // ========================================================
-    // DADOS DAS LIÇÕES (ATUALIZADOS PARA DIGITAÇÃO)
+    // DADOS DAS LIÇÕES (IDS A PARTIR DE 100)
     // ========================================================
     const modulesContent = {
-        // MÓDULO 1: COMIDAS 
+        // MÓDULO 1: COMIDAS
         '1': {
-            // NÍVEL 1
+            // NÍVEL 1 (IDs 100 - 102)
             '1': [
                 { 
-                    id: 'mod1_niv1_q1', type: 'select_image', title: 'escolha-imagem', highlight: 'Book', correct: 'book',
+                    id: '100', type: 'select_image', title: 'Selecione', highlight: 'Book', correct: 'book',
                     options: [
-                        { id: 'orange', image: '🍊', color: '#ffd1dc' },
-                        { id: 'apple', image: '🍎', color: '#d4f9d4' },
-                        { id: 'banana', image: '🍌', color: '#bae6fd' },
-                        { id: 'book', image: '📕', color: '#e9d5ff' } 
+                        { id: 'orange', image: '../assets/svg/orange.svg', color: '#ffd1dc' },
+                        { id: 'apple', image: '../assets/svg/apple.svg', color: '#d4f9d4' },
+                        { id: 'banana', image: '../assets/svg/banana.svg', color: '#bae6fd' },
+                        { id: 'book', image: '../assets/svg/book.svg', color: '#e9d5ff' }
                     ]
                 },
-                // TRADUÇÃO: Removi 'options', agora só importa o 'correct'
                 { 
-                    id: 'mod1_niv1_q2', type: 'translate', title: 'traducao', highlight: 'Apple', image: '🍎', correct: 'Maçã'
+                    id: '101', type: 'translate', title: 'Traduza', highlight: 'Apple', 
+                    image: '../assets/svg/apple_big.svg', correct: 'Maçã'
                 },
                 { 
-                    id: 'mod1_niv1_q3', type: 'select_word', title: 'escolha-palavra', image: '🏠', imageColor: '#d1e6fa',
-                    correct: 'House', options: ['House', 'Cat', 'AirPlane']
-                },
-                { 
-                    id: 'mod1_niv1_q4', type: 'select_image', title: 'escolha-imagem', highlight: 'Book', correct: 'book',
-                    options: [
-                        { id: 'orange', image: '🍊', color: '#ffd1dc' },
-                        { id: 'apple', image: '🍎', color: '#d4f9d4' },
-                        { id: 'banana', image: '🍌', color: '#bae6fd' },
-                        { id: 'book', image: '📕', color: '#e9d5ff' } 
-                    ]
-                },
-                 { 
-                    id: 'mod1_niv1_q5', type: 'translate', title: 'traducao', highlight: 'Apple', image: '🍎', correct: 'Maçã'
+                    id: '102', type: 'select_word', title: 'Selecione o nome em inglês', 
+                    image: '../assets/svg/house.svg', imageColor: '#d1e6fa', correct: 'House', 
+                    options: ['House', 'Cat', 'AirPlane']
                 }
             ],
-            // NÍVEL 2
+            // NÍVEL 2 (IDs 103 - 105)
             '2': [
                 { 
-                    id: 'mod1_niv2_q1', type: 'select_word', title: 'escolha-palavra', image: '🍌', imageColor: '#ffe0b2',
+                    id: '103', type: 'select_word', title: 'Como se diz Banana?', 
+                    image: '../assets/svg/banana_big.svg', imageColor: '#ffe0b2',
                     correct: 'Banana', options: ['Apple', 'Banana', 'Carrot']
                 },
                 { 
-                    id: 'mod1_niv2_q2', type: 'select_image', title: 'escolha-imagem', highlight: 'Orange', correct: 'orange',
+                    id: '104', type: 'select_image', title: 'Selecione', highlight: 'Orange', correct: 'orange',
                     options: [
-                        { id: 'banana', image: '🍌', color: '#bae6fd' },
-                        { id: 'orange', image: '🍊', color: '#ffd1dc' },
-                        { id: 'grape', image: '🍇', color: '#e9d5ff' },
+                        { id: 'banana', image: '../assets/svg/banana.svg', color: '#bae6fd' },
+                        { id: 'orange', image: '../assets/svg/orange.svg', color: '#ffd1dc' },
+                        { id: 'grape', image: '../assets/svg/grape.svg', color: '#e9d5ff' },
                     ]
                 },
                 { 
-                    id: 'mod1_niv2_q3', type: 'translate', title: 'traducao', highlight: 'Orange', image: '🍊', correct: 'Laranja'
+                    id: '105', type: 'translate', title: 'Traduza', highlight: 'Orange', 
+                    image: '../assets/svg/orange_big.svg', correct: 'Laranja'
                 }
             ],
-            // NÍVEL 3
+            // NÍVEL 3 (IDs 106 - 108)
             '3': [
                 { 
-                    id: 'mod1_niv3_q1', type: 'translate', title: 'traducao', highlight: 'Carrot', image: '🥕', correct: 'Cenoura'
+                    id: '106', type: 'translate', title: 'Traduza', highlight: 'Carrot', 
+                    image: '../assets/svg/carrot_big.svg', correct: 'Cenoura'
                 },
                 { 
-                    id: 'mod1_niv3_q2', type: 'select_image', title: 'escolha-imagem', highlight: 'Broccoli', correct: 'broccoli',
+                    id: '107', type: 'select_image', title: 'Selecione', highlight: 'Broccoli', correct: 'broccoli',
                     options: [
-                        { id: 'carrot', image: '🥕', color: '#ffe0b2' },
-                        { id: 'broccoli', image: '🥦', color: '#d4f9d4' },
-                        { id: 'pizza', image: '🍕', color: '#ffd1dc' },
+                        { id: 'carrot', image: '../assets/svg/carrot.svg', color: '#ffe0b2' },
+                        { id: 'broccoli', image: '../assets/svg/broccoli.svg', color: '#d4f9d4' },
+                        { id: 'pizza', image: '../assets/svg/pizza.svg', color: '#ffd1dc' },
                     ]
                 },
                 { 
-                    id: 'mod1_niv3_q3', type: 'select_word', title: 'escolha-palavra', image: '🥔', imageColor: '#e9d5ff',
+                    id: '108', type: 'select_word', title: 'Como se diz Batata?', 
+                    image: '../assets/svg/potato_big.svg', imageColor: '#e9d5ff',
                     correct: 'Potato', options: ['Tomato', 'Potato', 'Onion']
                 }
             ],
-            // NÍVEL 4
+            // NÍVEL 4 (IDs 109 - 111)
             '4': [
                 { 
-                    id: 'mod1_niv4_q1', type: 'select_word', title: 'escolha-palavra', image: '🍞', imageColor: '#fff3e0',
+                    id: '109', type: 'select_word', title: 'Selecione o nome em inglês', 
+                    image: '../assets/svg/bread_big.svg', imageColor: '#fff3e0',
                     correct: 'Bread', options: ['Bread', 'Milk', 'Egg']
                 },
                 { 
-                    id: 'mod1_niv4_q2', type: 'translate', title: 'traducao', highlight: 'Milk', image: '🥛', correct: 'Leite'
+                    id: '110', type: 'translate', title: 'Traduza', highlight: 'Milk', 
+                    image: '../assets/svg/milk_big.svg', correct: 'Leite'
                 },
                 { 
-                    id: 'mod1_niv4_q3', type: 'select_image', title: 'escolha-imagem', highlight: 'Coffee', correct: 'coffee',
+                    id: '111', type: 'select_image', title: 'Selecione', highlight: 'Coffee', correct: 'coffee',
                     options: [
-                        { id: 'milk', image: '🥛', color: '#bae6fd' },
-                        { id: 'coffee', image: '☕', color: '#ffe0b2' },
-                        { id: 'tea', image: '🍵', color: '#d4f9d4' },
+                        { id: 'milk', image: '../assets/svg/milk.svg', color: '#bae6fd' },
+                        { id: 'coffee', image: '../assets/svg/coffee.svg', color: '#ffe0b2' },
+                        { id: 'tea', image: '../assets/svg/tea.svg', color: '#d4f9d4' },
                     ]
                 }
             ],
-            // NÍVEL 5
+            // NÍVEL 5 (IDs 112 - 114)
             '5': [
                 { 
-                    id: 'mod1_niv5_q1', type: 'select_image', title: 'escolha-imagem', highlight: 'Burger', correct: 'burger',
+                    id: '112', type: 'select_image', title: 'Selecione', highlight: 'Burger', correct: 'burger',
                     options: [
-                        { id: 'pizza', image: '🍕', color: '#ffd1dc' },
-                        { id: 'burger', image: '🍔', color: '#d4f9d4' },
-                        { id: 'fries', image: '🍟', color: '#ffe0b2' },
+                        { id: 'pizza', image: '../assets/svg/pizza.svg', color: '#ffd1dc' },
+                        { id: 'burger', image: '../assets/svg/burger.svg', color: '#d4f9d4' },
+                        { id: 'fries', image: '../assets/svg/fries.svg', color: '#ffe0b2' },
                     ]
                 },
                 { 
-                    id: 'mod1_niv5_q2', type: 'select_word', title: 'escolha-palavra', image: '🍳', imageColor: '#ffe0b2',
+                    id: '113', type: 'select_word', title: 'Selecione o nome em inglês', 
+                    image: '../assets/svg/egg_big.svg', imageColor: '#ffe0b2',
                     correct: 'Egg', options: ['Egg', 'Bacon', 'Sausage']
                 },
                 { 
-                    id: 'mod1_niv5_q3', type: 'translate', title: 'traducao', highlight: 'Cheese', image: '🧀', correct: 'Queijo'
+                    id: '114', type: 'translate', title: 'Traduza', highlight: 'Cheese', 
+                    image: '../assets/svg/cheese_big.svg', correct: 'Queijo'
                 }
             ]
         },
         
-        '2': { '1': [], '2': [], '3': [], '4': [], '5': [] },
-        '3': { '1': [], '2': [], '3': [], '4': [], '5': [] },
-        '4': { '1': [], '2': [], '3': [], '4': [], '5': [] }
+        // Outros módulos...
+        '2': { '1': [], '2': [], '3': [], '4': [], '5': [] }
     };
 
     // ========================================================
-    // LÓGICA DO PROGRAMA
+    // CONFIGURAÇÃO E VARIÁVEIS
     // ========================================================
     const urlParams = new URLSearchParams(window.location.search);
     const moduleId = urlParams.get('moduleId') || '1';
     const currentLevel = parseInt(urlParams.get('level')) || 1;
+
+    // Recupera o ID da criança logada
+    const idEstudante = localStorage.getItem("criancaSelecionada");
 
     let currentQueue = [];
     if (modulesContent[moduleId] && modulesContent[moduleId][currentLevel]) {
@@ -135,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentSelection = null; 
     let isCorrect = false;
 
-    // DOM Elements
+    // Elementos do DOM
     const wrapper = document.getElementById('atividade-wrapper');
     const btnPrincipal = document.getElementById('btn-principal');
     const feedbackArea = document.getElementById('feedback-area');
@@ -145,7 +144,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const progressBar = document.getElementById('progresso-atual');
     const modalConclusao = document.getElementById('licao-concluida-modal');
     const btnFinalizar = document.getElementById('btn-finalizar');
+    const tituloModal = document.getElementById('conclusao-titulo');
+    const mensagemModal = document.getElementById('conclusao-mensagem');
 
+    // ========================================================
+    // LÓGICA DE RENDERIZAÇÃO
+    // ========================================================
     function updateProgress() {
         const percentage = totalQuestions === 0 ? 0 : (completedCount / totalQuestions) * 100;
         progressBar.style.width = `${percentage}%`;
@@ -158,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
         resetFeedbackUI();
 
         if (currentQueue.length === 0) {
-            showSummary();
+            finalizarNivel(); 
             return;
         }
 
@@ -166,23 +170,23 @@ document.addEventListener('DOMContentLoaded', () => {
         const container = document.createElement('div');
         container.className = 'exercicio-container';
 
-        // --- LÓGICA DE RENDERIZAÇÃO ---
+        // --- RENDERIZAÇÃO POR TIPO ---
         if (activity.type === 'select_image') {
             container.innerHTML = `
-                <h2 class="titulo-exercicio">escolha-imagem <span class="palavra-destaque">${activity.highlight}</span></h2>
+                <h2 class="titulo-exercicio">${activity.title} <span class="palavra-destaque">${activity.highlight}</span></h2>
                 <div class="opcoes-grid">
                     ${activity.options.map(opt => `
                         <div class="card-opcao card-imagem" style="background-color: ${opt.color};" data-value="${opt.id}">
-                            <span style="pointer-events:none">${opt.image}</span>
+                            <img src="${opt.image}" alt="${opt.id}" onerror="this.style.display='none'; this.parentElement.innerHTML='🖼️'"/>
                         </div>
                     `).join('')}
                 </div>`;
         }
         else if (activity.type === 'select_word') {
             container.innerHTML = `
-                <h2 class="titulo-exercicio">escolha-palavra</h2>
-                <div class="imagem-destaque" style="background-color: ${activity.imageColor || '#ffe0b2'};">
-                    ${activity.image.startsWith('http') ? `<img src="${activity.image}" alt="${activity.image}" />` : activity.image}
+                <h2 class="titulo-exercicio">${activity.title}</h2>
+                <div class="imagem-destaque" style="background-color: ${activity.imageColor || '#fff'};">
+                    <img src="${activity.image}" alt="imagem" onerror="this.style.display='none'; this.parentElement.innerHTML='🖼️'"/>
                 </div>
                 <div class="opcoes-lista">
                     ${activity.options.map(opt => `
@@ -190,29 +194,24 @@ document.addEventListener('DOMContentLoaded', () => {
                     `).join('')}
                 </div>`;
         }
-        // --- AQUI MUDOU: INPUT DE TEXTO ---
         else if (activity.type === 'translate') {
             container.innerHTML = `
-                <h2 class="titulo-exercicio">traducao</h2>
+                <h2 class="titulo-exercicio">${activity.title}</h2>
                 <span class="palavra-destaque-orange">${activity.highlight}</span>
-                <div class="imagem-destaque" style="background-color: #ffe0b2;">
-                    ${activity.image.startsWith('http') ? `<img src="${activity.image}" alt="${activity.image}" />` : activity.image}
+                <div class="imagem-destaque" style="background-color: #fff3e0;">
+                    <img src="${activity.image}" alt="imagem" onerror="this.style.display='none'; this.parentElement.innerHTML='🖼️'"/>
                 </div>
-                
-                <textarea id="resposta-texto" class="area-texto" placeholder="Escreva em português"></textarea>
+                <textarea id="resposta-texto" class="area-texto" placeholder="Escreva em português..."></textarea>
             `;
         }
 
         wrapper.appendChild(container);
 
-        // LISTENERS
+        // Listeners
         if (activity.type === 'translate') {
-            // Listener para Digitação
             const textArea = document.getElementById('resposta-texto');
             textArea.addEventListener('input', (e) => {
-                currentSelection = e.target.value; // Armazena o que foi digitado
-                
-                // Habilita botão se tiver texto
+                currentSelection = e.target.value;
                 if (currentSelection.trim().length > 0) {
                     btnPrincipal.disabled = false;
                     btnPrincipal.classList.add('ativo');
@@ -222,7 +221,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         } else {
-            // Listener para Click (Botões)
             const cards = container.querySelectorAll('.card-opcao');
             cards.forEach(card => {
                 card.addEventListener('click', () => handleOptionSelect(card, cards));
@@ -230,6 +228,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // ========================================================
+    // LÓGICA DE INTERAÇÃO
+    // ========================================================
     function handleOptionSelect(selectedCard, allCards) {
         if (currentState === 'checked') return;
         allCards.forEach(c => c.classList.remove('selecionado'));
@@ -250,28 +251,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function checkAnswer() {
         const activity = currentQueue[0];
-        
-        // --- VERIFICAÇÃO ---
         let isCorrectAnswer = false;
 
         if (activity.type === 'translate') {
-            // Compara Texto (ignora espaços e maiúsculas)
             const respostaUsuario = currentSelection.trim().toLowerCase();
             const respostaCerta = activity.correct.trim().toLowerCase();
             isCorrectAnswer = (respostaUsuario === respostaCerta);
-
-            // Feedback visual no textarea
+            
             const textArea = document.getElementById('resposta-texto');
             if(textArea) {
-                textArea.disabled = true; // Bloqueia digitação
+                textArea.disabled = true;
                 textArea.classList.add(isCorrectAnswer ? 'correto' : 'incorreto');
             }
-
         } else {
-            // Compara ID/Valor do botão
             isCorrectAnswer = (currentSelection === activity.correct);
-            
-            // Feedback visual nos cards
             const allCards = document.querySelectorAll('.card-opcao');
             allCards.forEach(card => {
                 if (card.dataset.value === currentSelection) {
@@ -283,7 +276,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         isCorrect = isCorrectAnswer;
         currentState = 'checked';
-        
         feedbackArea.classList.add('com-feedback');
         
         if (isCorrect) {
@@ -318,23 +310,93 @@ document.addEventListener('DOMContentLoaded', () => {
         btnPrincipal.innerText = "VERIFICAR";
     }
 
-    function showSummary() {
+    // ========================================================
+    // INTEGRAÇÃO COM SUPABASE E SALVAMENTO
+    // ========================================================
+
+    async function finalizarNivel() {
         if (window.saveLessonProgress) {
             const percentPerLevel = 20; 
             const newTotalProgress = currentLevel * percentPerLevel;
             window.saveLessonProgress(moduleId, newTotalProgress);
         }
-        document.getElementById('conclusao-titulo').textContent = `Nível ${currentLevel} Completo!`;
+
+        tituloModal.textContent = `Nível ${currentLevel} Completo!`;
+        mensagemModal.textContent = "Salvando sua pontuação...";
         modalConclusao.classList.add('visivel');
+        btnFinalizar.disabled = true; 
+        btnFinalizar.textContent = "Salvando...";
+
+        await salvarNoBanco();
+    }
+
+    async function salvarNoBanco() {
+        if (!idEstudante) {
+            console.error("Erro: Nenhum estudante selecionado no localStorage.");
+            atualizarModalSucesso();
+            return;
+        }
+
+        const PONTOS_GANHOS = 20;
+
+        try {
+            // PASSO A: Inserir registro na tabela 'estudantejogos'
+            const { error: errorInsert } = await supabaseClient
+                .from('estudantejogos')
+                .insert({
+                    idestudante: parseInt(idEstudante),
+                    idjogos: parseInt(moduleId), 
+                    pontuacaoobtida: PONTOS_GANHOS,
+                    datarealizacao: new Date().toISOString()
+                });
+
+            if (errorInsert) throw errorInsert;
+
+            // PASSO B: Buscar a pontuação atual do estudante
+            const { data: estudanteData, error: errorSelect } = await supabaseClient
+                .from('estudante')
+                .select('pontuacao_total')
+                .eq('idestudante', parseInt(idEstudante))
+                .single();
+
+            if (errorSelect) throw errorSelect;
+
+            // PASSO C: Somar e Atualizar a pontuação total
+            const novaPontuacao = (estudanteData.pontuacao_total || 0) + PONTOS_GANHOS;
+
+            const { error: errorUpdate } = await supabaseClient
+                .from('estudante')
+                .update({ pontuacao_total: novaPontuacao })
+                .eq('idestudante', parseInt(idEstudante));
+
+            if (errorUpdate) throw errorUpdate;
+
+            console.log("Progresso salvo com sucesso! Nova pontuação:", novaPontuacao);
+            atualizarModalSucesso(novaPontuacao);
+
+        } catch (error) {
+            console.error("Erro ao salvar no Supabase:", error);
+            mensagemModal.textContent = "Erro ao salvar pontuação, mas o nível foi concluído!";
+            btnFinalizar.disabled = false;
+            btnFinalizar.textContent = "CONTINUAR";
+        }
+    }
+
+    function atualizarModalSucesso(pontos) {
+        mensagemModal.innerHTML = `Você ganhou +20 pontos!<br>Pontuação Total: ${pontos || '...'}`;
+        btnFinalizar.disabled = false;
+        btnFinalizar.textContent = "CONTINUAR";
     }
 
     btnFinalizar.addEventListener('click', () => {
         window.location.href = 'teladudyacademy.html';
     });
 
-    // Inicializa
+    // ========================================================
+    // INICIALIZAÇÃO
+    // ========================================================
     if (currentQueue.length === 0) {
-        wrapper.innerHTML = `<h2 style="text-align:center; margin-top:50px; color:#888;">Nível vazio.</h2>`;
+        wrapper.innerHTML = `<h2 style="text-align:center; margin-top:50px; color:#aaa;">Nível vazio.</h2>`;
     } else {
         renderCurrentActivity();
     }
