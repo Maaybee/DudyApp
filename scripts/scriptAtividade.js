@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
             '2': [
                 { 
                     id: '103', type: 'select_word', title: 'Como se diz Banana?', 
-                    image: '../assets/svg/banana_big.svg', imageColor: '#ffe0b2',
+                    image: '../assets/img/banana.svg', imageColor: '#ffe0b2',
                     correct: 'Banana', options: ['Apple', 'Banana', 'Carrot']
                 },
                 { 
