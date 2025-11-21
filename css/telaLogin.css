@@ -13,14 +13,14 @@ html, body {
 
 /* O fundo azul e o flexbox para centralizar AGORA FICAM NO BODY */
 body {
-    background-color: #5AC8FA !important; /* ESTA É A COR DE FUNDO AZUL DE TELA CHEIA */
+    background-color: #FFF9F9 !important; /* ESTA É A COR DE FUNDO AZUL DE TELA CHEIA */
     display: flex !important; /* Torna o body um container flexível */
     justify-content: center !important; /* Centraliza o conteúdo horizontalmente */
     align-items: center !important; /* Centraliza o conteúdo verticalmente */
     flex-direction: column !important; /* Empilha os itens verticalmente */
     overflow: hidden !important; /* Evita barras de rolagem indesejadas */
     /* Você pode adicionar a font-family aqui se ela for específica da tela de login */
-    font-family: 'Baloo Chettan 2', sans-serif !important; 
+    font-family: 'Baloo Chettan Regular', sans-serif !important; 
 }
 
 
@@ -76,4 +76,24 @@ body {
     .col-itens.center {
         padding: 0 10px !important; /* Ajusta o padding para telas muito pequenas */
     }
+}
+
+input::placeholder { 
+    color: #6B6B6B;
+    background-color: #FFF9F9;
+}
+
+input { 
+    background-color: #FFF9F9;
+}
+
+#telaLogin { 
+    display:flex; 
+    flex-direction: column;
+    gap: 20vh;
+}
+
+#btnLogin {
+    margin-top: 3vh;
+    margin-bottom: 3vh;
 }
