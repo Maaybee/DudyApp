@@ -52,7 +52,7 @@ async function carregarPerfil(idEstudante) {
     // META_PONTOS: Define quantos pontos são necessários para ter 100% do curso.
     // Se 1 Módulo (100pts) vale 5%, então o total é 2000.
     // O Jogo da Memória (~80pts) vai contribuir com aprox. 4% a cada vitória.
-    const META_PONTOS = 2000; 
+    const META_PONTOS = 4000; 
 
     const porcentagem = Math.min((pontuacaoTotal / META_PONTOS) * 100, 100); 
 
