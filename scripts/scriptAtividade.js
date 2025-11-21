@@ -9,22 +9,22 @@ document.addEventListener('DOMContentLoaded', () => {
             // NÍVEL 1 (IDs 100 - 102)
             '1': [
                 { 
-                    id: '100', type: 'select_image', title: 'Selecione', highlight: 'Book', correct: 'book',
+                    id: '100', type: 'select_image', title: 'Selecione', highlight: 'Apple', correct: 'apple',
                     options: [
-                        { id: 'orange', image: '../assets/svg/orange.svg', color: '#ffd1dc' },
-                        { id: 'apple', image: '../assets/svg/apple.svg', color: '#d4f9d4' },
-                        { id: 'banana', image: '../assets/svg/banana.svg', color: '#bae6fd' },
-                        { id: 'book', image: '../assets/svg/book.svg', color: '#e9d5ff' }
+                        { id: 'orange', image: '../assets/img/orange.svg', color: '#ffd1dc' },
+                        { id: 'apple', image: '../assets/img/apple.svg', color: '#d4f9d4' },
+                        { id: 'banana', image: '../assets/img/banana.svg', color: '#bae6fd' },
+                        { id: 'Milk', image: '../assets/img/leite.svg', color: '#e9d5ff' }
                     ]
                 },
                 { 
                     id: '101', type: 'translate', title: 'Traduza', highlight: 'Apple', 
-                    image: '../assets/svg/apple_big.svg', correct: 'Maçã'
+                    image: '../assets/img/apple.svg', correct: ['Maçã', 'maça', 'Maça', 'maca']
                 },
                 { 
                     id: '102', type: 'select_word', title: 'Selecione o nome em inglês', 
-                    image: '../assets/svg/house.svg', imageColor: '#d1e6fa', correct: 'House', 
-                    options: ['House', 'Cat', 'AirPlane']
+                    image: '../assets/img/orange.svg', imageColor: '#d1e6fa', correct: 'Orange', 
+                    options: ['Orange', 'Grape', 'Apple']
                 }
             ],
             // NÍVEL 2 (IDs 103 - 105)
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
                 { 
                     id: '105', type: 'translate', title: 'Traduza', highlight: 'Orange', 
-                    image: '../assets/svg/orange_big.svg', correct: 'Laranja'
+                    image: '../assets/svg/orange_big.svg', correct: ['Laranja']
                 }
             ],
             // NÍVEL 3 (IDs 106 - 108)
@@ -109,8 +109,10 @@ document.addEventListener('DOMContentLoaded', () => {
             ]
         },
         
-        // Outros módulos...
-        '2': { '1': [], '2': [], '3': [], '4': [], '5': [] }
+       
+        '2': { '1': [], '2': [], '3': [], '4': [], '5': [] },
+        '3': { '1': [], '2': [], '3': [], '4': [], '5': [] },
+        '4': { '1': [], '2': [], '3': [], '4': [], '5': [] }
     };
 
     // ========================================================
@@ -249,14 +251,25 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    function checkAnswer() {
+   function checkAnswer() {
         const activity = currentQueue[0];
         let isCorrectAnswer = false;
 
         if (activity.type === 'translate') {
+            // Pega o que o usuário digitou, tira espaços extras e põe em minúsculo
             const respostaUsuario = currentSelection.trim().toLowerCase();
-            const respostaCerta = activity.correct.trim().toLowerCase();
-            isCorrectAnswer = (respostaUsuario === respostaCerta);
+            
+            // LÓGICA NOVA: Verifica se 'correct' é uma lista (Array) ou um texto simples
+            if (Array.isArray(activity.correct)) {
+                // Se for lista: Transforma todas as respostas certas em minúsculo também
+                const respostasAceitas = activity.correct.map(r => r.trim().toLowerCase());
+                // Verifica se o que o usuário digitou está na lista
+                isCorrectAnswer = respostasAceitas.includes(respostaUsuario);
+            } else {
+                // Se for texto simples (lógica antiga): compara direto
+                const respostaCerta = activity.correct.trim().toLowerCase();
+                isCorrectAnswer = (respostaUsuario === respostaCerta);
+            }
             
             const textArea = document.getElementById('resposta-texto');
             if(textArea) {
@@ -286,7 +299,14 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             feedbackArea.classList.add('erro');
             feedbackTitle.innerText = "Ops, errou!";
-            feedbackMessage.innerHTML = `A resposta correta é: <strong>${activity.correct}</strong>`;
+            
+            // NOVA LÓGICA DE FEEDBACK: Se for lista, mostra a primeira opção bonita
+            let respostaParaMostrar = activity.correct;
+            if (Array.isArray(activity.correct)) {
+                respostaParaMostrar = activity.correct[0]; // Mostra a primeira opção da lista como a "ideal"
+            }
+            
+            feedbackMessage.innerHTML = `A resposta correta é: <strong>${respostaParaMostrar}</strong>`;
             feedbackIcon.innerText = "✕"; 
         }
         btnPrincipal.innerText = "CONTINUAR";
