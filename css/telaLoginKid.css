@@ -28,12 +28,11 @@
 
 body { 
     background-color: #FFF7F7;
-    margin-top: 25px;
 }
 
 .btns-blue{ 
-    background-color: #0262FF;
-    border: #0262FF;
+    background-color: #00BEFF;
+    border: #00BEFF;
     border-radius: 20px;
     color: white;
 }
@@ -45,6 +44,8 @@ body {
     gap: 30px;
     justify-content: center;
     align-items: center;
+    height: 100vh;
+    width: 100%;
    
 }
 
