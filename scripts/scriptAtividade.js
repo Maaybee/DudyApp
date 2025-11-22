@@ -440,7 +440,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Re-adiciona o evento de click no botão novo (pois o antigo foi apagado do DOM)
         document.getElementById('btn-finalizar-novo').addEventListener('click', () => {
-            window.location.href = 'teladudyacademy.html';
+            window.location.href = 'telaDudyAcademy.html';
         });
     }
 
