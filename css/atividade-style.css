@@ -18,8 +18,10 @@
 /* --- GERAL --- */
 body {
     font-family: 'Baloo Chettan Regular', sans-serif;
-    background-color: #fff7f7; /* O fundo rosa clarinho pedido */
-    color: #4b4b4b;
+    background-color: #FFF0F5; 
+    background-image: radial-gradient(#FFDEE9 10%, transparent 10%); 
+    background-size: 30px 30px;
+    color: #4a4a4a; /* Cinza chumbo suave (substituindo o roxo/marrom) */
     display: flex;
     flex-direction: column;
     height: 100vh;
@@ -33,43 +35,50 @@ body {
     display: flex;
     align-items: center;
     gap: 15px;
-    padding: 20px 20px 10px 20px; /* Um pouco menos de padding embaixo */
-    background-color: #fff7f7;
+    padding: 25px 20px 15px 20px;
+    background: transparent;
     width: 100%;
     box-sizing: border-box;
     flex-shrink: 0;
 }
 
 .fechar-btn { 
-    font-family: sans-serif;
-    font-size: 28px;
-    color: #e5e5e5; /* X cinza claro */
+    font-family: 'Baloo Chettan Regular', sans-serif;
+    font-size: 32px;
+    color: #FFB7B2; 
     text-decoration: none; 
-    font-weight: 700;
+    font-weight: 900;
     cursor: pointer; 
     line-height: 1;
     border: none;
-    background: none;
-    padding: 0;
-    transition: color 0.2s;
+    background: #fff;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(255, 183, 178, 0.4);
+    transition: transform 0.2s;
 }
-.fechar-btn:hover { color: #cfcfcf; }
+.fechar-btn:hover { transform: scale(1.1) rotate(90deg); }
 
 .barra-progresso { 
     flex-grow: 1; 
-    height: 16px;
-    background-color: #e5e5e5; 
-    border-radius: 12px; 
+    height: 20px;
+    background-color: #FFFFFF; 
+    border-radius: 20px; 
     overflow: hidden; 
+    border: 3px solid #FFFFFF;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
 }
 
 .progresso-atual { 
     height: 100%; 
-    background-color: #58cc02; /* Verde clássico de progresso */
-    border-radius: 12px; 
+    background: linear-gradient(90deg, #FF9A9E 0%, #FECFEF 100%);
+    border-radius: 20px; 
     width: 0%; 
-    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1); 
-    box-shadow: inset 0 -2px 0 rgba(0,0,0,0.2); /* Pequeno detalhe 3D na barra */
+    transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 /* --- CORPO DA ATIVIDADE --- */
@@ -77,8 +86,8 @@ body {
     flex-grow: 1;
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* Começa do topo */
-    padding: 10px 20px 160px 20px; /* Padding bottom grande pro footer */
+    align-items: flex-start;
+    padding: 10px 20px 160px 20px;
     overflow-y: auto;
     width: 100%;
     box-sizing: border-box;
@@ -90,237 +99,436 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 25px; /* Espaço entre Título, Imagem e Opções */
-    animation: slideUp 0.4s ease-out;
+    gap: 25px;
+    animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-@keyframes slideUp { 
-    from { opacity: 0; transform: translateY(20px); } 
-    to { opacity: 1; transform: translateY(0); } 
+@keyframes popIn { 
+    from { opacity: 0; transform: scale(0.8); } 
+    to { opacity: 1; transform: scale(1); } 
 }
 
 .titulo-exercicio {
-    font-size: 28px;
+    font-size: 30px;
     text-align: center;
     margin: 10px 0 0 0;
-    color: #3c3c3c;
+    color: #4a4a4a; /* Cor ajustada (sem roxo) */
     line-height: 1.2;
+    text-shadow: 2px 2px 0px #FFF;
 }
 
-.palavra-destaque { color: #ff4b4b; /* Rosa avermelhado */ }
-.palavra-destaque-orange { color: #ff9600; display: block; margin-top: 5px; font-size: 32px; }
+.palavra-destaque { color: #FF6F91; }
 
-/* --- IMAGENS (Espaços para SVG) --- */
+.palavra-destaque-orange { 
+    color: #FF9671; 
+    display: block; 
+    margin-top: 5px; 
+    font-size: 34px; 
+    cursor: pointer; 
+    background-color: #FFF;
+    padding: 5px 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(255, 150, 113, 0.2);
+    border: 2px dashed #FFC75F; 
+    transition: all 0.3s;
+}
+.palavra-destaque-orange:hover { transform: scale(1.05); }
+.palavra-destaque-orange.traduzido {
+    color: #43E97B; 
+    border-color: #43E97B;
+    border-style: solid;
+}
+
+/* --- IMAGENS --- */
 .imagem-destaque {
     width: 100%;
     max-width: 240px;
-    height: 180px;
-    border-radius: 20px;
+    height: 190px;
+    border-radius: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    background-color: #fff; /* Fundo branco padrão */
-    /* Sombra suave para destacar do fundo */
-    box-shadow: 0 4px 0 rgba(0,0,0,0.05), 0 0 0 2px #f0f0f0; 
+    background-color: #FFF;
+    border: 4px solid #FFF;
+    box-shadow: 0 8px 20px rgba(168, 168, 168, 0.15);
 }
 
 .imagem-destaque img { 
-    width: 80%; /* Imagem não encosta nas bordas */
-    height: 80%; 
+    width: 85%;
+    height: 85%; 
     object-fit: contain; 
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1)); 
 }
 
 /* --- OPÇÕES --- */
 .opcoes-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* 2 colunas */
-    gap: 15px;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
     width: 100%;
 }
 
 .opcoes-lista {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 15px;
     width: 100%;
 }
 
 /* --- CARDS --- */
 .card-opcao {
-    background-color: #fff;
-    border: 2px solid #e5e5e5; /* Borda cinza */
-    border-bottom: 4px solid #e5e5e5; /* Borda 3D */
-    border-radius: 16px;
+    background-color: #FFF;
+    border: none; 
+    border-radius: 25px; 
     cursor: pointer;
-    transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
-    /* Garante que o SVG fique contido */
     overflow: hidden; 
+    box-shadow: 0 6px 0 #E0E0E0, 0 10px 10px rgba(0,0,0,0.05);
 }
 
+.card-opcao:hover { transform: translateY(-3px); }
 .card-opcao:active { 
-    transform: translateY(2px); 
-    border-bottom-width: 2px; 
-    background-color: #f7f7f7;
+    transform: translateY(4px); 
+    box-shadow: 0 2px 0 #E0E0E0, 0 2px 5px rgba(0,0,0,0.05);
 }
 
-/* Card Imagem (Select Image) */
 .card-imagem {
-    height: 160px; /* Altura boa para o SVG */
+    height: 180px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 20px;
+    padding: 15px;
+    gap: 8px;
 }
 .card-imagem img {
-    width: 100%;
-    height: 100%;
+    width: 90px; height: 90px;
     object-fit: contain;
-    pointer-events: none; /* O clique vai no card, não na imagem */
+    pointer-events: none;
+    filter: drop-shadow(0 3px 0 rgba(0,0,0,0.1));
 }
-
-/* Card Texto (Select Word) */
-.card-texto {
-    padding: 18px;
-    font-size: 19px;
-    font-weight: 700; /* Baloo Bold */
-    color: #4b4b4b;
+.card-label {
+    font-family: 'Baloo Chettan Regular', sans-serif;
+    font-size: 20px;
+    color: #555; /* Cinza neutro (sem roxo) */
+    margin: 0;
+    text-transform: capitalize;
     text-align: center;
 }
 
-/* --- INPUT DE TEXTO (TRADUÇÃO) --- */
-.area-texto {
-    width: 100%;
-    height: 140px;
+.card-texto {
     padding: 20px;
-    font-family: 'Arimo', sans-serif;
-    font-size: 22px;
-    color: #4b4b4b;
-    background-color: #f7f7f7;
-    border: 2px solid #e5e5e5;
-    border-bottom: 4px solid #e5e5e5;
-    border-radius: 16px;
-    resize: none;
-    box-sizing: border-box;
-    outline: none;
-    transition: all 0.2s;
-}
-.area-texto::placeholder { color: #afafaf; }
-.area-texto:focus {
-    background-color: #fff;
-    border-color: #1cb0f6;
-    border-bottom-color: #1cb0f6;
-}
-.area-texto.correto {
-    background-color: #d7ffb8; border-color: #58cc02; color: #58a700;
-}
-.area-texto.incorreto {
-    background-color: #ffdfe0; border-color: #ff4b4b; color: #ea2b2b;
+    font-size: 20px;
+    font-weight: 700;
+    color: #555; /* Cinza neutro (sem roxo) */
+    text-align: center;
 }
 
+/* --- INPUT --- */
+.area-texto {
+    width: 90%; height: 50px; padding: 20px;
+    font-family: 'Arimo', sans-serif; font-size: 22px; color: #5A4A42;
+    background-color: #FFF;
+    border: 3px solid #F3F3F3;
+    border-radius: 25px;
+    box-shadow: inset 0 4px 8px rgba(0,0,0,0.03);
+    resize: none; outline: none;
+    transition: all 0.3s;
+}
+.area-texto:focus { border-color: #FF9A9E; box-shadow: 0 0 0 4px rgba(255, 154, 158, 0.2); }
+.area-texto.correto { border-color: #B0F2B6; background-color: #F0FFF4; color: #4CAF50; }
+.area-texto.incorreto { border-color: #FFB7B2; background-color: #FFF5F5; color: #FF6F91; }
 
-/* --- ESTADOS DE SELEÇÃO --- */
+/* --- ESTADOS DE SELEÇÃO (Cores suaves) --- */
 .card-opcao.selecionado {
-    background-color: #ddf4ff; /* Azul bem claro */
-    border-color: #84d8ff;
-    border-bottom-color: #1cb0f6; /* Azul forte 3D */
-    color: #1899d6;
+    background-color: #D4F1F4; 
+    box-shadow: 0 6px 0 #75E6DA, 0 10px 20px rgba(117, 230, 218, 0.3);
+    color: #189AB4;
+    transform: translateY(-2px);
 }
 
 .card-opcao.correto {
-    background-color: #d7ffb8;
-    border-color: #58cc02;
-    border-bottom-color: #4ca800;
-    color: #4ca800;
+    background-color: #D6F8D6; 
+    box-shadow: 0 6px 0 #7FDB82, 0 10px 20px rgba(127, 219, 130, 0.3);
+    color: #3D8C40;
 }
 
 .card-opcao.incorreto {
-    background-color: #ffdfe0;
-    border-color: #ff4b4b;
-    border-bottom-color: #d63636;
-    color: #d63636;
+    background-color: #FFD6D6; 
+    box-shadow: 0 6px 0 #FF8085, 0 10px 20px rgba(255, 128, 133, 0.2);
+    color: #C23B42;
 }
 
-/* --- RODAPÉ --- */
+/* --- RODAPÉ TELA CHEIA (NOVO) --- */
 .feedback-area {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 20px 20px 30px 20px; /* Padding extra embaixo pro celular */
-    background-color: #fff; 
-    border-top: 2px solid #e5e5e5;
-    z-index: 100;
+    position: fixed; 
+    top: 0; left: 0; width: 100%; height: 100%; /* Ocupa tudo */
+    z-index: 200; /* Fica em cima de tudo */
     display: flex; 
-    flex-direction: column;
-    gap: 20px;
-    max-width: 600px; /* Limita largura em desktop */
-    margin: 0 auto; /* Centraliza em desktop */
-}
-
-.feedback-content {
-    display: none; 
-    flex-direction: row;
+    justify-content: center; /* Centraliza tudo */
     align-items: center;
+    flex-direction: column; 
+    gap: 20px;
+    padding: 20px;
+    box-sizing: border-box;
+    
+    /* Efeito de vidro fosco */
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+/* Classe para mostrar a tela cheia */
+.feedback-area.com-feedback {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Cores de fundo para tela cheia */
+.feedback-area.correto { background-color: rgba(214, 248, 214, 0.9); } /* Verde Água Suave */
+.feedback-area.erro { background-color: rgba(255, 214, 214, 0.9); } /* Rosa Suave */
+
+/* Container do conteúdo (o cartão central) */
+.feedback-content {
+    display: flex; 
+    flex-direction: column; /* Ícone em cima, texto embaixo */
+    align-items: center;
+    text-align: center;
     gap: 15px;
-    animation: slideUp 0.2s ease-out;
+    background: white;
+    padding: 30px;
+    border-radius: 30px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    width: 80%;
+    max-width: 350px;
+    transform: scale(0.8);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.feedback-area.com-feedback .feedback-content { display: flex; }
-.feedback-area.correto { background-color: #d7ffb8; border-top-color: transparent; }
-.feedback-area.erro { background-color: #ffdfe0; border-top-color: transparent; }
-
-.feedback-icon-circle {
-    width: 50px; height: 50px;
-    border-radius: 50%;
-    background-color: #fff;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 28px; font-weight: bold;
+.feedback-area.com-feedback .feedback-content {
+    transform: scale(1); /* Efeito de Pop ao abrir */
 }
-.feedback-area.correto .feedback-icon-circle { color: #58cc02; }
-.feedback-area.erro .feedback-icon-circle { color: #ff4b4b; }
 
-.feedback-text h3 { margin: 0; font-size: 24px; font-weight: 900; color: #333; }
-.feedback-text p { margin: 0; font-size: 16px; color: #333; }
-.feedback-area.correto .feedback-text h3 { color: #58cc02; }
-.feedback-area.erro .feedback-text h3 { color: #ff4b4b; }
+.feedback-icon-circle { 
+    width: 80px; height: 80px; /* Ícone maior */
+    border-radius: 50%; 
+    background-color: #F0F0F0; 
+    display: flex; align-items: center; justify-content: center; 
+    font-size: 40px; 
+}
 
-/* --- BOTÃO PRINCIPAL --- */
+.feedback-area.correto .feedback-icon-circle { background-color: #E3FDF5; color: #4CAF50; }
+.feedback-area.erro .feedback-icon-circle { background-color: #FFE5E5; color: #FF6F91; }
+
+.feedback-text h3 { margin: 0; font-size: 32px; font-weight: 900; color: #5A4A42; }
+.feedback-text p { margin: 0; font-size: 18px; color: #777; }
+
+/* Botão dentro do feedback */
 .btn-principal {
     width: 100%;
-    padding: 16px;
-    border-radius: 16px;
+    max-width: 350px;
+    padding: 18px;
+    border-radius: 25px;
     font-family: 'Baloo Chettan Regular', sans-serif;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 900;
     text-transform: uppercase;
-    color: #afafaf;
-    background-color: #e5e5e5;
+    color: #FFF;
+    background: #D1D1D1;
     border: none;
-    border-bottom: 4px solid #cfcfcf; /* 3D desabilitado */
+    box-shadow: 0 6px 0 #B0B0B0;
     cursor: default;
+    transition: all 0.2s;
+    
+    /* No layout antigo ele ficava no footer, agora centralizamos ele também */
+    position: relative;
+    z-index: 201;
+}
+
+/* Se o feedback não está visível, o botão fica fixo embaixo (para "Verificar") */
+.feedback-area:not(.com-feedback) {
+    top: auto; bottom: 0; height: auto; background: none; backdrop-filter: none;
+    opacity: 1; visibility: visible;
+}
+.feedback-area:not(.com-feedback) .feedback-content { display: none; }
+
+/* Botão Ativo */
+.btn-principal.ativo {
+    background: #4facfe;
+    box-shadow: 0 6px 0 #2c85c9, 0 10px 20px rgba(79, 172, 254, 0.4);
+    cursor: pointer;
+}
+.btn-principal.ativo:active { transform: translateY(6px); box-shadow: none; }
+
+/* ... (Mantenha o CSS anterior) ... */
+
+/* --- FEEDBACK DE ERRO (AGORA AZUL E FOFO) --- */
+.feedback-area.erro { 
+    /* Fundo Azul Claro (Igual ao vídeo) */
+    background-color: #94DDF8; 
+    border-color: #94DDF8;
+}
+
+/* Texto na tela de erro agora deve ser branco ou azul escuro para ler bem */
+.feedback-area.erro .feedback-text h3 { color: #0B5289; }
+.feedback-area.erro .feedback-text p { color: #FFF; font-weight: bold; }
+.feedback-area.erro .feedback-icon-circle { 
+    display: none; /* Esconde o ícone de X, pois teremos o urso */ 
+}
+
+/* ESTILO DO URSO (GIF) */
+.urso-erro-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    width: 100%;
+    margin-bottom: -10px; /* Ajuste para ficar perto do botão */
+    z-index: 1; 
+    position: relative;
+}
+
+.urso-erro-img {
+    width: 240px; /* Tamanho do urso */
+    height: auto;
+    object-fit: contain;
+    margin-top: -10px;
+    filter: drop-shadow(0 4px 4px rgba(0,0,0,0.1)); /* Sombra suave */
+}
+/* Ajuste do Botão na tela de erro (Azul mais escuro) */
+.feedback-area.erro .btn-principal { 
+    background-color: #00BEFF; /* Azul forte */
+    box-shadow: 0 6px 0  #069bcd; 
+    color: white;
+    position: relative;
+    z-index: 10; /* Fica NA FRENTE do urso */
+}
+.feedback-area.correto .btn-principal { 
+    background:  #43E97B ;
+    box-shadow: 0 6px 0 #2E9E68; 
+}
+
+/* ... (Mantenha todo o CSS anterior igual até chegar na parte do MODAL) ... */
+
+/* --- MODAL DE CONCLUSÃO (TELA DE VITÓRIA) --- */
+#licao-concluida-modal { 
+    display: none; 
+    position: fixed; 
+    top: 0; left: 0; width: 100%; height: 100%; 
+    /* Fundo Azul Vibrante (Transição de Vitória) */
+    background:  #4facfe;
+    z-index: 999; 
+    justify-content: center; 
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+#licao-concluida-modal.visivel { 
+    display: flex; 
+    animation: fadeIn 0.5s ease-out; /* Transição suave */
+}
+
+/* O Cartão Branco no meio */
+.modal-conteudo {
+    background: #FFF; 
+    padding: 30px; 
+    border-radius: 40px; 
+    text-align: center; 
+    width: 100%; 
+    max-width: 400px;
+    box-shadow: 0 20px 60px rgba(0, 50, 100, 0.3);
+    border: 5px solid #DDF6FF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Estilo do Vídeo */
+.video-conclusao {
+    width: 100%;
+    max-width: 250px; /* Tamanho bom para o urso */
+    border-radius: 20px;
+    margin-bottom: 10px;
+    /* Sombra suave no vídeo */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+/* Título e Textos */
+#conclusao-titulo {
+    font-family: 'Baloo Chettan Regular', sans-serif;
+    font-size: 32px;
+    color: #007bff; /* Azul */
+    margin: 0;
+    line-height: 1.1;
+}
+
+.conclusao-pontos {
+    font-family: 'Baloo Chettan Regular', sans-serif;
+    font-size: 24px;
+    color: #58cc02; /* Verde para os pontos */
+    background: #eaffea;
+    padding: 10px 20px;
+    border-radius: 15px;
+    display: inline-block;
+    margin-top: 5px;
+}
+
+.conclusao-detalhes {
+    font-family: 'Arimo', sans-serif;
+    font-size: 16px;
+    color: #777;
+}
+
+/* Botão Continuar AZUL */
+#btn-finalizar {
+    width: 100%;
+    padding: 18px;
+    margin-top: 10px;
+    border-radius: 25px;
+    font-family: 'Baloo Chettan Regular', sans-serif;
+    font-size: 22px;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: #FFF;
+    background-color: #007bff; /* Azul vibrante */
+    border: none;
+    box-shadow: 0 6px 0 #0056b3; /* Sombra 3D azul escura */
+    cursor: pointer;
     transition: all 0.2s;
 }
 
-.btn-principal.ativo {
-    background-color: #58cc02; /* Verde */
-    color: white;
-    border-bottom-color: #46a302; /* Verde escuro 3D */
-    cursor: pointer;
+#btn-finalizar:active {
+    transform: translateY(4px);
+    box-shadow: 0 0 0;
 }
-.btn-principal.ativo:active { transform: translateY(4px); border-bottom-width: 0; }
 
-.feedback-area.erro .btn-principal { background-color: #ff4b4b; border-bottom-color: #d63636; }
-.feedback-area.correto .btn-principal { background-color: #58cc02; border-bottom-color: #46a302; }
-
-/* --- MODAL --- */
-#licao-concluida-modal {
-    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.5); z-index: 999; justify-content: center; align-items: center;
+#btn-finalizar:disabled {
+    background-color: #ccc;
+    box-shadow: 0 6px 0 #999;
+    cursor: wait;
 }
-#licao-concluida-modal.visivel { display: flex; animation: fadeIn 0.3s; }
-.modal-conteudo {
-    background: white; padding: 40px; border-radius: 24px; text-align: center; width: 85%; max-width: 380px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+
+/* --- URSINHO DO VERBO (OPCIONAL) --- */
+.mascot-verb-container {
+    display: flex;
+    justify-content: center;
+    margin-top: -10px; /* Aproxima um pouco do título */
+    margin-bottom: -10px;
+    margin-bottom: -10px;
+    width: 100%;
+    animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.mascot-verb-img {
+    height: 180px; /* Tamanho ideal para não ocupar a tela toda */
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 4px rgba(0,0,0,0.1)); /* Sombra suave */
 }
