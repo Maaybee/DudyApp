@@ -41,3 +41,12 @@
     height: 50px;
 }
 
+input::placeholder { 
+    background-color: #FFF7F7;
+    color: #696969;
+}
+
+input {
+    background-color: #FFF7F7;
+    color: #696969;
+}
