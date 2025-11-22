@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
             ],
             '2': [
-                { id: '106', type: 'select_image', title: 'Selecione', highlight: 'Sorvete', correct: 'Ice Cream', options: [ { id: 'Ice Cream', image: '../assets/svg/icecream.svg', color: '#d4f9d4' }, { id: 'fries', image: '../assets/svg/fries.svg', color: '#fff3e0' },{ id: 'pizza', image: '../assets/svg/pizza.svg', color: '#fff3e0' }, { id: 'chocolate', image: '../assets/svg/chocolate.svg', color: '#fff3e0' }]},
+                { id: '106', type: 'select_image', title: 'Selecione', highlight: 'Sorvete', correct: 'Ice Cream', options: [ { id: 'Ice Cream', image: '../assets/svg/icecream.svg', color: '#d4f9d4' }, { id: 'fries', image: '../assets/svg/fries.svg', color: '#fff3e0' },{ id: 'pizza', image: '../assets/svg/pizza.svg', color: '#bae6fd' }, { id: 'chocolate', image: '../assets/svg/chocolate.svg', color: '#e9d5ff' }]},
                 { id: '107', type: 'select_word', title: 'Como se diz Batata frita?', image: '../assets/svg/fries.svg', imageColor: '#bae6fd', correct: 'Fries', options: ['Pizza', 'Fries', 'Juice'] },
                 { id: '108', type: 'translate', title: 'Traduza', highlight: 'Chocolate', image: '../assets/svg/chocolate.svg', correct: ['Chocolate'] },
                 { id: '109', type: 'select_image', title: 'I eat', highlight: 'Hamburguer', correct: 'Hamburguer',  mascotImage: '../assets/svg/urso_hamburguer.svg', options: [ { id: 'Hamburguer', image: '../assets/svg/hamburguer.svg', color: '#ffd1dc' }, { id: 'fries', image: '../assets/svg/fries.svg', color: '#d4f9d4' } ]},
