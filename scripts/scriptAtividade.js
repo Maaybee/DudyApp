@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
             ],
             '3': [
-                { id: '112', type: 'select_image', title: 'Selecione', highlight: 'Water', correct: 'Water', options: [ { id: 'Grapes', image: '../assets/svg/grape.svg', color: '#ffd1dc' }, { id: 'sandwich', image: '../assets/svg/sandwich.svg', color: '#fff3e0' },{ id: 'cake', image: '../assets/svg/cake.svg', color: '#e9d5ff' },{ id: 'Orange', image: '../assets/svg/orange.svg', color: '#bae6fd' } ]},
+                { id: '112', type: 'select_image', title: 'Selecione', highlight: 'Grapes', correct: 'Grapes', options: [ { id: 'Grapes', image: '../assets/svg/grape.svg', color: '#ffd1dc' }, { id: 'sandwich', image: '../assets/svg/sandwich.svg', color: '#fff3e0' },{ id: 'cake', image: '../assets/svg/cake.svg', color: '#e9d5ff' },{ id: 'Orange', image: '../assets/svg/orange.svg', color: '#bae6fd' } ]},
                 { id: '113', type: 'select_word', title: 'O que é isso?', image: '../assets/svg/apple.svg', imageColor: '#ffd1dc', correct: 'Apple', options: ['Juice', 'Water', 'Apple'] }, 
                 { id: '114', type: 'translate', title: 'Traduza', highlight: 'Laranja', image: '../assets/svg/orange.svg', correct: ['Orange', 'oranges'] },
                 { id: '115', type: 'select_image', title: 'i eat', highlight: 'grapes', correct: 'Grapes',  mascotImage: '../assets/svg/urso_grape.svg', options: [ { id: 'banana', image: '../assets/svg/banana.svg', color: '#ffd1dc' }, { id: 'Grapes', image: '../assets/svg/grape.svg', color: '#fff3e0' } ]},
