@@ -282,7 +282,7 @@ document.addEventListener('DOMContentLoaded', () => {
             feedbackContent.innerHTML = `
                 <div class="feedback-text" style="width: 100%; text-align: center;">
                     <h3 style="margin-bottom: 5px;">Vamos tentar de novo!</h3>
-                    <p style="font-size: 16px; color: #0056b3;">A resposta era: <strong>${respostaParaMostrar}</strong></p>
+                    <p style="font-size: 16px; color: #00BEFF;">A resposta era: <strong>${respostaParaMostrar}</strong></p>
                 </div>
                 
                 <div class="urso-erro-container">
@@ -430,7 +430,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 Total aprendido: ${palavras || '...'} palavras
             </div>
 
-            <button id="btn-finalizar-novo" class="btn-principal" style="background-color: #007bff; box-shadow: 0 6px 0 #0056b3; color: white;">
+            <button id="btn-finalizar-novo" class="btn-principal" style="background-color: #00BEFF; box-shadow: 0 6px 0 #0056b3; color: white;">
                 CONTINUAR
             </button>
         `;

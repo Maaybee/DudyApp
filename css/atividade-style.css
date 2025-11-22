@@ -358,7 +358,7 @@ body {
 
 /* Botão Ativo */
 .btn-principal.ativo {
-    background: #4facfe;
+    background: #00BEFF;
     box-shadow: 0 6px 0 #2c85c9, 0 10px 20px rgba(79, 172, 254, 0.4);
     cursor: pointer;
 }
@@ -369,12 +369,12 @@ body {
 /* --- FEEDBACK DE ERRO (AGORA AZUL E FOFO) --- */
 .feedback-area.erro { 
     /* Fundo Azul Claro (Igual ao vídeo) */
-    background-color: #94DDF8; 
+    background-color: #B0EBFF; 
     border-color: #94DDF8;
 }
 
 /* Texto na tela de erro agora deve ser branco ou azul escuro para ler bem */
-.feedback-area.erro .feedback-text h3 { color: #0B5289; }
+.feedback-area.erro .feedback-text h3 { color: #00BEFF; }
 .feedback-area.erro .feedback-text p { color: #FFF; font-weight: bold; }
 .feedback-area.erro .feedback-icon-circle { 
     display: none; /* Esconde o ícone de X, pois teremos o urso */ 
@@ -419,7 +419,7 @@ body {
     position: fixed; 
     top: 0; left: 0; width: 100%; height: 100%; 
     /* Fundo Azul Vibrante (Transição de Vitória) */
-    background:  #4facfe;
+    background:  #B0EBFF;
     z-index: 999; 
     justify-content: center; 
     align-items: center;
@@ -464,7 +464,7 @@ body {
 #conclusao-titulo {
     font-family: 'Baloo Chettan Regular', sans-serif;
     font-size: 32px;
-    color: #007bff; /* Azul */
+    color: #00BEFF; /* Azul */
     margin: 0;
     line-height: 1.1;
 }
@@ -497,9 +497,9 @@ body {
     font-weight: 900;
     text-transform: uppercase;
     color: #FFF;
-    background-color: #007bff; /* Azul vibrante */
+    background-color: #00BEFF; /* Azul vibrante */
     border: none;
-    box-shadow: 0 6px 0 #0056b3; /* Sombra 3D azul escura */
+    box-shadow: 0 6px 0 #00BEFF; /* Sombra 3D azul escura */
     cursor: pointer;
     transition: all 0.2s;
 }
