@@ -426,7 +426,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // 5. PALAVRAS E DETALHES
         htmlContent += `
             <div class="conclusao-detalhes">
-                <strong>+4 Palavras novas!</strong><br>
+                <strong>+3 Palavras novas!</strong><br>
                 Total aprendido: ${palavras || '...'} palavras
             </div>
 
