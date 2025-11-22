@@ -6,17 +6,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const modulesContent = {
         '1': {
             '1': [
-                { id: '100', type: 'select_image', title: 'Selecione', highlight: 'Apple', correct: 'apple', options: [ { id: 'apple', image: '../assets/svg/apple.svg', color: '#d4f9d4' }, { id: 'banana', image: '../assets/svg/banana.svg', color: '#e9d5ff' }, { id: 'Grape', image: '../assets/svg/grape.svg', color: '#bae6fd' }, { id: 'Orange', image: '../assets/svg/orange.svg', color: '#ffd1dc' }, ]},
+                { id: '100', type: 'select_image', title: 'Selecione', highlight: 'Maçã', correct: 'Apple', options: [ { id: 'Apple', image: '../assets/svg/apple.svg', color: '#d4f9d4' }, { id: 'banana', image: '../assets/svg/banana.svg', color: '#e9d5ff' }, { id: 'Grape', image: '../assets/svg/grape.svg', color: '#bae6fd' }, { id: 'Orange', image: '../assets/svg/orange.svg', color: '#ffd1dc' }, ]},
                 { id: '101', type: 'select_word', title: 'Banana', image: '../assets/svg/banana.svg', imageColor: '#bae6fd', correct: 'Banana', options: ['Apple', 'Banana', 'Grapes'] },
                 { id: '102', type: 'translate', title: 'Traduza', highlight: 'Orange', image: '../assets/svg/orange.svg', correct: ['Laranja', 'laraja'] },
                 { id: '103', type: 'select_image', title: 'i eat', highlight: 'Bananas', correct: 'Banana', mascotImage: '../assets/svg/urso_banana.svg', options: [ { id: 'Banana', image: '../assets/svg/banana.svg', color: '#ffd1dc',  }, { id: 'apple', image: '../assets/svg/apple.svg', color: '#e9d5ff' } ]},
-                { id: '104', type: 'select_word', title: 'Grape', image: '../assets/svg/grape.svg', imageColor: '#bae6fd', correct: 'Grapes', options: ['Apple', 'Banana', 'Grapes'] },
+                { id: '104', type: 'select_word', title: 'Uva', image: '../assets/svg/grape.svg', imageColor: '#bae6fd', correct: 'Grapes', options: ['Apple', 'Banana', 'Grapes'] },
                 { id: '105', type: 'translate', title: 'Traduza', highlight: 'I eat Bananas', image: '../assets/svg/banana.svg', correct: ['Eu como bananas', 'como bananas','eu como banana', 'como banana'] }
            
                 
             ],
             '2': [
-                { id: '106', type: 'select_image', title: 'Selecione', highlight: 'ice Cream', correct: 'Ice Cream', options: [ { id: 'Ice Cream', image: '../assets/svg/icecream.svg', color: '#d4f9d4' }, { id: 'fries', image: '../assets/svg/fries.svg', color: '#fff3e0' },{ id: 'pizza', image: '../assets/svg/pizza.svg', color: '#fff3e0' }, { id: 'chocolate', image: '../assets/svg/chocolate.svg', color: '#fff3e0' }]},
+                { id: '106', type: 'select_image', title: 'Selecione', highlight: 'Sorvete', correct: 'Ice Cream', options: [ { id: 'Ice Cream', image: '../assets/svg/icecream.svg', color: '#d4f9d4' }, { id: 'fries', image: '../assets/svg/fries.svg', color: '#fff3e0' },{ id: 'pizza', image: '../assets/svg/pizza.svg', color: '#fff3e0' }, { id: 'chocolate', image: '../assets/svg/chocolate.svg', color: '#fff3e0' }]},
                 { id: '107', type: 'select_word', title: 'Como se diz Batata frita?', image: '../assets/svg/fries.svg', imageColor: '#bae6fd', correct: 'Fries', options: ['Pizza', 'Fries', 'Juice'] },
                 { id: '108', type: 'translate', title: 'Traduza', highlight: 'Chocolate', image: '../assets/svg/chocolate.svg', correct: ['Chocolate'] },
                 { id: '109', type: 'select_image', title: 'I eat', highlight: 'Hamburguer', correct: 'Hamburguer',  mascotImage: '../assets/svg/urso_hamburguer.svg', options: [ { id: 'Hamburguer', image: '../assets/svg/hamburguer.svg', color: '#ffd1dc' }, { id: 'fries', image: '../assets/svg/fries.svg', color: '#d4f9d4' } ]},
@@ -29,23 +29,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 { id: '112', type: 'select_image', title: 'Selecione', highlight: 'Grapes', correct: 'Grapes', options: [ { id: 'Grapes', image: '../assets/svg/grape.svg', color: '#ffd1dc' }, { id: 'sandwich', image: '../assets/svg/sandwich.svg', color: '#fff3e0' },{ id: 'cake', image: '../assets/svg/cake.svg', color: '#e9d5ff' },{ id: 'Orange', image: '../assets/svg/orange.svg', color: '#bae6fd' } ]},
                 { id: '113', type: 'select_word', title: 'O que é isso?', image: '../assets/svg/apple.svg', imageColor: '#ffd1dc', correct: 'Apple', options: ['Juice', 'Water', 'Apple'] }, 
                 { id: '114', type: 'translate', title: 'Traduza', highlight: 'Laranja', image: '../assets/svg/orange.svg', correct: ['Orange', 'oranges'] },
-                { id: '115', type: 'select_image', title: 'i eat', highlight: 'grapes', correct: 'Grapes',  mascotImage: '../assets/svg/urso_grape.svg', options: [ { id: 'banana', image: '../assets/svg/banana.svg', color: '#ffd1dc' }, { id: 'Grapes', image: '../assets/svg/grape.svg', color: '#fff3e0' } ]},
+                { id: '115', type: 'select_image', title: 'i eat', highlight: '...', correct: 'Grapes',  mascotImage: '../assets/svg/urso_grape.svg', options: [ { id: 'banana', image: '../assets/svg/banana.svg', color: '#ffd1dc' }, { id: 'Grapes', image: '../assets/svg/grape.svg', color: '#fff3e0' } ]},
                 { id: '116', type: 'select_word', title: 'O que é isso?', image: '../assets/svg/strawberry.svg', imageColor: '#ffd1dc', correct: 'Strawberry', options: ['Strawberry', 'Apple', 'Banana'] }, 
                 { id: '117', type: 'translate', title: 'Traduza', highlight: 'Strawberry', image: '../assets/svg/strawberry.svg', correct: ['morango', 'morago'] }
             ],
             '4': [
-                { id: '118', type: 'select_image', title: 'Selecione', highlight: 'Water', correct: 'Water', options: [ { id: 'Milk', image: '../assets/svg/milk.svg', color: '#ffd1dc' }, { id: 'Juice', image: '../assets/svg/juice.svg', color: '#fff3e0' },{ id: 'Tea', image: '../assets/svg/tea.svg', color: '#d4f9d4' },{ id: 'Water', image: '../assets/svg/water.svg', color: '#e9d5ff' } ]},
+                { id: '118', type: 'select_image', title: 'Selecione', highlight: 'Água', correct: 'Water', options: [ { id: 'Milk', image: '../assets/svg/milk.svg', color: '#ffd1dc' }, { id: 'Juice', image: '../assets/svg/juice.svg', color: '#fff3e0' },{ id: 'Tea', image: '../assets/svg/tea.svg', color: '#d4f9d4' },{ id: 'Water', image: '../assets/svg/water.svg', color: '#e9d5ff' } ]},
                 { id: '119', type: 'select_word', title: 'O que é isso?', image: '../assets/svg/milk.svg', imageColor: '#ffd1dc', correct: 'Milk', options: ['Juice', 'Water', 'Milk'] }, 
                 { id: '120', type: 'translate', title: 'Traduza', highlight: 'Tea', image: '../assets/svg/tea.svg', correct: ['Chá', 'cha'] },
-                { id: '121', type: 'select_image', title: 'i drink', highlight: 'water', correct: 'Water',  mascotImage: '../assets/svg/urso_water.svg', options: [ { id: 'juice', image: '../assets/svg/juice.svg', color: '#ffd1dc' }, { id: 'Water', image: '../assets/svg/water.svg', color: '#fff3e0' } ]},
+                { id: '121', type: 'select_image', title: 'i drink', highlight: '...', correct: 'Water',  mascotImage: '../assets/svg/urso_water.svg', options:[ { id: 'juice', image: '../assets/svg/juice.svg', color: '#ffd1dc' }, { id: 'Water', image: '../assets/svg/water.svg', color: '#fff3e0' } ]},
                 { id: '122', type: 'select_word', title: 'O que é isso?', image: '../assets/svg/soda.svg', imageColor: '#ffd1dc', correct: 'Soda', options: ['Water', 'Soda', 'Tea'] }, 
                 { id: '123', type: 'translate', title: 'Traduza', highlight: 'Suco', image: '../assets/svg/juice.svg', correct: ['Juice', 'juice'] }
             ],
             '5': [
-                { id: '106', type: 'select_image', title: 'Selecione', highlight: 'ice Cream', correct: 'Ice Cream', options: [ { id: 'Ice Cream', image: '../assets/svg/icecream.svg', color: '#d4f9d4' }, { id: 'fries', image: '../assets/svg/fries.svg', color:'#bae6fd' },{ id: 'pizza', image: '../assets/svg/pizza.svg', color: '#e9d5ff' }, { id: 'chocolate', image: '../assets/svg/chocolate.svg', color: '#fff3e0' }]},
+                { id: '106', type: 'select_image', title: 'Selecione', highlight: 'Sorvete', correct: 'Ice Cream', options: [ { id: 'Ice Cream', image: '../assets/svg/icecream.svg', color: '#d4f9d4' }, { id: 'fries', image: '../assets/svg/fries.svg', color:'#bae6fd' },{ id: 'pizza', image: '../assets/svg/pizza.svg', color: '#e9d5ff' }, { id: 'chocolate', image: '../assets/svg/chocolate.svg', color: '#fff3e0' }]},
                 { id: '107', type: 'select_word', title: 'Como se diz Batata frita?', image: '../assets/svg/fries.svg', imageColor: '#bae6fd', correct: 'Fries', options: ['Pizza', 'Fries', 'Juice'] },
                 { id: '108', type: 'translate', title: 'Traduza', highlight: 'Chocolate', image: '../assets/svg/chocolate.svg', correct: ['Chocolate'] },
-                { id: '109', type: 'select_image', title: 'I eat', highlight: 'Hamburguer', correct: 'Hamburguer',  mascotImage: '../assets/svg/urso_hamburguer.svg', options: [ { id: 'Hamburguer', image: '../assets/svg/hamburguer.svg', color: '#ffd1dc' }, { id: 'fries', image: '../assets/svg/fries.svg', color: '#d4f9d4' } ]},
+                { id: '109', type: 'select_image', title: 'I eat', highlight: '...', correct: 'Hamburguer',  mascotImage: '../assets/svg/urso_hamburguer.svg', options: [ { id: 'Hamburguer', image: '../assets/svg/hamburguer.svg', color: '#ffd1dc' }, { id: 'fries', image: '../assets/svg/fries.svg', color: '#d4f9d4' } ]},
                 { id: '110', type: 'select_word', title: 'Como se diz sanduiche?', image: '../assets/svg/sandwich.svg', imageColor: '#bae6fd', correct: 'Sandwich', options: ['Pizza', 'Fries', 'Sandwich'] },
                 { id: '111', type: 'translate', title: 'Traduza', highlight: 'Eu como batata frita', image: '../assets/svg/fries.svg', correct: ['I eat fries'] }
            
