@@ -149,7 +149,7 @@ body {
 #group button, .btn-principal { margin: 5px; padding: 10px 20px; border-radius: 10px; border: none; cursor: pointer; color: white; font-weight: bold; }
 #btnSair { background-color: #ff4b4b; }
 #btnVoltar { background-color: #58cc02; }
-.btn-principal { background-color: var(--blue-btn); box-shadow: 0 4px 0 var(--blue-shadow); width: 100%; margin-top: 15px; padding: 15px; font-size: 18px; }
+.btn-principal { background-color: var(--blue-btn); box-shadow: 0 4px 0 var(--blue-shadow); width: 100%; margin-top: 15px; padding: 15px; font-size: 18px; font-family: 'Baloo Chettan Regular'; }
 
 /* ... (Mantenha o resto do CSS igual) ... */
 
@@ -244,4 +244,5 @@ body {
 #btnVoltarParaHistorias:active {
     transform: translateY(4px);
     box-shadow: 0 0 0;
+
 }
