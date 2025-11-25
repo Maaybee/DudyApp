@@ -64,6 +64,7 @@ h4 {
     width: 192px;
     height: 32px;
     border-radius: 50px;
+    margin-bottom: 10px;
     overflow: hidden; /* Importante para que o preenchimento não "saia" dos cantos arredondados */
     position: relative; /* Para posicionar o preenchimento se necessário, embora não seja estritamente vital aqui */
 }
