@@ -1,13 +1,14 @@
 // Arquivo: js/historias.js
 
 const DADOS_HISTORIAS = [
+    // 1. História: The Picnic
     {
-        id: 'picnic', // Identificador único (sem espaços ou acentos)
+        id: 'picnic',
         jogo_id: 3,
         titulo: 'The Picnic',
         personagens: 'Leo and Emma',
-        imagem: '../assets/historias/picnic.svg', // Imagem do menu
-        icone_header: '../assets/historias/picnic.svg', // Ícone do cabeçalho na página da história
+        imagem: '../assets/historias/picnic.svg',
+        icone_header: '../assets/historias/picnic.svg',
         color_text: "#DBA778",
         dialogo: [
             { personagem: 'Emma', fala: 'Hi Leo! Are you ready for the picnic?', audio: 'emma1' },
@@ -21,6 +22,15 @@ const DADOS_HISTORIAS = [
             { personagem: 'Leo', fala: 'I’m happy. Picnics are fun!', audio: 'leo4' },
             { personagem: 'Emma', fala: 'Yes, very fun!', audio: 'emma5' }
         ],
+        vocabulario: {
+            "hi": "oi", "ready": "pronto", "picnic": "piquenique",
+            "have": "tenho", "apples": "maçãs", "sandwiches": "sanduíches",
+            "yum": "nham (delícia)", "juice": "suco", "cookies": "biscoitos",
+            "great": "ótimo", "like": "gosto", "let’s": "vamos",
+            "sit": "sentar", "under": "embaixo", "tree": "árvore",
+            "eat": "comer", "good": "bom", "sweet": "doce",
+            "happy": "feliz", "fun": "divertido"
+        },
         quiz: {
             perguntas: [
                 'What does Leo bring to the picnic?',
@@ -34,43 +44,63 @@ const DADOS_HISTORIAS = [
             ],
             respostasCorretas: [
                 'Apples and sandwiches.',
-                'This apple is sweet!',
+                'This apple is so sweet!',
                 'Picnics are fun!',
             ]
         }
     },
+
+    // 2. História: Pizza Time
     {
         id: 'pizza-time',
         jogo_id: 4,
         titulo: 'Pizza Time',
         personagens: 'Mia and Sam',
         imagem: '../assets/historias/pizza.svg',
-        icone_header: '../assets/historias/pizza.svg', // Crie um ícone para a pizza se quiser
+        icone_header: '../assets/historias/pizza.svg',
         color_text: "#2E6B80",
-
         dialogo: [
             { personagem: 'Mia', fala: 'Hi Sam! Are you hungry?', audio: 'mia1' },
             { personagem: 'Sam', fala: 'Yes, I am! What should we eat?', audio: 'sam1' },
-            { personagem: 'Mia', fala: 'Let’s make a pizza! I have the dough and tomato sauce.' , audio: 'mia2' },
+            { personagem: 'Mia', fala: 'Let’s make a pizza! I have the dough and tomato sauce.', audio: 'mia2' },
             { personagem: 'Sam', fala: 'Great idea! I have cheese and pepperoni.', audio: 'sam2' },
             { personagem: 'Mia', fala: 'Perfect! Let’s put the toppings on.', audio: 'mia3' },
             { personagem: 'Sam', fala: 'It looks so yummy! Let’s put it in the oven.', audio: 'sam3' },
             { personagem: 'Mia', fala: 'Ding! The pizza is ready. It smells delicious!', audio: 'mia4' },
             { personagem: 'Sam', fala: 'Hooray! Look at the melted cheese.', audio: 'sam4' },
             { personagem: 'Mia', fala: 'This pizza is so tasty!', audio: 'mia5' },
-            { personagem: 'Sam', fala: ' Yes! Pizza time is the best time.', audio: 'sam5' },
-    
+            { personagem: 'Sam', fala: 'Yes! Pizza time is the best time.', audio: 'sam5' },
         ],
+        vocabulario: {
+            "hungry": "com fome", "eat": "comer", "make": "fazer",
+            "dough": "massa", "tomato": "tomate", "sauce": "molho",
+            "cheese": "queijo", "pepperoni": "calabresa", "idea": "ideia",
+            "perfect": "perfeito", "toppings": "coberturas", "put": "colocar",
+            "yummy": "delicioso", "oven": "forno", "ready": "pronta",
+            "smells": "cheira", "delicious": "delicioso", "look": "olhe",
+            "melted": "derretido", "tasty": "saboroso", "best": "melhor",
+            "time": "hora"
+        },
         quiz: {
-             perguntas: ['What toppings did they put on the pizza?', 'How does the pizza smell according to Mia?',
-    'What is Sam’s final opinion about pizza time?'],
-             alternativas: [ ['Cheese and pepperoni.', 'Mushrooms and olives.', 'Pineapple and ham.'],
-                            ['It smells burnt.', 'It smells delicious!', 'It smells like cookies.'],
-                            ['It is boring.', 'He is sleepy.', 'Pizza time is the best time.']],
-             respostasCorretas: ['Cheese and pepperoni.', 'It smells delicious!', 'Pizza time is the best time.']
+            perguntas: [
+                'What toppings did they put on the pizza?',
+                'How does the pizza smell according to Mia?',
+                'What is Sam’s final opinion about pizza time?'
+            ],
+            alternativas: [
+                ['Cheese and pepperoni.', 'Mushrooms and olives.', 'Pineapple and ham.'],
+                ['It smells burnt.', 'It smells delicious!', 'It smells like cookies.'],
+                ['It is boring.', 'He is sleepy.', 'Pizza time is the best time.']
+            ],
+            respostasCorretas: [
+                'Cheese and pepperoni.',
+                'It smells delicious!',
+                'Pizza time is the best time.'
+            ]
         }
     },
-// 3. História: Baking a Cake
+
+    // 3. História: Baking a Cake
     {
         id: 'baking-a-cake',
         jogo_id: 5,
@@ -91,6 +121,16 @@ const DADOS_HISTORIAS = [
             { personagem: 'Ana', fala: 'Wow! It looks amazing. Let’s have a slice.', audio: 'ana4' },
             { personagem: 'Dad', fala: 'This is the most delicious cake ever!', audio: 'dad4' }
         ],
+        vocabulario: {
+            "bake": "assar", "today": "hoje", "something": "algo",
+            "course": "claro", "big": "grande", "cake": "bolo",
+            "choice": "escolha", "ingredients": "ingredientes", "need": "precisamos",
+            "flour": "farinha", "sugar": "açúcar", "eggs": "ovos",
+            "chocolate": "chocolate", "mix": "misturar", "bowl": "tigela",
+            "oven": "forno", "smells": "cheira", "wonderful": "maravilhoso",
+            "decorate": "decorar", "sprinkles": "confeitos", "amazing": "incrível",
+            "slice": "fatia", "delicious": "delicioso", "ever": "de todos"
+        },
         quiz: {
             perguntas: [
                 'What kind of cake did they bake?',
@@ -131,6 +171,15 @@ const DADOS_HISTORIAS = [
             { personagem: 'Sofia', fala: 'And mine is so sweet and refreshing!', audio: 'sofia4' },
             { personagem: 'Carlos', fala: 'Ice cream is the best treat for a sunny day.', audio: 'carlos5' }
         ],
+        vocabulario: {
+            "hot": "quente", "day": "dia", "know": "sei",
+            "perfect": "perfeito", "guess": "adivinhar", "ice cream": "sorvete",
+            "exactly": "exatamente", "shop": "loja", "corner": "esquina",
+            "flavor": "sabor", "want": "quer", "chocolate": "chocolate",
+            "strawberry": "morango", "favorite": "favorito", "creamy": "cremoso",
+            "cold": "frio", "sweet": "doce", "refreshing": "refrescante",
+            "best": "melhor", "treat": "guloseima", "sunny": "ensolarado"
+        },
         quiz: {
             perguntas: [
                 'What flavor of ice cream did Sofia choose?',
@@ -170,6 +219,16 @@ const DADOS_HISTORIAS = [
             { personagem: 'Lucas', fala: 'Wow, this is delicious! It gives me so much energy.', audio: 'lucas4' },
             { personagem: 'Julia', fala: 'A perfect start to our day!', audio: 'julia4' }
         ],
+        vocabulario: {
+            "want": "quero", "quick": "rápido", "healthy": "saudável",
+            "breakfast": "café da manhã", "smoothie": "vitamina", "easy": "fácil",
+            "idea": "ideia", "bananas": "bananas", "yogurt": "iogurte",
+            "strawberries": "morangos", "little": "pouco", "honey": "mel",
+            "ingredients": "ingredientes", "blender": "liquidificador", "button": "botão",
+            "listen": "escute", "sound": "som", "ready": "pronto",
+            "beautiful": "linda", "pink": "rosa", "color": "cor",
+            "delicious": "delicioso", "energy": "energia", "start": "começo"
+        },
         quiz: {
             perguntas: [
                 'What fruits did they use in the smoothie?',
