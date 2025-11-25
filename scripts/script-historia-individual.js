@@ -383,6 +383,6 @@ function atualizarModalSucesso(pontosTotais, palavrasTotais, ganhouMedalha, pont
 
     // Adiciona evento ao botão recém-criado
     document.getElementById('btn-finalizar-novo').addEventListener('click', () => {
-        window.location.href = 'indexCentroHistorias.html';
+        window.location.href = 'indexCentrohistorias.html';
     });
 }
