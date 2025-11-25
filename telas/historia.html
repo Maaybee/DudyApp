@@ -4,33 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DudyApp - História</title> 
-    <link rel="stylesheet" href="../css/atividadequiz.css"> 
+    <link rel="stylesheet" href="../css/telaHistoria.css"> 
 </head>
 <body>
 
     <div id="tela-inicio-overlay">
-        <img id="btnComecarHistoria" src="../assets/img/botao-comecar.svg" alt="Começar a História">
+        <img id="btnComecarHistoria" alt="Começar a História" style="cursor: pointer;">
     </div>
-
-    <img src="../assets/sair.svg" id="sair">
 
     <div class="header">
-        <div>
-            <img src="" alt="livro Icon" class="books"> <h4></h4> 
-        </div>
-    </div>
-
-    <div class="historia">
-        <div class="personagens">
-            <h4><b>Characters: </b><span></span></h4> 
-        </div>
-        <div class="texto">
+        <img src="../assets/sair.svg" id="sair" alt="Sair">
+        
+        <img src="" alt="Icon" class="books" id="img-header"> 
+        <div class="header-info">
+            <h4 id="titulo-historia"></h4> 
+            <div class="personagens">
+                <span>Characters: </span><span id="lista-personagens"></span>
             </div>
+        </div>
+        
     </div>
 
-    <div class="quiz-container">
-        <h4 id="pergunta"></h4>
-        <div class="buttons" id="botoes-container"></div>
+    <div class="content-scroll-area">
+        
+        <div class="historia" id="container-dialogos">
+            </div>
+
+        <div class="quiz-container hidden" id="quiz-area">
+            <h2 class="titulo-quiz">Vamos praticar!</h2>
+            <h4 id="pergunta" class="pergunta-texto"></h4>
+            <div class="buttons-quiz" id="botoes-container"></div>
+        </div>
+
+    </div>
+
+    <div class="footer-nav">
+        <button id="btnAnterior" class="btn-nav btn-secundario" disabled>ANTERIOR</button>
+        <button id="btnProximo" class="btn-nav btn-primario">CONTINUAR</button>
     </div>
 
     <audio id="player"></audio>
@@ -38,23 +48,26 @@
     <div id="popupOverlay" class="overlay">
         <div id="pop-up">
             <h2>Tem certeza que deseja sair?</h2>
-            <h3>*Seu progresso NÂO será salvo!</h3>
+            <h3>*Seu progresso NÃO será salvo!</h3>
             <div id="group">
                 <button id="btnSair">SAIR</button>
                 <button id="btnVoltar">VOLTAR</button>
             </div>
         </div>
     </div>
+
     <div id="historia-concluida-modal" style="display: none;">
         <div class="modal-conteudo">
             <h2 id="conclusao-titulo">Quiz Concluído!</h2>
-            <img id="conclusao-gif" src="/DudyApp/assets/img/congratulations.gif" alt="Parabéns!">
+            <img id="conclusao-gif" src="../assets/img/congratulations.gif" alt="Parabéns!" style="max-width: 200px;">
             <p id="conclusao-mensagem">Sua pontuação foi: <b id="pontuacao-final-texto"></b></p>
             <button id="btnVoltarParaHistorias" class="btn-principal">Voltar para Histórias</button>
         </div>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../scripts/supabaseConfig.js"></script>
     <script src="../scripts/historias.js"></script> 
     <script src="../scripts/script-historia-individual.js"></script> 
-    </body>
+</body>
 </html>
